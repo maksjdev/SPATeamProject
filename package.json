@@ -2,10 +2,10 @@
   "name": "news-project-spa",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
+    "start": "ng serve --port 4200",
+    "build": "ng build --prod --build-optimizer --stats-json",
+    "test": "ng test --watch=false --code-coverage",
+    "update": "ng update --all --force",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
