@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'main'},
+  {path: '**', pathMatch: 'full', redirectTo: 'main'},
   {path: 'main', loadChildren: '@main/app-main.module#AppMainModule'},
 ];
 

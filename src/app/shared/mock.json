@@ -1,0 +1,17 @@
+{
+  "users": [
+    {"id": "92jdlw3", "name": "Vitalik", "password": "12345", "nickname": "Sirius", "role": "Admin", "last-visit": "1540397337"},
+    {"id": "432wvfw", "name": "Maksimka", "password": "12345", "nickname": "zeComedian", "role": "Admin", "last-visit": "1540397337"},
+    {"id": "vd42lvd", "name": "Slavyshka", "password": "12345", "nickname": "Yamtee", "role": "Admin", "last-visit": "1540397337"},
+    {"id": "92bk34q", "name": "Dashenka", "password": "12345", "nickname": "Cunade", "role": "Admin", "last-visit": "1540397337"}
+  ],
+
+  "articles": [
+    {"id": "43hd42l", "title": "Article about AI", "text": "text <p>text</p>",
+      "tags": ["it","ai"], "rating": "100", "time": "1540397337",
+      "comments": [
+        {"time": "1540397337", "user-id": "92bk34q", "comment": "I like it!"}
+      ]
+    }
+  ]
+}

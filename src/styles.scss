@@ -1,6 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+// Custom files
+@import "./assets/base-css/theme";
+@import "./assets/base-css/normalize";
 
-.body {
+// Other imports
+// ...
+
+body {
+  font-family: 'Roboto Condensed', sans-serif;
   background-color: aliceblue;
   text-align: center;
+}
+h1 {
+  font-family: 'Permanent Marker', cursive;
 }
