@@ -5,7 +5,15 @@
     "paths": {
       "@app/*": ["src/app/*"],
       "@routes/*": ["src/app/routes/*"],
-      "@main/*": ["src/app/main/*"]
+      "@shared/*": ["src/app/shared/*"],
+      "@components/*": ["src/app/shared/components/*"],
+
+      "@pages/*": ["src/app/main/pages/*"],
+      "@main/*": ["src/app/main/pages/main-page/*"],
+      "@news/*": ["src/app/main/pages/news-page/*"],
+
+      "@header/*": ["src/app/main/header/*"],
+      "@footer/*": ["src/app/main/footer/*"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

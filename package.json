@@ -6,7 +6,7 @@
     "build": "ng build --prod --build-optimizer --stats-json",
     "bundle": "webpack-bundle-analyzer dist/news-project-spa/stats.json",
     "test": "ng test --watch=false --code-coverage",
-    "mock": "json-server --watch ./src/app/shared/mock.json",
+    "mock": "json-server --watch ./src/app/shared/mocks/mock.json",
     "update": "ng update --all --force",
     "lint": "ng lint",
     "e2e": "ng e2e"

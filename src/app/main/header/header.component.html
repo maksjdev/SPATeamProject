@@ -1,0 +1,13 @@
+<p>
+  *Header* Welcome to {{ title }}!
+</p>
+
+<span *ngFor="let link of navLinks">
+  <a class="menu-link" (click)="menuItemClick($event)"
+     [routerLink] = "link.path"
+     [routerLinkActive] = "link.active">
+
+    <span [ngClass]="['menu-icon', link.icon]"></span>
+    <span>{{ link.label }}</span>
+  </a>
+</span>
