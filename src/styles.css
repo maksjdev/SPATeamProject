@@ -360,11 +360,68 @@ blockquote {
   margin: 0; }
 
 body {
+  font-size: 16px;
+  font-weight: 300;
   font-family: 'Roboto Condensed', sans-serif;
-  background-color: aliceblue;
-  text-align: center; }
+  background-color: #2d2d2d;
+  color: #f9f8fd; }
 
 h1 {
   font-family: 'Permanent Marker', cursive; }
+
+.wrapper {
+  text-align: center; }
+
+.btn {
+  margin: 5px;
+  font-weight: 500;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  vertical-align: middle;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: uppercase; }
+  .btn-default {
+    border-width: 0;
+    overflow: hidden;
+    background-color: #393E46;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+    .btn-default:hover {
+      opacity: 0.75;
+      box-shadow: 0 2px 3px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.24);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+    .btn-default:focus {
+      outline: 0; }
+    .btn-default:active {
+      background-color: #2d2d2d;
+      background-size: 100%;
+      opacity: 0.75;
+      transition: background 0.25s; }
+  .btn-gradient {
+    border-width: 0;
+    overflow: hidden;
+    background: linear-gradient(50deg, #f7c626 15%, #f16b44 40%, #e5127d 85%);
+    color: #000000;
+    font-weight: bold;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+    .btn-gradient:hover {
+      opacity: 0.75;
+      box-shadow: 0 2px 3px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.24);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+    .btn-gradient:focus {
+      outline: 0; }
+    .btn-gradient:active {
+      background-size: 100%;
+      opacity: 0.45;
+      transition: background 0.25s; }
+
+.gradient {
+  background: linear-gradient(50deg, #f7c626 15%, #f16b44 40%, #e5127d 85%);
+  color: #000000;
+  font-weight: bold; }
+
+.fab {
+  color: #e5127d; }
 
 /*# sourceMappingURL=styles.css.map */

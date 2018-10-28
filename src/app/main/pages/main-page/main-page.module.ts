@@ -5,7 +5,9 @@ import {MainPageComponent} from '@main/main-page.component';
 import {SharedComponentsModule} from '@components/shared-components.module';
 
 const router: Routes = [{
-  path: '', component: MainPageComponent, data: {}
+  path: '', component: MainPageComponent, data: {
+    title: 'Main Page!'
+  }
 }];
 
 @NgModule({

@@ -1,13 +1,13 @@
-<p>
+<h1>
   *Header* Welcome to {{ title }}!
-</p>
+</h1>
 
-<span *ngFor="let link of navLinks">
-  <a class="menu-link" (click)="menuItemClick($event)"
+<button class="btn btn-gradient" *ngFor="let link of navLinks">
+  <a (click)="menuItemClick($event)"
      [routerLink] = "link.path"
      [routerLinkActive] = "link.active">
 
     <span [ngClass]="['menu-icon', link.icon]"></span>
     <span>{{ link.label }}</span>
   </a>
-</span>
+</button>

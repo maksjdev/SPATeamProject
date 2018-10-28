@@ -3,11 +3,6 @@ Error: File to import not found or unreadable: ~src/assets/base-css/vars.
         on line 1 of header.component.scss
 
 1: @import "~src/assets/base-css/vars";
-2: 
-3: .menu-link {
-4:   padding: 5px 10px;
-5:   background-color: #99b3cd;
-6:   border-radius: $border-radius;
 
 Backtrace:
 header.component.scss:1
@@ -53,4 +48,4 @@ C:/Program Files (x86)/Ruby25-x64/bin/scss:23:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: File to import not found or unreadable: ~src/assets/base-css/vars.\A         on line 1 of header.component.scss\A \A 1: @import \"~src/assets/base-css/vars\";\A 2: \A 3: .menu-link {\A 4:   padding: 5px 10px;\A 5:   background-color: #99b3cd;\A 6:   border-radius: $border-radius;"; }
+  content: "Error: File to import not found or unreadable: ~src/assets/base-css/vars.\A         on line 1 of header.component.scss\A \A 1: @import \"~src/assets/base-css/vars\";"; }

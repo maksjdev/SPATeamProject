@@ -5,7 +5,9 @@ import {NewsPageComponent} from '@news/news-page.component';
 import {SharedComponentsModule} from '@components/shared-components.module';
 
 const router: Routes = [{
-  path: '', component: NewsPageComponent, data: {}
+  path: '', component: NewsPageComponent, data: {
+    title: 'News Page!'
+  }
 }];
 
 @NgModule({
