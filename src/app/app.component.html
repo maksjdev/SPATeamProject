@@ -1,16 +1,13 @@
 
-<div>
-  <ng-progress [spinner]="false" [spinnerPosition]="'left'" [thick]="false" [meteor]="true"
-               [color]="'white'" [ease]="'linear'" #progressBar>
-  </ng-progress>
+<ng-progress [spinner]="false" [spinnerPosition]="'left'" [thick]="false" [meteor]="true"
+             [color]="'white'" [ease]="'linear'" #progressBar>
+</ng-progress>
 
-  <app-header [title]="'Best news-site ever'"></app-header>
+<app-header class="shadow-block" [title]="'Best news-site ever'"></app-header>
+
+<div class="content-block">
   <router-outlet></router-outlet>
-
-  <button class="btn btn-default" (click)="progressBar.start()">Старт load</button>
-  <button class="btn btn-default" (click)="progressBar.complete()">Конец load</button>
-  <button class="btn btn-default" (click)="loadData($event)">Load Users</button>
-
-  <app-footer></app-footer>
+  <div class="loading-block">Загрузка контента..</div>
 </div>
 
+<app-footer class="shadow-block" ></app-footer>

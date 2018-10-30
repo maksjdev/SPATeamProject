@@ -1,0 +1,12 @@
+
+<span class="navigations-block">
+  <span class="navigations-block__item" *ngFor="let link of navLinks">
+    <a (click)="menuItemClick($event)"
+       [routerLink] = "link.path"
+       [routerLinkActive] = "link.class">
+      <span>{{link.label}}</span>
+      <i [ngClass]="['fab', link.icon] "></i>
+    </a>
+  </span>
+</span>
+

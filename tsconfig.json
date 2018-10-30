@@ -7,7 +7,7 @@
       "@environments/*": ["src/environments/*"],
       "@routes/*": ["src/app/routes/*"],
       "@shared/*": ["src/app/shared/*"],
-      "@components/*": ["src/app/shared/components/*"],
+      "@components/*": ["src/app/main/components/*"],
 
       "@pages/*": ["src/app/main/pages/*"],
       "@main/*": ["src/app/main/pages/main-page/*"],

@@ -11,26 +11,50 @@ html {
 
 }
 body {
+  margin:0;
+  padding:0;
+
   font-size: 16px;
   font-weight: 300;
   font-family: 'Roboto Condensed', sans-serif;
   background-color: $main-bg-color;
   color: $main-text-color;
 }
-h1 {
-  font-family: 'Permanent Marker', cursive;
+app-header {
+  display: block;
+
+}
+app-footer {
+  display: block;
+
 }
 
 .wrapper {
-  text-align: center;
+  display: block;
 }
 
+.content-block {
+  padding: $normal-padding $big-padding;
+}
+
+.shadow-block {
+  -webkit-box-shadow: 0 $big-shadow 6px -6px $main-color;
+  -moz-box-shadow: 0 $big-shadow 6px -6px $main-color;
+  box-shadow: 0 $normal-shadow $normal-smoothness  0px $shadows-color;
+}
+
+.gradient {
+  background: $bg-gradient;
+  color: $main-text-dark-color;
+}
+
+//  Стили вспомогательных элементов
 .btn {
   margin: 5px;
   font-weight: 500;
   padding: 5px 10px;
   border: none;
-  border-radius: $border-radius;
+  border-radius: $normal-border-radius;
 
   vertical-align: middle;
   text-align: center;
@@ -58,7 +82,6 @@ h1 {
       transition: background 0.25s;
     }
   }
-
   &-gradient {
     border-width: 0;
     overflow: hidden;
@@ -83,13 +106,21 @@ h1 {
   }
 }
 
-
-// Просто тестовые
-.gradient {
-  background: $bg-gradient;
-  color: $main-text-dark-color;
-  font-weight: bold;
-}
 .fab {
   color: $main-pink;
+}
+.link {
+  text-decoration: underline;
+}
+
+
+
+// Ну совсем не нужные.. (для редактирования)
+div.loading-block{
+  height: 100px;
+  color: $main-text-color;
+  display: none;
+}
+router-outlet + div.loading-block{
+  display: block;
 }

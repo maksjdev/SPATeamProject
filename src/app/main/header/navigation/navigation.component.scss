@@ -1,0 +1,26 @@
+@import "~src/assets/base-css/theme";
+@import "~src/assets/base-css/vars";
+
+.navigations-block {
+
+  &__item {
+    padding: $small-padding;
+    margin-right: $normal-padding;
+    text-decoration: underline;
+
+    & .active {
+      padding: $small-padding;
+      background-color: $footer-bg;
+      border-radius: $normal-border-radius;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+
+.fab {
+  color: $main-color;
+}
+

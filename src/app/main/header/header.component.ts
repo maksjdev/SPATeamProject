@@ -6,12 +6,6 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  @Input() title: string = "Default";
-
-  navLinks = [
-    {path: '/main',     label: 'main', active: 'active', icon: 'icon-home'},
-    {path: '/news', label: 'news', active: 'active', icon: 'icon-news'},
-  ];
 
   constructor() { }
 
@@ -19,7 +13,4 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  public menuItemClick(event){
-    console.info('You click on link!')
-  }
 }

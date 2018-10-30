@@ -1,13 +1,8 @@
-<h1>
-  *Header* Welcome to {{ title }}!
-</h1>
 
-<button class="btn btn-gradient" *ngFor="let link of navLinks">
-  <a (click)="menuItemClick($event)"
-     [routerLink] = "link.path"
-     [routerLinkActive] = "link.active">
+<div class="header">
+  <app-full-logo class="header__logo" [title]="'News-Pick'"></app-full-logo>
+  <app-navigation class="header__navigations"></app-navigation>
+  <app-user-info class="header__user-info"></app-user-info>
+  <app-login-buttons class="header__login"></app-login-buttons>
+</div>
 
-    <span [ngClass]="['menu-icon', link.icon]"></span>
-    <span>{{ link.label }}</span>
-  </a>
-</button>

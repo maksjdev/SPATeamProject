@@ -1,0 +1,19 @@
+@import "~src/assets/base-css/theme";
+@import "~src/assets/base-css/vars";
+
+.footer {
+  height: 100px;
+  text-align: center;
+  font-weight: normal;
+
+  background-color: $main-color;
+
+  &__border {
+    height: 3px;
+  }
+  &__content {
+    display: grid;
+    height: 100%;
+    padding: $normal-padding;
+  }
+}
