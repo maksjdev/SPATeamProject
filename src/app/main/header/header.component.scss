@@ -3,10 +3,11 @@
 
 .header {
   display: grid;
-  height: 60px;
   align-items: center;
   text-align: center;
   font-weight: normal;
+
+  grid-gap: $normal-padding;
   grid-template-columns: 1fr 3fr 1fr 1fr;
 
   padding: $normal-padding;
@@ -24,4 +25,7 @@
   &__login {
 
   }
+}
+.col {
+  padding: $small-padding 0;
 }

@@ -3,11 +3,14 @@
              [color]="'white'" [ease]="'linear'" #progressBar>
 </ng-progress>
 
-<app-header class="shadow-block" [title]="'Best news-site ever'"></app-header>
+<div class="wrapper">
+  <app-header class="shadow-block" [title]="'Best news-site ever'"></app-header>
 
-<div class="content-block">
-  <router-outlet></router-outlet>
-  <div class="loading-block">Загрузка контента..</div>
+  <div class="content-block">
+    <router-outlet></router-outlet>
+    <div class="loading-block">Загрузка контента..</div>
+  </div>
+
+  <app-footer class="shadow-block" ></app-footer>
 </div>
 
-<app-footer class="shadow-block" ></app-footer>

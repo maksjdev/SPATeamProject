@@ -2,7 +2,28 @@
 <div class="footer">
   <div class="footer__border gradient"></div>
   <div class="footer__content">
-    *Footer*
+
+    <div class="footer__content--main">
+      <blockquote class="col">
+        <p><q>Stay hungry, Stay foolish &hellip;</q></p>
+        <footer>Steve Jobs</footer>
+      </blockquote>
+      <div class="col">Какая-то информация</div>
+      <div class="col">Какая-то информация</div>
+    </div>
+
+    <div class="footer__content--small">
+      <div class="copyright-block">
+        <i class="far fa-copyright"></i>
+        2017 – 2018 «Elite TM»
+      </div>
+      <div class="reference-links">
+        <span class="link reference-links__item" *ngFor="let link of referLinks">
+          <a href="{{link.link}}">{{link.name}}</a>
+        </span>
+      </div>
+      <app-social-links class="social-links"></app-social-links>
+    </div>
   </div>
 </div>
 

@@ -6,7 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
-
+  referLinks = [
+    {name: 'О сайте', link: '#'},
+    {name: 'Служба поддержки', link: '#'},
+    {name: 'Мобильное приложение', link: '#'},
+  ];
   constructor() { }
 
   ngOnInit() {

@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FullLogoComponent} from '@components/visual-components/full-logo/full-logo.component';
+import { SocialLinksComponent } from './social-links/social-links.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   exports: [
-    FullLogoComponent
+    FullLogoComponent,
+    SocialLinksComponent
   ],
   declarations: [
-    FullLogoComponent
+    FullLogoComponent,
+    SocialLinksComponent
   ]
 })
 export class VisualComponentsModule { }

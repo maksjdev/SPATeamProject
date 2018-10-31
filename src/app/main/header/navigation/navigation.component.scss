@@ -1,26 +1,18 @@
 @import "~src/assets/base-css/theme";
 @import "~src/assets/base-css/vars";
 
-.navigations-block {
+.navigations-block__item {
+  margin-right: $normal-padding;
 
-  &__item {
+  & a {
     padding: $small-padding;
-    margin-right: $normal-padding;
-    text-decoration: underline;
-
-    & .active {
-      padding: $small-padding;
-      background-color: $footer-bg;
-      border-radius: $normal-border-radius;
-    }
-    &:last-child {
-      margin-right: 0;
-    }
+    border-radius: $normal-border-radius;
   }
-}
-
-
-.fab {
-  color: $main-color;
+  & a.active {
+    background-color: $gray-light;
+  }
+  &:last-child {
+    margin-right: 0;
+  }
 }
 

@@ -2,8 +2,10 @@
 $main-color: #393E46;
 $shadows-color: #1D1D1F;
 $main-bg-color: #262729;
-$footer-bg: #a39e9e;
 //#303133 #262729 #1D1D1F #171719
+
+$gray-light: lighten($main-color, 35%);
+$gray-dark: darken($main-color, 35%);
 
 $main-title-color: #E6E6E6;
 $main-text-color: #f9f8fd;

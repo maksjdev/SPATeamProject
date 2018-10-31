@@ -1,0 +1,6 @@
+
+<span class="social-item" *ngFor="let link of socialLinks">
+  <a class="social-item__link" href="{{link.link}}" target="_blank" [title]="link.name">
+    <i class="social-item__icon" [ngClass]="['fab', link.icon]"></i>
+  </a>
+</span>

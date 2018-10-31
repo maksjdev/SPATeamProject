@@ -1,0 +1,8 @@
+@import "~src/assets/base-css/theme";
+@import "~src/assets/base-css/vars";
+
+:host {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  grid-template-rows: 100%;
+}

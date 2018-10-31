@@ -1,0 +1,23 @@
+@import "~src/assets/base-css/theme";
+@import "~src/assets/base-css/vars";
+
+.social-item{
+  height: $normal-icon-size;
+  width: $normal-icon-size;
+  display: inline-grid;
+  align-items: center;
+  margin-right: $small-padding;
+
+  &__link {
+    height: inherit;
+    border-radius: $normal-border-radius;
+    background-color: $main-pink;
+  }
+  &__icon {
+    margin-top: 4px;
+    color: $shadows-color;
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+}
