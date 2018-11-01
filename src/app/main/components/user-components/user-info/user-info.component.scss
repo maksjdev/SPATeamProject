@@ -1,0 +1,20 @@
+@import "~src/assets/base-css/theme";
+@import "~src/assets/base-css/vars";
+
+.user-info {
+  display: grid;
+  grid-template-columns: auto 40px;
+  align-items: center;
+
+  &__image{
+    height: 40px;
+    width: 40px;
+    border-radius: $normal-border-radius;
+    padding: 1px;
+    background: $bg-gradient;
+  }
+  &__name {
+    font-size: $big-font-size;
+    padding: 0 $normal-padding;
+  }
+}

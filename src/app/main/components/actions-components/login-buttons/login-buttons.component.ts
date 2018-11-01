@@ -12,4 +12,10 @@ export class LoginButtonsComponent implements OnInit {
   ngOnInit() {
   }
 
+  OnLogin (event) {
+    console.log(`Log In!`);
+  }
+  OnSignIn (event) {
+    console.log(`Sign In!`);
+  }
 }

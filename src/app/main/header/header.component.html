@@ -1,8 +1,9 @@
 
 <div class="header">
-  <app-full-logo      class="col header__logo" [title]="'News-Pick'"></app-full-logo>
-  <app-navigation     class="col header__navigations"></app-navigation>
-  <app-user-info      class="col header__user-info"></app-user-info>
-  <app-login-buttons  class="col header__login"></app-login-buttons>
+  <app-full-logo      class="header__logo" [title]="'News-Pick'"></app-full-logo>
+  <app-navigation     class="header__navigations"></app-navigation>
+
+  <app-user-info *ngIf="isLoged"      class="header__user-info"></app-user-info>
+  <app-login-buttons *ngIf="!isLoged" class="header__login"></app-login-buttons>
 </div>
 

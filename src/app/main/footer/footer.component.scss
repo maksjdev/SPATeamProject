@@ -16,7 +16,7 @@
     &--main {
       display: grid;
       grid-gap: $normal-padding;
-      padding: 0 $normal-padding;
+      padding: 0 $big-padding;
       grid-template-columns: 1.5fr 2fr 2fr;
       .col {
         margin: $normal-padding 0;
@@ -27,7 +27,7 @@
       grid-gap: $normal-padding;
       grid-template-columns: 1fr 3fr 1fr;
 
-      padding: $small-padding $normal-padding;
+      padding: $small-padding $big-padding;
       align-items: center;
       background-color: $shadows-color;
     }

@@ -3,6 +3,24 @@
 
 :host {
   display: grid;
-  grid-template-columns: 1fr auto auto;
-  grid-template-rows: 100%;
+  gap: $normal-padding;
+  grid-template: "f f" 1fr
+                 "m s" auto
+                 / 1fr 300px;
+}
+.filters-block {
+  grid-area: f;
+  height: 50px;
+}
+.news-block {
+  display: grid;
+  gap: $small-padding;
+  grid-area: m;
+}
+.sidebar-block {
+  display: grid;
+  max-height: 60%;
+  grid-template-rows: 50%;
+  gap: $small-padding;
+  grid-area: s;
 }

@@ -1,6 +1,17 @@
 
-<p>You watch on main-page!</p>
+<div class="panel filters-block">
+  You watch on main-page!
+  <button class="btn btn-default" (click)="loadData($event)">Load Users</button>
+</div>
 
-<button class="btn btn-default" (click)="loadData($event)">Load Users</button>
-<button class="btn btn-white" (click)="loadData($event)">Load Users</button>
+<div class="news-block">
+  <app-news-item-block></app-news-item-block>
+  <app-news-item-block></app-news-item-block>
+  <app-news-item-block></app-news-item-block>
+</div>
 
+<div class="sidebar-block">
+  <app-ad-item-block></app-ad-item-block>
+  <app-ad-item-block></app-ad-item-block>
+  <app-ad-item-block></app-ad-item-block>
+</div>

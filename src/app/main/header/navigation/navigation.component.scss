@@ -7,9 +7,17 @@
   & a {
     padding: $small-padding;
     border-radius: $normal-border-radius;
+    text-transform: uppercase;
+    font-weight: lighter;
+    transition: .25s;
+  }
+  & a:hover {
+    & span:after {
+      color: $main-pink;
+    }
   }
   & a.active {
-    background-color: $gray-light;
+    color: $main-pink;
   }
   &:last-child {
     margin-right: 0;

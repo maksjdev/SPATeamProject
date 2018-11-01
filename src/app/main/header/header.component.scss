@@ -8,13 +8,13 @@
   font-weight: normal;
 
   grid-gap: $normal-padding;
-  grid-template-columns: 1fr 3fr 1fr 1fr;
+  grid-template-columns: 1fr 3fr auto;
 
-  padding: $normal-padding;
+  padding: $normal-padding $big-padding;
   background-color: $main-color;
 
   &__logo {
-
+    text-align: start;
   }
   &__navigations {
 
