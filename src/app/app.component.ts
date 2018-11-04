@@ -7,9 +7,10 @@ import {Subscription} from 'rxjs';
   templateUrl: './app.component.html'
 })
 export class AppComponent {
+  isScroled: boolean = false;
 
-  constructor(
-
-  ){}
-
+  constructor(){}
+   scrollToTop(event) {
+    console.log(`Scroll to top of page!`);
+   }
 }

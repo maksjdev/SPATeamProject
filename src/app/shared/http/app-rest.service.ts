@@ -16,4 +16,11 @@ export class AppRestService {
       catchError(this.connectService.handleError('getSpecificData', []))
     );
   }
+
+  public getAppConfigData() {
+    return this.connectService.getData(this.host + 'config').pipe(
+      catchError(this.connectService.handleError('getConfigData', []))
+    );
+  }
+
 }

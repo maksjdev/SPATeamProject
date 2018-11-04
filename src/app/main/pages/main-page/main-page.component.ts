@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AppRoutingService} from '@routes/app-routing.service';
-import {Title} from '@angular/platform-browser';
 import {Subscription} from 'rxjs';
 import {AppRestService} from '@shared/http/app-rest.service';
+import {ConfigService} from '@shared/config/config.service';
 
 @Component({
   selector: 'app-main-page',
@@ -15,14 +15,17 @@ export class MainPageComponent implements OnInit, OnDestroy {
   constructor(
     private restService: AppRestService,
     private routingService: AppRoutingService,
-    private title: Title
+    private configService: ConfigService,
   ) { }
 
   ngOnInit() {
-    let queryParam = {
-      ['param']: 'some',
-    };
-    this.routingService.setQueryParam(queryParam)
+    // Просто для демонстрации ставим параметр
+    let queryParam = {['param']: 'some'};
+    this.routingService.setQueryParam(queryParam);
+
+    // Просим у сермиса данных - данные о каком-то количестве новостей
+    let nuberOfNews = this.configService.getNumberOfNews();
+    console.log(`Сервер дай мне ${nuberOfNews} новостей, пожалуйста :з`);
   }
 
   ngOnDestroy(): void {

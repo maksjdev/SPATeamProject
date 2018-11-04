@@ -1,9 +1,10 @@
 
-<div class="header">
-  <app-full-logo      class="header__logo" [title]="'News-Pick'"></app-full-logo>
-  <app-navigation     class="header__navigations"></app-navigation>
+<header class="header">
+  <app-full-logo      class="block header__logo" [title]="'News-Pick'"></app-full-logo>
+  <app-navigation     class="block header__navigations"></app-navigation>
 
-  <app-user-info *ngIf="isLoged"      class="header__user-info"></app-user-info>
-  <app-login-buttons *ngIf="!isLoged" class="header__login"></app-login-buttons>
-</div>
+  <app-search-block (search)="onSearch($event)" class="block header__search"></app-search-block>
+  <app-user-info      *ngIf="isLoged"      class="block header__user-info"></app-user-info>
+  <app-login-buttons  *ngIf="!isLoged"     class="block header__login"></app-login-buttons>
+</header>
 

@@ -1,6 +1,12 @@
 @import "~src/assets/base-css/theme";
 @import "~src/assets/base-css/vars";
 
+:host {
+  margin-bottom: $normal-padding;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
 .news-item {
   height: 200px;
 }

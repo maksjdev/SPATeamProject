@@ -1,6 +1,12 @@
 @import "~src/assets/base-css/theme";
 @import "~src/assets/base-css/vars";
 
+:host {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
 .user-info {
   display: grid;
   grid-template-columns: auto 40px;

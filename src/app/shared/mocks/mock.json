@@ -36,7 +36,6 @@
       "last-visit": "1540397337"
     }
   ],
-
   "articles": [
     {
       "id": "43hd42l",
@@ -47,5 +46,13 @@
         {"time": "1540397337", "user-id": "92bk34q", "comment": "I like it!"}
       ]
     }
-  ]
+  ],
+  "config": {
+
+    "news": {
+      "numbers": {
+        "start": 10
+      }
+    }
+  }
 }
