@@ -10,8 +10,9 @@ export class ConfigService implements IConfigModel{
   numbOfNews: number;
 
   constructor() {
-    let config = ConfigLoadService.settings || AppConfigDefault;
-    this.numbOfNews = config['news']['numbers']['start'];
+    let serverConfig = ConfigLoadService.settings;
+    let config = serverConfig.hasOwnProperty('news')?  serverConfig : AppConfigDefault;
+    this.numbOfNews = config.news.numbers.start;
   }
 
   getNumberOfNews(): number {
