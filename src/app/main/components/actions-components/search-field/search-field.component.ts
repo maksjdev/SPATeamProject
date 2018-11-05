@@ -26,7 +26,7 @@ export class SearchFieldComponent implements AfterViewInit, OnDestroy{
   }
 
   filterEvent(filter) {
-    this.search.emit(filter);
+    if (filter.length > 0) this.search.emit(filter);
   }
 }
 

@@ -3,6 +3,6 @@
   <input class="search-form__input" type="text" placeholder="{{ stringPlaceHolder }}" #searchField>
   <span class="search-form__icons">
     <i *ngIf="!searchField.value" class="fas fa-search" (click)="filterEvent(searchField.value)"></i>
-    <i *ngIf="searchField.value" class="fas fa-times" (click)="searchField.value=''; filterEvent('')"></i>
+    <i *ngIf="searchField.value" class="fas fa-times" (click)="searchField.value=''; filterEvent('null')"></i>
   </span>
 </form>

@@ -11,10 +11,8 @@
 .filters-block {
   display: flex;
   align-items: center;
-
   padding: 0;
   grid-area: f;
-  height: 50px;
 }
 .news-block {
   display: flex;
@@ -27,5 +25,9 @@
   flex-direction: column;
   &:last-child {
     margin-bottom: 0;
+  }
+  &__category {
+    width: 100%;
+    margin-bottom: $normal-padding;
   }
 }
