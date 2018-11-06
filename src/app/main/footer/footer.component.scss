@@ -3,7 +3,6 @@
 
 .footer {
   text-align: center;
-  font-weight: normal;
   background-color: $main-color;
 
   &__border {
@@ -16,7 +15,7 @@
     &--main {
       display: grid;
       grid-gap: $normal-padding;
-      padding: 0 $big-padding;
+      padding: 0 $extra-padding;
       grid-template-columns: 1.5fr 2fr 2fr;
       .col {
         margin: $normal-padding 0;
@@ -28,8 +27,9 @@
       grid-gap: $normal-padding;
       grid-template-columns: 1fr 3fr 1fr;
 
-      padding: $small-padding $big-padding;
+      padding: $small-padding $extra-padding;
       align-items: center;
+      font-weight: normal;
       background-color: $shadows-color;
     }
   }

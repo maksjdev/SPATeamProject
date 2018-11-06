@@ -1,13 +1,14 @@
 
-$main-color: #393E46;
+$main-color: #262729;
 $shadows-color: #1D1D1F;
-$main-bg-color: #262729;
+$main-bg-color: #303133;
 //#303133 #262729 #1D1D1F #171719
 
 $main-title-color: #E6E6E6;
 $main-text-color: #f9f8fd;
 $main-text-dark-color: #000000;
 
+$gray-default: lighten($main-color, 10%);
 $gray-light: lighten($main-color, 35%);
 $gray-dark: darken($main-color, 35%);
 

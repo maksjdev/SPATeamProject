@@ -1,8 +1,18 @@
 @import "~src/assets/base-css/theme";
 @import "~src/assets/base-css/vars";
 
+:host {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-end;
+
+}
+
 .navigations-block__item {
-  margin-right: $normal-padding;
+  margin-right: $small-padding;
+  -webkit-transition: width $normal-animation ease-in-out;
+  transition: width $normal-animation ease-in-out;
 
   & a {
     padding: $small-padding;

@@ -4,23 +4,30 @@
 :host {
   display: grid;
   gap: $normal-padding;
-  grid-template: "f f" 1fr
+  grid-template: "f s" 1fr
                  "m s" auto
                  / 1fr 300px;
 }
 .filters-block {
+  display: flex;
+  align-items: center;
+  padding: 0;
   grid-area: f;
-  height: 50px;
 }
 .news-block {
-  display: grid;
-  gap: $small-padding;
+  display: flex;
   grid-area: m;
+  flex-direction: column;
 }
 .sidebar-block {
-  display: grid;
-  max-height: 60%;
-  grid-template-rows: 50%;
-  gap: $small-padding;
+  display: flex;
   grid-area: s;
+  flex-direction: column;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  &__category {
+    width: 100%;
+    margin-bottom: $normal-padding;
+  }
 }

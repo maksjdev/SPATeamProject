@@ -6,6 +6,7 @@
  * 2. Prevent iOS and IE text size adjust after device orientation change,
  *    without disabling user zoom.
  */
+@import url(~@ng-select/ng-select/themes/default.theme.css);
 * {
   box-sizing: border-box; }
 
@@ -368,7 +369,7 @@ body, html {
   font-size: 16px;
   font-weight: 300;
   font-family: 'Roboto Condensed', sans-serif;
-  background-color: #262729;
+  background-color: #303133;
   color: #f9f8fd; }
 
 app-header {
@@ -382,13 +383,38 @@ app-footer {
   display: grid;
   grid-template-rows: auto 1fr auto;
   grid-template-columns: 100%; }
+  .wrapper__elevator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: none;
+    width: 60px;
+    height: 100%;
+    color: #d5dddf;
+    text-align: center;
+    cursor: pointer;
+    transform: translateY(0);
+    will-change: transform; }
+    .wrapper__elevator--arrow {
+      position: relative;
+      top: 50%;
+      margin-top: -15px;
+      font-size: 2em;
+      opacity: 0.5; }
+    .wrapper__elevator.show {
+      display: block;
+      opacity: .25;
+      background-color: #262729; }
+      .wrapper__elevator.show:hover {
+        opacity: .5; }
 
 .content-block {
-  padding: 10px 15px; }
+  margin: 25px 100px; }
 
 .shadow-block {
-  -webkit-box-shadow: 0 10px 6px -6px #393E46;
-  -moz-box-shadow: 0 10px 6px -6px #393E46;
+  -webkit-box-shadow: 0 10px 6px -6px #262729;
+  -moz-box-shadow: 0 10px 6px -6px #262729;
   box-shadow: 0 6px 6px 0px #1D1D1F; }
 
 .gradient {
@@ -397,9 +423,9 @@ app-footer {
 
 .panel {
   padding: 10px;
-  background-color: #393E46;
+  background-color: #3f4043;
   border-radius: 3px;
-  box-shadow: 0 6px 6px 0px #1D1D1F; }
+  box-shadow: 0 3px 6px 0px #1D1D1F; }
 
 .btn {
   margin: 5px;
@@ -424,7 +450,7 @@ app-footer {
     .btn-default:focus {
       outline: 0; }
     .btn-default:active {
-      background-color: #8e96a3;
+      background-color: #7c7f86;
       background-size: 100%;
       transition: background 0.25s; }
   .btn-gradient {
@@ -460,43 +486,42 @@ app-footer {
     border-width: 0 0 1px;
     border-style: solid; }
 
+.ng-select.ng-select-opened .ng-arrow-wrapper .ng-arrow {
+  border-color: transparent transparent #f9f8fd !important; }
+.ng-select-container .ng-value-container {
+  padding-top: 0 !important;
+  margin: 5px !important; }
+.ng-select-container .ng-arrow-wrapper .ng-arrow {
+  border-color: #f9f8fd transparent transparent !important; }
+
 blockquote {
   padding: 0 15px;
   height: fit-content;
   border-left: 5px solid #f9f8fd; }
-
-blockquote:before {
-  display: none; }
-
-blockquote:not(:first-of-type) {
-  margin-top: .5em; }
-
-blockquote p {
-  margin: 0;
-  text-align: left;
-  font-size: 12pt;
-  line-height: 1.4; }
-
-blockquote footer {
-  text-align: right;
-  font-style: italic; }
-
-blockquote footer:before {
-  content: '— '; }
-
-blockquote:nth-of-type(even) {
-  text-align: right;
-  border-left: none;
-  border-right: 5px solid #999; }
-
-blockquote:nth-of-type(even) footer {
-  text-align: right; }
-
-blockquote:nth-of-type(even) footer:before {
-  content: ''; }
-
-blockquote:nth-of-type(even) footer:after {
-  content: ' —'; }
+  blockquote:before {
+    display: none; }
+  blockquote:not(:first-of-type) {
+    margin-top: .5em; }
+  blockquote p {
+    margin: 0;
+    text-align: left;
+    font-size: 12pt;
+    line-height: 1.4; }
+  blockquote:nth-of-type(even) {
+    text-align: right;
+    border-left: none;
+    border-right: 5px solid #999; }
+  blockquote:nth-of-type(even) footer {
+    text-align: right; }
+  blockquote:nth-of-type(even) footer:before {
+    content: ''; }
+  blockquote:nth-of-type(even) footer:after {
+    content: ' —'; }
+  blockquote footer {
+    text-align: right;
+    font-style: italic; }
+    blockquote footer:before {
+      content: '— '; }
 
 div.loading-block {
   height: 100px;
@@ -505,5 +530,15 @@ div.loading-block {
 
 router-outlet + div.loading-block {
   display: block; }
+
+body::-webkit-scrollbar-track {
+  background-color: black; }
+
+body::-webkit-scrollbar {
+  width: 5px;
+  background-color: #F5F5F5; }
+
+body::-webkit-scrollbar-thumb {
+  background-color: #7c7f86; }
 
 /*# sourceMappingURL=styles.css.map */

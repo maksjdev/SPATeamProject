@@ -5,13 +5,12 @@ import {Component, Input, OnInit} from '@angular/core';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   isLoged: boolean = true;
 
   constructor() { }
 
-  ngOnInit() {
-
+  onSearch(str) {
+    console.log(`Search: ${str}`);
   }
-
 }

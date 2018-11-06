@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 
 import {AppRoutingModule} from '@routes/app-routing.module';
 import {AppComponent} from './app.component';
@@ -11,7 +11,11 @@ import {NgProgressModule} from '@ngx-progressbar/core';
 import {AppRestService} from '@shared/http/app-rest.service';
 import {AppHttpService} from '@shared/http/app-http.service';
 import {HttpClientModule} from '@angular/common/http';
+import {ConfigLoadService} from '@shared/config/config-load.service';
 
+export function initializeApp(configData: ConfigLoadService) {
+  return () => configData.loadAppConfig();
+}
 @NgModule({
   imports: [
     BrowserModule,
@@ -34,6 +38,8 @@ import {HttpClientModule} from '@angular/common/http';
     AppHttpService,
     AppRestService,
     AppRoutingModule,
+
+    ConfigLoadService, {provide: APP_INITIALIZER, useFactory: initializeApp, deps: [ConfigLoadService], multi: true},
   ],
   bootstrap: [AppComponent]
 })

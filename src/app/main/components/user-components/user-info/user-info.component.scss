@@ -1,12 +1,17 @@
 @import "~src/assets/base-css/theme";
 @import "~src/assets/base-css/vars";
 
-.user-info {
+:host {
   display: grid;
-  grid-template-columns: auto 40px;
+  grid-template: "n i" 1fr
+                 "r i" auto;
   align-items: center;
+}
+
+.user-info {
 
   &__image{
+    grid-area: i;
     height: 40px;
     width: 40px;
     border-radius: $normal-border-radius;
@@ -14,7 +19,15 @@
     background: $bg-gradient;
   }
   &__name {
+    grid-area: n;
     font-size: $big-font-size;
+    text-align: end;
+    padding: 0 $normal-padding;
+  }
+  &__role {
+    grid-area: r;
+    text-align: end;
+    font-size: $small-font-size;
     padding: 0 $normal-padding;
   }
 }

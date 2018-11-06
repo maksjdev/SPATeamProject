@@ -12,5 +12,9 @@
   </div>
 
   <app-footer class="shadow-block" ></app-footer>
+
+  <a class="wrapper__elevator" [class.show]="isScroled" (click)="scrollToTop($event)">
+    <i class="wrapper__elevator--arrow fas fa-arrow-circle-up"></i>
+  </a>
 </div>
 

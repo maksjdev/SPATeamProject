@@ -1,6 +1,16 @@
 @import "~src/assets/base-css/theme";
 @import "~src/assets/base-css/vars";
 
+:host {
+  margin-bottom: $normal-padding;
+  &:first-child {
+    height: 75px;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
 .adv-item {
   display: block;
   height: 100%;

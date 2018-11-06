@@ -27,7 +27,6 @@ export class AppRoutingService {
         let data = this.getRouterData(router.routerState, router.routerState.root);
 
         this.activeRoute = this.routeActive.firstChild;
-        console.log(data);
         if(data.length > 0) {
           data = data[0]; // Берем инфу только с "Главного" роутинка (не учитывая дочерних)
 

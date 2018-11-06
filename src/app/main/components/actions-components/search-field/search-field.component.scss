@@ -1,0 +1,34 @@
+@import "~src/assets/base-css/theme";
+@import "~src/assets/base-css/vars";
+
+:host, form {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+}
+.search-form {
+  justify-content: flex-end;
+  padding-left: 20px;
+  &__input {
+    width: 125px;
+    color: $main-text-color;
+    padding: $small-padding 35px $small-padding $small-padding;
+    background-color: transparent;
+    -webkit-transition: width $normal-animation ease-in-out;
+    transition: width $normal-animation ease-in-out;
+    border-bottom: 1px solid $main-text-color;
+
+    &:focus {
+      outline: 0;
+      width: 200%;
+      border-color: $main-pink;
+      transform-origin: inherit;
+    }
+  }
+  &__icons {
+    font-size: 1.25em;
+    position: relative;
+    left: -25px;
+  }
+}
