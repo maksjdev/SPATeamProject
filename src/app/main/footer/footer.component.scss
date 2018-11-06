@@ -21,6 +21,7 @@
       .col {
         margin: $normal-padding 0;
       }
+
     }
     &--small {
       display: grid;
@@ -32,7 +33,6 @@
       background-color: $shadows-color;
     }
   }
-
 }
 
 .copyright-block {
@@ -40,7 +40,6 @@
 }
 .reference-links {
   text-align: left;
-
   &__item {
     margin-right: $big-padding;
   }

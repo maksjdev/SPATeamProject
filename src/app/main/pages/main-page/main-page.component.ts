@@ -31,7 +31,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   public loadData(event){
     this.subscribe = this.restService.getMockData('users').subscribe( (data) => {
-      Object.keys(data).length > 0? alert(JSON.stringify(data[0])) : alert('Запути сервер *npm mock*, дурашка))');
+      Object.keys(data).length > 0 ? alert(JSON.stringify(data[0])) : alert('Запути сервер *npm mock*, дурашка))');
     });
   }
 }

@@ -1,0 +1,13 @@
+@import "~src/assets/base-css/theme";
+@import "~src/assets/base-css/vars";
+:host{
+  width: 50%;
+  height: 100%;
+  border-collapse: collapse;
+  border: 1px solid $main-pink;
+}
+.stat-table {
+  &__str{
+    border: 1px solid $main-pink;
+  }
+}
