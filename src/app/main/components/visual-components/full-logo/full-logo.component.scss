@@ -2,7 +2,28 @@
 @import "~src/assets/base-css/vars";
 
 :host {
-  display: flex;
-  height: 100%;
+  display: grid;
+  font-family: 'Graduate', cursive;
+  grid-template: "i t" 1fr
+                 "i h" auto;
   align-items: center;
+}
+
+.full-logo {
+  &__image {
+    grid-area: i;
+    width: auto;
+    height: 100%;
+  }
+  &__title {
+    grid-area: t;
+    font-size: $big-font-size;
+    padding-left: $normal-padding;
+    padding-bottom: $small-padding;
+  }
+  &__hint {
+    grid-area: h;
+    font-size: $tiny-font-size;
+    padding-left: $normal-padding;
+  }
 }
