@@ -11,7 +11,7 @@ export class AppRestService {
     this.host = environment.host;
   }
 
-  public getMockData(route: string){
+  public getMockData(route: string) {
     return this.connectService.getData(this.host + route).pipe(
       catchError(this.connectService.handleError('getSpecificData', []))
     );
