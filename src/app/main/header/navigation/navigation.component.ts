@@ -9,6 +9,8 @@ export class NavigationComponent {
   navLinks = [
     {path: '/main',     label: 'main', class: 'active', icon: 'fa-apple', test: ''},
     {path: '/news', label: 'news', class: 'active', icon: 'fa-accusoft'},
+    {path: '/news', label: 'news', class: 'active', icon: 'fa-accusoft'},
+    {path: '/news', label: 'news', class: 'active', icon: 'fa-accusoft'},
   ];
 
   constructor() { }

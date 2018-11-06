@@ -6,6 +6,7 @@
  * 2. Prevent iOS and IE text size adjust after device orientation change,
  *    without disabling user zoom.
  */
+@import url(~@ng-select/ng-select/themes/default.theme.css);
 * {
   box-sizing: border-box; }
 
@@ -485,43 +486,42 @@ app-footer {
     border-width: 0 0 1px;
     border-style: solid; }
 
+.ng-select.ng-select-opened .ng-arrow-wrapper .ng-arrow {
+  border-color: transparent transparent #f9f8fd !important; }
+.ng-select-container .ng-value-container {
+  padding-top: 0 !important;
+  margin: 5px !important; }
+.ng-select-container .ng-arrow-wrapper .ng-arrow {
+  border-color: #f9f8fd transparent transparent !important; }
+
 blockquote {
   padding: 0 15px;
   height: fit-content;
   border-left: 5px solid #f9f8fd; }
-
-blockquote:before {
-  display: none; }
-
-blockquote:not(:first-of-type) {
-  margin-top: .5em; }
-
-blockquote p {
-  margin: 0;
-  text-align: left;
-  font-size: 12pt;
-  line-height: 1.4; }
-
-blockquote footer {
-  text-align: right;
-  font-style: italic; }
-
-blockquote footer:before {
-  content: 'тАФ '; }
-
-blockquote:nth-of-type(even) {
-  text-align: right;
-  border-left: none;
-  border-right: 5px solid #999; }
-
-blockquote:nth-of-type(even) footer {
-  text-align: right; }
-
-blockquote:nth-of-type(even) footer:before {
-  content: ''; }
-
-blockquote:nth-of-type(even) footer:after {
-  content: ' тАФ'; }
+  blockquote:before {
+    display: none; }
+  blockquote:not(:first-of-type) {
+    margin-top: .5em; }
+  blockquote p {
+    margin: 0;
+    text-align: left;
+    font-size: 12pt;
+    line-height: 1.4; }
+  blockquote:nth-of-type(even) {
+    text-align: right;
+    border-left: none;
+    border-right: 5px solid #999; }
+  blockquote:nth-of-type(even) footer {
+    text-align: right; }
+  blockquote:nth-of-type(even) footer:before {
+    content: ''; }
+  blockquote:nth-of-type(even) footer:after {
+    content: ' —'; }
+  blockquote footer {
+    text-align: right;
+    font-style: italic; }
+    blockquote footer:before {
+      content: '— '; }
 
 div.loading-block {
   height: 100px;

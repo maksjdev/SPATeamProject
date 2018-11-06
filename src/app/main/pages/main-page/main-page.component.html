@@ -1,7 +1,6 @@
 
 <section class="panel filters-block">
-  You watch on main-page!
-  <button class="btn btn-default" (click)="loadData($event)">Load Users</button>
+  <app-period-filter class="sidebar-block__period"></app-period-filter>
 </section>
 
 <section class="news-block">
@@ -11,7 +10,13 @@
 </section>
 
 <section class="sidebar-block">
+  <div class="sidebar-block__category">
+    <app-category-select></app-category-select>
+  </div>
+
   <app-ad-item-block></app-ad-item-block>
   <app-ad-item-block></app-ad-item-block>
   <app-ad-item-block></app-ad-item-block>
+
+  <button class="btn btn-default" (click)="loadData($event)">Load Users</button>
 </section>
