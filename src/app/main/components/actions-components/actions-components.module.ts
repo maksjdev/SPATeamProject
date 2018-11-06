@@ -6,6 +6,7 @@ import { PeriodFilterComponent } from './period-filter/period-filter.component';
 import {NgSelectModule} from '@ng-select/ng-select';
 import { CategorySelectComponent } from './category-select/category-select.component';
 import {FormsModule} from '@angular/forms';
+import { DemoFunctionsComponent } from './demo-functions/demo-functions.component';
 
 @NgModule({
   imports: [
@@ -17,13 +18,15 @@ import {FormsModule} from '@angular/forms';
     SearchFieldComponent,
     LoginButtonsComponent,
     PeriodFilterComponent,
-    CategorySelectComponent
+    CategorySelectComponent,
+    DemoFunctionsComponent
   ],
   declarations: [
     LoginButtonsComponent,
     SearchFieldComponent,
     PeriodFilterComponent,
-    CategorySelectComponent
+    CategorySelectComponent,
+    DemoFunctionsComponent
   ]
 })
 export class ActionsComponentsModule { }
