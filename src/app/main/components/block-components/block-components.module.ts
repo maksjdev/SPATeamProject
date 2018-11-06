@@ -6,7 +6,7 @@ import { StatisticTableComponent } from './statistic-table/statistic-table.compo
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports: [
     NewsItemBlockComponent,

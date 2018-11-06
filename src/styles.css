@@ -410,7 +410,7 @@ app-footer {
         opacity: .5; }
 
 .content-block {
-  margin: 25px 100px; }
+  margin: 25px 200px; }
 
 .shadow-block {
   -webkit-box-shadow: 0 10px 6px -6px #262729;
@@ -422,7 +422,6 @@ app-footer {
   color: #000000; }
 
 .panel {
-  padding: 10px;
   background-color: #3f4043;
   border-radius: 3px;
   box-shadow: 0 3px 6px 0px #1D1D1F; }
