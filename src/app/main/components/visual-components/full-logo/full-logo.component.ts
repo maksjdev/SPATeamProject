@@ -11,7 +11,6 @@ export class FullLogoComponent implements OnInit {
 
   constructor() {
     this.title = CONSTANTS.APP.TITLE;
-    console.log(this.title);
   }
 
   ngOnInit() {
