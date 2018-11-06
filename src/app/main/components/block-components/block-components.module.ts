@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NewsItemBlockComponent } from './news-item-block/news-item-block.component';
 import { AdItemBlockComponent } from './ad-item-block/ad-item-block.component';
+import { FullNewsBlockComponent } from './full-news-block/full-news-block.component';
 
 @NgModule({
   imports: [
@@ -9,11 +10,13 @@ import { AdItemBlockComponent } from './ad-item-block/ad-item-block.component';
   ],
   exports: [
     NewsItemBlockComponent,
-    AdItemBlockComponent
+    AdItemBlockComponent,
+    FullNewsBlockComponent
   ],
   declarations: [
     NewsItemBlockComponent,
-    AdItemBlockComponent
+    AdItemBlockComponent,
+    FullNewsBlockComponent
   ]
 })
 export class BlockComponentsModule { }

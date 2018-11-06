@@ -507,7 +507,7 @@ blockquote footer {
   font-style: italic; }
 
 blockquote footer:before {
-  content: '— '; }
+  content: 'тАФ '; }
 
 blockquote:nth-of-type(even) {
   text-align: right;
@@ -521,7 +521,7 @@ blockquote:nth-of-type(even) footer:before {
   content: ''; }
 
 blockquote:nth-of-type(even) footer:after {
-  content: ' —'; }
+  content: ' тАФ'; }
 
 div.loading-block {
   height: 100px;
