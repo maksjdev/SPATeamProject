@@ -28,12 +28,13 @@
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
+    box-shadow: 0 $small-shadow $small-smoothness 0px $shadows-color;
   }
   &__content {
     margin: $small-padding $normal-padding;
   }
   &__bottom {
-    margin: 0 $normal-padding $big-padding;
+    margin: $normal-padding $big-padding $huge-padding;
   }
 }
 

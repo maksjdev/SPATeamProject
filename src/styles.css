@@ -410,11 +410,10 @@ app-footer {
         opacity: .5; }
 
 .content-block {
-  margin: 25px 200px; }
+  margin: 20px 200px; }
 
 .shadow-block {
   -webkit-box-shadow: 0 10px 6px -6px #262729;
-  -moz-box-shadow: 0 10px 6px -6px #262729;
   box-shadow: 0 6px 6px 0px #1D1D1F; }
 
 .gradient {
