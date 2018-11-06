@@ -2,7 +2,7 @@
   "name": "news-project-spa",
   "version": "0.0.0",
   "scripts": {
-    "start": "ng serve --port 4201",
+    "start": "ng serve --port 4200",
     "build": "ng build --prod --build-optimizer --stats-json",
     "bundle": "webpack-bundle-analyzer dist/news-project-spa/stats.json",
     "test": "ng test --watch=false --code-coverage",
@@ -22,6 +22,7 @@
     "@angular/platform-browser": "~7.0.0",
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
+    "@ng-select/ng-select": "^2.11.2",
     "@ngx-progressbar/core": "^5.2.1",
     "@ngx-progressbar/http": "^5.2.1",
     "core-js": "^2.5.4",

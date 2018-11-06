@@ -5,11 +5,14 @@
   display: flex;
   height: 100%;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+
 }
 
 .navigations-block__item {
-  margin-right: $normal-padding;
+  margin-right: $small-padding;
+  -webkit-transition: width $normal-animation ease-in-out;
+  transition: width $normal-animation ease-in-out;
 
   & a {
     padding: $small-padding;

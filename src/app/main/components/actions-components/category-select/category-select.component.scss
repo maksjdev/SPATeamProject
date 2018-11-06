@@ -1,0 +1,22 @@
+@import "~src/assets/base-css/theme";
+@import "~src/assets/base-css/vars";
+
+:host {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+}
+.ng-select {
+  width: 100%;
+}
+.category-select {
+
+  &::ng-deep .ng-select-container {
+    //color: $main-text-color;
+  }
+  &::ng-deep .ng-select-container{
+      background-color: $gray-default !important;
+      border-color: $main-text-color !important;
+    }
+}
