@@ -410,7 +410,8 @@ app-footer {
         opacity: .5; }
 
 .content-block {
-  margin: 20px 200px; }
+  width: 1000px;
+  margin: 20px auto; }
 
 .shadow-block {
   -webkit-box-shadow: 0 10px 6px -6px #262729;

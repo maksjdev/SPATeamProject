@@ -1,17 +1,21 @@
 @import "~src/assets/base-css/theme";
 @import "~src/assets/base-css/vars";
 
+:host {
+  background-color: $main-color;
+}
+
 .header {
   display: grid;
+  width: $main-content-wight;
   align-items: center;
   text-align: center;
   font-weight: normal;
 
   grid-gap: $normal-padding;
   grid-template-columns: auto 1fr auto auto;
+  margin: $normal-padding auto;
 
-  padding: $normal-padding $extra-padding;
-  background-color: $main-color;
 
   &__logo {
     text-align: start;
