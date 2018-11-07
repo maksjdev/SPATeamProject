@@ -9,11 +9,9 @@ import {ConfigService} from '@shared/config/config.service';
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss'],
 })
-export class MainPageComponent implements OnInit, OnDestroy {
-  private subscribe: Subscription;
+export class MainPageComponent implements OnInit {
 
   constructor(
-    private restService: AppRestService,
     private routingService: AppRoutingService,
     private configService: ConfigService,
   ) { }
@@ -28,13 +26,4 @@ export class MainPageComponent implements OnInit, OnDestroy {
     console.log(`Сервер дай мне ${nuberOfNews} новостей, пожалуйста :з`);
   }
 
-  ngOnDestroy(): void {
-    if (this.subscribe) this.subscribe.unsubscribe();
-  }
-
-  public loadData(event){
-    this.subscribe = this.restService.getMockData('users').subscribe( (data) => {
-      Object.keys(data).length > 0? alert(JSON.stringify(data[0])) : alert('Запути сервер *npm mock*, дурашка))');
-    });
-  }
 }

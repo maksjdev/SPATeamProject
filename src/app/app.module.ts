@@ -12,6 +12,10 @@ import {AppRestService} from '@shared/http/app-rest.service';
 import {AppHttpService} from '@shared/http/app-http.service';
 import {HttpClientModule} from '@angular/common/http';
 import {ConfigLoadService} from '@shared/config/config-load.service';
+import {DatePipe} from '@angular/common';
+import {AppDateTimeService} from '@shared/services/app-date-time.service';
+import {AppStringService} from '@shared/services/app-string.service';
+import {ShortenPipe} from 'ngx-pipes';
 
 export function initializeApp(configData: ConfigLoadService) {
   return () => configData.loadAppConfig();
@@ -35,10 +39,15 @@ export function initializeApp(configData: ConfigLoadService) {
     AppComponent,
   ],
   providers: [
+    // Кастомные сервисы
     AppHttpService,
     AppRestService,
     AppRoutingModule,
+    AppDateTimeService,
+    AppStringService,
 
+    // Внедренные херни
+    DatePipe, ShortenPipe,
     ConfigLoadService, {provide: APP_INITIALIZER, useFactory: initializeApp, deps: [ConfigLoadService], multi: true},
   ],
   bootstrap: [AppComponent]

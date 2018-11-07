@@ -1,4 +1,33 @@
 
 <article class="panel news-item">
-  News #1
+  <div class="news-item__header">
+    <div class="news-item__header--title">{{ trimString(mockNews.title, 100) }}</div>
+    <div class="header-info">
+      <div class="header-info__author">
+        <img class="header-info__author--image" [src]="mockNews.author.image" alt="*User Image*">
+        <a href="#" class="header-info__author--name">
+          {{ mockNews.author.first_name + mockNews.author.last_name }}{{ ',' }}
+        </a>
+      </div>
+      <div class="header-info__date">{{ mockNews.date | date: 'dd.MM.yyyy' }}</div>
+      <div class="header-info__comments">
+        {{ mockNews.comments }}
+        <i class="far fa-comment-dots"></i>
+      </div>
+    </div>
+    <span class="header-tags">
+      <div class="header-tags__item" *ngFor="let tag of mockNews.tags">
+        {{ tag }}
+      </div>
+    </span>
+  </div>
+  <div class="shadow-block news-item__image" [ngStyle]="{ 'background-image': 'url(' + mockNews.image + ')'}"></div>
+  <div class="news-item__content">
+    <div class="news-item__content--text">
+      {{ trimString(mockNews.text, 500) }}
+    </div>
+  </div>
+  <div class="news-item__bottom">
+    <button class="btn btn-default btn-read-more">Читать далее <i class="fas fa-long-arrow-alt-right"></i></button>
+  </div>
 </article>

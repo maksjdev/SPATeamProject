@@ -1,0 +1,18 @@
+
+<table class="stat-table">
+  <thead>
+  <tr class="stat-table__str">
+    <td colspan="3">Statistic of visiting</td>
+  </tr>
+  </thead>
+  <tr class="stat-table__str" *ngFor="let table of tableData">
+    <td>Days</td>
+    <td class="stat-table__str">Weeks</td>
+    <td>Years</td>
+  </tr>
+  <tr class="stat-table__str" *ngFor="let table of tableData">
+    <td>{{table.days}}</td>
+    <td class="stat-table__str">{{table.weeks}}</td>
+    <td>{{table.years}}</td>
+  </tr>
+</table>

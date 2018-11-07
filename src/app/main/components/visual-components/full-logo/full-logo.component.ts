@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {CONSTANTS} from '@shared/config/constants';
 
 @Component({
   selector: 'app-full-logo',
@@ -6,9 +7,11 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./full-logo.component.scss']
 })
 export class FullLogoComponent implements OnInit {
-  @Input() title: string = "Default";
+  title: string;
 
-  constructor() { }
+  constructor() {
+    this.title = CONSTANTS.APP.TITLE;
+  }
 
   ngOnInit() {
   }
