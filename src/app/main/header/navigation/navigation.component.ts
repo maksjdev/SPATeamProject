@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-navigation',
@@ -7,10 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationComponent {
   navLinks = [
-    {path: '/main',     label: 'main', class: 'active', icon: 'fa-apple', test: ''},
-    {path: '/news', label: 'news', class: 'active', icon: 'fa-accusoft'},
-    {path: '/news', label: 'news', class: 'active', icon: 'fa-accusoft'},
-    {path: '/news', label: 'news', class: 'active', icon: 'fa-accusoft'},
+    {path: '/main',   label: 'main',  class: 'active'},
+    {path: '/news',   label: 'news',  class: 'active'},
+    {path: '/login',  label: 'login', class: 'active'},
   ];
 
   constructor() { }

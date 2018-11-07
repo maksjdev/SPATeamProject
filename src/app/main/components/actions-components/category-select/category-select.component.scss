@@ -1,9 +1,11 @@
 @import "~src/assets/base-css/theme";
 @import "~src/assets/base-css/vars";
 
+$height-base: 40px;
+
 :host {
   display: flex;
-  height: 100%;
+  min-height: $height-base;
   width: 100%;
   align-items: center;
 }
@@ -11,12 +13,11 @@
   width: 100%;
 }
 .category-select {
+  min-height: $height-base !important;
 
   &::ng-deep .ng-select-container {
-    //color: $main-text-color;
+    background-color: $gray-default !important;
+    border-color: $main-text-color !important;
+    min-height: $height-base;
   }
-  &::ng-deep .ng-select-container{
-      background-color: $gray-default !important;
-      border-color: $main-text-color !important;
-    }
 }

@@ -195,6 +195,10 @@ app-footer {
       & .ng-value {
         //margin-bottom: 0 !important;
       }
+      & .ng-placeholder {
+        top: initial !important;
+        padding-bottom: initial !important;
+      }
 
     }
     & .ng-arrow-wrapper {
