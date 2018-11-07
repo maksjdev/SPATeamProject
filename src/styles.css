@@ -505,6 +505,9 @@ app-footer {
 .ng-select-container .ng-value-container {
   padding-top: 0 !important;
   margin: 5px !important; }
+  .ng-select-container .ng-value-container .ng-placeholder {
+    top: initial !important;
+    padding-bottom: initial !important; }
 .ng-select-container .ng-arrow-wrapper .ng-arrow {
   border-color: #f9f8fd transparent transparent !important; }
 

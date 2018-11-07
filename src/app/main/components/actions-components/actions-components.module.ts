@@ -7,6 +7,8 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import { CategorySelectComponent } from './category-select/category-select.component';
 import {FormsModule} from '@angular/forms';
 import { DemoFunctionsComponent } from './demo-functions/demo-functions.component';
+import {PaginationComponent} from '@components/actions-components/pagination/pagination.component';
+import { RatingFilterComponent } from './rating-filter/rating-filter.component';
 
 @NgModule({
   imports: [
@@ -19,14 +21,18 @@ import { DemoFunctionsComponent } from './demo-functions/demo-functions.componen
     LoginButtonsComponent,
     PeriodFilterComponent,
     CategorySelectComponent,
-    DemoFunctionsComponent
+    DemoFunctionsComponent,
+    PaginationComponent,
+    RatingFilterComponent
   ],
   declarations: [
     LoginButtonsComponent,
     SearchFieldComponent,
     PeriodFilterComponent,
     CategorySelectComponent,
-    DemoFunctionsComponent
+    DemoFunctionsComponent,
+    PaginationComponent,
+    RatingFilterComponent
   ]
 })
 export class ActionsComponentsModule { }

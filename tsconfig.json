@@ -12,6 +12,7 @@
       "@pages/*": ["src/app/main/pages/*"],
       "@main/*": ["src/app/main/pages/main-page/*"],
       "@news/*": ["src/app/main/pages/news-page/*"],
+      "@login/*": ["src/app/main/pages/login-page/*"],
 
       "@header/*": ["src/app/main/header/*"],
       "@footer/*": ["src/app/main/footer/*"]
