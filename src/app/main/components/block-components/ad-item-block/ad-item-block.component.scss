@@ -3,15 +3,24 @@
 
 :host {
   margin-bottom: $normal-padding;
-  &:first-child {
+  /*&:first-child {
     height: 75px;
   }
   &:last-child {
     margin-bottom: 0;
-  }
+  }*/
 }
-
 .adv-item {
-  display: block;
+  display: flex;
   height: 100%;
+  &__close-ico {
+    width: 7%;
+    height: 7%;
+  }
+  &__image {
+    grid-area: i;
+    //background: url("../../../../../assets/images/burger_king.jpg");
+    width: 100%;
+    height: 100%;
+  }
 }

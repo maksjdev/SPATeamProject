@@ -1,5 +1,4 @@
-
-export const CONSTANTS ={
+export const CONSTANTS = {
   APP: {
     TITLE: 'NewString'
   }

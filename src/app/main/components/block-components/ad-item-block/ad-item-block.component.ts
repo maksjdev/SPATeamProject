@@ -6,9 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ad-item-block.component.scss']
 })
 export class AdItemBlockComponent implements OnInit {
-
+  adLinks = [
+    {path: 'https://burgerking.ru/actions'}
+  ];
   constructor() { }
-
+  /*getUrl()
+  {
+    let myUrl = {
+      'background-image' : 'url(\'../../../../../assets/images/burger_king.jpg\')'
+    };
+    return myUrl;
+  }*/
   ngOnInit() {
   }
 
