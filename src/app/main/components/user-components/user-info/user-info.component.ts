@@ -9,7 +9,7 @@ export class UserInfoComponent implements OnInit {
   user: object = {
     name: 'Sirius Dark',
     role: 'Admin',
-    image: '//habrastorage.org/getpro/habr/avatars/4fe/2db/5b6/4fe2db5b695c03abe903c7c966c618a4.png',
+    image: 'https://hsto.org/getpro/habr/avatars/fc7/23a/b6b/fc723ab6b9870078eefc3aba22c605ad.png',
   };
 
   constructor() { }

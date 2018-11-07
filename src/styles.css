@@ -410,11 +410,11 @@ app-footer {
         opacity: .5; }
 
 .content-block {
-  margin: 25px 100px; }
+  width: 1000px;
+  margin: 20px auto; }
 
 .shadow-block {
   -webkit-box-shadow: 0 10px 6px -6px #262729;
-  -moz-box-shadow: 0 10px 6px -6px #262729;
   box-shadow: 0 6px 6px 0px #1D1D1F; }
 
 .gradient {
@@ -422,7 +422,6 @@ app-footer {
   color: #000000; }
 
 .panel {
-  padding: 10px;
   background-color: #3f4043;
   border-radius: 3px;
   box-shadow: 0 3px 6px 0px #1D1D1F; }
