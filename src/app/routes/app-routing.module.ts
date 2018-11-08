@@ -5,8 +5,9 @@ const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'main'},
   //{path: '**', redirectTo: 'main'},
 
-  {path: 'news', loadChildren: '@news/news-page.module#NewsPageModule'},
   {path: 'main', loadChildren: '@main/main-page.module#MainPageModule'},
+  {path: 'news', loadChildren: '@news/news-page.module#NewsPageModule'},
+  {path: 'login', loadChildren: '@login/login-page.module#LoginPageModule'},
 ];
 
 @NgModule({

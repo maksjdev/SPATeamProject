@@ -410,7 +410,8 @@ app-footer {
         opacity: .5; }
 
 .content-block {
-  margin: 20px 200px; }
+  width: 1000px;
+  margin: 20px auto; }
 
 .shadow-block {
   -webkit-box-shadow: 0 10px 6px -6px #262729;
@@ -504,6 +505,9 @@ app-footer {
 .ng-select-container .ng-value-container {
   padding-top: 0 !important;
   margin: 5px !important; }
+  .ng-select-container .ng-value-container .ng-placeholder {
+    top: initial !important;
+    padding-bottom: initial !important; }
 .ng-select-container .ng-arrow-wrapper .ng-arrow {
   border-color: #f9f8fd transparent transparent !important; }
 

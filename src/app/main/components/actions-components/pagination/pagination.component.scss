@@ -1,0 +1,74 @@
+@import "~src/assets/base-css/theme";
+@import "~src/assets/base-css/vars";
+
+:host {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+}
+
+.pagination {
+  &__previous{
+    display: flex;
+    flex-direction: row;
+    margin-right: $big-padding;
+    &--text {
+      font-weight: bold;
+    }
+    &--icon {
+      font-size: $big-font-size;
+      margin: 0 $normal-padding;
+    }
+  }
+  &__page {
+    margin-right: $normal-padding;
+    &:last-child {
+      margin-right: 0;
+    }
+    &:not(.dots){
+      font-weight: bold;
+    }
+    &.current {
+      position: relative;
+      z-index: 3;
+      color: $main-color;
+      padding: 0 12px 0;
+
+      &:before{
+        position: absolute;
+        content: '';
+        top: -2px;
+        left: 50%;
+        bottom: 0;
+        width: 36px;
+        margin-left: -18px;
+        z-index: -1;
+        background-color: $main-text-color;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+      }
+      &:after {
+        position: absolute;
+        content: '';
+        top: 20px;
+        left: 50%;
+        margin-left: -18px;
+        border: 18px solid transparent;
+        border-top: 8px solid $main-text-color;
+      }
+    }
+  }
+  &__next {
+    display: flex;
+    flex-direction: row;
+    margin-left: $big-padding;
+    &--text {
+      font-weight: bold;
+    }
+    &--icon {
+      font-size: $big-font-size;
+      margin: 0 $normal-padding;
+    }
+  }
+}

@@ -2,21 +2,28 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NewsItemBlockComponent } from './news-item-block/news-item-block.component';
 import { AdItemBlockComponent } from './ad-item-block/ad-item-block.component';
-import {FullNewsBlockComponent} from '@components/block-components/full-news-block/full-news-block.component';
+import { StatisticTableComponent } from './statistic-table/statistic-table.component';
+import {NewsDataService} from '@shared/news-data.service';
+import {TrimStringPipe} from '@shared/pipes/trim-string.pipe';
+import {AppPipesModule} from '@shared/pipes/app-pipes.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    AppPipesModule
   ],
   exports: [
-    FullNewsBlockComponent,
     NewsItemBlockComponent,
-    AdItemBlockComponent
+    AdItemBlockComponent,
+    StatisticTableComponent
   ],
   declarations: [
-    FullNewsBlockComponent,
     NewsItemBlockComponent,
-    AdItemBlockComponent
+    AdItemBlockComponent,
+    StatisticTableComponent,
+  ],
+  providers: [
+    NewsDataService,
   ]
 })
 export class BlockComponentsModule { }
