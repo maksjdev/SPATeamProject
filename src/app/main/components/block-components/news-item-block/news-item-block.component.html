@@ -24,7 +24,7 @@
   <div class="shadow-block news-item__image" [ngStyle]="{ 'background-image': 'url(' + news.image + ')'}"></div>
   <div class="news-item__content">
     <div class="news-item__content--text">
-      {{ news.text | trimString: 500 }}
+      {{ textContent | trimString: 500 }}
     </div>
   </div>
   <div class="news-item__bottom">
