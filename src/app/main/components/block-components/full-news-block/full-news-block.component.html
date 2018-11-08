@@ -1,30 +1,28 @@
 <article class="full-news">
-  <div class="full-news__title">{{mockNews.title}}</div>
+  <div class="full-news__title">{{news.title}}</div>
   <div class="header-info">
     <div class="header-info__author">
-      <img class="header-info__author--image" [src]="mockNews.author.image" alt="*User Image*">
+      <img class="header-info__author--image" [src]="news.author.image" alt="*User Image*">
       <a href="#" class="header-info__author--name">
-        {{ mockNews.author.first_name + mockNews.author.last_name }}{{ ',' }}
+        {{ news.author.first_name + news.author.last_name }}{{ ',' }}
       </a>
       <span class="header-info__date">
-        {{ mockNews.date | date: 'dd.MM.yyyy' }}
+        {{ news.date | date: 'dd.MM.yyyy' }}
       </span>
     </div>
   </div>
   <span class="header-tags">
-      <div class="header-tags__item" *ngFor="let tag of mockNews.tags">
+      <div class="header-tags__item" *ngFor="let tag of news.tags">
         {{ tag }}
       </div>
     </span>
   <div class="full-news__content">
-    <div class="full-news__content--image" [ngStyle]="{ 'background-image': 'url(' + mockNews.image + ')'}"></div>
-      <div class="full-news__content--text">{{ mockNews.text }} <br>
-          <div class="full-news__content--quotes">
-            <i class="fas fa-quote-left"></i>
-              {{mockNews.quotes}}
-            <i class="fas fa-quote-right"></i>
-          </div>
-        {{mockNews.text}}
+    <div class="content-image" [ngStyle]="{ 'background-image': 'url(' + news.image + ')'}"></div>
+      <div *ngFor="let element of news" class="content--wrapper__element">
+        <div [ngSwitch]="" class="content--wrapper__">
+          <p class="ttt" *ngSwitchCase="text">{{ element['value'] }}</p>
+        </div>
+
 
       </div>
   </div>

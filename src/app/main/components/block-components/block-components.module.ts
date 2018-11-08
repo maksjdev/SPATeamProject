@@ -6,6 +6,7 @@ import { StatisticTableComponent } from './statistic-table/statistic-table.compo
 import {NewsDataService} from '@shared/news-data.service';
 import {TrimStringPipe} from '@shared/pipes/trim-string.pipe';
 import {AppPipesModule} from '@shared/pipes/app-pipes.module';
+import {FullNewsBlockComponent} from '@components/block-components/full-news-block/full-news-block.component';
 
 @NgModule({
   imports: [
@@ -15,12 +16,14 @@ import {AppPipesModule} from '@shared/pipes/app-pipes.module';
   exports: [
     NewsItemBlockComponent,
     AdItemBlockComponent,
-    StatisticTableComponent
+    StatisticTableComponent,
+    FullNewsBlockComponent
   ],
   declarations: [
     NewsItemBlockComponent,
     AdItemBlockComponent,
     StatisticTableComponent,
+    FullNewsBlockComponent
   ],
   providers: [
     NewsDataService,
