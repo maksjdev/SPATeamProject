@@ -26,7 +26,7 @@ export class NewsItemBlockComponent {
         linkNews: string = 'https://habrastorage.org/getpro/habr/post_images/349/844/4f8/3498444f856e32a0b6fbdb7877ac5610.jpg',
         date = dateTimeService.unixToDate('1541538783'),
         tags = ['Space', 'Humans', 'Potato'];
-    this.mockNews = new News (this.mockUser, date, title, text, linkNews, tags,100, 5);
+    this.mockNews = new News (this.mockUser, date, title, text, linkNews, tags,100, 7);
   }
 
   trimString(str, maxLenght): string {

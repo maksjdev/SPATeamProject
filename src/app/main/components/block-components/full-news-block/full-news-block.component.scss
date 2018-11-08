@@ -1,0 +1,68 @@
+@import "~src/assets/base-css/theme";
+@import "~src/assets/base-css/vars";
+
+:host {
+  display: flex;
+  width: 100%;
+  height: inherit;
+  flex-direction: row;
+
+  margin-bottom: $normal-padding;
+
+ .full-news{
+   display: flex;
+   flex-direction: column;
+   &__title{
+     font-size: $extra-font-size;
+     font-family: 'Graduate',cursive;
+     margin: $small-padding;
+   }
+  .header-info{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $small-padding;
+    &__author{
+      margin-left: $small-padding;
+      &--image{
+        width: 25px;
+        height: 25px;
+      }
+    }
+  }
+  .header-tags{
+    display: flex;
+    flex-direction: row;
+    margin: $small-padding;
+    &__item{
+      color: $main-text-dark-color;
+      background-color: $main-text-color;
+      border-radius: $normal-border-radius;
+      font-size: $small-font-size;
+      font-weight: bold;
+      padding: $small-padding $small-padding;
+
+      margin-right: $normal-padding;
+    }
+  }
+   &__content{
+     &--image{
+       width: 100%;
+       height: 400px;
+       background-size: cover;
+       background-position: center center;
+       background-repeat: no-repeat;
+     }
+     &--text{
+       font-family: "Roboto Condensed";
+       text-align: justify;
+       margin: $small-padding;
+       letter-spacing: 0.3px;
+     }
+     &--quotes{
+       color: $main-blue;
+       font-size: $big-font-size;
+       margin: $normal-padding;
+     }
+   }
+ }
+}

@@ -1,3 +1,31 @@
-<p>
-  full-news-block works!
-</p>
+<article class="full-news">
+  <div class="full-news__title">{{mockNews.title}}</div>
+  <div class="header-info">
+    <div class="header-info__author">
+      <img class="header-info__author--image" [src]="mockNews.author.image" alt="*User Image*">
+      <a href="#" class="header-info__author--name">
+        {{ mockNews.author.first_name + mockNews.author.last_name }}{{ ',' }}
+      </a>
+      <span class="header-info__date">
+        {{ mockNews.date | date: 'dd.MM.yyyy' }}
+      </span>
+    </div>
+  </div>
+  <span class="header-tags">
+      <div class="header-tags__item" *ngFor="let tag of mockNews.tags">
+        {{ tag }}
+      </div>
+    </span>
+  <div class="full-news__content">
+    <div class="full-news__content--image" [ngStyle]="{ 'background-image': 'url(' + mockNews.image + ')'}"></div>
+      <div class="full-news__content--text">{{ mockNews.text }} <br>
+          <div class="full-news__content--quotes">
+            <i class="fas fa-quote-left"></i>
+              {{mockNews.quotes}}
+            <i class="fas fa-quote-right"></i>
+          </div>
+        {{mockNews.text}}
+
+      </div>
+  </div>
+</article>

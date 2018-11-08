@@ -7,6 +7,7 @@ export class News {
     public date: Date,
     public title: string,
     public text: string,
+    public quotes: string,
     public image: string,
     public tags: Array<string>,
     public rating: number,

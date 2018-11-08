@@ -529,12 +529,12 @@ blockquote {
   blockquote:nth-of-type(even) footer:before {
     content: ''; }
   blockquote:nth-of-type(even) footer:after {
-    content: ' —'; }
+    content: ' тАФ'; }
   blockquote footer {
     text-align: right;
     font-style: italic; }
     blockquote footer:before {
-      content: '— '; }
+      content: 'тАФ '; }
 
 div.loading-block {
   height: 100px;
