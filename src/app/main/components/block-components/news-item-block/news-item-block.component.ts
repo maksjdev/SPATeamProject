@@ -14,11 +14,22 @@ import {NewsDataService} from '@shared/news-data.service';
 })
 export class NewsItemBlockComponent {
   news: News;
+  textContent: string;
 
   constructor(
     private newsSercice: NewsDataService,
   ) {
     this.news = this.newsSercice.getMockNews();
+    this.textContent = this.leftText(this.news.text);
   }
 
+  public leftText(arr: Array<object>): string {
+    let result: string = '';
+    arr.filter( (obj, ind, arr) => {
+      return obj['type'] === 'text';
+    }).forEach( (obj) => {
+      result += obj['value'] + ' \n';
+    });
+    return result;
+  }
 }
