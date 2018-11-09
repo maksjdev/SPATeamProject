@@ -10,7 +10,7 @@ import {AppPipesModule} from '@shared/pipes/app-pipes.module';
     AppPipesModule
   ],
   exports: [
-    UserInfoComponent
+    UserInfoComponent,
   ],
   declarations: [
     UserInfoComponent,

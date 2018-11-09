@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {RouterModule, Routes} from '@angular/router';
-import {LoginPageComponent} from '@pages/login-page/login-page.component';
 import {UserComponentsModule} from '@components/user-components/user-components.module';
+import {RouterModule, Routes} from '@angular/router';
+import {RegistrationPageComponent} from '@registration/registration-page.component';
 
 const router: Routes = [{
-  path: '', component: LoginPageComponent, data: {
-    title: 'Login Page!'
+  path: '', component: RegistrationPageComponent, data: {
+    title: 'Registration Page!'
   }
 }];
 
@@ -20,7 +20,7 @@ const router: Routes = [{
     RouterModule
   ],
   declarations: [
-    LoginPageComponent
+    RegistrationPageComponent
   ]
 })
-export class LoginPageModule { }
+export class RegistrationPageModule { }

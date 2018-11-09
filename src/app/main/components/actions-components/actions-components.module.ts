@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {LoginButtonsComponent} from './login-buttons/login-buttons.component';
+import {SignButtonsComponent} from './sign-buttons/sign-buttons.component';
 import {SearchFieldComponent} from '@components/actions-components/search-field/search-field.component';
 import { PeriodFilterComponent } from './period-filter/period-filter.component';
 import {NgSelectModule} from '@ng-select/ng-select';
@@ -20,7 +20,7 @@ import {NgxEditorModule} from 'ngx-editor';
   ],
   exports: [
     SearchFieldComponent,
-    LoginButtonsComponent,
+    SignButtonsComponent,
     PeriodFilterComponent,
     CategorySelectComponent,
     DemoFunctionsComponent,
@@ -28,7 +28,7 @@ import {NgxEditorModule} from 'ngx-editor';
     RatingFilterComponent
   ],
   declarations: [
-    LoginButtonsComponent,
+    SignButtonsComponent,
     SearchFieldComponent,
     PeriodFilterComponent,
     CategorySelectComponent,

@@ -12,6 +12,7 @@ const routes: Routes = [
   },
   {path: 'news', loadChildren: '@news/news-page.module#NewsPageModule'},
   {path: 'login', loadChildren: '@login/login-page.module#LoginPageModule'},
+  {path: 'registration', loadChildren: '@registration/registration-page.module#RegistrationPageModule'},
   {path: 'about', loadChildren: '@about/about-page.module#AboutPageModule'},
   {path: 'demo', loadChildren: '@demo/demo-page.module#DemoPageModule'},
 ];

@@ -2,5 +2,6 @@
 @import "~src/assets/base-css/vars";
 
 :host {
-  //display: grid;
+  display: flex;
+  flex-direction: row;
 }
