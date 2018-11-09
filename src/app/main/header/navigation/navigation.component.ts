@@ -10,6 +10,8 @@ export class NavigationComponent {
     {path: '/main',   label: 'main',  class: 'active'},
     {path: '/news',   label: 'news',  class: 'active'},
     {path: '/login',  label: 'login', class: 'active'},
+    {path: '/about',  label: 'about', class: 'active'},
+    {path: '/demo',  label: 'demo', class: 'active'},
   ];
 
   constructor() { }

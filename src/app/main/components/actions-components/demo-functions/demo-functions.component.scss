@@ -7,10 +7,21 @@
   width: 100%;
   align-items: center;
 }
-button {
-  width: 100%;
+.btn-wrapper {
   margin-bottom: $normal-padding;
-  &:last-child {
-    margin-bottom: 0;
+  button {
+    margin-right: $normal-padding;
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
+.demo {
+  &-editor {
+    margin-bottom: $normal-padding;
+  }
+  &-content {
+    width: 100%;
+  }
+}
+
