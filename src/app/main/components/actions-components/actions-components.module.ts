@@ -9,12 +9,14 @@ import {FormsModule} from '@angular/forms';
 import { DemoFunctionsComponent } from './demo-functions/demo-functions.component';
 import {PaginationComponent} from '@components/actions-components/pagination/pagination.component';
 import { RatingFilterComponent } from './rating-filter/rating-filter.component';
+import {NgxEditorModule} from 'ngx-editor';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    NgSelectModule
+    NgSelectModule,
+    NgxEditorModule
   ],
   exports: [
     SearchFieldComponent,
