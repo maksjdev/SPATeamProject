@@ -18,9 +18,10 @@
     </span>
   <div class="full-news__content">
     <div class="content-image" [ngStyle]="{ 'background-image': 'url(' + news.image + ')'}"></div>
-      <div *ngFor="let element of news" class="content--wrapper__element">
+      <div *ngFor="let element of news.text" class="content--wrapper__element">
         <div [ngSwitch]="" class="content--wrapper__">
           <p class="ttt" *ngSwitchCase="text">{{ element['value'] }}</p>
+
         </div>
 
 
