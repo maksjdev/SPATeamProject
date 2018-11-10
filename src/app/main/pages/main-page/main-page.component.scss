@@ -6,7 +6,7 @@
   gap: $normal-padding;
   grid-template: "f s" auto
                  "m s" 1fr
-                 / 1fr 300px;
+                 / 1fr auto;
 }
 .filters-block {
   display: flex;
@@ -21,15 +21,11 @@
   grid-area: m;
   flex-direction: column;
 }
-//.sidebar-category{
-//  display: flex;
-//  grid-area: c;
-//  flex-direction: column;
-//}
 .sidebar-block {
   display: flex;
   grid-area: s;
   flex-direction: column;
+  min-width: 300px;
   &:last-child {
     margin-bottom: 0;
   }

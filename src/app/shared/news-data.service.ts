@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {News} from '@shared/models/News';
 import {AppDateTimeService} from '@shared/services/app-date-time.service';
 import {CONSTANTS} from '@shared/config/constants';
@@ -41,4 +41,18 @@ export class NewsDataService {
   public getMockNews(): News {
     return this.mockNews;
   }
+
+  public getMockNewsList(quantity, page?: number, period?: string, rating?: string): Array<News>{
+    let resultArr = [];
+    // Получаем новости по требованиям
+    console.info(`Чики-брики, сервер, гони новости (стр. ${page}, период: ${period}, рейтинг: ${rating})!`);
+
+    //Как-то получили новости
+    let news = this.getMockNews();
+    for (let i = 0 ; i < quantity; i++){
+      resultArr.push(news);
+    }
+    return resultArr;
+  }
+
 }

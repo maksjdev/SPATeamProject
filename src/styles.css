@@ -385,29 +385,34 @@ app-footer {
   grid-template-columns: 100%; }
   .wrapper__elevator {
     position: fixed;
+    display: block;
     top: 0;
     left: 0;
     z-index: 1;
-    display: none;
+    opacity: 0;
+    visibility: hidden;
     width: 60px;
     height: 100%;
     color: #d5dddf;
     text-align: center;
     cursor: pointer;
     transform: translateY(0);
-    will-change: transform; }
+    will-change: transform;
+    transition: all 0.5s; }
     .wrapper__elevator--arrow {
       position: relative;
       top: 50%;
       margin-top: -15px;
       font-size: 2em;
       opacity: 0.5; }
+      .wrapper__elevator--arrow.fas {
+        color: #f9f8fd; }
     .wrapper__elevator.show {
-      display: block;
       opacity: .25;
+      visibility: visible;
       background-color: #262729; }
       .wrapper__elevator.show:hover {
-        opacity: .5; }
+        opacity: .75; }
 
 .content-block {
   width: 1000px;
@@ -416,6 +421,10 @@ app-footer {
 .shadow-block {
   -webkit-box-shadow: 0 10px 6px -6px #262729;
   box-shadow: 0 6px 6px 0px #1D1D1F; }
+  .shadow-block-sm {
+    box-shadow: 0 3px 10px 0px #1D1D1F; }
+  .shadow-block-big {
+    box-shadow: 0 10px 10px 0px #1D1D1F; }
 
 .gradient {
   background: linear-gradient(50deg, #f7c626 15%, #f16b44 40%, #e5127d 85%);
@@ -423,14 +432,13 @@ app-footer {
 
 .panel {
   background-color: #3f4043;
-  border-radius: 3px;
-  box-shadow: 0 3px 6px 0px #1D1D1F; }
+  border-radius: 4px; }
 
 .btn {
   font-weight: 500;
   padding: 5px 10px;
   border: none;
-  border-radius: 3px;
+  border-radius: 4px;
   vertical-align: middle;
   text-align: center;
   text-overflow: ellipsis;
@@ -520,11 +528,11 @@ i.fab, i.fas, i.fa {
 app-ngx-editor {
   width: 100%; }
   app-ngx-editor .ngx-toolbar {
-    border-top-left-radius: 3px !important;
-    border-top-right-radius: 3px !important; }
+    border-top-left-radius: 4px !important;
+    border-top-right-radius: 4px !important; }
   app-ngx-editor .ngx-editor-grippie {
-    border-bottom-left-radius: 3px !important;
-    border-bottom-right-radius: 3px !important; }
+    border-bottom-left-radius: 4px !important;
+    border-bottom-right-radius: 4px !important; }
 
 blockquote {
   padding: 0 15px;

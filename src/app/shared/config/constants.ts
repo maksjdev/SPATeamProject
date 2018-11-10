@@ -1,7 +1,13 @@
 
 export const CONSTANTS ={
   APP: {
-    TITLE: 'NewString'
+    TITLE: 'NewString',
+    MAIN: 'main'
+  },
+  QUERY: {
+    PAGE: 'page',
+    PERIOD: 'period',
+    RATING: 'rating'
   },
   MOCK: {
     USER_IMAGE: 'https://hsto.org/getpro/habr/avatars/fc7/23a/b6b/fc723ab6b9870078eefc3aba22c605ad.png',

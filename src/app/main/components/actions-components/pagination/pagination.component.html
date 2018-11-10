@@ -1,22 +1,38 @@
 
-<a href="#" class="pagination__previous">
+<a *ngIf="pagination.previous"
+   class="pagination__previous"
+   (click)="onPagination(pagination.previous)">
   <i class="pagination__previous--icon fas fa-angle-left"></i>
   <div class="pagination__previous--text">Предыдущая</div>
 </a>
 
-<a href="#" class="pagination__page dots">...</a>
-<a href="#" class="pagination__page previous">{{ mockPagination['large_back'] }}</a>
-<a href="#" class="pagination__page dots">...</a>
+<div *ngIf="pagination.large_back" class="pagination__large-back">
+  <i class="pagination__page dots">...</i>
+  <a class="pagination__page large_back"
+     (click)="onPagination(pagination.large_back)">
+    {{ pagination.large_back }}
+  </a>
+  <i class="pagination__page dots">...</i>
+</div>
 
-<a href="#" class="pagination__page previous">{{ mockPagination['previous'] }}</a>
-<a href="#" class="pagination__page current">{{ mockPagination['current'] }}</a>
-<a href="#" class="pagination__page next">{{ mockPagination['next'] }}</a>
+<a *ngIf="pagination.previous" class="pagination__page previous"
+   (click)="onPagination(pagination.previous)">{{ pagination.previous }}</a>
+<a class="pagination__page current">{{ pagination.current }}</a>
+<a *ngIf="pagination.next" class="pagination__page next"
+   (click)="onPagination(pagination.next)">{{ pagination.next }}</a>
 
-<a href="#" class="pagination__page dots">...</a>
-<a href="#" class="pagination__page previous">{{ mockPagination['large_forward'] }}</a>
-<a href="#" class="pagination__page dots">...</a>
+<div *ngIf="pagination.large_forward" class="pagination__large_forward">
+  <i class="pagination__page dots">...</i>
+  <a class="pagination__page large_forward"
+    (click)="onPagination(pagination.large_forward)">
+    {{ pagination.large_forward }}
+  </a>
+  <i class="pagination__page dots">...</i>
+</div>
 
-<a href="#" class="pagination__next">
+<a *ngIf="pagination.next"
+   class="pagination__next"
+   (click)="onPagination(pagination.next)">
   <div class="pagination__next--text">Следующая</div>
   <i class="pagination__next--icon fas fa-angle-right"></i>
 </a>

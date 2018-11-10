@@ -14,6 +14,7 @@
 }
 .news-item {
   width: 100%;
+  //border: 1px solid $main-text-color;
   &__header {
     margin: $normal-padding $normal-padding 0;
     &--title {
@@ -25,10 +26,21 @@
   &__image {
     width: 100%;
     height: 200px;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    box-shadow: 0 $small-shadow $small-smoothness 0px $shadows-color;
+    position: relative;
+    overflow: hidden;
+
+    & > img {
+      position: absolute;
+      top: -20%;
+      max-width: 100%;
+      opacity: 0.8;
+      transition: all $fast-animation;
+      &:hover {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+    }
+
   }
   &__content {
     margin: $small-padding $normal-padding;

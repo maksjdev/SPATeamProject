@@ -1,9 +1,9 @@
 
-<ul class="panel rating-block">
+<ul class="panel shadow-block rating-block">
   <li *ngFor="let item of mockRatings"
       class="rating-block__item"
       [class.active]="currentRating === item['value']"
-      (click)="onRatingChange(item['value'])">
+      (click)="OnRatingChg(item['value'])">
     {{ item['name'] }}
   </li>
 </ul>

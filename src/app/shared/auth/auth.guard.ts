@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate, CanLoad {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.authService.getLoginState()) {
+    if (this.authService.getLoginState().getValue()) {
       // Залогинен -> проходите, сэр
       return true;
     } else {
@@ -33,7 +33,7 @@ export class AuthGuard implements CanActivate, CanLoad {
   }
 
   canLoad(route: Route): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.authService.getLoginState()) {
+    if (this.authService.getLoginState().getValue()) {
       // Залогинен -> загружаем, сэр
       return true;
     } else {
