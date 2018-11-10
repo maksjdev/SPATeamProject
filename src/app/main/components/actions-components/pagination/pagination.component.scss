@@ -6,6 +6,9 @@
   flex-direction: row;
   width: 100%;
   justify-content: center;
+  a {
+    cursor: pointer;
+  }
 }
 
 .pagination {
@@ -20,6 +23,9 @@
       font-size: $big-font-size;
       margin: 0 $normal-padding;
     }
+  }
+  &__large-back{
+    margin-right: $big-padding;
   }
   &__page {
     margin-right: $normal-padding;

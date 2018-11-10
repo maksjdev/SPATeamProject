@@ -1,12 +1,26 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
+import {AppRoutingService} from '@routes/app-routing.service';
+import {CONSTANTS} from '@shared/config/constants';
 
 @Component({
   selector: 'app-rating-filter',
   templateUrl: './rating-filter.component.html',
-  styleUrls: ['./rating-filter.component.scss']
+  styleUrls: ['./rating-filter.component.scss'],
 })
-export class RatingFilterComponent {
-  @Input() currentRating = 'any';
+export class RatingFilterComponent implements OnChanges {
+  @Input() currentRating;
+  @Output() ratingChg = new EventEmitter();
+  paramName: string;
 
   mockRatings: Array<object> = [
     {name: 'Любой', value: 'any'},
@@ -16,10 +30,22 @@ export class RatingFilterComponent {
     {name: '≥ 100', value: '100'}
   ];
 
-  constructor() { }
+  constructor(
+    private routingService: AppRoutingService
+  ) {
+    this.paramName = CONSTANTS.QUERY.RATING;
+  }
 
-  onRatingChange(value: string): void {
-    console.info(`Change rating: ${value}`);
-    this.currentRating = value;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.hasOwnProperty('currentRating') &&  changes['currentRating'].currentValue){
+      setTimeout(_ => {
+        let param = {[this.paramName]: this.currentRating};
+        this.routingService.setQueryParam(param);
+      }, 20);
+    }
+  }
+
+  OnRatingChg(value){
+    this.ratingChg.emit(value);
   }
 }

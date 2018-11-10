@@ -36,10 +36,12 @@ app-footer {
   grid-template-columns: 100%;
   &__elevator {
     position: fixed;
+    display: block;
     top: 0;
     left: 0;
     z-index: 1;
-    display: none;
+    opacity: 0;
+    visibility: hidden;
     width: 60px;
     height: 100%;
     color: #d5dddf;
@@ -47,6 +49,7 @@ app-footer {
     cursor: pointer;
     transform: translateY(0);
     will-change: transform;
+    transition: all $fast-animation;
 
     &--arrow {
       position: relative;
@@ -54,13 +57,16 @@ app-footer {
       margin-top: -15px;
       font-size: 2em;
       opacity: 0.5;
+      &.fas{
+        color: $main-text-color;
+      }
     }
     &.show {
-      display: block;
       opacity: .25;
+      visibility: visible;
       background-color: $main-color;
       &:hover {
-        opacity: .5;
+        opacity: .75;
       }
     }
   }
@@ -75,16 +81,20 @@ app-footer {
 .shadow-block {
   -webkit-box-shadow: 0 $big-shadow 6px -6px $main-color;
   box-shadow: 0 $normal-shadow $normal-smoothness  0px $shadows-color;
+  &-sm {
+    box-shadow: 0 $small-shadow $big-smoothness  0px $shadows-color;
+  }
+  &-big {
+    box-shadow: 0 $big-shadow $big-smoothness  0px $shadows-color;
+  }
 }
 .gradient {
   background: $bg-gradient;
   color: $main-text-dark-color;
 }
 .panel {
-  //padding: $normal-padding;
   background-color: $gray-default;
   border-radius: $normal-border-radius;
-  box-shadow: 0 $small-shadow $normal-smoothness  0px $shadows-color;
 }
 
 //  Стили вспомогательных элементов

@@ -1,5 +1,5 @@
 
-<article class="panel news-item">
+<article *ngIf="news" class="panel shadow-block news-item">
   <div class="news-item__header">
     <div class="news-item__header--title">{{ news.title | trimString: 100 }}</div>
     <div class="header-info">
@@ -21,7 +21,9 @@
       </div>
     </span>
   </div>
-  <div class="shadow-block news-item__image" [ngStyle]="{ 'background-image': 'url(' + news.image + ')'}"></div>
+  <div class="shadow-block-sm news-item__image">
+    <img [src]="news.image" alt="News image">
+  </div>
   <div class="news-item__content">
     <div class="news-item__content--text">
       {{ textContent | trimString: 500 }}

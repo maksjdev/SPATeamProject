@@ -8,9 +8,11 @@ import {CONSTANTS} from '@shared/config/constants';
 })
 export class FullLogoComponent implements OnInit {
   title: string;
+  mainLink: string;
 
   constructor() {
     this.title = CONSTANTS.APP.TITLE;
+    this.mainLink = CONSTANTS.APP.MAIN;
   }
 
   ngOnInit() {
