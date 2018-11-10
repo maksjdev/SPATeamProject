@@ -1,0 +1,12 @@
+@import "~src/assets/base-css/theme";
+@import "~src/assets/base-css/vars";
+
+:host {
+  button {
+    width: 40px;
+    margin-right: $normal-padding;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

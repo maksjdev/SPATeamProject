@@ -2,21 +2,24 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
+import {AppRouterData} from '@routes/AppRouterData';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppRoutingService {
-  activeQueryParam: BehaviorSubject<any>;
-  activeRoute: any;
+  activeQueryParam: BehaviorSubject<object>;
+  currentRouteData: BehaviorSubject<AppRouterData>;
+  activeRoute: ActivatedRoute;
 
   constructor(
     private router: Router,
     private routeActive: ActivatedRoute,
     private titleService: Title,
   ) {
-    this.activeQueryParam = new BehaviorSubject<any>({});
-
+    this.activeQueryParam = new BehaviorSubject<object>({});
+    let defaultData = new AppRouterData('','',{});
+    this.currentRouteData = new BehaviorSubject<AppRouterData>(defaultData);
     this.routeActive.queryParamMap.subscribe(params => {
       this.activeQueryParam.next({...params});
     });
@@ -29,27 +32,31 @@ export class AppRoutingService {
         this.activeRoute = this.routeActive.firstChild;
         if(data.length > 0) {
           data = data[0]; // Берем инфу только с "Главного" роутинка (не учитывая дочерних)
-
           titleService.setTitle(data['title']);
 
-          // let url = event.url;
-          // let path = this.getCleanUrl(url);
-          // let params = this.getActiveQueryParam().getValue().params;
+          let routerData = new AppRouterData(
+            event.url, this.getCleanUrl(event.url),
+            this.getActiveQueryParam().getValue()['params']
+          );
+          this.currentRouteData.next(routerData);
         }}
     });
   }
-
-  getActiveQueryParam(){
+  public getCurrentRouteData(): BehaviorSubject<object>{
+    return this.currentRouteData;
+  }
+  public getActiveQueryParam(): BehaviorSubject<object>{
     return this.activeQueryParam;
   }
-  getQueryParam(paramName: string){
-    let currentParam = this.activeQueryParam.getValue().params;
+
+  public getQueryParam(paramName: string){
+    let currentParam = this.activeQueryParam.getValue()['params'];
     if (paramName in currentParam){
       var value = currentParam[paramName];
       return value;
     } else return;
   }
-  setQueryParam(queryParamArr){
+  public setQueryParam(queryParamArr){
     this.router.navigate(['.'],{
       relativeTo: this.activeRoute,
       queryParams: queryParamArr,
@@ -57,7 +64,7 @@ export class AppRoutingService {
     });
   }
 
-  getRouterData(state, parent) {
+  private getRouterData(state, parent) {
     var data = [];
     if(parent && parent.snapshot.data && parent.snapshot.data.title) {
       data.push(parent.snapshot.data);
@@ -68,13 +75,13 @@ export class AppRoutingService {
     return data;
   }
 
-  goToLink(link: string){
+  public goToLink(link: string){
     this.router.navigate([`/${link}`]);
   }
-  goChildLink(link: string){
+  public goChildLink(link: string){
     this.router.navigate([`./${link}`], { relativeTo: this.activeRoute, skipLocationChange: false });
   }
-  getCleanUrl(link): string{
+  private getCleanUrl(link): string{
     // Возврат "чистой ссылки" (без параметров)
     let urlTree = this.router.parseUrl(link);
     let primeChild = urlTree.root.children['primary'];

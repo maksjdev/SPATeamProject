@@ -106,6 +106,9 @@ app-footer {
     color: $main-text-dark-color;
     background-color: $main-text-color;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    & .fab, & .fas, & .fa{
+      color: $main-text-dark-color;
+    }
     &:hover{
       opacity: 0.75;
       box-shadow: 0 2px 3px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24);
@@ -126,6 +129,9 @@ app-footer {
     color: $main-text-dark-color;
     background-color: $main-pink;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    & .fab, & .fas, & .fa{
+      color: $main-text-dark-color;
+    }
     &:hover{
       opacity: 0.75;
       box-shadow: 0 2px 3px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24);
@@ -147,6 +153,9 @@ app-footer {
     color: $main-text-dark-color;
     font-weight: bold;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    & .fab, & .fas, & .fa{
+      color: $main-text-dark-color;
+    }
     &:hover{
       opacity: 0.75;
       box-shadow: 0 2px 3px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24);
@@ -162,8 +171,10 @@ app-footer {
     }
   }
 }
-.fab {
-  color: $main-pink;
+i {
+  &.fab, &.fas, &.fa{
+    color: $main-pink;
+  }
 }
 .link {
   text-decoration: none;
@@ -206,6 +217,18 @@ app-footer {
         border-color: $main-text-color transparent transparent !important;
       }
     }
+  }
+}
+// Стилизация кастомного text-editor
+app-ngx-editor {
+  width: 100%;
+  .ngx-toolbar {
+    border-top-left-radius: $normal-border-radius !important;
+    border-top-right-radius: $normal-border-radius !important;
+  }
+  .ngx-editor-grippie {
+    border-bottom-left-radius: $normal-border-radius !important;
+    border-bottom-right-radius: $normal-border-radius !important;
   }
 }
 // Стили блока цитат

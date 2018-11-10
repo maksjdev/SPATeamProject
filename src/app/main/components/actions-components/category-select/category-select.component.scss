@@ -18,6 +18,6 @@ $height-base: 40px;
   &::ng-deep .ng-select-container {
     background-color: $gray-default !important;
     border-color: $main-text-color !important;
-    min-height: $height-base;
+    min-height: $height-base !important;
   }
 }

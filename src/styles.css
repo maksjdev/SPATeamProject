@@ -441,6 +441,8 @@ app-footer {
     color: #000000;
     background-color: #f9f8fd;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+    .btn-default .fab, .btn-default .fas, .btn-default .fa {
+      color: #000000; }
     .btn-default:hover {
       opacity: 0.75;
       box-shadow: 0 2px 3px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.24);
@@ -457,6 +459,8 @@ app-footer {
     color: #000000;
     background-color: #e5127d;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+    .btn-colored .fab, .btn-colored .fas, .btn-colored .fa {
+      color: #000000; }
     .btn-colored:hover {
       opacity: 0.75;
       box-shadow: 0 2px 3px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.24);
@@ -474,6 +478,8 @@ app-footer {
     color: #000000;
     font-weight: bold;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+    .btn-gradient .fab, .btn-gradient .fas, .btn-gradient .fa {
+      color: #000000; }
     .btn-gradient:hover {
       opacity: 0.75;
       box-shadow: 0 2px 3px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.24);
@@ -485,7 +491,7 @@ app-footer {
       opacity: 0.45;
       transition: background 0.25s; }
 
-.fab {
+i.fab, i.fas, i.fa {
   color: #e5127d; }
 
 .link {
@@ -510,6 +516,15 @@ app-footer {
     padding-bottom: initial !important; }
 .ng-select-container .ng-arrow-wrapper .ng-arrow {
   border-color: #f9f8fd transparent transparent !important; }
+
+app-ngx-editor {
+  width: 100%; }
+  app-ngx-editor .ngx-toolbar {
+    border-top-left-radius: 3px !important;
+    border-top-right-radius: 3px !important; }
+  app-ngx-editor .ngx-editor-grippie {
+    border-bottom-left-radius: 3px !important;
+    border-bottom-right-radius: 3px !important; }
 
 blockquote {
   padding: 0 15px;

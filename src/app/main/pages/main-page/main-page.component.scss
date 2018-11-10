@@ -4,12 +4,13 @@
 :host {
   display: grid;
   gap: $normal-padding;
-  grid-template: "f s" 1fr
-                 "m s" auto
+  grid-template: "f s" auto
+                 "m s" 1fr
                  / 1fr 300px;
 }
 .filters-block {
   display: flex;
+  height: max-content;
   align-items: center;
   justify-content: space-between;
   padding: 0;
@@ -20,6 +21,11 @@
   grid-area: m;
   flex-direction: column;
 }
+//.sidebar-category{
+//  display: flex;
+//  grid-area: c;
+//  flex-direction: column;
+//}
 .sidebar-block {
   display: flex;
   grid-area: s;

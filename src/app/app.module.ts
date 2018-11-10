@@ -16,6 +16,7 @@ import {DatePipe} from '@angular/common';
 import {AppDateTimeService} from '@shared/services/app-date-time.service';
 import {AppStringService} from '@shared/services/app-string.service';
 import {ShortenPipe} from 'ngx-pipes';
+import {MainPageModule} from '@main/main-page.module';
 
 export function initializeApp(configData: ConfigLoadService) {
   return () => configData.loadAppConfig();
@@ -33,6 +34,7 @@ export function initializeApp(configData: ConfigLoadService) {
 
     // Custom Modules
     HeaderModule,
+    MainPageModule,
     FooterModule
   ],
   declarations: [
