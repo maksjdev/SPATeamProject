@@ -25,7 +25,7 @@
   display: flex;
   grid-area: s;
   flex-direction: column;
-  min-width: 300px;
+  width: 300px;
   &:last-child {
     margin-bottom: 0;
   }
