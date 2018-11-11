@@ -1,11 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NewsBigBlockComponent } from './news-big-block/news-big-block.component';
-import { AdItemBlockComponent } from './ad-item-block/ad-item-block.component';
-import { StatisticTableComponent } from './statistic-table/statistic-table.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {NewsBigBlockComponent} from './news-big-block/news-big-block.component';
+import {AdItemBlockComponent} from './ad-item-block/ad-item-block.component';
+import {StatisticTableComponent} from './statistic-table/statistic-table.component';
 import {NewsDataService} from '@shared/news-data.service';
-import {TrimStringPipe} from '@shared/pipes/trim-string.pipe';
 import {AppPipesModule} from '@shared/pipes/app-pipes.module';
+import {CategoryItemBlockComponent} from './category-item-block/category-item-block.component';
+import {TopNewsBlockComponent} from './top-news-block/top-news-block.component';
+import {NewsSmallBlockComponent} from '@components/block-components/news-small-block/news-small-block.component';
 import {FullNewsBlockComponent} from '@components/block-components/full-news-block/full-news-block.component';
 
 @NgModule({
@@ -15,14 +17,21 @@ import {FullNewsBlockComponent} from '@components/block-components/full-news-blo
   ],
   exports: [
     NewsBigBlockComponent,
+    NewsSmallBlockComponent,
     AdItemBlockComponent,
+    StatisticTableComponent,
+    CategoryItemBlockComponent,
+    TopNewsBlockComponent
     StatisticTableComponent,
     FullNewsBlockComponent
   ],
   declarations: [
     NewsBigBlockComponent,
+    NewsSmallBlockComponent,
     AdItemBlockComponent,
     StatisticTableComponent,
+    CategoryItemBlockComponent,
+    TopNewsBlockComponent,
     FullNewsBlockComponent
   ],
   providers: [

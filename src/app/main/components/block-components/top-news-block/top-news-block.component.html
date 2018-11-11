@@ -1,0 +1,7 @@
+
+<div class="panel top-news">
+  <div class="top-news__header">Top news</div>
+  <ul class="top-news__list">
+    <app-news-small-block class="top-news__list--item" *ngFor="let news of newsList" [news]="news"></app-news-small-block>
+  </ul>
+</div>

@@ -1,0 +1,65 @@
+@import "~src/assets/base-css/theme";
+@import "~src/assets/base-css/vars";
+
+:host {
+  margin-bottom: $normal-padding;
+}
+.category-item {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  &__header {
+    display: block;
+    width: 90%;
+    height: 15%;
+    padding-top: $normal-padding;
+    margin: 0px $big-padding;
+    border-bottom: 1px solid $main-text-color;
+    &--title {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: bold;
+      padding: $normal-padding;
+      font-family: 'Roboto Condensed', sans-serif;
+      font-size: $normal-font-size;
+    }
+  }
+  &__content {
+    &--menu {
+      box-sizing: border-box;
+      padding: 0 $big-padding;
+      margin: $normal-padding 0;
+      list-style: none;
+      &:last-child {
+        border-bottom: 1px solid #3f4043;
+      }
+    }
+  }
+}
+.list-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-gap: 10px;
+  height: 90%;
+  padding-bottom: $normal-padding;
+  padding-left: $normal-padding;
+  margin-bottom: $normal-padding;
+  border-bottom: 1px solid $main-text-color;
+  &:last-child{
+    margin-bottom: 0;
+  }
+  &__text {
+    letter-spacing: 1px;
+    font-weight: 400;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: $normal-font-size;
+    padding-left: $normal-padding;
+  }
+  &__counter {
+    letter-spacing: 1px;
+    font-weight: 400;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: $normal-font-size;
+    margin-right: $normal-padding;
+  }
+}

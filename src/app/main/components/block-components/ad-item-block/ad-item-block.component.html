@@ -1,4 +1,9 @@
-
 <div class="panel adv-item">
-  *Some Sidebar block*
+  <span  class="adv-item__close" (click)="OnClose($event)">
+    <i class="fas fa-times"></i>
+  </span>
+  <a [href]="adversiting['href']" target="_blank">
+    <div class="adv-item__image" [ngStyle]="{ 'background-image': 'url(' + adversiting['link'] + ')'}"></div>
+  </a>
+
 </div>
