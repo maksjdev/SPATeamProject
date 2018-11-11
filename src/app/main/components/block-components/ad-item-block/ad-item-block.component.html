@@ -1,8 +1,9 @@
-<div class="panel adv-item" *ngFor="let link of adLinks">
-  <!--<img class="adv-item__image" [ngStyle]="{ background-image: getUrl()}">-->
-  <!--<a (click)="menuItemClick($event)" [routerLink] = "link.path">-->
-  <a href="https://burgerking.ru/actions">
-    <img class="adv-item__image" src="../../../../../assets/images/burger_king.jpg">
+<div class="panel adv-item">
+  <span  class="adv-item__close" (click)="OnClose($event)">
+    <i class="fas fa-times"></i>
+  </span>
+  <a [href]="adversiting['href']" target="_blank">
+    <div class="adv-item__image" [ngStyle]="{ 'background-image': 'url(' + adversiting['link'] + ')'}"></div>
   </a>
-  <img class="adv-item__close-ico" src="../../../../../assets/icons/ad_close.ico">
+
 </div>

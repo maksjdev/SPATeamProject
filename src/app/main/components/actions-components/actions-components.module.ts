@@ -7,7 +7,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { CategorySelectComponent } from './category-select/category-select.component';
 import { FormsModule } from '@angular/forms';
 import { DemoFunctionsComponent } from './demo-functions/demo-functions.component';
-import { ListCategoryComponent } from './list-category/list-category.component';
 
 @NgModule({
   imports: [
@@ -21,7 +20,6 @@ import { ListCategoryComponent } from './list-category/list-category.component';
     PeriodFilterComponent,
     CategorySelectComponent,
     DemoFunctionsComponent,
-    ListCategoryComponent
   ],
   declarations: [
     LoginButtonsComponent,
@@ -29,7 +27,6 @@ import { ListCategoryComponent } from './list-category/list-category.component';
     PeriodFilterComponent,
     CategorySelectComponent,
     DemoFunctionsComponent,
-    ListCategoryComponent
   ]
 })
 export class ActionsComponentsModule { }

@@ -1,0 +1,29 @@
+
+<div class="panel top-news">
+  <div class="top-news__header">Top news</div>
+  <ul class="top-news__list">
+    <li>
+    <div class="top-news__content">
+      <div class="top-news__content--title">
+        <a href= "#">
+          <span> {{mockNews.title}} </span>
+        </a>
+      </div>
+    </div>
+    <div class="top-news__info">
+      <div class="top-news__info--date">
+        {{ mockNews.date | date: 'dd.MM.yyyy' }}
+        <i class="far fa-calendar-alt"></i>
+      </div>
+      <div class="top-news__info--rating">
+        {{mockNews.rating}}
+        <i class="far fa-star"></i>
+      </div>
+      <div class="top-news__info--comments">
+        {{ mockNews.comments }}
+        <i class="far fa-comment-dots"></i>
+      </div>
+    </div>
+    </li>
+  </ul>
+</div>

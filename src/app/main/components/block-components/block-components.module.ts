@@ -4,7 +4,9 @@ import { NewsItemBlockComponent } from './news-item-block/news-item-block.compon
 import { AdItemBlockComponent } from './ad-item-block/ad-item-block.component';
 import { StatisticTableComponent } from './statistic-table/statistic-table.component';
 import { CategoryItemBlockComponent } from './category-item-block/category-item-block.component';
-import {ActionsComponentsModule} from '@components/actions-components/actions-components.module';
+import { ActionsComponentsModule } from '@components/actions-components/actions-components.module';
+import { ListCategoryItemComponent } from '@components/block-components/category-item-block/list-category-item/list-category-item.component';
+import { TopNewsBlockComponent } from './top-news-block/top-news-block.component';
 
 @NgModule({
   imports: [
@@ -15,13 +17,16 @@ import {ActionsComponentsModule} from '@components/actions-components/actions-co
     NewsItemBlockComponent,
     AdItemBlockComponent,
     StatisticTableComponent,
-    CategoryItemBlockComponent
+    CategoryItemBlockComponent,
+    TopNewsBlockComponent
   ],
   declarations: [
     NewsItemBlockComponent,
     AdItemBlockComponent,
     StatisticTableComponent,
-    CategoryItemBlockComponent
+    CategoryItemBlockComponent,
+    ListCategoryItemComponent,
+    TopNewsBlockComponent
   ]
 })
 export class BlockComponentsModule { }
