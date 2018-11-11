@@ -5,6 +5,7 @@ import {LoginPageComponent} from '@pages/login-page/login-page.component';
 import {UserComponentsModule} from '@components/user-components/user-components.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppFormService} from '@shared/services/app-form.service';
+import {MatInputModule} from '@angular/material';
 
 const router: Routes = [{
   path: '', component: LoginPageComponent, data: {
@@ -19,6 +20,7 @@ const router: Routes = [{
     ReactiveFormsModule,
     UserComponentsModule,
 
+    MatInputModule,
     RouterModule.forChild(router),
   ],
   exports: [

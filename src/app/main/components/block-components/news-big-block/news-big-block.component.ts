@@ -4,10 +4,10 @@ import {AppStringService} from '@shared/services/app-string.service';
 
 @Component({
   selector: 'app-news-item-block',
-  templateUrl: './news-item-block.component.html',
-  styleUrls: ['./news-item-block.component.scss']
+  templateUrl: './news-big-block.component.html',
+  styleUrls: ['./news-big-block.component.scss']
 })
-export class NewsItemBlockComponent implements OnChanges {
+export class NewsBigBlockComponent implements OnChanges {
   @Input() news: News;
   textContent: string;
 
