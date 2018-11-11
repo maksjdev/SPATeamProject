@@ -5,6 +5,7 @@ import {NewsDataService} from '@shared/news-data.service';
 import {Subscription} from 'rxjs';
 import {AppRoutingService} from '@routes/app-routing.service';
 import {CONSTANTS} from '@shared/config/constants';
+import {Advertising} from '@components/block-components/ad-item-block/Advertising';
 
 @Component({
   selector: 'app-main-page',
@@ -14,6 +15,7 @@ import {CONSTANTS} from '@shared/config/constants';
 export class MainPageComponent implements OnInit, OnDestroy {
   periodFilter: string;
   ratingFilter: string;
+  adv: Advertising;
   newsList: Array<News>;
   _subscribe: Subscription;
 
@@ -23,6 +25,9 @@ export class MainPageComponent implements OnInit, OnDestroy {
     private routingService: AppRoutingService,
   ) {
     this.newsList = [];
+    this.adv =  new Advertising('Burger King',
+      'https://burgerking.ru/images/actions/BK-2037_CHEESY_710х459_.jpg',
+      'https://burgerking.ru/actions');
   }
 
   ngOnInit() {

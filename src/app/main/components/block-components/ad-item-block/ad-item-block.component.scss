@@ -2,7 +2,6 @@
 @import "~src/assets/base-css/vars";
 
 :host {
-  margin-bottom: $normal-padding;
   display: flex;
   position: relative;
   width: 100%;
@@ -10,6 +9,10 @@
 .adv-item {
   display: block;
   width: 100%;
+  margin-bottom: $normal-padding;
+  &.close {
+    display: none;
+  }
   &__image {
     width: 100%;
     height: 200px;
@@ -23,12 +26,13 @@
     margin-top: $small-padding;
     margin-right: $small-padding;
     & .fas {
+      cursor: pointer;
       color: $main-text-color;
     }
   }
   &__hint {
     position: absolute;
-    bottom: $small-padding;
+    bottom: 12px;
     right: $small-padding;
     font-size: $small-font-size;
   }
