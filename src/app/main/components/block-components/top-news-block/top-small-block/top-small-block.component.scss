@@ -1,0 +1,25 @@
+@import "~src/assets/base-css/theme";
+@import "~src/assets/base-css/vars";
+
+:host {
+  margin-bottom: $normal-padding;
+}
+.top-small {
+  &__content {
+    height: 100%;
+    margin: 0px $big-padding;
+    padding: $normal-padding 0px;
+  }
+  &__info {
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    grid-gap: 10px;
+    text-align: end;
+    flex-direction: row;
+    margin: 0px $big-padding;
+    padding-bottom: $normal-padding;
+    padding-right: $normal-padding;
+    border-bottom: 1px solid $main-text-color;
+  }
+}

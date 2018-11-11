@@ -10,6 +10,7 @@ import { CategoryItemBlockComponent } from './category-item-block/category-item-
 import { ActionsComponentsModule } from '@components/actions-components/actions-components.module';
 import { ListCategoryItemComponent } from '@components/block-components/category-item-block/list-category-item/list-category-item.component';
 import { TopNewsBlockComponent } from './top-news-block/top-news-block.component';
+import { TopSmallBlockComponent } from './top-news-block/top-small-block/top-small-block.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { TopNewsBlockComponent } from './top-news-block/top-news-block.component
     StatisticTableComponent,
     CategoryItemBlockComponent,
     ListCategoryItemComponent,
-    TopNewsBlockComponent
+    TopNewsBlockComponent,
+    TopSmallBlockComponent
   ],
   providers: [
     NewsDataService,

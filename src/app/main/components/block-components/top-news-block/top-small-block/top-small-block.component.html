@@ -1,0 +1,23 @@
+
+<li class="top-small">
+  <div class="top-small__content">
+    <div class="top-small__content--title">
+      <a href= "#">
+        <span> {{mockNews.title}} </span>
+      </a>
+    </div>
+  </div>
+  <div class="top-small__info">
+    <div>
+      {{ mockNews.author.first_name + mockNews.author.last_name }}
+    </div>
+    <div>
+      {{ mockNews.date | date: 'dd.MM.yyyy' }}
+      <i class="far fa-calendar-alt"></i>
+    </div>
+    <div>
+      {{ mockNews.comments }}
+      <i class="far fa-comment-dots"></i>
+    </div>
+  </div>
+</li>
