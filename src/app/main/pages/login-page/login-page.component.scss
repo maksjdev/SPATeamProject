@@ -28,10 +28,8 @@
       background-color: $main-pink;
     }
   }
-  &__body {
-
-  }
 }
+
 .header-link {
   position: relative;
   font-family: 'Graduate', cursive;
@@ -66,23 +64,15 @@
     &:last-child {
       margin-bottom: 0;
     }
-    &--label {
-
-    }
     &--field {
       display: flex;
       flex-direction: row;
       align-items: center;
       width: 100%;
     }
-    &--validator {
-
-    }
-    &.checkbox {
-    }
-
   }
   &__bottom {
+    padding-top: $big-padding;
     .btn-login {
       width: 100%;
       padding: $normal-padding 0;

@@ -18,26 +18,30 @@
     <div class="login-form__line">
       <label class="login-form__line--label" for="l_login">Ваш логин</label>
       <div class="login-form__line--field">
-        <i class="fas fa-user"></i>
-        <input class="input-style login-input" id="l_login" placeholder="UserName"  formControlName="l_login" type="text">
+        <div class="input-field">
+          <i class="input-field__icon fas fa-user"></i>
+          <input class="input-field__default login-input" id="l_login" placeholder="UserName"  formControlName="l_login" type="text">
+        </div>
       </div>
-      <div class="login-form__line--validator">Ошибки валидации{{ formErrors.l_login }}</div>
+      <mat-error class="validator" *ngIf="formErrors.l_login">{{ formErrors.l_login }}</mat-error>
     </div>
     
     <div class="login-form__line">
       <label class="login-form__line--label" for="l_login">Ваш пароль</label>
 
       <div class="login-form__line--field">
-        <i class="fas fa-key"></i>
-        <input class="input-style login-input" id="l_password" placeholder="Password" formControlName="l_password"  type="password">
+        <div class="input-field">
+          <i class="input-field__icon fas fa-key"></i>
+          <input class="input-field__default login-input" id="l_password" placeholder="Password" formControlName="l_password"  type="password">
+        </div>
       </div>
-      <div class="login-form__line--validator">Ошибки валидации{{ formErrors.l_password }}</div>
+      <mat-error class="validator" *ngIf="formErrors.l_password">{{ formErrors.l_password }}</mat-error>
     </div>
 
     <div class="login-form__line">
       <div class="login-form__line--field">
-        <input id="checkSafe" type="checkbox" formControlName="l_save">
-        <label for="checkSafe">Сохранить пароль?</label>
+        <input class="checkbox" id="checkSafe" type="checkbox" formControlName="l_save">
+        <label class="checkbox-label" for="checkSafe">Сохранить пароль?</label>
       </div>
     </div>
 

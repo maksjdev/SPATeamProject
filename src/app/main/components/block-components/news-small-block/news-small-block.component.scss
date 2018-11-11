@@ -1,0 +1,18 @@
+@import "~src/assets/base-css/theme";
+@import "~src/assets/base-css/vars";
+
+:host {
+  margin-bottom: $normal-padding;
+}
+.top-small {
+  &__content {
+    height: 100%;
+    padding: $normal-padding 0px;
+  }
+  &__info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: $normal-padding;
+  }
+}
