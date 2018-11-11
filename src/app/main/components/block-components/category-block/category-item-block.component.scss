@@ -2,6 +2,7 @@
 @import "~src/assets/base-css/vars";
 
 :host {
+  width: 100%;
   margin-bottom: $normal-padding;
 }
 .category-item {
@@ -10,18 +11,14 @@
   height: 100%;
   &__header {
     display: block;
-    width: 90%;
-    height: 15%;
     padding-top: $normal-padding;
-    margin: 0px $big-padding;
-    border-bottom: 1px solid $main-text-color;
+    margin: 0 $big-padding;
+    border-bottom: 2px solid $main-text-color;
     &--title {
       text-transform: uppercase;
       letter-spacing: 1px;
       font-weight: bold;
       padding: $normal-padding;
-      font-family: 'Roboto Condensed', sans-serif;
-      font-size: $normal-font-size;
     }
   }
   &__content {
@@ -36,6 +33,7 @@
     }
   }
 }
+
 .list-item {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -53,7 +51,6 @@
     font-weight: 400;
     font-family: 'Roboto Condensed', sans-serif;
     font-size: $normal-font-size;
-    padding-left: $normal-padding;
   }
   &__counter {
     letter-spacing: 1px;

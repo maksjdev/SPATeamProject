@@ -1,9 +1,11 @@
-<div class="panel adv-item">
+
+<div class="panel shadow-block adv-item">
   <span  class="adv-item__close" (click)="OnClose($event)">
     <i class="fas fa-times"></i>
   </span>
+  <span class="adv-item__hint">Реклама</span>
+
   <a [href]="adversiting['href']" target="_blank">
     <div class="adv-item__image" [ngStyle]="{ 'background-image': 'url(' + adversiting['link'] + ')'}"></div>
   </a>
-
 </div>

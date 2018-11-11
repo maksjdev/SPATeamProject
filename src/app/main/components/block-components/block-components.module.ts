@@ -5,7 +5,7 @@ import {AdItemBlockComponent} from './ad-item-block/ad-item-block.component';
 import {StatisticTableComponent} from './statistic-table/statistic-table.component';
 import {NewsDataService} from '@shared/news-data.service';
 import {AppPipesModule} from '@shared/pipes/app-pipes.module';
-import {CategoryItemBlockComponent} from './category-item-block/category-item-block.component';
+import {CategoryItemBlockComponent} from './category-block/category-item-block.component';
 import {TopNewsBlockComponent} from './top-news-block/top-news-block.component';
 import {NewsSmallBlockComponent} from '@components/block-components/news-small-block/news-small-block.component';
 

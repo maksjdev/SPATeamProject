@@ -4,10 +4,10 @@
 :host {
   margin-bottom: $normal-padding;
 }
-.top-small {
+.news-small {
   &__content {
     height: 100%;
-    padding: $normal-padding 0px;
+    padding: $normal-padding 0;
   }
   &__info {
     display: flex;
