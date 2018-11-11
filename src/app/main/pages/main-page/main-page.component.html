@@ -1,12 +1,16 @@
 
 <section class="filters-block">
-  <app-period-filter class="filters-block__period"></app-period-filter>
-  <app-rating-filter class="filters-block__rating"></app-rating-filter>
+  <app-period-filter class="filters-block__period"
+                     [currentPeriod]="periodFilter" (periodChg)="onPeriodChange($event)">
+  </app-period-filter>
+  <app-rating-filter class="filters-block__rating"
+                     [currentRating]="ratingFilter" (ratingChg)="onRatingChange($event)">
+  </app-rating-filter>
 </section>
 
 <section class="news-block">
-  <app-news-item-block></app-news-item-block>
-  <app-news-item-block></app-news-item-block>
+  <!--Будут создаватся динамически-->
+  <app-news-item-block *ngFor="let news of newsList" [news]="news"></app-news-item-block>
   <app-pagination></app-pagination>
 </section>
 

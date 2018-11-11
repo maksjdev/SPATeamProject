@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NewsItemBlockComponent } from './news-item-block/news-item-block.component';
+import { NewsBigBlockComponent } from './news-big-block/news-big-block.component';
 import { AdItemBlockComponent } from './ad-item-block/ad-item-block.component';
 import { StatisticTableComponent } from './statistic-table/statistic-table.component';
 import {NewsDataService} from '@shared/news-data.service';
@@ -14,13 +14,13 @@ import {FullNewsBlockComponent} from '@components/block-components/full-news-blo
     AppPipesModule
   ],
   exports: [
-    NewsItemBlockComponent,
+    NewsBigBlockComponent,
     AdItemBlockComponent,
     StatisticTableComponent,
     FullNewsBlockComponent
   ],
   declarations: [
-    NewsItemBlockComponent,
+    NewsBigBlockComponent,
     AdItemBlockComponent,
     StatisticTableComponent,
     FullNewsBlockComponent

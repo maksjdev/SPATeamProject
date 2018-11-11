@@ -3,7 +3,7 @@ export const AppConfigDefault = {
 
   news: {
     "numbers": {
-      "start": 5
+      "start": 3
     }
   }
 };

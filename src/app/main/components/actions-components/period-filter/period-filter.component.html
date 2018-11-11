@@ -1,9 +1,9 @@
 
-<ul class="panel period-block">
+<ul class="panel shadow-block period-block">
   <li *ngFor="let item of mockPeriod"
       class="period-block__item"
       [class.active]="currentPeriod === item['value']"
-      (click)="onPeriodChange(item['value'])">
+      (click)="OnPeriodChg(item['value'])">
     {{ item['name'] }}
   </li>
 </ul>

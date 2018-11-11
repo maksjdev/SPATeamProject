@@ -6,7 +6,8 @@
 
 // Other imports
 @import "~@ng-select/ng-select/themes/default.theme.css";
-//@import "~@ng-select/ng-select/themes/material.theme.css";
+// Material
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 
 body, html {
@@ -21,14 +22,10 @@ body, html {
   background-color: $main-bg-color;
   color: $main-text-color;
 }
-app-header {
+app-header, app-footer {
   display: block;
-
 }
-app-footer {
-  display: block;
 
-}
 .wrapper {
   min-height: 100%;
   display: grid;
@@ -36,10 +33,12 @@ app-footer {
   grid-template-columns: 100%;
   &__elevator {
     position: fixed;
+    display: block;
     top: 0;
     left: 0;
     z-index: 1;
-    display: none;
+    opacity: 0;
+    visibility: hidden;
     width: 60px;
     height: 100%;
     color: #d5dddf;
@@ -47,6 +46,7 @@ app-footer {
     cursor: pointer;
     transform: translateY(0);
     will-change: transform;
+    transition: all $fast-animation;
 
     &--arrow {
       position: relative;
@@ -54,13 +54,16 @@ app-footer {
       margin-top: -15px;
       font-size: 2em;
       opacity: 0.5;
+      &.fas{
+        color: $main-text-color;
+      }
     }
     &.show {
-      display: block;
       opacity: .25;
+      visibility: visible;
       background-color: $main-color;
       &:hover {
-        opacity: .5;
+        opacity: .75;
       }
     }
   }
@@ -75,16 +78,20 @@ app-footer {
 .shadow-block {
   -webkit-box-shadow: 0 $big-shadow 6px -6px $main-color;
   box-shadow: 0 $normal-shadow $normal-smoothness  0px $shadows-color;
+  &-sm {
+    box-shadow: 0 $small-shadow $big-smoothness  0px $shadows-color;
+  }
+  &-big {
+    box-shadow: 0 $big-shadow $big-smoothness  0px $shadows-color;
+  }
 }
 .gradient {
   background: $bg-gradient;
   color: $main-text-dark-color;
 }
 .panel {
-  //padding: $normal-padding;
   background-color: $gray-default;
   border-radius: $normal-border-radius;
-  box-shadow: 0 $small-shadow $normal-smoothness  0px $shadows-color;
 }
 
 //  Стили вспомогательных элементов
@@ -171,11 +178,6 @@ app-footer {
     }
   }
 }
-i {
-  &.fab, &.fas, &.fa{
-    color: $main-pink;
-  }
-}
 .link {
   text-decoration: none;
   position: relative;
@@ -190,6 +192,88 @@ i {
     border-style: solid;
   }
 }
+p {
+  line-height: 1.3em;
+}
+i {
+  &.fab, &.fas, &.fa{
+    color: $main-pink;
+  }
+}
+h1,h2,h3,h4{
+  margin: 0;
+  padding: 0;
+}
+label {
+  font-size: $small-font-size;
+}
+.input-field {
+  background-color: $main-color;
+  border-radius: $normal-border-radius;
+  width: 100%;
+  text-align: left;
+
+  &__default{
+    outline: none;
+    width: calc(100% - 40px);
+    background-color: transparent !important;
+    border-top-right-radius: $normal-border-radius;
+    border-bottom-right-radius: $normal-border-radius;
+    padding: $normal-padding;
+  }
+  &__icon {
+    width: 20px;
+    font-size: $big-font-size;
+    margin: 0 $normal-padding;
+  }
+}
+.checkbox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  margin: 10px 0 0 20px;
+
+  &:checked + label:before {
+    background: $main-pink;
+  }
+  &:checked + label:after {
+    left: 20px;
+  }
+  & + label {
+    position: relative;
+    padding: 0 0 0 50px;
+    cursor: pointer;
+    font-size: 16px;
+    &:after {
+      content: '';
+      position: absolute;
+      top: 1px;
+      left: 1px;
+      width: 18px;
+      height: 18px;
+      border-radius: $big-border-radius;
+      background: #FFF;
+      box-shadow: 0 2px 5px rgba(0,0,0,.3);
+      transition: .2s;
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 40px;
+      height: 20px;
+      border-radius: $big-border-radius;
+      background: #CDD1DA;
+      box-shadow: inset 0 2px 3px rgba(0,0,0,.2);
+      transition: .2s;
+    }
+  }
+}
+.validator {
+  font-size: $small-font-size;
+  color: $main-pink;
+}
+
 // Стилизация кастомного селекта
 .ng-select {
   &.ng-select-opened {

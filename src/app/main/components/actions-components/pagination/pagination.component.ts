@@ -1,20 +1,33 @@
-import {Component} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {AppRoutingService} from '@routes/app-routing.service';
+import {PaginationItem} from '@shared/models/PaginationItem';
+import {CONSTANTS} from '@shared/config/constants';
 
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss']
 })
-export class PaginationComponent {
-  mockPagination: object = {
-    previous: 19,
-    current: 20,
-    next: 21,
+export class PaginationComponent implements OnInit{
+  @Input() pagination: PaginationItem;
+  paramName: string;
 
-    large_back: 10,
-    large_forward: 30,
-  };
+  constructor(
+    private routingService: AppRoutingService,
+  ) {
+    this.paramName = CONSTANTS.QUERY.PAGE;
 
-  constructor() { }
+    // Значение по умолчанию
+    this.pagination = new PaginationItem(10, 9,11, 1, 20);
+  }
 
+  ngOnInit(): void {
+    // Просто для демонстрации ставим параметр
+    let queryParam = {[this.paramName]: this.pagination.current};
+    this.routingService.setQueryParam(queryParam);
+  }
+
+  onPagination(page: number){
+    console.log(`Необходимо перейти на ${page} страницу!`);
+  }
 }

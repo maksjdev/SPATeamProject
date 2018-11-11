@@ -4,10 +4,12 @@ import {FullLogoComponent} from '@components/visual-components/full-logo/full-lo
 import {SocialLinksComponent} from './social-links/social-links.component';
 import { QuoteBlockComponent } from './quote-block/quote-block.component';
 import { ListBlockComponent } from './list-block/list-block.component';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
     QuoteBlockComponent,

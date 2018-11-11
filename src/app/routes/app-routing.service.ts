@@ -49,14 +49,14 @@ export class AppRoutingService {
     return this.activeQueryParam;
   }
 
-  public getQueryParam(paramName: string){
+  public getQueryParam(paramName: string): string{
     let currentParam = this.activeQueryParam.getValue()['params'];
     if (paramName in currentParam){
       var value = currentParam[paramName];
       return value;
     } else return;
   }
-  public setQueryParam(queryParamArr){
+  public setQueryParam(queryParamArr: object): void{
     this.router.navigate(['.'],{
       relativeTo: this.activeRoute,
       queryParams: queryParamArr,
@@ -75,13 +75,13 @@ export class AppRoutingService {
     return data;
   }
 
-  public goToLink(link: string){
+  public goToLink(link: string): void{
     this.router.navigate([`/${link}`]);
   }
-  public goChildLink(link: string){
+  public goChildLink(link: string): void{
     this.router.navigate([`./${link}`], { relativeTo: this.activeRoute, skipLocationChange: false });
   }
-  public getCleanUrl(link): string{
+  getCleanUrl(link): string{
     // Возврат "чистой ссылки" (без параметров)
     let urlTree = this.router.parseUrl(link);
     let primeChild = urlTree.root.children['primary'];
