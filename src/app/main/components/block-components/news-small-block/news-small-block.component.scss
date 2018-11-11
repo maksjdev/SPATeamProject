@@ -7,19 +7,12 @@
 .top-small {
   &__content {
     height: 100%;
-    margin: 0px $big-padding;
     padding: $normal-padding 0px;
   }
   &__info {
-    width: 90%;
-    display: grid;
-    grid-template-columns: 1fr auto auto;
-    grid-gap: 10px;
-    text-align: end;
+    display: flex;
     flex-direction: row;
-    margin: 0px $big-padding;
+    justify-content: space-between;
     padding-bottom: $normal-padding;
-    padding-right: $normal-padding;
-    border-bottom: 1px solid $main-text-color;
   }
 }

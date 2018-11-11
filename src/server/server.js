@@ -2,7 +2,7 @@ const http = require('http');
 const chalk = require('chalk');
 // npm-windows-upgrade -p -v latest
 
-const hostname = '127.0.0.1';
+const hostname = 'back.com';
 const port = 3000;
 
 const server = http.createServer((req, res) => {

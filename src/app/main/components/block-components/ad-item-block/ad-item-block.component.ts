@@ -1,5 +1,4 @@
-import {Component, OnInit, OnDestroy, ViewRef} from '@angular/core';
-import {removeChild} from '@angular/core/src/render3/node_manipulation';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-ad-item-block',

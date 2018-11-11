@@ -10,8 +10,13 @@
   height: 100%;
   margin-bottom: $normal-padding;
   &__list {
-    padding: 0px;
+    padding: 0;
+    margin: 0 $big-padding;
     list-style-type: none;
+    &--item {
+      display: block;
+      border-bottom: 1px solid $main-text-color;
+    }
   }
   &__header {
     display: block;
@@ -21,8 +26,8 @@
     font-weight: 400;
     font-family: 'Roboto Condensed', sans-serif;
     font-size: $normal-font-size;
-    padding: $big-padding 0px $normal-padding $normal-padding;
-    margin: 0px $big-padding;
+    padding: $big-padding 0 $normal-padding $normal-padding;
+    margin: 0 $big-padding;
     border-bottom: 1px solid $main-text-color;
   }
 }

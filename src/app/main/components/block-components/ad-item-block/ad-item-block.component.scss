@@ -20,6 +20,9 @@
     border-radius: $normal-border-radius;
   }
   &__close {
+    & .fas {
+      color: $main-text-color;
+    }
     float: right;
     margin-top: $small-padding;
     margin-right: $small-padding;
