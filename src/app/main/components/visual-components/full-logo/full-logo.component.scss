@@ -1,8 +1,9 @@
 @import "~src/assets/base-css/theme";
 @import "~src/assets/base-css/vars";
 
-:host {
+:host,.link-wrapper {
   display: grid;
+  width: 100%;
   font-family: 'Graduate', cursive;
   grid-template: "i t" 1fr
                  "i h" auto;
@@ -20,6 +21,7 @@
     font-size: $big-font-size;
     padding-left: $normal-padding;
     padding-bottom: $small-padding;
+    text-shadow: 2px 2px 0px $main-text-dark-color, 5px 4px 0px rgba(0,0,0,0.15);
   }
   &__hint {
     grid-area: h;

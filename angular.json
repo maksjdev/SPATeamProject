@@ -61,11 +61,16 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
+            "hmrWarning": false,
             "browserTarget": "news-project-spa:build"
           },
           "configurations": {
             "production": {
               "browserTarget": "news-project-spa:build:production"
+            },
+            "hmr": {
+              "hmr": true,
+              "browserTarget": "news-project-spa:build:hmr"
             }
           }
         },

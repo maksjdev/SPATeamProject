@@ -1,0 +1,30 @@
+@import "~src/assets/base-css/theme";
+@import "~src/assets/base-css/vars";
+
+:host {
+  display: flex;
+  height: 40px;
+}
+.rating-block {
+  display: flex;
+  flex-direction: row;
+  text-transform: uppercase;
+  border: 1px solid $main-text-color;
+  padding: 0;
+  margin: 0;
+
+  &__item {
+    display: block;
+    padding: $normal-padding;
+    border-radius: $normal-border-radius;
+    transition: all $fast-animation;
+    font-size: $normal-font-size;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+    &.active {
+      color: $main-pink;
+    }
+  }
+}

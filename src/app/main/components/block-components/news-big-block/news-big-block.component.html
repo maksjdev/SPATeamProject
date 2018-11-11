@@ -1,0 +1,35 @@
+
+<article *ngIf="news" class="panel shadow-block news-item">
+  <div class="news-item__header">
+    <h2 class="news-item__header--title">{{ news.title | trimString: 100 }}</h2>
+    <div class="header-info">
+      <div class="header-info__author">
+        <img class="header-info__author--image" [src]="news.author.image" alt="*User Image*">
+        <a href="#" class="header-info__author--name">
+          {{ news.author.first_name +' '+ news.author.last_name }}{{ ',' }}
+        </a>
+      </div>
+      <div class="header-info__date">{{ news.date | date: 'dd.MM.yyyy' }}</div>
+      <div class="header-info__comments">
+        {{ news.comments }}
+        <i class="far fa-comment-dots"></i>
+      </div>
+    </div>
+    <span class="header-tags">
+      <div class="header-tags__item" *ngFor="let tag of news.tags">
+        {{ tag }}
+      </div>
+    </span>
+  </div>
+  <div class="shadow-block-sm news-item__image">
+    <img [src]="news.image" alt="News image">
+  </div>
+  <div class="news-item__content">
+    <p class="news-item__content--text">
+      {{ textContent | trimString: 500 }}
+    </p>
+  </div>
+  <div class="news-item__bottom">
+    <button class="btn btn-default btn-read-more">Читать далее <i class="fas fa-long-arrow-alt-right"></i></button>
+  </div>
+</article>

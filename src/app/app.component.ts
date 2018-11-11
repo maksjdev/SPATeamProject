@@ -1,6 +1,5 @@
-import {Component, OnDestroy} from '@angular/core';
-import {AppRestService} from '@shared/http/app-rest.service';
-import {Subscription} from 'rxjs';
+import {Component, HostListener} from '@angular/core';
+import {Debounce} from 'lodash-decorators';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +9,13 @@ export class AppComponent {
   isScroled: boolean = false;
 
   constructor(){}
-   scrollToTop(event) {
-    console.log(`Scroll to top of page!`);
-   }
+
+  @HostListener('window:scroll', ['$event'])
+  @Debounce(50)
+  trackScroll(event) {
+    this.isScroled = window.pageYOffset > 300;
+  }
+  scrollToTop(event) {
+    window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+  }
 }

@@ -10,13 +10,40 @@
 
 .user-info {
 
-  &__image{
+  &__image {
+    display: flex;
+    position: relative;
     grid-area: i;
     height: 40px;
     width: 40px;
     border-radius: $normal-border-radius;
     padding: 1px;
     background: $bg-gradient;
+
+    &--img {
+      border-radius: $normal-border-radius;
+      width: 100%;
+      height: 100%;
+    }
+    &:hover &--img {
+      opacity: 0.2;
+    }
+
+    &--logout {
+      transition: .5s ease;
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      cursor: pointer;
+      font-size: $extra-font-size;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: $main-text-dark-color;
+    }
+    &:hover &--logout {
+      opacity: 1;
+    }
   }
   &__name {
     grid-area: n;

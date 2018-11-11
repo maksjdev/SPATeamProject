@@ -12,6 +12,10 @@
       "@pages/*": ["src/app/main/pages/*"],
       "@main/*": ["src/app/main/pages/main-page/*"],
       "@news/*": ["src/app/main/pages/news-page/*"],
+      "@login/*": ["src/app/main/pages/login-page/*"],
+      "@registration/*": ["src/app/main/pages/registration-page/*"],
+      "@about/*": ["src/app/main/pages/about-page/*"],
+      "@demo/*": ["src/app/main/pages/demo-page/*"],
 
       "@header/*": ["src/app/main/header/*"],
       "@footer/*": ["src/app/main/footer/*"]

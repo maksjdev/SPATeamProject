@@ -12,10 +12,8 @@
   text-align: center;
   font-weight: normal;
 
-  grid-gap: $normal-padding;
   grid-template-columns: auto 1fr auto auto;
   margin: $normal-padding auto;
-
 
   &__logo {
     text-align: start;

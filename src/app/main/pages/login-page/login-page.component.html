@@ -1,0 +1,54 @@
+
+<div class="panel shadow-block-big login-wrapper">
+  <div class="login-wrapper__header">
+    <div class="login-wrapper__header--links">
+        <a *ngFor="let link of navLinks"
+           class="header-link"
+           [routerLink] = "link.path"
+           [routerLinkActive] = "link.class">
+          {{link.label}}
+        </a>
+    </div>
+    <div class="login-wrapper__header--image">
+      <img src="" alt="*Image*">
+    </div>
+  </div>
+
+  <form class="login-wrapper__body" [formGroup]="LoginForm" novalidate autocomplete="off">
+    <div class="login-form__line">
+      <label class="login-form__line--label" for="l_login">Ваш логин</label>
+      <div class="login-form__line--field">
+        <div class="input-field">
+          <i class="input-field__icon fas fa-user"></i>
+          <input class="input-field__default login-input" id="l_login" placeholder="UserName"  formControlName="l_login" type="text">
+        </div>
+      </div>
+      <mat-error class="validator" *ngIf="formErrors.l_login">{{ formErrors.l_login }}</mat-error>
+    </div>
+    
+    <div class="login-form__line">
+      <label class="login-form__line--label" for="l_login">Ваш пароль</label>
+
+      <div class="login-form__line--field">
+        <div class="input-field">
+          <i class="input-field__icon fas fa-key"></i>
+          <input class="input-field__default login-input" id="l_password" placeholder="Password" formControlName="l_password"  type="password">
+        </div>
+      </div>
+      <mat-error class="validator" *ngIf="formErrors.l_password">{{ formErrors.l_password }}</mat-error>
+    </div>
+
+    <div class="login-form__line">
+      <div class="login-form__line--field">
+        <input class="checkbox" id="checkSafe" type="checkbox" formControlName="l_save">
+        <label class="checkbox-label" for="checkSafe">Сохранить пароль?</label>
+      </div>
+    </div>
+
+    <div class="login-form__bottom">
+      <button class="btn btn-colored btn-login" type="button" (click)="onLogin()" [disabled]="false">
+        <i class="fas fa-unlock"></i>Войти
+      </button>
+    </div>
+  </form>
+</div>

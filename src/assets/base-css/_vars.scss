@@ -15,8 +15,8 @@ $small-padding: 5px;
 $tiny-padding: 2px;
 
 // Borders
-$big-border-radius: 3px;
-$normal-border-radius: 3px;
+$big-border-radius: 10px;
+$normal-border-radius: 4px;
 
 // Shadows
 $big-shadow: 10px;
@@ -34,5 +34,9 @@ $normal-border-height: 2px;
 
 // Wights
 $main-content-wight: 1000px;
+$center-content-wight: 400px;
+
 // Speeds
-$normal-animation: 0.5s;
+$fast-animation: 0.5s;
+$normal-animation: 1s;
+$slow-animation: 2s;
