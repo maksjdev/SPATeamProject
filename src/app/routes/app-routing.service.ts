@@ -64,7 +64,7 @@ export class AppRoutingService {
     });
   }
 
-  private getRouterData(state, parent) {
+  public getRouterData(state, parent) {
     var data = [];
     if(parent && parent.snapshot.data && parent.snapshot.data.title) {
       data.push(parent.snapshot.data);
@@ -81,7 +81,7 @@ export class AppRoutingService {
   public goChildLink(link: string){
     this.router.navigate([`./${link}`], { relativeTo: this.activeRoute, skipLocationChange: false });
   }
-  private getCleanUrl(link): string{
+  public getCleanUrl(link): string{
     // Возврат "чистой ссылки" (без параметров)
     let urlTree = this.router.parseUrl(link);
     let primeChild = urlTree.root.children['primary'];
