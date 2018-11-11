@@ -16,7 +16,7 @@ export class TopSmallBlockComponent {
     private stringService: AppStringService,
     private dateTimeService: AppDateTimeService
   ) {
-    /*let linkUser: string = 'https://hsto.org/getpro/habr/avatars/fc7/23a/b6b/fc723ab6b9870078eefc3aba22c605ad.png';
+    let linkUser: string = 'https://hsto.org/getpro/habr/avatars/fc7/23a/b6b/fc723ab6b9870078eefc3aba22c605ad.png';
     this.mockUser = new User('Sirius', 'Dark', linkUser, 0, 'Admin');
 
     let title: string = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eg dolor. Aenean massa.',
@@ -25,7 +25,7 @@ export class TopSmallBlockComponent {
       linkNews: string = '#',
       date = dateTimeService.unixToDate('1541538783'),
       tags = ['Space', 'Humans', 'Potato'];
-    this.mockNews = new News (this.mockUser, date, title, text['0'], linkNews, tags,100, 5);*/
+    this.mockNews = new News (this.mockUser, date, title, text['0'], linkNews, tags,100, 5);
   }
 
 }
