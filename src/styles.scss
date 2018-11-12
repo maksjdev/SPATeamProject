@@ -77,12 +77,12 @@ app-header, app-footer {
 // Визуальные общие стили
 .shadow-block {
   -webkit-box-shadow: 0 $big-shadow 6px -6px $main-color;
-  box-shadow: 0 $normal-shadow $normal-smoothness  0px $shadows-color;
+  box-shadow: 0 $normal-shadow $normal-smoothness  0 $shadows-color;
   &-sm {
-    box-shadow: 0 $small-shadow $big-smoothness  0px $shadows-color;
+    box-shadow: 0 $small-shadow $big-smoothness  0 $shadows-color;
   }
   &-big {
-    box-shadow: 0 $big-shadow $big-smoothness  0px $shadows-color;
+    box-shadow: 0 $big-shadow $big-smoothness  0 $shadows-color;
   }
 }
 .gradient {
@@ -92,6 +92,14 @@ app-header, app-footer {
 .panel {
   background-color: $gray-default;
   border-radius: $normal-border-radius;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+}
+.row {
+  display: flex;
+  flex-direction: row;
 }
 
 //  Стили вспомогательных элементов
@@ -270,8 +278,17 @@ label {
   }
 }
 .validator {
-  font-size: $small-font-size;
-  color: $main-pink;
+  &-input, &-checkbox {
+    font-size: $small-font-size;
+    color: $main-pink;
+    position: absolute;
+  }
+  &-input {
+    margin-top: 52px;
+  }
+  &-checkbox {
+    margin-top: 20px;
+  }
 }
 
 // Стилизация кастомного селекта
@@ -360,12 +377,15 @@ blockquote {
 
 
 // Ну совсем не нужные.. (для редактирования)
-div.loading-block{
-  height: 100px;
+.loading-block{
+  height: 50px;
+  position: fixed;
+  margin: auto;
+  left: 0; right: 0;
   color: $main-text-color;
   display: none;
 }
-router-outlet + div.loading-block{
+router-outlet + .loading-block{
   display: block;
 }
 // ScrollBar

@@ -418,11 +418,11 @@ app-header, app-footer {
 
 .shadow-block {
   -webkit-box-shadow: 0 10px 6px -6px #262729;
-  box-shadow: 0 6px 6px 0px #1D1D1F; }
+  box-shadow: 0 6px 6px 0 #1D1D1F; }
   .shadow-block-sm {
-    box-shadow: 0 3px 10px 0px #1D1D1F; }
+    box-shadow: 0 3px 10px 0 #1D1D1F; }
   .shadow-block-big {
-    box-shadow: 0 10px 10px 0px #1D1D1F; }
+    box-shadow: 0 10px 10px 0 #1D1D1F; }
 
 .gradient {
   background: linear-gradient(50deg, #f7c626 15%, #f16b44 40%, #e5127d 85%);
@@ -431,6 +431,14 @@ app-header, app-footer {
 .panel {
   background-color: #3f4043;
   border-radius: 4px; }
+
+.column {
+  display: flex;
+  flex-direction: column; }
+
+.row {
+  display: flex;
+  flex-direction: row; }
 
 .btn {
   font-weight: 500;
@@ -575,9 +583,14 @@ label {
       box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.2);
       transition: .2s; }
 
-.validator {
+.validator-input, .validator-checkbox {
   font-size: 12px;
-  color: #e5127d; }
+  color: #e5127d;
+  position: absolute; }
+.validator-input {
+  margin-top: 52px; }
+.validator-checkbox {
+  margin-top: 20px; }
 
 .ng-select.ng-select-opened .ng-arrow-wrapper .ng-arrow {
   border-color: transparent transparent #f9f8fd !important; }
@@ -628,12 +641,16 @@ blockquote {
     blockquote footer:before {
       content: '— '; }
 
-div.loading-block {
-  height: 100px;
+.loading-block {
+  height: 50px;
+  position: fixed;
+  margin: auto;
+  left: 0;
+  right: 0;
   color: #f9f8fd;
   display: none; }
 
-router-outlet + div.loading-block {
+router-outlet + .loading-block {
   display: block; }
 
 body::-webkit-scrollbar-track {
