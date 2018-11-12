@@ -1,4 +1,95 @@
 
-<div class="registration-wrapper">
-  *Registration*
+
+<div class="panel shadow-block-big registration-wrapper">
+  <div class="registration-wrapper__header">
+    <div class="registration-wrapper__header--links">
+      <a *ngFor="let link of navLinks"
+         class="header-link"
+         [routerLink] = "link.path"
+         [routerLinkActive] = "link.class">
+        {{link.label}}
+      </a>
+    </div>
+    <div class="registration-wrapper__header--image">
+      *Ваш прекрасный аватар*<br>
+      *Инпут для загрузки изображения*
+    </div>
+  </div>
+
+  <form class="registration-wrapper__body" [formGroup]="registrationForm" novalidate autocomplete="off">
+    <div class="row registration-form__line">
+        <div class="column registration-form__line--half">
+          <label class="registration-form__line--label" for="r_real_name">Ваше имя</label>
+          <div class="registration-form__line--field">
+            <div class="input-field">
+              <i class="input-field__icon fas fa-id-card"></i>
+              <input class="input-field__default registration-input" id="r_real_name"
+                     placeholder="RealName"  formControlName="r_real_name" type="text">
+            </div>
+          </div>
+          <mat-error class="validator-input" *ngIf="formErrors.r_real_name">{{ formErrors.r_real_name }}</mat-error>
+        </div>
+
+        <div class="column registration-form__line--half">
+          <label class="registration-form__line--label" for="r_nickname">Ваш никнейм</label>
+          <div class="registration-form__line--field">
+            <div class="input-field">
+              <i class="input-field__icon fas fa-paw"></i>
+              <input class="input-field__default registration-input" id="r_nickname"
+                     placeholder="NickName" formControlName="r_nickname"  type="text">
+            </div>
+          </div>
+          <mat-error class="validator-input" *ngIf="formErrors.r_nickname">{{ formErrors.r_nickname }}</mat-error>
+        </div>
+    </div>
+
+    <div class="column registration-form__line">
+      <label class="registration-form__line--label" for="r_email">Ваша почта</label>
+      <div class="registration-form__line--field">
+        <div class="input-field">
+          <i class="input-field__icon fas fa-envelope"></i>
+          <input class="input-field__default registration-input" id="r_email"
+                 placeholder="your.email@gmail.com" formControlName="r_email"  type="email">
+        </div>
+      </div>
+      <mat-error class="validator-input" *ngIf="formErrors.r_email">{{ formErrors.r_email }}</mat-error>
+    </div>
+
+    <div class="column registration-form__line">
+      <label class="registration-form__line--label" for="r_password">Ваш пароль</label>
+      <div class="registration-form__line--field">
+        <div class="input-field">
+          <i class="input-field__icon fas fa-key"></i>
+          <input class="input-field__default registration-input" id="r_password"
+                 placeholder="password" formControlName="r_password"  type="password">
+        </div>
+      </div>
+      <mat-error class="validator-input" *ngIf="formErrors.r_password">{{ formErrors.r_password }}</mat-error>
+    </div>
+    <div class="column registration-form__line">
+      <label class="registration-form__line--label" for="r_re_password">Ваш пароль *повторно*</label>
+      <div class="registration-form__line--field">
+        <div class="input-field">
+          <i class="input-field__icon fas fa-key"></i>
+          <input class="input-field__default registration-input" id="r_re_password"
+                 placeholder="password *again*" formControlName="r_re_password"  type="password">
+        </div>
+      </div>
+      <mat-error class="validator-input" *ngIf="formErrors.r_re_password">{{ formErrors.r_re_password }}</mat-error>
+    </div>
+
+    <div class="column registration-form__line">
+      <div class="registration-form__line--field">
+        <input class="checkbox" id="r_agreement" type="checkbox" formControlName="r_agreement">
+        <label class="checkbox-label" for="r_agreement">Принимаю соглашение</label>
+      </div>
+      <mat-error class="validator-checkbox" *ngIf="formErrors.r_agreement">{{ formErrors.r_agreement }}</mat-error>
+    </div>
+
+    <div class="registration-form__bottom">
+      <button class="btn btn-colored btn-registration" type="button" (click)="onRegister()" [disabled]="false">
+        <i class="fas fa-unlock"></i>Регистрация
+      </button>
+    </div>
+  </form>
 </div>

@@ -1,7 +1,7 @@
 export const CONSTANTS = {
   APP: {
     TITLE: 'NewString',
-    MAIN: 'main'
+    MAIN: 'main',
   },
   QUERY: {
     PAGE: 'page',

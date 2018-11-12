@@ -25,4 +25,10 @@ export class CustomValidators extends Validators {
       return result;
     }
   }
+
+  static validateBoolean(expected: boolean) {
+    return function (control: FormControl) {
+      return control.value === expected ? null : { invalid_expected: expected };
+    }
+  }
 }

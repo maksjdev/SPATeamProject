@@ -6,7 +6,7 @@ import {CONSTANTS} from '@shared/config/constants';
   templateUrl: './full-logo.component.html',
   styleUrls: ['./full-logo.component.scss']
 })
-export class FullLogoComponent implements OnInit {
+export class FullLogoComponent {
   title: string;
   mainLink: string;
 
@@ -14,8 +14,4 @@ export class FullLogoComponent implements OnInit {
     this.title = CONSTANTS.APP.TITLE;
     this.mainLink = CONSTANTS.APP.MAIN;
   }
-
-  ngOnInit() {
-  }
-
 }
