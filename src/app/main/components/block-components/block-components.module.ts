@@ -21,7 +21,7 @@ import {FullNewsBlockComponent} from '@components/block-components/full-news-blo
     AdItemBlockComponent,
     StatisticTableComponent,
     CategoryItemBlockComponent,
-    TopNewsBlockComponent
+    TopNewsBlockComponent,
     StatisticTableComponent,
     FullNewsBlockComponent
   ],

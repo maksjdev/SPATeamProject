@@ -1,15 +1,17 @@
-<article class="full-news">
-  <div class="full-news__title">{{news.title}}</div>
-  <div class="header-info">
-    <div class="header-info__author">
-      <img class="header-info__author--image" [src]="news.author.image" alt="*User Image*">
-      <a href="#" class="header-info__author--name">
-        {{ news.author.first_name + news.author.last_name }}{{ ' , ' }}
-      </a>
-      <span class="header-info__date">
-        {{ news.date | date: 'dd.MM.yyyy' }}
-      </span>
-    </div>
+<article class="panel shadow-block full-news">
+  <div class="full-news__header">
+    <h2 class="full-news__header--title">{{news.title}}</h2>
+      <div class="header-info">
+        <div class="header-info__author">
+          <img class="header-info__author--image" [src]="news.author.image" alt="*User Image*">
+          <a href="#" class="header-info__author--name">
+            {{ news.author.first_name + news.author.last_name }}{{ ' , ' }}
+          </a>
+          <span class="header-info__date">
+            {{ news.date | date: 'dd.MM.yyyy' }}
+          </span>
+        </div>
+      </div>
   </div>
   <span class="header-tags">
       <div class="header-tags__item" *ngFor="let tag of news.tags">
@@ -18,15 +20,20 @@
     </span>
   <div class="full-news__content">
     <div class="content-image" [ngStyle]="{ 'background-image': 'url(' + news.image + ')'}"></div>
-    <div class="content-text">
-      {{ textContent | trimString: 500 }}
-    </div>
-      <!--<div *ngFor="let element of news.text" class="content&#45;&#45;wrapper__element">-->
-        <!--<div [ngSwitch]="" class="content&#45;&#45;wrapper__">-->
-          <!--<p class="ttt" *ngSwitchCase="text">{{ element['value'] }}</p>-->
-          <!--<p class="sb" *ngSwitch="subtitle">{{ element['value'] }}</p>-->
-          <!--<p class="quote" *ngSwitch="quote">{{ element['value.text'] }}</p>-->
-        <!--</div>-->
-      <!--</div>-->
+
+      <div  class="content__wrapper">
+        <div  class="content__wrapper--text">
+          <p>Душа моя озарена неземной радостью, как эти чудесные весенние утра, которыми я наслаждаюсь от всего.</p>
+        </div>
+         <div class="content__wrapper--subtitle">
+           <h3>Подзаголовок</h3>
+         </div>
+        <div class="content__wrapper--blockquote">
+          <blockquote>
+            <p>Не ссы против ветра</p>
+            <footer>— <cite>Батя</cite></footer>
+          </blockquote>
+        </div>
+      </div>
   </div>
 </article>
