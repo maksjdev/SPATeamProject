@@ -1,23 +1,26 @@
 
-<li class="top-small" *ngIf="news">
-  <div class="top-small__content">
-    <div class="top-small__content--title">
+<li class="news-small" *ngIf="news">
+  <div class="news-small__content">
+    <div class="news-small__content--title">
       <a href= "#">
         <span> {{news.title}} </span>
       </a>
     </div>
   </div>
-  <div class="top-small__info">
-    <div>
+
+  <div class="news-small__info">
+
+    <div class="news-small__info--author">
       {{ news.author.first_name + news.author.last_name }}
     </div>
-    <div>
-      {{ news.date | date: 'dd.MM.yyyy' }}
-      <i class="far fa-calendar-alt"></i>
-    </div>
-    <div>
+    <div class="news-small__info--comment">
       {{ news.comments }}
       <i class="far fa-comment-dots"></i>
     </div>
+    <div class="news-small__info--date">
+      {{ news.date | date: 'dd.MM.yyyy' }}
+      <i class="far fa-calendar-alt"></i>
+    </div>
+
   </div>
 </li>

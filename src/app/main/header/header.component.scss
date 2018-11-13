@@ -9,7 +9,7 @@
   display: grid;
   width: $main-content-wight;
   align-items: center;
-  text-align: center;
+  text-align: justify;
   font-weight: normal;
 
   grid-template-columns: auto 1fr auto auto;
@@ -17,6 +17,8 @@
 
   &__logo {
     text-align: start;
+    height: 42px;
+    width: 200px;
   }
   &__navigations {
 

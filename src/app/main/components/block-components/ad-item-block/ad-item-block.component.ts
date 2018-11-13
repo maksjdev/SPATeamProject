@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Advertising} from '@components/block-components/ad-item-block/Advertising';
 
 @Component({
   selector: 'app-ad-item-block',
@@ -6,21 +7,12 @@ import {Component} from '@angular/core';
   styleUrls: ['./ad-item-block.component.scss']
 })
   export class AdItemBlockComponent {
-  adversiting: object;
+  isClosed: boolean = false;
+  @Input() advertising: Advertising;
 
-  constructor() {
-    this.adversiting = {
-      title: 'Burger King',
-      link: 'https://burgerking.ru/images/actions/BK-2037_CHEESY_710х459_.jpg',
-      href: 'https://burgerking.ru/actions'
-    }
-  }
+  constructor() {}
+
   public OnClose(event): void {
-    let x;
-    for(x in this.adversiting) {
-      delete this.adversiting[x];
-    }
-
+    this.isClosed = true;
   }
-
 }

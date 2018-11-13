@@ -1,7 +1,11 @@
 
-<div class="panel top-news">
-  <div class="top-news__header">Top news</div>
-  <ul class="top-news__list">
-    <app-news-small-block class="top-news__list--item" *ngFor="let news of newsList" [news]="news"></app-news-small-block>
-  </ul>
+<div class="panel shadow-block top-news">
+  <div class="top-news__header">
+    <h4 class="top-news__header--title" >Топ актуальных новостей</h4>
+  </div>
+  <div class="top-news__content">
+    <ul class="top-news__menu">
+      <app-news-small-block class="top-news__menu--item" *ngFor="let news of newsList" [news]="news"></app-news-small-block>
+    </ul>
+  </div>
 </div>

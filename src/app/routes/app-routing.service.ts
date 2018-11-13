@@ -3,6 +3,7 @@ import {BehaviorSubject, Subject} from 'rxjs';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 import {AppRouterData} from '@routes/AppRouterData';
+import {CONSTANTS} from '@shared/config/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class AppRoutingService {
         this.activeRoute = this.routeActive.firstChild;
         if(data.length > 0) {
           data = data[0]; // Берем инфу только с "Главного" роутинка (не учитывая дочерних)
-          titleService.setTitle(data['title']);
+          titleService.setTitle(CONSTANTS.APP.TITLE + ' — ' + data['title']);
 
           let routerData = new AppRouterData(
             event.url, this.getCleanUrl(event.url),

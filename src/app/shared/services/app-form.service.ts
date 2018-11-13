@@ -21,16 +21,17 @@ export class AppFormService {
     const messages = {
       required: 'Это поле необходимо!',
       email: 'Данный email адрес не коректен!',
-      requiredTrue: 'Подтвердите данный пункт..',
       invalid_min: (min: number) => {
         return `Минимальная длинна (${min}) - не достигнута!`;
       },
       invalid_max: (max: number) => {
         return `Максимальная длинна (${max}) - превышена!`;
       },
+      invalid_expected: (expected: boolean) =>{
+        return 'Вы должны' + (expected? 'принять данный пункт' : 'отказатся от данного пункта') + '!';
+      },
       invalid_characters: (matches: any[]) => {
         let matchedCharacters = matches;
-
         matchedCharacters = matchedCharacters.reduce((characterString, character, index) => {
           let string = characterString;
           string += character;
@@ -61,7 +62,7 @@ export class AppFormService {
           if (!checkDirty || (control.dirty || control.touched || checkField[field])) {
             control.markAsTouched();
             for (const key in control.errors) {
-              if (key && key !== 'invalid_characters' && key !== 'invalid_min' && key !== 'invalid_max') {
+              if (key && key !== 'invalid_characters' && key !== 'invalid_min' && key !== 'invalid_max' && key !== 'invalid_expected') {
                 formErrors[field] = formErrors[field] || messages[key];
               } else {
                 formErrors[field] = formErrors[field] || messages[key](control.errors[key]);

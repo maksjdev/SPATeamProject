@@ -12,10 +12,12 @@ import {RouterModule} from '@angular/router';
   exports: [
     FullLogoComponent,
     SocialLinksComponent,
+    FullLogoPngComponent,
   ],
   declarations: [
     FullLogoComponent,
-    SocialLinksComponent
+    SocialLinksComponent,
+    FullLogoPngComponent,
   ]
 })
 export class VisualComponentsModule { }
