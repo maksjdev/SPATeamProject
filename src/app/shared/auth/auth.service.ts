@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AppRoutingService} from '@routes/app-routing.service';
-import {UserService} from '@shared/auth/user.service';
+import {UserService} from '@shared/user.service';
 import {BehaviorSubject} from 'rxjs';
 import {AppRestService} from '@shared/http/app-rest.service';
 import {CONSTANTS} from '@shared/config/constants';

@@ -28,10 +28,8 @@
   <div class="shadow-block-sm news-item__image">
     <img [src]="news.image" alt="News image">
   </div>
-  <div class="news-item__content">
-    <p class="news-item__content--text">
-      {{ textContent | trimString: 500 }}
-    </p>
+  <div class="news-item__content" [innerHTML]="textContent | trimString: 500 ">
+
   </div>
   <div class="news-item__bottom">
     <button class="btn btn-default btn-read-more">Читать далее <i class="fas fa-long-arrow-alt-right"></i></button>

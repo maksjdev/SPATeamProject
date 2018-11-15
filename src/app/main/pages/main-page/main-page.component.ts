@@ -7,6 +7,7 @@ import {AppRoutingService} from '@routes/app-routing.service';
 import {CONSTANTS} from '@shared/config/constants';
 import {Advertising} from '@components/block-components/ad-item-block/Advertising';
 import {PaginationItem} from '@shared/models/PaginationItem';
+import {debounceTime, throttleTime} from 'rxjs/operators';
 
 @Component({
   selector: 'app-main-page',
@@ -31,14 +32,13 @@ export class MainPageComponent implements OnInit, OnDestroy {
     this.adv =  new Advertising('Burger King',
       'https://burgerking.ru/images/actions/BK-2037_CHEESY_710х459_.jpg',
       'https://burgerking.ru/actions');
-    this.pagination = new PaginationItem(10, 9,11, 1, 20);
   }
 
   ngOnInit() {
     //Просим у сервиса данных - данные о каком-то количестве новостей
     let numberOfNews = this.configService.getNumberOfNews();
 
-    this._subscribe = this.routingService.getActiveQueryParam().subscribe( _ => {
+    this._subscribe = this.routingService.getActiveQueryParam().pipe(throttleTime(100)).subscribe( _ => {
       let page = this.routingService.getQueryParam(CONSTANTS.QUERY.PAGE);
       let period = this.routingService.getQueryParam(CONSTANTS.QUERY.PERIOD);
       let rating = this.routingService.getQueryParam(CONSTANTS.QUERY.RATING);
@@ -46,8 +46,9 @@ export class MainPageComponent implements OnInit, OnDestroy {
       page = page? page : "1";          // Значения по умолчанию
       period = period? period : 'week'; // Значения по умолчанию
       rating = rating? rating : '10';   // Значения по умолчанию
-      this.onPeriodChange(period);  this.onRatingChange(rating);
-      this.newsList = this.newsService.getMockNewsList(numberOfNews, parseInt(page), period, rating);
+
+      this.onRatingChange(rating); this.onPeriodChange(period); this.onPaginationChange(parseInt(page));
+      this.newsList = this.newsService.getNewsFromServer(parseInt(page), period, rating);
     });
   }
   ngOnDestroy(): void {
@@ -56,19 +57,15 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   onRatingChange(value: string): void {
     this.ratingFilter = value;
-    console.log('Rating change!');
-    //this.pagination = this.pagination.createPageItem(1);
   }
   onPeriodChange(value: string): void {
     this.periodFilter = value;
-    console.log('Period change!');
-    //this.pagination = this.pagination.createPageItem(1);
   }
   onPaginationChange(page: number): void {
     // Получаем пагинацию с сервера
     let minPage: number = 1,  maxPage: number = 100, pageLargeStep: number = 10;
     if (page >= minPage && page < maxPage) {
-      this.pagination = this.pagination.createPageItem(page, pageLargeStep, minPage, maxPage);
+      this.pagination = PaginationItem.createPageItem(page, pageLargeStep, minPage, maxPage);
     }
   }
 }

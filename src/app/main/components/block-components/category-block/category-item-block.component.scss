@@ -38,8 +38,8 @@
   grid-template-columns: 1fr auto;
   padding-bottom: $normal-padding;
   padding-left: $normal-padding;
-  padding-top: $normal-padding;
-  border-bottom: 1px solid $main-text-color;
+  padding-top: $big-padding;
+  border-bottom: 1px solid rgba($main-text-color, .25);
   &:last-child{
     margin-bottom: 0;
   }
