@@ -4,7 +4,7 @@
 :host,.link-wrapper {
   display: grid;
   width: 100%;
-  //font-family: 'Graduate', cursive;
+  font-family: $extra-font;
   grid-template: "i t" 1fr
                  "i h" auto;
   align-items: center;
@@ -18,7 +18,7 @@
   }
   &__title {
     grid-area: t;
-    font-size: $big-font-size;
+    font-size: $huge-font-size;
     padding-left: $normal-padding;
     padding-bottom: $small-padding;
     text-shadow: 2px 2px 0px $main-text-dark-color, 5px 4px 0px rgba(0,0,0,0.15);

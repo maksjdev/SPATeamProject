@@ -3,7 +3,7 @@ import {News} from '@shared/models/News';
 import {AppStringService} from '@shared/services/app-string.service';
 
 @Component({
-  selector: 'app-news-item-block',
+  selector: 'app-news-big-block',
   templateUrl: './news-big-block.component.html',
   styleUrls: ['./news-big-block.component.scss']
 })

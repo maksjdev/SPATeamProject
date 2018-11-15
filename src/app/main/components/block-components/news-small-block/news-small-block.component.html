@@ -9,18 +9,20 @@
   </div>
 
   <div class="news-small__info">
-
     <div class="news-small__info--author">
-      {{ news.author.first_name + news.author.last_name }}
+      {{ (news.author.first_name +" "+ news.author.last_name) | trimString: 15 }}
     </div>
     <div class="news-small__info--comment">
-      {{ news.comments }}
-      <i class="far fa-comment-dots"></i>
+    {{ news.comments }}
+    <i class="far fa-comment-dots"></i>
+  </div>
+    <div class="news-small__info--rating">
+      {{ news.rating }}
+      <i class="fas fa-star"></i>
     </div>
     <div class="news-small__info--date">
       {{ news.date | date: 'dd.MM.yyyy' }}
       <i class="far fa-calendar-alt"></i>
     </div>
-
   </div>
 </li>
