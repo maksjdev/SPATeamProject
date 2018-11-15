@@ -18,8 +18,8 @@
   &__header {
     margin: $normal-padding $normal-padding 0;
     &--title {
-      //font-family: 'Graduate', cursive;
-      font-size: $big-font-size;
+      font-family: $extra-font;
+      font-size: $huge-font-size;
       margin-bottom: $normal-padding;
     }
   }
@@ -69,6 +69,9 @@
       background-color: $main-text-color;
       border-radius: $normal-border-radius;
     }
+  }
+  &__rating {
+    margin-left: auto;
   }
 }
 .header-tags {

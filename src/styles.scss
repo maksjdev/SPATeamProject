@@ -16,9 +16,9 @@ body, html {
   margin:0;
   padding:0;
 
-  font-size: 16px;
   font-weight: 300;
-  font-family: 'Roboto Condensed', sans-serif;
+  font-size: $big-font-size;
+  font-family: $standart-font;
   background-color: $main-bg-color;
   color: $main-text-color;
 }
@@ -103,6 +103,10 @@ app-header, app-footer {
 }
 
 //  Стили вспомогательных элементов
+button {
+  outline: none;
+  user-select: none;
+}
 .btn {
   //margin: 5px;
   font-weight: 500;
@@ -121,7 +125,7 @@ app-header, app-footer {
     color: $main-text-dark-color;
     background-color: $main-text-color;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    & .fab, & .fas, & .fa{
+    & .fab, & .fas, & .far, & .fa{
       color: $main-text-dark-color;
     }
     &:hover{
@@ -144,7 +148,7 @@ app-header, app-footer {
     color: $main-text-dark-color;
     background-color: $main-pink;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    & .fab, & .fas, & .fa{
+    & .fab, & .fas, & .far, & .fa{
       color: $main-text-dark-color;
     }
     &:hover{
@@ -204,7 +208,7 @@ p {
   line-height: 1.3em;
 }
 i {
-  &.fab, &.fas, &.fa{
+  & .fab, & .fas, & .far, & .fa{
     color: $main-pink;
   }
 }
@@ -231,7 +235,7 @@ label {
   }
   &__icon {
     width: 20px;
-    font-size: $big-font-size;
+    font-size: $huge-font-size;
     margin: 0 $normal-padding;
   }
 }

@@ -2,7 +2,7 @@
   "users": [
     {
       "id": "92jdlw3",
-      "name": "Vitalik",
+      "real-name": "Vitalik",
       "password": "12345",
       "nickname": "Sirius",
       "role": "Admin",

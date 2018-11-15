@@ -47,6 +47,4 @@ export class PeriodFilterComponent implements OnChanges {
   OnPeriodChg(value){
     this.periodChg.emit(value);
   }
-
-
 }

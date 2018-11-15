@@ -6,6 +6,7 @@ import {Subscription} from 'rxjs';
 import {AppRoutingService} from '@routes/app-routing.service';
 import {CONSTANTS} from '@shared/config/constants';
 import {Advertising} from '@components/block-components/ad-item-block/Advertising';
+import {PaginationItem} from '@shared/models/PaginationItem';
 
 @Component({
   selector: 'app-main-page',
@@ -15,6 +16,8 @@ import {Advertising} from '@components/block-components/ad-item-block/Advertisin
 export class MainPageComponent implements OnInit, OnDestroy {
   periodFilter: string;
   ratingFilter: string;
+  pagination: PaginationItem;
+
   adv: Advertising;
   newsList: Array<News>;
   _subscribe: Subscription;
@@ -28,6 +31,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
     this.adv =  new Advertising('Burger King',
       'https://burgerking.ru/images/actions/BK-2037_CHEESY_710х459_.jpg',
       'https://burgerking.ru/actions');
+    this.pagination = new PaginationItem(10, 9,11, 1, 20);
   }
 
   ngOnInit() {
@@ -51,11 +55,20 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   onRatingChange(value: string): void {
-    // Выполняем сброс страницы на 1ю
     this.ratingFilter = value;
+    console.log('Rating change!');
+    //this.pagination = this.pagination.createPageItem(1);
   }
   onPeriodChange(value: string): void {
-    // Выполняем сброс страницы на 1ю
     this.periodFilter = value;
+    console.log('Period change!');
+    //this.pagination = this.pagination.createPageItem(1);
+  }
+  onPaginationChange(page: number): void {
+    // Получаем пагинацию с сервера
+    let minPage: number = 1,  maxPage: number = 100, pageLargeStep: number = 10;
+    if (page >= minPage && page < maxPage) {
+      this.pagination = this.pagination.createPageItem(page, pageLargeStep, minPage, maxPage);
+    }
   }
 }
