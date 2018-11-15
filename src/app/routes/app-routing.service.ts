@@ -4,6 +4,7 @@ import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 import {AppRouterData} from '@routes/AppRouterData';
 import {CONSTANTS} from '@shared/config/constants';
+import {debounceTime} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

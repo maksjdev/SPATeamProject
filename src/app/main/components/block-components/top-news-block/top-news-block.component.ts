@@ -15,7 +15,7 @@ export class TopNewsBlockComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
-    this.newsList = this.newsService.getMockNewsList(5);
+    this.newsList = this.newsService.getTopNews();
   }
 
 }
