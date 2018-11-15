@@ -9,6 +9,7 @@ import {CategoryItemBlockComponent} from './category-block/category-item-block.c
 import {TopNewsBlockComponent} from './top-news-block/top-news-block.component';
 import {NewsSmallBlockComponent} from '@components/block-components/news-small-block/news-small-block.component';
 import {FullNewsBlockComponent} from '@components/block-components/full-news-block/full-news-block.component';
+import { CommentFullItemComponent } from './comment-full-item/comment-full-item.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import {FullNewsBlockComponent} from '@components/block-components/full-news-blo
     CategoryItemBlockComponent,
     TopNewsBlockComponent,
     StatisticTableComponent,
-    FullNewsBlockComponent
+    FullNewsBlockComponent,
+    CommentFullItemComponent
   ],
   declarations: [
     NewsBigBlockComponent,
@@ -32,7 +34,8 @@ import {FullNewsBlockComponent} from '@components/block-components/full-news-blo
     StatisticTableComponent,
     CategoryItemBlockComponent,
     TopNewsBlockComponent,
-    FullNewsBlockComponent
+    FullNewsBlockComponent,
+    CommentFullItemComponent
   ],
   providers: [
     NewsDataService,
