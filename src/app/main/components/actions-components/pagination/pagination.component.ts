@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {AppRoutingService} from '@routes/app-routing.service';
 import {PaginationItem} from '@shared/models/PaginationItem';
 import {CONSTANTS} from '@shared/config/constants';
@@ -8,26 +8,27 @@ import {CONSTANTS} from '@shared/config/constants';
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss']
 })
-export class PaginationComponent implements OnInit{
-  @Input() pagination: PaginationItem;
+export class PaginationComponent implements OnChanges{
+  @Input() currentPagination: PaginationItem;
+  @Output() paginationChg = new EventEmitter();
   paramName: string;
 
   constructor(
     private routingService: AppRoutingService,
   ) {
     this.paramName = CONSTANTS.QUERY.PAGE;
-
-    // Значение по умолчанию
-    this.pagination = new PaginationItem(10, 9,11, 1, 20);
   }
 
-  ngOnInit(): void {
-    // Просто для демонстрации ставим параметр
-    let queryParam = {[this.paramName]: this.pagination.current};
-    this.routingService.setQueryParam(queryParam);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.hasOwnProperty('currentPagination') &&  changes['currentPagination'].currentValue){
+      setTimeout(_ =>{
+        let param = {[this.paramName]: this.currentPagination.current};
+        this.routingService.setQueryParam(param);
+      },20);
+    }
   }
 
   onPagination(page: number){
-    console.log(`Необходимо перейти на ${page} страницу!`);
+    this.paginationChg.emit(page);
   }
 }

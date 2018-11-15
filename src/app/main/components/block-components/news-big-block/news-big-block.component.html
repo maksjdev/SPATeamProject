@@ -15,6 +15,10 @@
         {{ news.comments }}
         <i class="far fa-comment-dots"></i>
       </div>
+      <div class="header-info__rating">
+        {{ news.rating }}
+        <i class="fas fa-star"></i>
+      </div>
     </div>
     <span class="header-tags">
       <div class="header-tags__item" *ngFor="let tag of news.tags">

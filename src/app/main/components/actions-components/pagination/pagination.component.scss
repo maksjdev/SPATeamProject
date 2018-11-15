@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  justify-content: center;
+  justify-content: space-between;
   a {
     cursor: pointer;
   }
@@ -16,11 +16,17 @@
     display: flex;
     flex-direction: row;
     margin-right: $big-padding;
+    opacity: 0.5;
+    cursor: default;
+    &.active {
+      opacity: 1;
+      cursor: pointer;
+    }
     &--text {
       font-weight: bold;
     }
     &--icon {
-      font-size: $big-font-size;
+      font-size: $huge-font-size;
       margin: 0 $normal-padding;
     }
   }
@@ -28,6 +34,7 @@
     margin-right: $big-padding;
   }
   &__page {
+    user-select: none;
     margin-right: $normal-padding;
     &:last-child {
       margin-right: 0;
@@ -51,29 +58,34 @@
         margin-left: -18px;
         z-index: -1;
         background-color: $main-text-color;
-        border-top-left-radius: 2px;
-        border-top-right-radius: 2px;
+        border-radius: $normal-border-radius;
       }
-      &:after {
-        position: absolute;
-        content: '';
-        top: 20px;
-        left: 50%;
-        margin-left: -18px;
-        border: 18px solid transparent;
-        border-top: 8px solid $main-text-color;
-      }
+      //&:after {
+      //  position: absolute;
+      //  content: '';
+      //  top: 20px;
+      //  left: 50%;
+      //  margin-left: -18px;
+      //  border: 18px solid transparent;
+      //  border-top: 8px solid $main-text-color;
+      //}
     }
   }
   &__next {
     display: flex;
     flex-direction: row;
     margin-left: $big-padding;
+    opacity: 0.5;
+    cursor: default;
+    &.active {
+      opacity: 1;
+      cursor: pointer;
+    }
     &--text {
       font-weight: bold;
     }
     &--icon {
-      font-size: $big-font-size;
+      font-size: $huge-font-size;
       margin: 0 $normal-padding;
     }
   }

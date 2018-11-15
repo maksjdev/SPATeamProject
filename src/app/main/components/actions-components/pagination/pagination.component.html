@@ -1,38 +1,41 @@
 
-<a *ngIf="pagination.previous"
-   class="pagination__previous"
-   (click)="onPagination(pagination.previous)">
-  <i class="pagination__previous--icon fas fa-angle-left"></i>
-  <div class="pagination__previous--text">Предыдущая</div>
-</a>
+<button  class="pagination__previous"
+    [class.active]="currentPagination.previous"
+    (click)="onPagination(currentPagination.previous)">
+    <i class="pagination__previous--icon fas fa-angle-left"></i>
+    <div class="pagination__previous--text">Предыдущая</div>
+</button>
 
-<div *ngIf="pagination.large_back" class="pagination__large-back">
-  <i class="pagination__page dots">...</i>
-  <a class="pagination__page large_back"
-     (click)="onPagination(pagination.large_back)">
-    {{ pagination.large_back }}
-  </a>
-  <i class="pagination__page dots">...</i>
+<div class="row pagination__numbers">
+  <div *ngIf="currentPagination.large_back" class="pagination__large-back">
+    <i class="pagination__page dots">...</i>
+    <a class="pagination__page large_back"
+       (click)="onPagination(currentPagination.large_back)">
+      {{ currentPagination.large_back }}
+    </a>
+    <i class="pagination__page dots">...</i>
+  </div>
+
+  <a *ngIf="currentPagination.previous" class="pagination__page previous"
+     (click)="onPagination(currentPagination.previous)">{{ currentPagination.previous }}</a>
+  <a class="pagination__page current">{{ currentPagination.current }}</a>
+  <a *ngIf="currentPagination.next" class="pagination__page next"
+     (click)="onPagination(currentPagination.next)">{{ currentPagination.next }}</a>
+
+  <div *ngIf="currentPagination.large_forward" class="pagination__large_forward">
+    <i class="pagination__page dots">...</i>
+    <a class="pagination__page large_forward"
+       (click)="onPagination(currentPagination.large_forward)">
+      {{ currentPagination.large_forward }}
+    </a>
+    <i class="pagination__page dots">...</i>
+  </div>
+
 </div>
 
-<a *ngIf="pagination.previous" class="pagination__page previous"
-   (click)="onPagination(pagination.previous)">{{ pagination.previous }}</a>
-<a class="pagination__page current">{{ pagination.current }}</a>
-<a *ngIf="pagination.next" class="pagination__page next"
-   (click)="onPagination(pagination.next)">{{ pagination.next }}</a>
-
-<div *ngIf="pagination.large_forward" class="pagination__large_forward">
-  <i class="pagination__page dots">...</i>
-  <a class="pagination__page large_forward"
-    (click)="onPagination(pagination.large_forward)">
-    {{ pagination.large_forward }}
-  </a>
-  <i class="pagination__page dots">...</i>
-</div>
-
-<a *ngIf="pagination.next"
-   class="pagination__next"
-   (click)="onPagination(pagination.next)">
-  <div class="pagination__next--text">Следующая</div>
-  <i class="pagination__next--icon fas fa-angle-right"></i>
-</a>
+<button  class="pagination__next"
+    [class.active]="currentPagination.next"
+    (click)="onPagination(currentPagination.next)">
+    <div class="pagination__next--text">Следующая</div>
+    <i class="pagination__next--icon fas fa-angle-right"></i>
+</button>

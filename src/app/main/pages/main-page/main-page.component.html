@@ -10,8 +10,8 @@
 
 <section class="news-block">
   <!--Будут создаватся динамически-->
-  <app-news-item-block *ngFor="let news of newsList" [news]="news"></app-news-item-block>
-  <app-pagination></app-pagination>
+  <app-news-big-block *ngFor="let news of newsList" [news]="news"></app-news-big-block>
+  <app-pagination [currentPagination]="pagination" (paginationChg)="onPaginationChange($event)"></app-pagination>
 </section>
 
 <section class="sidebar-block">
