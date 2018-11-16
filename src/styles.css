@@ -601,6 +601,8 @@ label {
 .ng-select-container .ng-value-container {
   padding-top: 0 !important;
   margin: 5px !important; }
+  .ng-select-container .ng-value-container .ng-input {
+    color: #f9f8fd; }
   .ng-select-container .ng-value-container .ng-placeholder {
     top: initial !important;
     padding-bottom: initial !important; }

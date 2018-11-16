@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {ShortenPipe} from 'ngx-pipes';
+import {Category} from '@shared/models/Category';
 
 @Injectable()
 export class AppStringService {
@@ -26,4 +27,5 @@ export class AppStringService {
     });
     return result;
   }
+
 }
