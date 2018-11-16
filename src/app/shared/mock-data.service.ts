@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {News} from '@shared/models/News';
 import {User} from '@shared/models/User';
+import {Comment} from '@shared/models/Comment';
 import {AppDateTimeService} from '@shared/services/app-date-time.service';
 import {CONSTANTS} from '@shared/config/constants';
 
@@ -10,6 +11,7 @@ import {CONSTANTS} from '@shared/config/constants';
 export class MockDataService {
   mockNews: News;
   mockUser: User;
+  mockComment: Comment;
   mockActiveUser: User;
 
   constructor(
@@ -20,6 +22,9 @@ export class MockDataService {
 
     let linkActiveUser: string = CONSTANTS.MOCK.USER_IMAGE;
     this.mockActiveUser = new User('Sirius', 'Dark', linkActiveUser, 0, 'Admin');
+
+    let commentDate = dateTimeService.unixToDate('1541538783');
+    this.mockComment = new Comment(this.mockUser, 'Обожаю ваш ресурс! Самые авторитетные и неподкупные новости, всегда акктуально свежо, молодо и вообще всем селом читаем! NodeJS + TypeScript (JavaScript) впервые дали возможность быть FullStack и писать только на одном ЯП. Тем самым упрощая процесс профессионального роста.',commentDate, 100);
 
     let title: string = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.',
       text: Array<object> = [
@@ -51,5 +56,15 @@ export class MockDataService {
   getMockActiveUser(): User{
     return this.mockActiveUser;
   }
-
+  getMockComment(): Comment{
+    return this.mockComment;
+  }
+  getMockCommentList(quantity: number): Array<Comment>{
+    let comment = this.getMockComment();
+    let resultArr = [];
+    for (let i = 0; i < quantity; i++){
+      resultArr.push(comment);
+    }
+    return resultArr;
+  }
 }
