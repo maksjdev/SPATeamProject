@@ -29,7 +29,8 @@ export class AppDateTimeService {
     return RegExp('^(3[01]|[12][0-9]|0[1-9]).(1[0-2]|0[1-9]).[0-9]{4}').test(visual);
   }
   checkDateToday(date: Date) {
-    return this.getDateVisual(date) === this.getDateVisual(new Date());
+    let today = new Date();
+    return this.getDateVisual(date) === this.getDateVisual(today);
   }
   unixToDate(timestamp): Date {
     return new Date(+timestamp * 1000);

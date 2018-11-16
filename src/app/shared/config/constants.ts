@@ -2,6 +2,7 @@ export const CONSTANTS = {
   APP: {
     TITLE: 'NewString',
     MAIN: 'main',
+    LN_RU: 'ru'
   },
   QUERY: {
     PAGE: 'page',

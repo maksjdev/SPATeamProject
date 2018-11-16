@@ -9,7 +9,7 @@
           {{ news.author.first_name +' '+ news.author.last_name }}{{ ',' }}
         </a>
       </div>
-      <div class="header-info__date">{{ news.date | date: 'dd.MM.yyyy' }}</div>
+      <div class="header-info__date">{{ news.date | dateTransform }}</div>
       <div class="header-info__comments">
         {{ news.comments }}
         <i class="far fa-comment-dots"></i>
