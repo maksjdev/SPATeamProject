@@ -1,28 +1,50 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {AppRoutingService} from '@routes/app-routing.service';
+import {CONSTANTS} from '@shared/config/constants';
+import {Category} from '@shared/models/Category';
+import {NewsDataService} from '@shared/news-data.service';
 
 @Component({
   selector: 'app-category-select',
   templateUrl: './category-select.component.html',
   styleUrls: ['./category-select.component.scss']
 })
-export class CategorySelectComponent implements OnInit {
-  categorys: object;
-  selectedCategody: object;
+export class CategorySelectComponent implements OnChanges {
+  @Input() categorys: Array<Category>;
+  @Input() selectedCategory: Array<Category>;
+  @Output() categoryAdd = new EventEmitter();
+  @Output() categoryRemove = new EventEmitter();
+  @Output() categoryClear = new EventEmitter();
+  paramName: string;
 
-  constructor() {
-    this.categorys = [
-      { id: '1', name: 'Anime', disabled: true },
-      { id: '2', name: 'Web', disabled: false },
-      { id: '3', name: 'Design', disabled: false },
-      { id: '3', name: 'Android', disabled: false },
-      { id: '3', name: 'Toasters', disabled: false },
-      { id: '3', name: 'iOS', disabled: false },
-      { id: '3', name: 'Space', disabled: false },
-      { id: '3', name: 'Navalny', disabled: false },
-    ];
+  constructor(
+    private routingService: AppRoutingService,
+    private newsService: NewsDataService
+  ) {
+    this.paramName = CONSTANTS.QUERY.CATEGORY;
   }
 
-  ngOnInit() {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.hasOwnProperty('selectedCategory') && changes['selectedCategory'].currentValue) {
+      if (this.selectedCategory.length > 0) {
+        setTimeout(_ => {
+          let param = {[this.paramName]: this.newsService.getCategoryNames(this.selectedCategory).join(',')};
+          this.routingService.setQueryParam(param);
+        }, 20);
+      } else {
+        let param = {[this.paramName]: null};
+        this.routingService.setQueryParam(param);
+      }
+    }
   }
 
+  OnAddItem(value){
+    this.categoryAdd.emit(value);
+  }
+  OnRemoveItem(value){
+    this.categoryRemove.emit(value);
+  }
+  OnClearAll(value){
+    this.categoryClear.emit(value);
+  }
 }

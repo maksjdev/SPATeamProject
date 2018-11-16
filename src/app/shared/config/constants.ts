@@ -7,7 +7,8 @@ export const CONSTANTS = {
   QUERY: {
     PAGE: 'page',
     PERIOD: 'period',
-    RATING: 'rating'
+    RATING: 'rating',
+    CATEGORY: 'category'
   },
   MOCK: {
     USER_IMAGE: 'https://hsto.org/getpro/habr/avatars/fc7/23a/b6b/fc723ab6b9870078eefc3aba22c605ad.png',

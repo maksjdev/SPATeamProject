@@ -16,7 +16,12 @@
 
 <section class="sidebar-block">
   <div class="sidebar-block__category">
-    <app-category-select></app-category-select>
+    <app-category-select [categorys]="categoryAll"
+                         [selectedCategory]="categoryFilter"
+                         (categoryAdd)="onCategoryAdd($event)"
+                         (categoryRemove)="onCategoryRemove($event)"
+                         (categoryClear)="onCategoryClear($event)">
+    </app-category-select>
   </div>
 
   <app-ad-item-block [advertising]="adv"></app-ad-item-block>

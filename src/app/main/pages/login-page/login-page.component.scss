@@ -26,6 +26,10 @@
       height: 100px;
       margin-bottom: $normal-padding;
       background-color: $main-pink;
+      img {
+        height: 100%;
+        padding: 10px;
+      }
     }
   }
 }

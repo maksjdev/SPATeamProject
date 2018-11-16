@@ -4,6 +4,7 @@ import {User} from '@shared/models/User';
 import {Comment} from '@shared/models/Comment';
 import {AppDateTimeService} from '@shared/services/app-date-time.service';
 import {CONSTANTS} from '@shared/config/constants';
+import {Category} from '@shared/models/Category';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class MockDataService {
   mockUser: User;
   mockComment: Comment;
   mockActiveUser: User;
+  categorysList: Array<Category>;
 
   constructor(
     private dateTimeService: AppDateTimeService
@@ -36,6 +38,17 @@ export class MockDataService {
       date = dateTimeService.unixToDate('1541538783'),
       tags = ['Space', 'Humans', 'Potato'];
     this.mockNews = new News (this.mockUser, date, title, text, linkNews, tags,100, 5);
+
+    this.categorysList = [
+      new Category(1, 'Anime', true),
+      new Category(2, 'Web', false),
+      new Category(3, 'Design', false),
+      new Category(4, 'Android', false),
+      new Category(5, 'Toasters', false),
+      new Category(6, 'iOS', false),
+      new Category(7, 'Space', false),
+      new Category(8, 'Navalny', false),
+    ];
   }
 
   public getMockNews(): News {
@@ -56,6 +69,7 @@ export class MockDataService {
   getMockActiveUser(): User{
     return this.mockActiveUser;
   }
+
   getMockComment(): Comment{
     return this.mockComment;
   }
@@ -66,5 +80,9 @@ export class MockDataService {
       resultArr.push(comment);
     }
     return resultArr;
+  }
+
+  getMockCategories(): Array<Category> {
+    return this.categorysList;
   }
 }
