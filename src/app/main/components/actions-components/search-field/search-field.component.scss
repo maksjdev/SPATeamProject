@@ -15,20 +15,23 @@
     color: $main-text-color;
     padding: $small-padding 35px $small-padding $small-padding;
     background-color: transparent;
-    -webkit-transition: width $normal-animation ease-in-out;
-    transition: width $normal-animation ease-in-out;
     border-bottom: 1px solid $main-text-color;
+    transition: all $fast-animation ease;
 
     &:focus {
       outline: 0;
       width: 300px;
       border-color: $main-pink;
-      transform-origin: inherit;
+      transition: all $fast-animation ease;
     }
   }
   &__icons {
     font-size: 1.25em;
     position: relative;
+    cursor: pointer;
     left: -25px;
+    & .fas {
+      color: $main-text-color;
+    }
   }
 }

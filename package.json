@@ -2,7 +2,7 @@
   "name": "news-project-spa",
   "version": "0.0.0",
   "scripts": {
-    "start": "ng serve --port 4200 --hmr",
+    "start": "ng serve --port 4200",
     "build": "ng build --prod --build-optimizer --stats-json",
     "bundle": "webpack-bundle-analyzer dist/news-project-spa/stats.json",
     "test": "ng test --watch=false --code-coverage",

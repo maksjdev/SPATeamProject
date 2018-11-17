@@ -18,8 +18,10 @@
   &__header {
     margin: $normal-padding $normal-padding 0;
     &--title {
+      font-weight: bold;
       font-family: $extra-font;
-      font-size: $huge-font-size;
+      letter-spacing: 1px;
+      font-size: $extra-font-size;
       margin-bottom: $normal-padding;
     }
   }
@@ -28,12 +30,13 @@
     height: 200px;
     position: relative;
     overflow: hidden;
+    background-color:  $main-text-color;
 
     & > img {
       position: absolute;
       top: -20%;
       max-width: 100%;
-      opacity: 0.8;
+      opacity: 0.9;
       transition: all $fast-animation;
       &:hover {
         opacity: 1;
@@ -44,6 +47,7 @@
   }
   &__content {
     margin: $normal-padding;
+    line-height: $big-line-height;
   }
   &__bottom {
     margin: $normal-padding $big-padding $huge-padding;
@@ -53,7 +57,6 @@
 .header-info {
   display: flex;
   flex-direction: row;
-  margin-bottom: $small-padding;
   & * {
     margin-right: $normal-padding;
     &:last-child {
@@ -61,8 +64,6 @@
     }
   }
   &__author {
-    display: flex;
-    font-weight: bold;
     &--image {
       height: 20px;
       width: auto;
@@ -77,7 +78,8 @@
 .header-tags {
   display: flex;
   flex-direction: row;
-  margin-bottom: $normal-padding;
+  margin: $normal-padding 0;
+
   &__item {
     color: $main-text-dark-color;
     background-color: $main-text-color;

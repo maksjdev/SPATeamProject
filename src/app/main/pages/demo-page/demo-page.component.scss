@@ -1,6 +1,12 @@
 @import "~src/assets/base-css/theme";
 @import "~src/assets/base-css/vars";
 
-:host {
-  //display: grid;
+.btn-wrapper {
+  margin-bottom: $normal-padding;
+  button {
+    margin-right: $normal-padding;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }

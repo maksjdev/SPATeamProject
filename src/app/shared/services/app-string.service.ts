@@ -12,7 +12,7 @@ export class AppStringService {
   public trimmString(string, maxLenght, suffix?): string {
     suffix = suffix? suffix : ' ...';
     let lengthShort: number = this.trimmedLenght(string, maxLenght);
-    return this.shortPipe.transform(string, lengthShort);
+    return this.shortPipe.transform(string, lengthShort, suffix);
   }
   private trimmedLenght(str: string, maxLength: number): number{
     let trimmedString = str.substr(0, maxLength);
@@ -27,5 +27,12 @@ export class AppStringService {
     });
     return result;
   }
-
+  public getAllBeforeTag(text: string, tag: string): string{
+    if (text.includes('<'+tag+'>')){
+      let regExp = new RegExp('(.)+?(?:<'+tag+'>)', 'i');
+      return text.match(regExp)[0];
+    } else {
+      return text;
+    }
+  }
 }
