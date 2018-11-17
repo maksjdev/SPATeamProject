@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import {APP_INITIALIZER, LOCALE_ID, NgModule} from '@angular/core';
 
 import {AppRoutingModule} from '@routes/app-routing.module';
 import {AppComponent} from './app.component';
@@ -12,11 +12,14 @@ import {AppRestService} from '@shared/http/app-rest.service';
 import {AppHttpService} from '@shared/http/app-http.service';
 import {HttpClientModule} from '@angular/common/http';
 import {ConfigLoadService} from '@shared/config/config-load.service';
-import {DatePipe} from '@angular/common';
+import {DatePipe, registerLocaleData} from '@angular/common';
 import {AppDateTimeService} from '@shared/services/app-date-time.service';
 import {AppStringService} from '@shared/services/app-string.service';
 import {ShortenPipe} from 'ngx-pipes';
 import {MainPageModule} from '@main/main-page.module';
+import localeRu from '@angular/common/locales/ru';
+
+registerLocaleData(localeRu, 'ru');
 
 export function initializeApp(configData: ConfigLoadService) {
   return () => configData.loadAppConfig();
@@ -50,7 +53,9 @@ export function initializeApp(configData: ConfigLoadService) {
 
     // Внедренные херни
     DatePipe, ShortenPipe,
-    ConfigLoadService, {provide: APP_INITIALIZER, useFactory: initializeApp, deps: [ConfigLoadService], multi: true},
+    ConfigLoadService,
+    {provide: APP_INITIALIZER, useFactory: initializeApp, deps: [ConfigLoadService], multi: true},
+    { provide: LOCALE_ID, useValue: 'ru' },
   ],
   bootstrap: [AppComponent]
 })

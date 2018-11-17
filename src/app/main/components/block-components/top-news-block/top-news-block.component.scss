@@ -18,7 +18,7 @@
     list-style-type: none;
     &--item {
       display: block;
-      border-bottom: 1px solid $main-text-color;
+      border-bottom: 1px solid rgba($main-text-color, .25);
     }
   }
   &__header {

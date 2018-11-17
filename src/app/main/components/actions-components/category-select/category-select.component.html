@@ -6,7 +6,10 @@
            [searchable]="true"
            [hideSelected]="true"
            bindLabel="name"
-           placeholder="Выберите категории"
-           [(ngModel)]="selectedCategody">
+           placeholder="Выберите категории.."
+           (add)="OnAddItem($event)"
+           (remove)="OnRemoveItem($event)"
+           (clear)="OnClearAll($event)"
+           [ngModel]="selectedCategory">
 </ng-select>
 

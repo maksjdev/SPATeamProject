@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {ShortenPipe} from 'ngx-pipes';
+import {Category} from '@shared/models/Category';
 
 @Injectable()
 export class AppStringService {
@@ -9,8 +10,9 @@ export class AppStringService {
   ) { }
 
   public trimmString(string, maxLenght, suffix?): string {
+    suffix = suffix? suffix : ' ...';
     let lengthShort: number = this.trimmedLenght(string, maxLenght);
-    return this.shortPipe.transform(string, lengthShort, suffix? suffix : ' ...');
+    return this.shortPipe.transform(string, lengthShort);
   }
   private trimmedLenght(str: string, maxLength: number): number{
     let trimmedString = str.substr(0, maxLength);
@@ -25,4 +27,5 @@ export class AppStringService {
     });
     return result;
   }
+
 }
