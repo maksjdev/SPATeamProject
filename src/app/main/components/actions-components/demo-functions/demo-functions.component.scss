@@ -4,17 +4,7 @@
 :host {
   display: flex;
   flex-direction: column;
-  width: 100%;
   align-items: center;
-}
-.btn-wrapper {
-  margin-bottom: $normal-padding;
-  button {
-    margin-right: $normal-padding;
-    &:last-child {
-      margin-right: 0;
-    }
-  }
 }
 .demo {
   &-editor {
@@ -24,4 +14,3 @@
     width: 100%;
   }
 }
-
