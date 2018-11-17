@@ -21,6 +21,9 @@ export class NewsDataService {
     // Сервер вернул, ок?
     return this.currentNews;
   }
+  public getFullNews(id: string): News {
+    return this.mockDataService.getMockNews();
+  }
   public getTopNews(): Array<News> {
     return this.mockDataService.getMockNewsList(5);
   }

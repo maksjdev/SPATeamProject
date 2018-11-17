@@ -15,6 +15,7 @@
       "@login/*": ["src/app/main/pages/login-page/*"],
       "@registration/*": ["src/app/main/pages/registration-page/*"],
       "@about/*": ["src/app/main/pages/about-page/*"],
+      "@add-news/*": ["src/app/main/pages/add-news-page/*"],
       "@demo/*": ["src/app/main/pages/demo-page/*"],
 
       "@header/*": ["src/app/main/header/*"],

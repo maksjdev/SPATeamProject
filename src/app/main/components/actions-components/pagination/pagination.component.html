@@ -2,7 +2,7 @@
 <button  class="pagination__previous"
     [class.active]="currentPagination.previous"
     (click)="onPagination(currentPagination.previous)">
-    <i class="pagination__previous--icon fas fa-angle-left"></i>
+    <i class="color pagination__previous--icon fas fa-angle-left"></i>
     <div class="pagination__previous--text">Предыдущая</div>
 </button>
 
@@ -37,5 +37,5 @@
     [class.active]="currentPagination.next"
     (click)="onPagination(currentPagination.next)">
     <div class="pagination__next--text">Следующая</div>
-    <i class="pagination__next--icon fas fa-angle-right"></i>
+    <i class="color pagination__next--icon fas fa-angle-right"></i>
 </button>

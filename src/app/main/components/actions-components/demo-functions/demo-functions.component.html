@@ -1,14 +1,10 @@
 
-<div class="btn-wrapper">
-  <button class="btn btn-default" (click)="loadData($event)">Load User</button>
-  <button class="btn btn-colored" (click)="getHtml($event)">Show html</button>
-</div>
-
 <app-ngx-editor
   class="demo-editor"
   [placeholder]="'Начинаем писать статейку...'"
   [spellcheck]="true"
   [minHeight]="500"
+  [imageEndPoint]="'https://www.gettyimages.ie/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg'"
   [toolbar]="toolbarConfig"
   [resizer]="'stack'"
   [(ngModel)]="_htmlContent">

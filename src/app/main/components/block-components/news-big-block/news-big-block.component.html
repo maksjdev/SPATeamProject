@@ -3,8 +3,7 @@
   <div class="news-item__header">
     <h2 class="news-item__header--title">{{ news.title | trimString: 100 }}</h2>
     <div class="header-info">
-
-      <div class="header-info__author">
+      <div class="row header-info__author">
         <img class="header-info__author--image" [src]="news.author.image" alt="*User Image*">
         <a href="#" class="header-info__author--name">
           {{ news.author.first_name +' '+ news.author.last_name }}{{ ',' }}
@@ -13,11 +12,11 @@
       <div class="header-info__date">{{ news.date | dateTransform }}</div>
       <div class="header-info__comments">
         {{ news.comments }}
-        <i class="far fa-comment-dots"></i>
+        <i class="main far fa-comment-dots"></i>
       </div>
       <div class="header-info__rating">
         {{ news.rating }}
-        <i class="fas fa-star"></i>
+        <i class="main fas fa-star"></i>
       </div>
     </div>
     <span class="header-tags">
@@ -30,7 +29,6 @@
   <div class="shadow-block-sm news-item__image">
     <img [src]="news.image" alt="News image">
   </div>
-
   <div class="news-item__content" [innerHTML]="textContent | trimString: 500 ">
 
   </div>

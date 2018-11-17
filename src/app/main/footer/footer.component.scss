@@ -27,6 +27,7 @@
       display: grid;
       grid-gap: $normal-padding;
       grid-template-columns: 1fr 3fr 1fr;
+      color: $main-text-color;
 
       margin: $small-padding auto;
       align-items: center;
