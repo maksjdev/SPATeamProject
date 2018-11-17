@@ -11,6 +11,9 @@
             {{ news.date | date: 'dd.MM.yyyy' }}
           </span>
         </div>
+        <div  class="header-info__favorites">
+          <button (click)="toggle($event)"><i [class.fas]="favorites" [class.far]="!favorites" class=" fa-star"></i></button>
+        </div>
       </div>
   </div>
   <span class="header-tags">
@@ -51,13 +54,19 @@
         </div>
 
         <div class="content__wrapper--link">
-          <span>
             <a href="https://ebanoe.it/2018/11/11/sprava-ukraine-review/">Делюсь опытом работы в моей первой IT-компании </a>
-            <i class="fas fa-external-link-alt"></i>
-          </span>
         </div>
 
         <div class="content__wrapper--list">
+          <ul>
+            <li> Деградировать днем</li>
+            <li> Деградировать вечером</li>
+            <li> Деградировать ночью</li>
+            <li> А утром можно и поспать</li>
+          </ul>
+        </div>
+
+        <div class="content__wrapper--numlist">
           <ol>
             <li> Написать код </li>
             <li> Написать тесты </li>

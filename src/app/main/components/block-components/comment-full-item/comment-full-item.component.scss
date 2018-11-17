@@ -1,0 +1,14 @@
+@import "~src/assets/base-css/theme";
+@import "~src/assets/base-css/vars";
+
+:host {
+  display: flex;
+  width: 100%;
+  height: inherit;
+  flex-direction: column;
+
+  margin-bottom: $normal-padding;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

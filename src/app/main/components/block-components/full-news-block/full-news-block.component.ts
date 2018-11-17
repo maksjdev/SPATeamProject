@@ -12,6 +12,9 @@ import {CONSTANTS} from '@shared/config/constants';
 export class FullNewsBlockComponent implements OnInit {
   news: News;
   commentsList: Array<object>;
+  // visibility: boolean = true;
+  favorites: boolean;
+
 
   constructor(
     private newsSercice: NewsDataService,
@@ -28,28 +31,11 @@ export class FullNewsBlockComponent implements OnInit {
         text: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.',
         date: '1542196324'
       },
-      { user: {
-          image: [CONSTANTS.MOCK.USER_IMAGE],
-          nickname: 'AuthorNickname2'
-        },
-        text: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.',
-        date: '1542196324'
-      },
-      { user: {
-          image: [CONSTANTS.MOCK.USER_IMAGE],
-          nickname: 'AuthorNickname3'
-        },
-        text: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.',
-        date: '1542196324'
-      },
-      { user: {
-          image: [CONSTANTS.MOCK.USER_IMAGE],
-          nickname: 'AuthorNickname4'
-        },
-        text: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.',
-        date: '1542196324'
-      },
     ];
+  }
+
+  toggle(event){
+    this.favorites = !this.favorites;
   }
 
 }
