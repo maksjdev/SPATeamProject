@@ -9,7 +9,7 @@ import {CategoryItemBlockComponent} from './category-block/category-item-block.c
 import {TopNewsBlockComponent} from './top-news-block/top-news-block.component';
 import {NewsSmallBlockComponent} from '@components/block-components/news-small-block/news-small-block.component';
 import {FullNewsBlockComponent} from '@components/block-components/full-news-block/full-news-block.component';
-import { CommentFullItemComponent } from './comment-full-item/comment-full-item.component';
+import {CommentFullItemComponent } from './comment-full-item/comment-full-item.component';
 
 @NgModule({
   imports: [

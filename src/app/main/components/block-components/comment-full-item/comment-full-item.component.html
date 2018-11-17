@@ -1,10 +1,27 @@
 
 <div class="comments__author">
-  <img class="comments__author--image"  [src]="comment.user.image" alt="*User Image*">
-  <a href="#" class="header-info__author--name">
-    {{comment['user']['nickname'] }}
+  <img class="comments__author--image" [src]="comment.author.image" alt="*User Image*">
+  <a href="#" class="comments__author--name">
+    {{ comment.author.first_name +' '+ comment.author.last_name }}{{ ',' }}
   </a>
   <span class="header-info__date">
-       '24 октября 2018 в 18:00'
+      {{ comment.date | dateTransform }}
+  </span>
+  <div class="comments__author--rating">
+    <span>
+      <button><i class="fas fa-angle-up"></i></button>
+      {{ comment.rating }}
+      <button><i class="fas fa-angle-down"></i></button>
     </span>
+  </div>
 </div>
+
+<div class="comments__wrapper">
+  <div class="comments__wrapper--content">
+    <p>{{comment.text}}}</p>
+  </div>
+</div>
+
+
+
+

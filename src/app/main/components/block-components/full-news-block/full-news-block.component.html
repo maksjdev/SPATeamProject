@@ -1,87 +1,90 @@
-<article class="panel shadow-block full-news">
+
+<article *ngIf="news" class="panel shadow-block full-news">
   <div class="full-news__header">
-    <h2 class="full-news__header--title">{{news.title}}</h2>
+    <h2 class="full-news__header--title">{{ news.title | trimString: 100 }}</h2>
+
       <div class="header-info">
+
         <div class="header-info__author">
           <img class="header-info__author--image" [src]="news.author.image" alt="*User Image*">
           <a href="#" class="header-info__author--name">
-            {{ news.author.first_name + news.author.last_name }}{{ ' , ' }}
+            {{ news.author.first_name +' '+ news.author.last_name }}{{ ', ' }}
           </a>
-          <span class="header-info__date">
-            {{ news.date | date: 'dd.MM.yyyy' }}
-          </span>
         </div>
+        <div class="header-info__date">{{ news.date | dateTransform }} </div>
         <div  class="header-info__favorites">
           <button (click)="toggle($event)"><i [class.fas]="favorites" [class.far]="!favorites" class=" fa-star"></i></button>
         </div>
       </div>
-  </div>
-  <span class="header-tags">
+
+    <span class="header-tags">
       <div class="header-tags__item" *ngFor="let tag of news.tags">
         {{ tag }}
       </div>
     </span>
-  <div class="full-news__content">
-    <div class="content-image" [ngStyle]="{ 'background-image': 'url(' + news.image + ')'}"></div>
+  </div>
 
-      <div  class="content__wrapper">
+  <div class="content__wrapper">
 
-        <div  class="content__wrapper--text">
-          <p>Душа моя озарена неземной радостью, как эти чудесные весенние утра, которыми я наслаждаюсь от всего.</p>
-        </div>
+    <div class="content__wrapper--newsimage">
+      <img [src]="news.image" alt="News image">
+    </div>
 
-         <div class="content__wrapper--subtitle">
-           <h3>Подзаголовок</h3>
-         </div>
+    <div class="content__wrapper--text">
+      <p>Душа моя озарена неземной радостью, как эти чудесные весенние утра, которыми я наслаждаюсь от всего.</p>
+    </div>
 
-        <div class="content__wrapper--blockquote">
-          <blockquote>
-            <p>Не ссы против ветра</p>
-            <footer>— <cite>Батя</cite></footer>
-          </blockquote>
-        </div>
+    <div class="content__wrapper--subtitle">
+      <h3>Подзаголовок</h3>
+    </div>
 
-        <div class="content__wrapper--video">
-          <iframe width="0" height="0"
-                  src="https://www.youtube.com/embed/kNQASi28tIg"
-                  frameborder="0"
-                  allow="accelerometer;
+    <div class="content__wrapper--blockquote">
+      <blockquote>
+        <p>Не ссы против ветра</p>
+        <footer>— <cite>Батя</cite></footer>
+      </blockquote>
+    </div>
+
+    <div class="content__wrapper--video">
+      <iframe width="0" height="0"
+              src="https://www.youtube.com/embed/kNQASi28tIg"
+              frameborder="0"
+              allow="accelerometer;
                   autoplay;
                   encrypted-media;
                   gyroscope;
                   picture-in-picture"
-                  allowfullscreen></iframe>
-        </div>
+              allowfullscreen></iframe>
+    </div>
 
-        <div class="content__wrapper--link">
-            <a href="https://ebanoe.it/2018/11/11/sprava-ukraine-review/">Делюсь опытом работы в моей первой IT-компании </a>
-        </div>
+    <div class="content__wrapper--link">
+      <a href="https://ebanoe.it/2018/11/11/sprava-ukraine-review/">Делюсь опытом работы в моей первой IT-компании </a>
+    </div>
 
-        <div class="content__wrapper--list">
-          <ul>
-            <li> Деградировать днем</li>
-            <li> Деградировать вечером</li>
-            <li> Деградировать ночью</li>
-            <li> А утром можно и поспать</li>
-          </ul>
-        </div>
+    <div class="content__wrapper--list">
+      <ul>
+        <li> Деградировать днем</li>
+        <li> Деградировать вечером</li>
+        <li> Деградировать ночью</li>
+        <li> А утром можно и поспать</li>
+      </ul>
+    </div>
 
-        <div class="content__wrapper--numlist">
-          <ol>
-            <li> Написать код </li>
-            <li> Написать тесты </li>
-            <li> Переписать тесты, что бы работал код </li>
-          </ol>
-        </div>
+    <div class="content__wrapper--numlist">
+      <ol>
+        <li> Написать код</li>
+        <li> Написать тесты</li>
+        <li> Переписать тесты, что бы работал код</li>
+      </ol>
+    </div>
 
-        <div class="content__wrapper--image">
-          <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg" alt="">
-        </div>
+    <div class="content__wrapper--image">
+      <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg" alt="">
+    </div>
 
-      </div>
   </div>
 </article>
 
-<section class="comments-block">
-    <app-comment-full-item *ngFor="let comment of commentsList" [comment]="comment"></app-comment-full-item>
+<section *ngIf="commentsList.length > 0" class="comments-block">
+    <app-comment-full-item *ngFor="let comment of commentsList" [comment]="comment" class="panel shadow-block"></app-comment-full-item>
 </section>

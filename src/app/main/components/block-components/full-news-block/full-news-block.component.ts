@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit, SimpleChanges} from '@angular/core';
 import {News} from '@shared/models/News';
-import {NewsDataService} from '@shared/news-data.service';
-import {CONSTANTS} from '@shared/config/constants';
-
+import {MockDataService} from '@shared/mock-data.service';
+import {Comment} from '@shared/models/Comment';
 
 @Component({
   selector: 'app-full-news-block',
@@ -10,32 +9,19 @@ import {CONSTANTS} from '@shared/config/constants';
   styleUrls: ['./full-news-block.component.scss']
 })
 export class FullNewsBlockComponent implements OnInit {
-  news: News;
-  commentsList: Array<object>;
-  // visibility: boolean = true;
+  @Input() news: News;
   favorites: boolean;
-
+  commentsList: Array<Comment>;
 
   constructor(
-    private newsSercice: NewsDataService,
-  ) {
-    this.news = this.newsSercice.getMockNews();
-  }
+    private mockService: MockDataService
+  ) {}
 
   ngOnInit(): void {
-    this.commentsList = [
-      { user: {
-          image: [CONSTANTS.MOCK.USER_IMAGE],
-          nickname: 'AuthorNickname1'
-        },
-        text: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.',
-        date: '1542196324'
-      },
-    ];
+    this.commentsList = this.mockService.getMockCommentList(5);
   }
 
   toggle(event){
     this.favorites = !this.favorites;
   }
-
 }

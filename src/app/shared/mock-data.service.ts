@@ -73,7 +73,7 @@ export class MockDataService {
   getMockComment(): Comment{
     return this.mockComment;
   }
-  getMockCommentList(quantity: number): Array<Comment>{
+  getMockCommentList(quantity: number): Array<Comment> {
     let comment = this.getMockComment();
     let resultArr = [];
     for (let i = 0; i < quantity; i++){

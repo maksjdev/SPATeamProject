@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Comment} from '@shared/models/Comment';
 
 @Component({
   selector: 'app-comment-full-item',
@@ -6,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./comment-full-item.component.scss']
 })
 export class CommentFullItemComponent implements OnInit {
-  @Input() comment: object;
+  @Input() comment: Comment;
 
   constructor() { }
 
