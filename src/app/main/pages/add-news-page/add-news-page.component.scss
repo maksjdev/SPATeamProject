@@ -11,6 +11,31 @@
   display: flex;
   grid-area: n;
   flex-direction: column;
+  &__title {
+    padding: $normal-padding 0;
+  }
+  &__form {
+    height: 100%;
+    &--line{
+      display: block;
+      padding: $small-padding;
+      margin-bottom: $normal-padding;
+      &-label {
+        margin-bottom: $tiny-padding;
+      }
+    }
+    &--image {
+
+    }
+    &--bottom {
+      height: 100%;
+      .add-bnt {
+        margin-left: auto;
+        margin-bottom: auto;
+        height: 40px;
+      }
+    }
+  }
 }
 .sidebar-block {
   display: flex;

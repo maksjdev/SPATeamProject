@@ -6,10 +6,11 @@ import { PeriodFilterComponent } from './period-filter/period-filter.component';
 import {NgSelectModule} from '@ng-select/ng-select';
 import { CategorySelectComponent } from './category-select/category-select.component';
 import {FormsModule} from '@angular/forms';
-import { DemoFunctionsComponent } from './demo-functions/demo-functions.component';
+import { HtmlEditComponent } from './html-edit/html-edit.component';
 import {PaginationComponent} from '@components/actions-components/pagination/pagination.component';
 import { RatingFilterComponent } from './rating-filter/rating-filter.component';
 import {NgxEditorModule} from 'ngx-editor';
+import { ImageFieldComponent } from './image-field/image-field.component';
 
 @NgModule({
   imports: [
@@ -23,18 +24,20 @@ import {NgxEditorModule} from 'ngx-editor';
     SignButtonsComponent,
     PeriodFilterComponent,
     CategorySelectComponent,
-    DemoFunctionsComponent,
+    HtmlEditComponent,
     PaginationComponent,
-    RatingFilterComponent
+    RatingFilterComponent,
+    ImageFieldComponent
   ],
   declarations: [
     SignButtonsComponent,
     SearchFieldComponent,
     PeriodFilterComponent,
     CategorySelectComponent,
-    DemoFunctionsComponent,
+    HtmlEditComponent,
     PaginationComponent,
-    RatingFilterComponent
+    RatingFilterComponent,
+    ImageFieldComponent
   ]
 })
 export class ActionsComponentsModule { }

@@ -9,8 +9,8 @@ export class News {
     public text: string,
     public image: string,
     public tags: Array<string>,
-    public rating: number,
-    public comments: number
+    public rating: number = 0,
+    public comments: number = 0
   ){}
 }
 
