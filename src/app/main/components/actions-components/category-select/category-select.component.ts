@@ -12,6 +12,7 @@ import {NewsDataService} from '@shared/news-data.service';
 export class CategorySelectComponent implements OnChanges {
   @Input() categorys: Array<Category>;
   @Input() selectedCategory: Array<Category>;
+
   @Output() categoryAdd = new EventEmitter();
   @Output() categoryRemove = new EventEmitter();
   @Output() categoryClear = new EventEmitter();

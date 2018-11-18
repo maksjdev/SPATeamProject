@@ -1,14 +1,20 @@
 import { Injectable } from '@angular/core';
 import {ShortenPipe} from 'ngx-pipes';
 import {Category} from '@shared/models/Category';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 
 @Injectable()
 export class AppStringService {
 
   constructor(
-    private shortPipe: ShortenPipe
+    private shortPipe: ShortenPipe,
+    private _sanitizer: DomSanitizer
   ) { }
 
+  public getSafeHtml(html: string): SafeHtml {
+    let string = html? html : '';
+    return this._sanitizer.bypassSecurityTrustHtml(string);
+  }
   public trimmString(string, maxLenght, suffix?): string {
     suffix = suffix? suffix : ' ...';
     let lengthShort: number = this.trimmedLenght(string, maxLenght);

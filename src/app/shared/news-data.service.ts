@@ -13,6 +13,10 @@ export class NewsDataService {
     this.currentNews = [];
   }
 
+
+  public sendNews(news: News){
+    console.log(news);
+  }
   public getNewsFromServer(page: number, period: string, rating: string, categorys: Array<string>): Array<News> {
     let category: string = categorys.length > 0? categorys.join(',') : 'any';
     console.info(`Cервер - (стр. ${page}, период: ${period}, рейтинг: ${rating}), категории: ${category}!`);

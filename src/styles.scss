@@ -9,7 +9,7 @@
 // Material
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-
+// Стили основных тегов
 body, html {
   width: 100%;
   height: 100%;
@@ -26,7 +26,34 @@ body, html {
 app-header, app-footer {
   display: block;
 }
+button {
+  outline: none;
+  user-select: none;
+}
+p {
+  line-height: 1.3em;
+}
+i {
+  &.color {
+    color: $main-pink;
+  }
+  &.main {
+    color: $main-text-color;
+  }
+}
+h1,h2,h3,h4{
+  margin: 0;
+  padding: 0;
+  font-family: $extra-font;
+}
+label {
+  font-size: $small-font-size;
+}
+img {
+  max-width: 100%;
+}
 
+// Стили основных блоков
 .wrapper {
   min-height: 100%;
   display: grid;
@@ -104,10 +131,6 @@ app-header, app-footer {
 }
 
 //  Стили вспомогательных элементов
-button {
-  outline: none;
-  user-select: none;
-}
 .btn {
   //margin: 5px;
   font-weight: 500;
@@ -205,40 +228,22 @@ button {
     border-style: solid;
   }
 }
-p {
-  line-height: 1.3em;
-}
-i {
-  &.color {
-    color: $main-pink;
-  }
-  &.main {
-    color: $main-text-color;
-  }
-}
-h1,h2,h3,h4{
-  margin: 0;
-  padding: 0;
-}
-label {
-  font-size: $small-font-size;
-}
-img {
-  max-width: 100%;
-}
 .input-field {
   background-color: $main-color;
   border-radius: $normal-border-radius;
-  width: 100%;
+  width: inherit;
   text-align: left;
 
-  &__default{
+  &__default, &__default-icon {
     outline: none;
-    width: calc(100% - 40px);
+    width: 100%;
     background-color: transparent !important;
     border-top-right-radius: $normal-border-radius;
     border-bottom-right-radius: $normal-border-radius;
     padding: $normal-padding;
+    &-icon {
+      width: calc(100% - 40px);
+    }
   }
   &__icon {
     width: 20px;
@@ -342,6 +347,13 @@ app-ngx-editor {
     border-top-right-radius: $normal-border-radius !important;
     & .ngx-editor-button i{
       color: $main-pink !important;
+    }
+  }
+  .ngx-wrapper {
+
+    & .ngx-editor-textarea {
+      min-height: 300px !important;
+      max-height: 700px !important;
     }
   }
   .ngx-editor-grippie {
