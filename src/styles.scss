@@ -151,6 +151,7 @@ img {
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     & .fab, & .fas, & .far, & .fa{
       color: $main-text-dark-color;
+      margin-right: $small-padding;
     }
     &:hover{
       opacity: 0.75;
@@ -234,14 +235,15 @@ img {
   width: inherit;
   text-align: left;
 
-  &__default, &__default-icon {
+  &__default {
     outline: none;
     width: 100%;
-    background-color: transparent !important;
+    background-color: transparent;
     border-top-right-radius: $normal-border-radius;
     border-bottom-right-radius: $normal-border-radius;
     padding: $normal-padding;
     &-icon {
+      @extend .input-field__default;
       width: calc(100% - 40px);
     }
   }
@@ -308,14 +310,33 @@ img {
 }
 
 // Стилизация кастомного селекта
-.ng-select {
-  &.ng-select-opened {
-    & .ng-arrow-wrapper {
-      & .ng-arrow {
-        border-color: transparent transparent $main-text-color !important;
-      }
+.select-white {
+  & .ng-input {
+    color: $main-text-dark-color;
+  }
+  & .ng-select-container {
+    background-color: $main-text-color !important;
+    border-color: $main-title-color !important;
+  }
+}
+.select-dark {
+  & .ng-input {
+    color: $main-text-color;
+  }
+  & .ng-select-container {
+    background-color: $gray-default !important;
+    border-color: $main-text-color !important;
+  }
+  & .ng-select-opened {
+    & .ng-arrow {
+      border-color: transparent transparent $main-text-color;
     }
   }
+  & .ng-arrow {
+    border-color: $main-text-color transparent transparent;
+  }
+}
+.ng-select {
   &-container {
     & .ng-value-container {
       padding-top: 0 !important;
@@ -323,18 +344,9 @@ img {
       & .ng-value {
         //margin-bottom: 0 !important;
       }
-      & .ng-input {
-        color: $main-text-color;
-      }
       & .ng-placeholder {
         top: initial !important;
         padding-bottom: initial !important;
-      }
-
-    }
-    & .ng-arrow-wrapper {
-      & .ng-arrow {
-        border-color: $main-text-color transparent transparent !important;
       }
     }
   }
@@ -419,12 +431,12 @@ router-outlet + .loading-block{
 }
 // ScrollBar
 body::-webkit-scrollbar-track {
-  background-color: $gray-dark;
+  background-color: $gray-dark !important;
 }
 body::-webkit-scrollbar {
-  width: 5px;
-  background-color: #F5F5F5;
+  width: 5px !important;
+  background-color: #F5F5F5 !important;
 }
 body::-webkit-scrollbar-thumb {
-  background-color: $gray-light;
+  background-color: $gray-light !important;
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 
 @Injectable()
@@ -11,8 +11,15 @@ export class AppHttpService {
     return this.httpClient.get(url);
   }
 
-  public putData(url: string, data, options){
-    return this.httpClient.put(url, data, options);
+  public postData<T>(url: string, data, options?): Observable<Object>{
+    // В опциях как раз и будут все вспомогательные данные
+    let body = JSON.stringify(data);
+    let myHeaders = new HttpHeaders()
+      .set('Authorization', 'my-auth-token')
+      .set('responseType', 'text')
+      .set('Content-Type', 'application/json')
+      .set('Cache-Control', 'no-cache');
+    return this.httpClient.post(url, body, {headers: myHeaders});
   }
 
   public handleError<T> (operation = 'operation', result?: T) {

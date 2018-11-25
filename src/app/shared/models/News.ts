@@ -12,5 +12,31 @@ export class News {
     public rating: number = 0,
     public comments: number = 0
   ){}
+
+  getAuthor(): User{
+    return this.author;
+  }
+  getDate(): Date{
+    return this.date;
+  }
+  getTitle(): string {
+    return this.title;
+  }
+  getText(): string {
+    return this.text;
+  }
+  getImage(): string {
+    return this.image;
+  }
+  getTags(): string {
+    return this.image;
+  }
+
+  getRating(): number {
+    return this.rating;
+  }
+  getComments(): number {
+    return this.comments;
+  }
 }
 
