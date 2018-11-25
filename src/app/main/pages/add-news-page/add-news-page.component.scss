@@ -23,9 +23,17 @@
       &-label {
         margin-bottom: $tiny-padding;
       }
+      &-input {
+        color: $main-text-dark-color;
+        background-color: $main-text-color;
+        height: 36px;
+      }
     }
     &--image {
-
+      height: 300px;
+      border-radius: $normal-border-radius;
+      padding: $small-padding;
+      margin-bottom: $normal-padding;
     }
     &--bottom {
       height: 100%;
@@ -37,6 +45,13 @@
     }
   }
 }
+.error-block {
+  .error {
+    font-size: $big-font-size;
+    color: $main-pink
+  }
+}
+
 .sidebar-block {
   display: flex;
   grid-area: s;
@@ -46,3 +61,4 @@
     margin-bottom: 0;
   }
 }
+

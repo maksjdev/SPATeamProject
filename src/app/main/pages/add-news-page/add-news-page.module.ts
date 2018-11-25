@@ -7,6 +7,7 @@ import {AddNewsPageComponent} from '@pages/add-news-page/add-news-page.component
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material';
 import {AppFormService} from '@shared/services/app-form.service';
+import {NgSelectModule} from '@ng-select/ng-select';
 
 const router: Routes = [{
   path: '', component: AddNewsPageComponent, data: {
@@ -18,6 +19,7 @@ const router: Routes = [{
   imports: [
     CommonModule,
     FormsModule,
+    NgSelectModule,
     ReactiveFormsModule,
 
     MatInputModule,

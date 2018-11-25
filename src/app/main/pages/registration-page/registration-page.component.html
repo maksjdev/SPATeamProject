@@ -10,13 +10,13 @@
         {{link.label}}
       </a>
     </div>
-    <div class="registration-wrapper__header--image">
-      *Ваш прекрасный аватар*<br>
-      *Инпут для загрузки изображения*
-    </div>
   </div>
 
   <form class="registration-wrapper__body" [formGroup]="registrationForm" novalidate autocomplete="off">
+    <div class="registration-wrapper__header--image">
+      <app-image-field id="n_image" formControlName="r_image"></app-image-field>
+    </div>
+
     <div class="row registration-form__line">
         <div class="column registration-form__line--half">
           <label class="registration-form__line--label" for="r_real_name">Ваше имя</label>
@@ -55,27 +55,30 @@
       <mat-error class="validator-input" *ngIf="formErrors.r_email">{{ formErrors.r_email }}</mat-error>
     </div>
 
-    <div class="column registration-form__line">
-      <label class="registration-form__line--label" for="r_password">Ваш пароль</label>
-      <div class="registration-form__line--field">
-        <div class="input-field">
-          <i class="color input-field__icon fas fa-key"></i>
-          <input class="input-field__default-icon registration-input" id="r_password"
-                 placeholder="password" formControlName="r_password"  type="password">
+
+    <div class="row registration-form__line">
+      <div class="column registration-form__line--half">
+        <label class="registration-form__line--label" for="r_password">Ваш пароль</label>
+        <div class="registration-form__line--field">
+          <div class="input-field">
+            <i class="color input-field__icon fas fa-key"></i>
+            <input class="input-field__default-icon registration-input" id="r_password"
+                   placeholder="password" formControlName="r_password"  type="password">
+          </div>
         </div>
+        <mat-error class="validator-input" *ngIf="formErrors.r_password">{{ formErrors.r_password }}</mat-error>
       </div>
-      <mat-error class="validator-input" *ngIf="formErrors.r_password">{{ formErrors.r_password }}</mat-error>
-    </div>
-    <div class="column registration-form__line">
-      <label class="registration-form__line--label" for="r_re_password">Ваш пароль *повторно*</label>
-      <div class="registration-form__line--field">
-        <div class="input-field">
-          <i class="color input-field__icon fas fa-key"></i>
-          <input class="input-field__default-icon registration-input" id="r_re_password"
-                 placeholder="password *again*" formControlName="r_re_password"  type="password">
+      <div class="column registration-form__line--half">
+        <label class="registration-form__line--label" for="r_re_password">Ваш пароль *повторно*</label>
+        <div class="registration-form__line--field">
+          <div class="input-field">
+            <i class="color input-field__icon fas fa-key"></i>
+            <input class="input-field__default-icon registration-input" id="r_re_password"
+                   placeholder="password *again*" formControlName="r_re_password"  type="password">
+          </div>
         </div>
+        <mat-error class="validator-input" *ngIf="formErrors.r_re_password">{{ formErrors.r_re_password }}</mat-error>
       </div>
-      <mat-error class="validator-input" *ngIf="formErrors.r_re_password">{{ formErrors.r_re_password }}</mat-error>
     </div>
 
     <div class="column registration-form__line">

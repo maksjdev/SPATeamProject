@@ -5,6 +5,9 @@ import {AppFormService} from '@shared/services/app-form.service';
 import {News} from '@shared/models/News';
 import {User} from '@shared/models/User';
 import {UserService} from '@shared/user.service';
+import {Category} from '@shared/models/Category';
+import {catchError} from 'rxjs/operators';
+import {HttpResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-add-news-page',
@@ -13,6 +16,7 @@ import {UserService} from '@shared/user.service';
 })
 export class AddNewsPageComponent implements OnInit {
   public news: News;
+  public categories: Array<Category>;
   public addNewsForm: FormGroup;
 
   public formErrors = {
@@ -29,7 +33,10 @@ export class AddNewsPageComponent implements OnInit {
   ngOnInit() {
     let title = '', image =  '', tags = [], text = '';
 
+    // Передали статью (не обязательно) и категории
     this.news = this.newsService.getFullNews('1');
+    this.categories = this.newsService.getCategories();
+
     if (this.news){
       title = this.news.title;
       image = this.news.image;
@@ -56,8 +63,11 @@ export class AddNewsPageComponent implements OnInit {
       let date = new Date();
 
       let news: News = new News(author, date, title, text, image, tags);
-      this.newsService.sendNews(news);
-      this.addNewsForm.reset();
+      this.newsService.sendNews(news).pipe().subscribe( (value: HttpResponse<ArrayBuffer>) => {
+        // Если отправка удалась -> иди на главную
+        this.addNewsForm.reset();
+        console.log(value);
+      });
     } else {
       this.formErrors = this.formService.validateForm(this.addNewsForm, this.formErrors, false);
     }

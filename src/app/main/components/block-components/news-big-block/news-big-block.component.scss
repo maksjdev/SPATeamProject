@@ -30,7 +30,7 @@
     height: 200px;
     position: relative;
     overflow: hidden;
-    background-color:  $main-text-color;
+    background: url(~src/assets/images/camera-back.jpg) no-repeat center center;
 
     & > img {
       position: absolute;

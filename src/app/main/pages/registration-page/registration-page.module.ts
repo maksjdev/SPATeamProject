@@ -6,6 +6,7 @@ import {RegistrationPageComponent} from '@registration/registration-page.compone
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material';
 import {AppFormService} from '@shared/services/app-form.service';
+import {ActionsComponentsModule} from '@components/actions-components/actions-components.module';
 
 const router: Routes = [{
   path: '', component: RegistrationPageComponent, data: {
@@ -18,6 +19,7 @@ const router: Routes = [{
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    ActionsComponentsModule,
     UserComponentsModule,
 
     MatInputModule,

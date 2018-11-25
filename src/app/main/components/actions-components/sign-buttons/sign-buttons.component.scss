@@ -4,7 +4,8 @@
 :host {
   button {
     width: 40px;
-    margin-right: $normal-padding;
+    font-size: $huge-font-size;
+    margin-right: $small-padding;
     &:last-child {
       margin-right: 0;
     }
