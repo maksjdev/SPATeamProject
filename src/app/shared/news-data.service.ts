@@ -2,15 +2,23 @@ import {Injectable} from '@angular/core';
 import {News} from '@shared/models/News';
 import {MockDataService} from '@shared/mock-data.service';
 import {Category} from '@shared/models/Category';
+import {AppRestService} from '@shared/http/app-rest.service';
+import {Observable} from 'rxjs';
+import {HttpResponse} from '@angular/common/http';
 
 @Injectable()
 export class NewsDataService {
   currentNews: Array<News>;
 
   constructor(
+    private restService: AppRestService,
     private mockDataService: MockDataService
   ) {
     this.currentNews = [];
+  }
+
+  public sendNews(news: News): Observable<HttpResponse<ArrayBuffer>>{
+    return this.restService.sendNews(news);
   }
 
   public getNewsFromServer(page: number, period: string, rating: string, categorys: Array<string>): Array<News> {

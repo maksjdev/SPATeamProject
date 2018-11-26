@@ -24,6 +24,9 @@ export class AppFormService {
       invalid_min: (min: number) => {
         return `Минимальная длинна (${min}) - не достигнута!`;
       },
+      pass_different: (diff: boolean) =>{
+        return 'Пароли не совпадают!';
+      },
       invalid_max: (max: number) => {
         return `Максимальная длинна (${max}) - превышена!`;
       },
@@ -62,7 +65,12 @@ export class AppFormService {
           if (!checkDirty || (control.dirty || control.touched || checkField[field])) {
             control.markAsTouched();
             for (const key in control.errors) {
-              if (key && key !== 'invalid_characters' && key !== 'invalid_min' && key !== 'invalid_max' && key !== 'invalid_expected') {
+              if (key && key !== 'invalid_characters'
+                && key !== 'invalid_min'
+                && key !== 'invalid_max'
+                && key !== 'invalid_expected'
+                && key !== 'pass_different'
+              ) {
                 formErrors[field] = formErrors[field] || messages[key];
               } else {
                 formErrors[field] = formErrors[field] || messages[key](control.errors[key]);

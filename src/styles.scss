@@ -9,7 +9,7 @@
 // Material
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-
+// Стили основных тегов
 body, html {
   width: 100%;
   height: 100%;
@@ -26,7 +26,34 @@ body, html {
 app-header, app-footer {
   display: block;
 }
+button {
+  outline: none;
+  user-select: none;
+}
+p {
+  line-height: 1.3em;
+}
+i {
+  &.color {
+    color: $main-pink;
+  }
+  &.main {
+    color: $main-text-color;
+  }
+}
+h1,h2,h3,h4{
+  margin: 0;
+  padding: 0;
+  font-family: $extra-font;
+}
+label {
+  font-size: $small-font-size;
+}
+img {
+  max-width: 100%;
+}
 
+// Стили основных блоков
 .wrapper {
   min-height: 100%;
   display: grid;
@@ -104,10 +131,6 @@ app-header, app-footer {
 }
 
 //  Стили вспомогательных элементов
-button {
-  outline: none;
-  user-select: none;
-}
 .btn {
   //margin: 5px;
   font-weight: 500;
@@ -128,6 +151,7 @@ button {
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     & .fab, & .fas, & .far, & .fa{
       color: $main-text-dark-color;
+      margin-right: $small-padding;
     }
     &:hover{
       opacity: 0.75;
@@ -205,40 +229,23 @@ button {
     border-style: solid;
   }
 }
-p {
-  line-height: 1.3em;
-}
-i {
-  &.color {
-    color: $main-pink;
-  }
-  &.main {
-    color: $main-text-color;
-  }
-}
-h1,h2,h3,h4{
-  margin: 0;
-  padding: 0;
-}
-label {
-  font-size: $small-font-size;
-}
-img {
-  max-width: 100%;
-}
 .input-field {
   background-color: $main-color;
   border-radius: $normal-border-radius;
-  width: 100%;
+  width: inherit;
   text-align: left;
 
-  &__default{
+  &__default {
     outline: none;
-    width: calc(100% - 40px);
-    background-color: transparent !important;
+    width: 100%;
+    background-color: transparent;
     border-top-right-radius: $normal-border-radius;
     border-bottom-right-radius: $normal-border-radius;
     padding: $normal-padding;
+    &-icon {
+      @extend .input-field__default;
+      width: calc(100% - 40px);
+    }
   }
   &__icon {
     width: 20px;
@@ -303,14 +310,33 @@ img {
 }
 
 // Стилизация кастомного селекта
-.ng-select {
-  &.ng-select-opened {
-    & .ng-arrow-wrapper {
-      & .ng-arrow {
-        border-color: transparent transparent $main-text-color !important;
-      }
+.select-white {
+  & .ng-input {
+    color: $main-text-dark-color;
+  }
+  & .ng-select-container {
+    background-color: $main-text-color !important;
+    border-color: $main-title-color !important;
+  }
+}
+.select-dark {
+  & .ng-input {
+    color: $main-text-color;
+  }
+  & .ng-select-container {
+    background-color: $gray-default !important;
+    border-color: $main-text-color !important;
+  }
+  & .ng-select-opened {
+    & .ng-arrow {
+      border-color: transparent transparent $main-text-color;
     }
   }
+  & .ng-arrow {
+    border-color: $main-text-color transparent transparent;
+  }
+}
+.ng-select {
   &-container {
     & .ng-value-container {
       padding-top: 0 !important;
@@ -318,18 +344,9 @@ img {
       & .ng-value {
         //margin-bottom: 0 !important;
       }
-      & .ng-input {
-        color: $main-text-color;
-      }
       & .ng-placeholder {
         top: initial !important;
         padding-bottom: initial !important;
-      }
-
-    }
-    & .ng-arrow-wrapper {
-      & .ng-arrow {
-        border-color: $main-text-color transparent transparent !important;
       }
     }
   }
@@ -342,6 +359,13 @@ app-ngx-editor {
     border-top-right-radius: $normal-border-radius !important;
     & .ngx-editor-button i{
       color: $main-pink !important;
+    }
+  }
+  .ngx-wrapper {
+
+    & .ngx-editor-textarea {
+      min-height: 300px !important;
+      max-height: 700px !important;
     }
   }
   .ngx-editor-grippie {
@@ -364,12 +388,12 @@ router-outlet + .loading-block{
 }
 // ScrollBar
 body::-webkit-scrollbar-track {
-  background-color: $gray-dark;
+  background-color: $gray-dark !important;
 }
 body::-webkit-scrollbar {
-  width: 5px;
-  background-color: #F5F5F5;
+  width: 5px !important;
+  background-color: #F5F5F5 !important;
 }
 body::-webkit-scrollbar-thumb {
-  background-color: $gray-light;
+  background-color: $gray-light !important;
 }

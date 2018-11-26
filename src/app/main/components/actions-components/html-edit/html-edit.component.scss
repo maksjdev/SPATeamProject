@@ -8,9 +8,7 @@
 }
 .demo {
   &-editor {
-    margin-bottom: $normal-padding;
-  }
-  &-content {
     width: 100%;
+    margin-bottom: $normal-padding;
   }
 }

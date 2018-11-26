@@ -1,4 +1,4 @@
-import { FormControl, Validators } from '@angular/forms';
+import {AbstractControl, FormControl, Validators} from '@angular/forms';
 
 // setup simple regex for white listed characters
 const validCharacters = /[^\s\w,.:&\/()+%'`@-]/;
@@ -31,4 +31,16 @@ export class CustomValidators extends Validators {
       return control.value === expected ? null : { invalid_expected: expected };
     }
   }
+
+  // static MatchPassword(AC: AbstractControl) {
+  //   let password = AC.get('password').value; // to get value in input tag
+  //   let confirmPassword = AC.get('confirmPassword').value; // to get value in input tag
+  //   if(password != confirmPassword) {
+  //     console.log('false');
+  //     AC.get('confirmPassword').setErrors( {MatchPassword: true} )
+  //   } else {
+  //     console.log('true');
+  //     return null
+  //   }
+  // }
 }

@@ -1,6 +1,50 @@
 
 <section class="news-block">
-  <app-demo-functions [_htmlContent]="articleText"></app-demo-functions>
+  <h1 class="news-block__title">Добавление новости</h1>
+  <form class="column news-block__form" [formGroup]="addNewsForm" novalidate autocomplete="off">
+    <div class="panel shadow-block column news-block__form--line">
+      <label class="news-block__form--line-label" for="n_title">Заголовок статьи</label>
+      <div class="input-field news-block__form--line-input">
+        <input id="n_title" class="input-field__default" formControlName="n_title">
+      </div>
+    </div>
+
+    <div class="panel shadow-block column news-block__form--line">
+      <label class="news-block__form--line-label" for="n_tags">Теги статьи</label>
+      <div class="input-field">
+        <ng-select class="select-white"
+                   formControlName="n_tags" id="n_tags"
+                   [items]="categories"
+                   [multiple]="true"
+                   [closeOnSelect]="true"
+                   [searchable]="true"
+                   [hideSelected]="true"
+                   bindLabel="name"
+                   placeholder="Выберите категории..">
+        </ng-select>
+      </div>
+    </div>
+
+    <div class="panel shadow-block news-block__form--image">
+      <app-image-field id="n_image" formControlName="n_image"></app-image-field>
+    </div>
+
+    <div class="news-block__form--text">
+      <app-html-edit id="n_text" formControlName="n_text"></app-html-edit>
+    </div>
+
+    <div class="row news-block__form--bottom">
+      <div class="column error-block">
+        <mat-error class="error error-block__title" *ngIf="formErrors.n_title">Тайтл: {{ formErrors.n_title }}</mat-error>
+        <mat-error class="error error-block__image" *ngIf="formErrors.n_image">Изображение: {{ formErrors.n_image }}</mat-error>
+        <mat-error class="error error-block__text" *ngIf="formErrors.n_text">Текст: {{ formErrors.n_text }}</mat-error>
+        <mat-error class="error error-block__tags" *ngIf="formErrors.n_tags">Тэги: {{ formErrors.n_tags }}</mat-error>
+      </div>
+      <button type="button" class="add-bnt btn btn-default" title="Добавить статью" (click)="onAddNews($event)">
+        <i class="far fa-newspaper"></i>Добавить новость
+      </button>
+    </div>
+  </form>
 </section>
 
 <section class="sidebar-block">

@@ -1,0 +1,11 @@
+
+<div class="image-field">
+  <div class="shadow-block row image-field--input">
+    <input type="url" [value]="imageLink" class="input-field__default-icon"
+           placeholder="Введите ссылку на изображение.." #imageField>
+    <i class="main input-field__icon fas fa-times" (click)="imageField.value = ''"></i>
+  </div>
+  <div class="image-field--image">
+    <img class="image-field--image" [src]="imageLink" alt="News Main Image">
+  </div>
+</div>

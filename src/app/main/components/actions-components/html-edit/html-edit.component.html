@@ -1,0 +1,11 @@
+
+<app-ngx-editor #ngxEditor
+  class="demo-editor"
+  [placeholder]="'Начинаем писать статейку...'"
+  [spellcheck]="true"
+  [minHeight]="500"
+  [toolbar]="toolbarConfig"
+  [resizer]="'stack'"
+  [(ngModel)]="_htmlContent"
+  (blur)="onBlur($event)">
+</app-ngx-editor>

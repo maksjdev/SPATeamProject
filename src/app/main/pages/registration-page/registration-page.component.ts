@@ -30,14 +30,14 @@ export class RegistrationPageComponent implements OnInit {
   ngOnInit() {
 
     this.registrationForm = this.formBuild.group({
-      r_image:    ['', [Validators.required]],
+      r_image:    [''],
       r_real_name: ['', [Validators.required, CustomValidators.validateLimits(4, 20)]],
       r_nickname: ['', [Validators.required, CustomValidators.validateLimits(4, 20)]],
       r_email: ['', [Validators.required , Validators.email]],
       r_agreement: [false, [CustomValidators.validateBoolean(true)]],
       r_password: ['', [Validators.required, CustomValidators.validateLimits(6, 20)]],
       r_re_password: ['', [Validators.required, CustomValidators.validateLimits(6, 20)]],
-    });
+    }, {validator: this.checkPasswords });
   }
 
   onRegister(){
@@ -55,4 +55,16 @@ export class RegistrationPageComponent implements OnInit {
     }
   }
 
+  checkPasswords(group: FormGroup) { // here we have the 'passwords' group
+    let pass = group.controls.r_password;
+    let confirmPass = group.controls.r_re_password;
+
+    if (pass.value !== confirmPass.value) {
+      pass.setErrors({ pass_different: true });
+      confirmPass.setErrors({ pass_different: true });
+      return { pass_different: true };
+    } else {
+      return null;
+    }
+  }
 }
