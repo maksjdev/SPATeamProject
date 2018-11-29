@@ -25,8 +25,14 @@
   </div>
 
   <div class="full-news__body content__wrapper" [innerHTML]="htmlContent"></div>
+
+  <span class="full-news__edit">
+    <a href="add">Редактировать статью</a>
+    <i class="far fa-edit"></i>
+  </span>
+
 </article>
 
 <section *ngIf="commentsList.length > 0" class="column comments-block">
-    <app-comment-full-item *ngFor="let comment of commentsList" [comment]="comment" class="panel shadow-block"></app-comment-full-item>
+    <app-comment-full-item *ngFor="let comment of commentsList" [comment]="comment" class="panel shadow-block cmt-block" [class.delete]="isDeleted"></app-comment-full-item>
 </section>

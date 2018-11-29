@@ -40,6 +40,13 @@
     margin: 0 $normal-padding;
 
   }
+  &__edit{
+    a {
+      color: $main-text-color;
+      font-style: italic;
+      padding: 0 $small-padding $small-padding $normal-padding;
+    }
+  }
 }
 
 .header-info {
@@ -66,6 +73,11 @@
   &__date {
     padding-top: $normal-padding;
   }
+  &__edit{
+    a{
+      padding-top: $normal-padding;
+    }
+  }
   &__favorites {
     margin-left: auto;
     padding-top: $normal-padding;
@@ -73,6 +85,7 @@
 
 }
 
+// Оформление статьи (сгенер HTML), хз как добраться до каждого div
 .content__wrapper {
   strike {
     color: $main-pink;

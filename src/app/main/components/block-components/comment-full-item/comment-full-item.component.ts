@@ -6,12 +6,14 @@ import {Comment} from '@shared/models/Comment';
   templateUrl: './comment-full-item.component.html',
   styleUrls: ['./comment-full-item.component.scss']
 })
-export class CommentFullItemComponent implements OnInit {
+export class CommentFullItemComponent  {
   @Input() comment: Comment;
+  isDeleted: boolean = false;
 
   constructor() { }
 
-  ngOnInit() {
-  }
 
+  OnDelete($event) {
+    this.isDeleted = true;
+  }
 }

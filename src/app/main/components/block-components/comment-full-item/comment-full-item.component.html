@@ -9,9 +9,9 @@
   </span>
   <div class="comments__author--rating">
     <span>
-      <button><i class="fas fa-angle-up"></i></button>
+      <button [title]="'Рейтинг+'"><i class="fas fa-angle-up"></i></button>
       {{ comment.rating }}
-      <button><i class="fas fa-angle-down"></i></button>
+      <button [title]="'Рейтинг-'"><i class="fas fa-angle-down"></i></button>
     </span>
   </div>
 </div>
@@ -21,6 +21,10 @@
     <p>{{comment.text}}}</p>
   </div>
 </div>
+
+<span class="cmt-block__delete" (click)="OnDelete($event)">
+    <p>Удалить комментарий</p>
+</span>
 
 
 
