@@ -1,5 +1,14 @@
 <section class="full-news-block">
-  <app-full-news-block [news]="fullNews"></app-full-news-block>
+  <app-full-news-block class="full-news-block__news" [news]="fullNews"></app-full-news-block>
+
+  <form class="panel shadow-block full-news-block__form">
+    *Форма для добавления коментария*
+    <!--<textarea></textarea>-->
+  </form>
+
+  <section *ngIf="commentsList.length > 0" class="column full-news-block__comments">
+    <app-comment-full-item *ngFor="let comment of commentsList" [comment]="comment" class="panel shadow-block cmt-block" [class.delete]="isDeleted"></app-comment-full-item>
+  </section>
 </section>
 
 <section class="sidebar-block">

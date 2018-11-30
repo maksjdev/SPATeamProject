@@ -12,6 +12,16 @@
     height: max-content;
     grid-area: f;
     flex-direction: column;
+    &__news {
+      margin-bottom: $normal-padding;
+    }
+    &__form {
+      margin-bottom: $normal-padding;
+      padding: $normal-padding;
+    }
+    &__comments {
+
+    }
   }
   .sidebar-block {
     display: flex;

@@ -15,10 +15,8 @@ export class FullNewsBlockComponent implements OnChanges{
   public _htmlContent: string;
 
   favorites: boolean;
-  commentsList: Array<Comment>;
 
   constructor(
-    private mockService: MockDataService,
     private _sanitizer: DomSanitizer
   ) { }
 
@@ -34,7 +32,6 @@ export class FullNewsBlockComponent implements OnChanges{
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.hasOwnProperty('news') && changes['news'].currentValue){
       this._htmlContent = this.news.text;
-      this.commentsList = this.mockService.getMockCommentList(5);
     }
   }
 }

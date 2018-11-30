@@ -47,8 +47,9 @@ export class NewsDataService {
     return this.mockDataService.getMockNews();
   }
 
-
-
+  public getComments(number){
+    return this.mockDataService.getMockCommentList(number);
+  }
 
   public getCategories(): Array<Category>{
     return this.mockDataService.getMockCategories();

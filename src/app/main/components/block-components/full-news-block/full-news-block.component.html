@@ -1,17 +1,24 @@
 
 <article *ngIf="news" class="column panel shadow-block full-news">
   <div class="full-news__header">
-    <h2 class="full-news__header--title">{{ news.title | trimString: 100 }}</h2>
+    <h2 class="full-news__header--title">{{ news.title }}</h2>
     <div class="row header-info">
         <div class="row header-info__author">
           <img class="header-info__author--image" [src]="news.author.image" alt="*User Image*">
           <a href="#" class="header-info__author--name">
-            {{ news.author.first_name +' '+ news.author.last_name }}{{ ', ' }}
+            {{ news.author.first_name +' '+ news.author.last_name }}
           </a>
         </div>
         <div class="header-info__date">{{ news.date | dateTransform }} </div>
-        <div  class="header-info__favorites">
-          <button (click)="toggle($event)"><i [class.fas]="favorites" [class.far]="!favorites" class=" fa-star"></i></button>
+        <div  class="header-info__actions">
+          <button class="btn-edit" (click)="toggle($event)">
+            Редактировать статью
+            <i class="fas fa-edit"></i>
+          </button>
+
+          <button class="btn-favorites" (click)="toggle($event)">
+            <i [class.fas]="favorites" [class.far]="!favorites" class=" fa-star"></i>
+          </button>
         </div>
     </div>
     <span class="row full-news__header--tags">
@@ -19,20 +26,13 @@
         {{ tag }}
       </div>
     </span>
-    <div class="full-news__header--image">
-      <img [src]="news.image" alt="">
-    </div>
   </div>
 
-  <div class="full-news__body content__wrapper" [innerHTML]="htmlContent"></div>
+  <div class="full-news__image">
+    <img [src]="news.image" alt="">
+  </div>
 
-  <span class="full-news__edit">
-    <a href="add">Редактировать статью</a>
-    <i class="far fa-edit"></i>
-  </span>
+  <div class="full-news__body content__wrapper" [innerHTML]="htmlContent">
 
+  </div>
 </article>
-
-<section *ngIf="commentsList.length > 0" class="column comments-block">
-    <app-comment-full-item *ngFor="let comment of commentsList" [comment]="comment" class="panel shadow-block cmt-block" [class.delete]="isDeleted"></app-comment-full-item>
-</section>
