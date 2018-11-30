@@ -1,0 +1,31 @@
+
+<div class="comments__author">
+  <img class="comments__author--image" [src]="comment.author.image" alt="*User Image*">
+  <a href="#" class="comments__author--name">
+    {{ comment.author.first_name +' '+ comment.author.last_name }}{{ ',' }}
+  </a>
+  <span class="header-info__date">
+      {{ comment.date | dateTransform }}
+  </span>
+  <div class="comments__author--rating">
+    <span>
+      <button [title]="'Рейтинг+'"><i class="fas fa-angle-up"></i></button>
+      {{ comment.rating }}
+      <button [title]="'Рейтинг-'"><i class="fas fa-angle-down"></i></button>
+    </span>
+  </div>
+</div>
+
+<div class="comments__wrapper">
+  <div class="comments__wrapper--content">
+    <p>{{comment.text}}}</p>
+  </div>
+</div>
+
+<span class="cmt-block__delete" (click)="OnDelete($event)">
+    <p>Удалить комментарий</p>
+</span>
+
+
+
+

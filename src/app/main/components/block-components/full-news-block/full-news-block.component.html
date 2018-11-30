@@ -1,0 +1,38 @@
+
+<article *ngIf="news" class="column panel shadow-block full-news">
+  <div class="full-news__header">
+    <h2 class="full-news__header--title">{{ news.title }}</h2>
+    <div class="row header-info">
+        <div class="row header-info__author">
+          <img class="header-info__author--image" [src]="news.author.image" alt="*User Image*">
+          <a href="#" class="header-info__author--name">
+            {{ news.author.first_name +' '+ news.author.last_name }}
+          </a>
+        </div>
+        <div class="header-info__date">{{ news.date | dateTransform }} </div>
+        <div  class="header-info__actions">
+          <button class="btn-edit" (click)="toggle($event)">
+            Редактировать статью
+            <i class="fas fa-edit"></i>
+          </button>
+
+          <button class="btn-favorites" (click)="toggle($event)">
+            <i [class.fas]="favorites" [class.far]="!favorites" class=" fa-star"></i>
+          </button>
+        </div>
+    </div>
+    <span class="row full-news__header--tags">
+      <div class="full-news__header--tags-item" *ngFor="let tag of news.tags">
+        {{ tag }}
+      </div>
+    </span>
+  </div>
+
+  <div class="full-news__image">
+    <img [src]="news.image" alt="">
+  </div>
+
+  <div class="full-news__body content__wrapper" [innerHTML]="htmlContent">
+
+  </div>
+</article>

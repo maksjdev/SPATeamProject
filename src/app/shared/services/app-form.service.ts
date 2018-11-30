@@ -22,7 +22,7 @@ export class AppFormService {
       required: 'Это поле необходимо!',
       email: 'Данный email адрес не коректен!',
       invalid_min: (min: number) => {
-        return `Минимальная длинна (${min}) - не достигнута!`;
+        return `Минимальная длинна - ${min}!`;
       },
       pass_different: (diff: boolean) =>{
         return 'Пароли не совпадают!';
@@ -31,7 +31,7 @@ export class AppFormService {
         return `Максимальная длинна (${max}) - превышена!`;
       },
       invalid_expected: (expected: boolean) =>{
-        return 'Вы должны' + (expected? 'принять данный пункт' : 'отказатся от данного пункта') + '!';
+        return 'Вы должны ' + (expected? 'принять данный пункт' : 'отказатся от данного пункта') + '!';
       },
       invalid_characters: (matches: any[]) => {
         let matchedCharacters = matches;

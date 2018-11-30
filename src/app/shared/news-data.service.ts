@@ -36,6 +36,21 @@ export class NewsDataService {
     return this.mockDataService.getMockNewsList(5);
   }
 
+  public getFullNewsData(): News {
+    // Ладно, потом
+    return this.mockDataService.getMockNews();
+  }
+  public getMediumNewsData(): News {
+    return this.mockDataService.getMockNews();
+  }
+  public getSmallNewsData(): News {
+    return this.mockDataService.getMockNews();
+  }
+
+  public getComments(number){
+    return this.mockDataService.getMockCommentList(number);
+  }
+
   public getCategories(): Array<Category>{
     return this.mockDataService.getMockCategories();
   }

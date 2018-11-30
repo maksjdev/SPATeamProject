@@ -60,7 +60,7 @@ export class RegistrationPageComponent implements OnInit {
     let confirmPass = group.controls.r_re_password;
 
     if (pass.value !== confirmPass.value) {
-      pass.setErrors({ pass_different: true });
+      //pass.setErrors({ pass_different: true });
       confirmPass.setErrors({ pass_different: true });
       return { pass_different: true };
     } else {

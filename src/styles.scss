@@ -373,49 +373,6 @@ app-ngx-editor {
     border-bottom-right-radius: $normal-border-radius !important;
   }
 }
-// Стили блока цитат
-blockquote {
-  padding: 0 $big-padding;
-  height: fit-content;
-  border-left: 5px solid $main-text-color;
-  &:before {
-    display: none;
-  }
-  &:not(:first-of-type) {
-    margin-top: .5em;
-  }
-  & p {
-    margin: 0;
-    text-align: left;
-    font-size: 12pt;
-    line-height: 1.4;
-  }
-  &:nth-of-type(even) {
-    text-align: right;
-    border-left: none;
-    border-right: 5px solid #999;
-  }
-  &:nth-of-type(even) footer {
-    text-align: right;
-  }
-  &:nth-of-type(even) footer:before {
-    content: '';
-  }
-  &:nth-of-type(even) footer:after {
-    content: ' —';
-  }
-  & footer {
-    text-align: right;
-    font-style: italic;
-    &:before {
-      content: '— ';
-    }
-  }
-}
-
-
-
-
 
 // Ну совсем не нужные.. (для редактирования)
 .loading-block{

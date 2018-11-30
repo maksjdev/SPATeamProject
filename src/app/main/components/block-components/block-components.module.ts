@@ -8,6 +8,8 @@ import {AppPipesModule} from '@shared/pipes/app-pipes.module';
 import {CategoryItemBlockComponent} from './category-block/category-item-block.component';
 import {TopNewsBlockComponent} from './top-news-block/top-news-block.component';
 import {NewsSmallBlockComponent} from '@components/block-components/news-small-block/news-small-block.component';
+import {FullNewsBlockComponent} from '@components/block-components/full-news-block/full-news-block.component';
+import {CommentFullItemComponent } from './comment-full-item/comment-full-item.component';
 
 @NgModule({
   imports: [
@@ -20,7 +22,10 @@ import {NewsSmallBlockComponent} from '@components/block-components/news-small-b
     AdItemBlockComponent,
     StatisticTableComponent,
     CategoryItemBlockComponent,
-    TopNewsBlockComponent
+    TopNewsBlockComponent,
+    StatisticTableComponent,
+    FullNewsBlockComponent,
+    CommentFullItemComponent
   ],
   declarations: [
     NewsBigBlockComponent,
@@ -29,6 +34,8 @@ import {NewsSmallBlockComponent} from '@components/block-components/news-small-b
     StatisticTableComponent,
     CategoryItemBlockComponent,
     TopNewsBlockComponent,
+    FullNewsBlockComponent,
+    CommentFullItemComponent
   ],
   providers: [
     NewsDataService,

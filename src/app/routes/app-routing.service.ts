@@ -66,7 +66,7 @@ export class AppRoutingService {
     });
   }
 
-  private getRouterData(state, parent) {
+  public getRouterData(state, parent) {
     var data = [];
     if(parent && parent.snapshot.data && parent.snapshot.data.title) {
       data.push(parent.snapshot.data);
