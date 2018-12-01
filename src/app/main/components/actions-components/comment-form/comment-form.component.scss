@@ -1,0 +1,34 @@
+@import "~src/assets/base-css/theme";
+@import "~src/assets/base-css/vars";
+
+:host, .comment-form {
+  display: flex;
+  width: 100%;
+  height: inherit;
+  flex-direction: column;
+}
+
+.comment-form {
+  &__header{
+    margin-bottom: $normal-padding;
+
+    &--author-image{
+      height: $normal-icon-size;
+      width: auto;
+      margin-right: $normal-padding;
+      background-color: $main-text-color;
+      border-radius: $normal-border-radius;
+    }
+    &--author-name{
+      margin: auto 0;
+      font-weight: bold;
+      font-size: $big-font-size;
+    }
+  }
+  &__footer {
+    margin-top: $normal-padding;
+  }
+}
+.btn-auth {
+  padding: 0;
+}

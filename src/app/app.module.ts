@@ -19,6 +19,8 @@ import {ShortenPipe} from 'ngx-pipes';
 import {MainPageModule} from '@main/main-page.module';
 import localeRu from '@angular/common/locales/ru';
 import { AddNewsPageComponent } from './main/pages/add-news-page/add-news-page.component';
+import {AuthService} from '@shared/auth/auth.service';
+import {UserService} from '@shared/user.service';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -46,6 +48,9 @@ export function initializeApp(configData: ConfigLoadService) {
   ],
   providers: [
     // Кастомные сервисы
+    AuthService,
+    UserService,
+
     AppHttpService,
     AppRestService,
     AppRoutingModule,

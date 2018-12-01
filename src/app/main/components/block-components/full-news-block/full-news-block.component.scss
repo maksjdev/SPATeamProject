@@ -15,14 +15,19 @@
     }
     &--tags {
       margin-bottom: $normal-padding;
+
       &-item {
         color: $main-text-dark-color;
         background-color: $main-text-color;
         border-radius: $normal-border-radius;
         font-size: $small-font-size;
         font-weight: bold;
-        padding: $small-padding $small-padding;
+        padding: $tiny-padding $small-padding;
+
         margin-right: $normal-padding;
+        &:last-child {
+          margin-right: 0;
+        }
       }
     }
   }
@@ -49,7 +54,7 @@
 }
 
 .header-info {
-  margin-bottom: $small-padding;
+  margin-bottom: $normal-padding;
   &:only-child {
     margin-right: $small-padding;
     &:last-child {

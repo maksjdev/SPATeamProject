@@ -7,4 +7,8 @@ export class User {
     public rating: number,
     public role: string,
   ){}
+
+  public toString(){
+    return `User (${this.role}) Name - ${this.first_name+this.last_name}`;
+  }
 }

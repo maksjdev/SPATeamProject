@@ -9,7 +9,7 @@ import {AuthService} from '@shared/auth/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  isLoged: boolean = false;
+  isLogged: boolean = false;
   signPage: boolean = false;
 
   constructor(
@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     // Получили состояние пользователя и его данные (типо как*)
     this.authService.getLoginState().subscribe( loginState => {
-      this.isLoged = loginState? loginState : false;
+      this.isLogged = loginState? loginState : false;
     });
 
     // Следим за страницей на которой находимся

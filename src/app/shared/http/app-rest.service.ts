@@ -34,7 +34,7 @@ export class AppRestService {
 
   public getAppConfigData() {
     return this.connectService.getData(this.host + 'config').pipe(
-      retry(3),
+      // retry(3),
       catchError(this.connectService.handleError('getConfigData', []))
     );
   }

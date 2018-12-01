@@ -13,9 +13,9 @@ export class SignButtonsComponent {
   ) { }
 
   OnSignUp (event) {
-    this.routerService.goToLink('registration');
+    this.routerService.goToLinkSave('registration');
   }
   OnSignIn (event) {
-    this.routerService.goToLink('login');
+    this.routerService.goToLinkSave('login');
   }
 }

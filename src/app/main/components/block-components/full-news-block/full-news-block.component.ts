@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {News} from '@shared/models/News';
 import {MockDataService} from '@shared/mock-data.service';
 import {Comment} from '@shared/models/Comment';
@@ -14,15 +14,13 @@ export class FullNewsBlockComponent implements OnChanges{
   @Input() news: News;
   public _htmlContent: string;
 
-  favorites: boolean;
+  @Output() favoritesToggle = new EventEmitter();
+  @Output() editClick = new EventEmitter();
+  favorites: boolean = false;
 
   constructor(
     private _sanitizer: DomSanitizer
   ) { }
-
-  toggle(event) {
-    this.favorites = !this.favorites;
-  }
 
   public get htmlContent(): SafeHtml {
     let string = this._htmlContent ? this._htmlContent : '';
@@ -30,8 +28,17 @@ export class FullNewsBlockComponent implements OnChanges{
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.hasOwnProperty('news') && changes['news'].currentValue){
+    if (changes.hasOwnProperty('news') && changes['news'].currentValue) {
       this._htmlContent = this.news.text;
+      // Необходимо получить "избранность" данной новости
     }
+  }
+
+  onEditNews (event) {
+    this.editClick.emit(event);
+  }
+  toggleFavorites(event) {
+    this.favorites = !this.favorites;
+    this.favoritesToggle.emit(this.favorites);
   }
 }

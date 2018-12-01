@@ -44,7 +44,7 @@ export class AppRoutingService {
         }}
     });
   }
-  public getCurrentRouteData(): BehaviorSubject<object>{
+  public getCurrentRouteData(): BehaviorSubject<AppRouterData>{
     return this.currentRouteData;
   }
   public getActiveQueryParam(): BehaviorSubject<object>{
@@ -77,6 +77,15 @@ export class AppRoutingService {
     return data;
   }
 
+  public goToLinkSave(link: string): void {
+    let routerData: AppRouterData = this.getCurrentRouteData().getValue();
+    let url = routerData.url;
+    let params = routerData.params;
+
+    this.router.navigate([`/${link}`],
+      { queryParams: { back_url: url, back_params: JSON.stringify(params) },
+        skipLocationChange: true});
+  }
   public goToLink(link: string): void{
     this.router.navigate([`/${link}`]);
   }

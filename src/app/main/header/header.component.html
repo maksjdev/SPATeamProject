@@ -4,7 +4,7 @@
   <app-navigation     class="header__navigations"></app-navigation>
 
   <app-search-block (search)="onSearch($event)" class="header__search"></app-search-block>
-  <app-user-info      *ngIf="isLoged" class="header__user-info"></app-user-info>
-  <app-sign-buttons  *ngIf="!isLoged && !signPage" class="header__login"></app-sign-buttons>
+  <app-user-info      *ngIf="isLogged" class="header__user-info"></app-user-info>
+  <app-sign-buttons  *ngIf="!isLogged && !signPage" class="header__login"></app-sign-buttons>
 </header>
 

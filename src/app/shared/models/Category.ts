@@ -6,4 +6,8 @@ export class Category {
     public name: string,
     public disabled?: boolean
   ){}
+
+  public toString(){
+    return `Category #${this.id} Name - ${this.name}`;
+  }
 }
