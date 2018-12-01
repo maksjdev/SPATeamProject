@@ -1,13 +1,26 @@
 <section class="full-news-block">
-  <app-full-news-block class="full-news-block__news" [news]="fullNews"></app-full-news-block>
+  <app-full-news-block class="full-news-block__news" [news]="fullNews"
+                       (editClick)="onEdit($event)" (favoritesToggle)="onFavorites($event)">
+  </app-full-news-block>
 
-  <form class="panel shadow-block full-news-block__form">
-    *Форма для добавления коментария*
-    <!--<textarea></textarea>-->
-  </form>
+  <section class="panel shadow-block full-news-block__form">
+    <h4 class="full-news-block__form-header">
+      Добавить коментарий
+    </h4>
+    <app-comment-form class="full-news-block__form-body"
+                      (addComment)="onAddComment($event)">
+    </app-comment-form>
+  </section>
 
-  <section *ngIf="commentsList.length > 0" class="column full-news-block__comments">
-    <app-comment-full-item *ngFor="let comment of commentsList" [comment]="comment" class="panel shadow-block cmt-block" [class.delete]="isDeleted"></app-comment-full-item>
+
+  <section *ngIf="commentsList.length > 0" class="panel shadow-block column full-news-block__comments">
+    <h4 class="full-news-block__comments-total">
+      Комментарии: {{commentsList.length}}
+    </h4>
+    <app-comment-full-item class="full-news-block__comments-item"
+                           *ngFor="let comment of commentsList"
+                           [comment]="comment" (commentDelete)="onDeleteComment($event)">
+    </app-comment-full-item>
   </section>
 </section>
 

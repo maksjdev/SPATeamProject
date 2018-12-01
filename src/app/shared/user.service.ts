@@ -1,15 +1,19 @@
 import {Injectable} from '@angular/core';
 import {User} from '@shared/models/User';
-import {MockDataService} from '@shared/mock-data.service';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 
 @Injectable()
 export class UserService {
+  private currentUser: BehaviorSubject<User>;
 
-  constructor(
-    private mockDataService: MockDataService
-  ) { }
+  constructor() {
+    this.currentUser = new BehaviorSubject(null);
+  }
 
-  public getUserData(): User {
-    return this.mockDataService.getMockActiveUser();
+  public setUserData(user: User){
+    this.currentUser.next(user);
+  }
+  public getUserData(): BehaviorSubject<User> {
+    return this.currentUser;
   }
 }

@@ -1,0 +1,25 @@
+
+<div class="comment-form" *ngIf="currentUser; else errorBlock">
+  <div class="row comment-form__header">
+    <img class="comment-form__header--author-image" [src]="currentUser.image" alt="*User Image*">
+    <div class="comment-form__header--author-name">
+      {{ currentUser.first_name +' '+ currentUser.last_name }}:
+    </div>
+  </div>
+
+  <form class="column comment-form__body" [formGroup]="CommentForm" novalidate autocomplete="off">
+    <textarea class="textarea textarea-default" placeholder="Текст вашего очень важного комментария.."
+              formControlName="c_text" maxlength="1000"></textarea>
+    <mat-error class="validator-textarea" *ngIf="formErrors.c_text">{{ formErrors.c_text }}</mat-error>
+
+    <span class="comment-form__footer">
+        <button class="btn btn-default" (click)="onAddComment($event)">Добавить</button>
+    </span>
+  </form>
+</div>
+
+<ng-template #errorBlock>
+  <div class="comment-form__error">
+    <button class="btn btn-auth" (click)="goToLogin($event)">Необходимо авторизироваться</button>
+  </div>
+</ng-template>

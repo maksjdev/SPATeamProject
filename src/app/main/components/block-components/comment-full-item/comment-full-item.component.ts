@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Comment} from '@shared/models/Comment';
 
 @Component({
@@ -8,12 +8,18 @@ import {Comment} from '@shared/models/Comment';
 })
 export class CommentFullItemComponent  {
   @Input() comment: Comment;
-  isDeleted: boolean = false;
+  @Output() commentDelete = new EventEmitter();
 
   constructor() { }
 
-
   OnDelete($event) {
-    this.isDeleted = true;
+    this.commentDelete.emit(this.comment);
+  }
+
+  ratingRaise($event){
+    // Передать родителью что кликнули
+  }
+  ratingDowngrade($event){
+    // Передать родителью что кликнули
   }
 }

@@ -295,6 +295,19 @@ img {
     }
   }
 }
+.textarea {
+  width: 100%;
+  min-height: 75px;
+  max-height: 250px;
+  border-radius: $normal-border-radius;
+  padding: $small-padding;
+  letter-spacing: 0.5px;
+  resize: vertical;
+  &-default {
+    background-color: $main-text-color;
+    color: $main-color;
+  }
+}
 .validator {
   &-input, &-checkbox {
     font-size: $small-font-size;
@@ -303,6 +316,11 @@ img {
   }
   &-input {
     margin-top: 52px;
+  }
+  &-textarea{
+    font-size: $small-font-size;
+    color: $main-pink;
+    margin-top: 0;
   }
   &-checkbox {
     margin-top: 20px;

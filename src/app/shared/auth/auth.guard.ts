@@ -26,8 +26,7 @@ export class AuthGuard implements CanActivate, CanLoad {
       let params = route.queryParams;
 
       this.router.navigate([this.loginUrl],
-        { queryParams: { back_url: url, back_params: JSON.stringify(params) },
-          skipLocationChange: true});
+        { queryParams: { back_url: url, back_params: JSON.stringify(params) }, skipLocationChange: true});
       return false;
     }
   }

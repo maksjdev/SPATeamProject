@@ -11,12 +11,11 @@
         </div>
         <div class="header-info__date">{{ news.date | dateTransform }} </div>
         <div  class="header-info__actions">
-          <button class="btn-edit" (click)="toggle($event)">
-            Редактировать статью
+          <button class="btn-edit" (click)="onEditNews($event)">
             <i class="fas fa-edit"></i>
           </button>
 
-          <button class="btn-favorites" (click)="toggle($event)">
+          <button class="btn-favorites" (click)="toggleFavorites($event)">
             <i [class.fas]="favorites" [class.far]="!favorites" class=" fa-star"></i>
           </button>
         </div>
@@ -29,7 +28,7 @@
   </div>
 
   <div class="full-news__image">
-    <img [src]="news.image" alt="">
+    <img [src]="news.image" alt="'Main news image'">
   </div>
 
   <div class="full-news__body content__wrapper" [innerHTML]="htmlContent">

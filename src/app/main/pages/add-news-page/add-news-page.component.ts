@@ -59,7 +59,7 @@ export class AddNewsPageComponent implements OnInit {
       let image: string = this.addNewsForm.value['n_image'];
       let tags: Array<string> = this.addNewsForm.value['n_tags'];
 
-      let author: User = this.userService.getUserData();
+      let author: User = this.userService.getUserData().getValue();
       let date = new Date();
 
       let news: News = new News(author, date, title, text, image, tags);

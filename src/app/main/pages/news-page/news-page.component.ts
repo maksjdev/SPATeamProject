@@ -27,4 +27,17 @@ export class NewsPageComponent implements OnInit {
     this.commentsList = this.newsService.getComments(5);
   }
 
+  onAddComment(comment){
+    console.log(`Add comment: ${comment}`);
+  }
+  onDeleteComment(comment: Comment){
+    console.log(`Delete comment: ${comment.id}`);
+  }
+  onEdit(event){
+    // Необходимо отправить на страницу редактирования
+  }
+  onFavorites (state){
+    // Необходимо добавить / удалить в избранное
+    console.log(`On favorites: ${state}`);
+  }
 }

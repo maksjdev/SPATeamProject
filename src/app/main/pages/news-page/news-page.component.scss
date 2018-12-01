@@ -18,9 +18,33 @@
     &__form {
       margin-bottom: $normal-padding;
       padding: $normal-padding;
+      &-header {
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: $normal-padding 0;
+        margin-bottom: $normal-padding;
+        border-bottom: 2px solid $main-text-color;
+      }
     }
     &__comments {
-
+      padding: $normal-padding;
+      &-total {
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: $normal-padding 0;
+        margin-bottom: $normal-padding;
+        border-bottom: 2px solid $main-text-color;
+      }
+      &-item {
+        padding-bottom: $normal-padding;
+        margin-bottom: $normal-padding;
+        border-bottom: 1px solid rgba($main-text-color, .25);
+        &:last-child {
+          padding-bottom: 0;
+          margin-bottom: 0;
+          border-bottom: none;
+        }
+      }
     }
   }
   .sidebar-block {

@@ -14,7 +14,7 @@ import {CommentFullItemComponent } from './comment-full-item/comment-full-item.c
 @NgModule({
   imports: [
     CommonModule,
-    AppPipesModule
+    AppPipesModule,
   ],
   exports: [
     NewsBigBlockComponent,
@@ -25,7 +25,7 @@ import {CommentFullItemComponent } from './comment-full-item/comment-full-item.c
     TopNewsBlockComponent,
     StatisticTableComponent,
     FullNewsBlockComponent,
-    CommentFullItemComponent
+    CommentFullItemComponent,
   ],
   declarations: [
     NewsBigBlockComponent,
@@ -35,7 +35,7 @@ import {CommentFullItemComponent } from './comment-full-item/comment-full-item.c
     CategoryItemBlockComponent,
     TopNewsBlockComponent,
     FullNewsBlockComponent,
-    CommentFullItemComponent
+    CommentFullItemComponent,
   ],
   providers: [
     NewsDataService,

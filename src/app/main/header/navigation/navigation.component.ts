@@ -17,6 +17,6 @@ export class NavigationComponent {
   constructor() { }
 
   public menuItemClick(event){
-    console.info('You click on link!')
+    // console.info('You click on link!')
   }
 }
