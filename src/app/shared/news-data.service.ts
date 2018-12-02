@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {News} from '@shared/models/News';
 import {MockDataService} from '@shared/mock-data.service';
-import {Category} from '@shared/models/Category';
 import {AppRestService} from '@shared/http/app-rest.service';
 import {Observable} from 'rxjs';
 import {HttpResponse} from '@angular/common/http';
@@ -29,37 +28,22 @@ export class NewsDataService {
     // Сервер вернул, ок?
     return this.currentNews;
   }
-  public getFullNews(id: string): News {
-    return this.mockDataService.getMockNews();
-  }
+
   public getTopNews(): Array<News> {
     return this.mockDataService.getMockNewsList(5);
   }
 
-  public getFullNewsData(): News {
-    // Ладно, потом
+  public getFullNewsData(id: string): News {
     return this.mockDataService.getMockNews();
   }
-  public getMediumNewsData(): News {
+  public getMediumNewsData(id: string): News {
     return this.mockDataService.getMockNews();
   }
-  public getSmallNewsData(): News {
+  public getSmallNewsData(id: string): News {
     return this.mockDataService.getMockNews();
   }
 
-  public getComments(number){
-    return this.mockDataService.getMockCommentList(number);
-  }
-
-  public getCategories(): Array<Category>{
-    return this.mockDataService.getMockCategories();
-  }
-
-  public getCategoryNames(arr: Array<Category>): Array<string> {
-    let string: Array<string> = [];
-    arr.forEach( (val, ind) => {
-      string.push(val.name.toLowerCase());
-    });
-    return string;
+  public getComments(id: string){
+    return this.mockDataService.getMockCommentList(5);
   }
 }
