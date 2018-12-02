@@ -79,13 +79,18 @@ export class AppRoutingService {
 
   public goToLinkSave(link: string): void {
     let routerData: AppRouterData = this.getCurrentRouteData().getValue();
-    let url = routerData.url;
+    let url = routerData.path;
     let params = routerData.params;
 
-    this.router.navigate([`/${link}`],
-      { queryParams: { back_url: url, back_params: JSON.stringify(params) },
-        skipLocationChange: true});
+    let querys = { [CONSTANTS.QUERY.BACK_URL]: url, [CONSTANTS.QUERY.BACK_PARAMS]: JSON.stringify(params) };
+    this.goToLinkWithQuery(link, true, querys)
   }
+
+  public goToLinkWithQuery(link: string, skip: boolean = false, queryParams?: object, ): void{
+    this.router.navigate([`/${link}`],
+      { queryParams: queryParams, skipLocationChange: skip });
+  }
+
   public goToLink(link: string): void{
     this.router.navigate([`/${link}`]);
   }

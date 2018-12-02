@@ -30,9 +30,15 @@
       height: 100px;
       margin-bottom: $normal-padding;
       background-color: $main-pink;
-      img {
-        height: 100%;
+      &-img {
+        height: 130%;
         padding: 10px;
+      }
+      &-text {
+        position: absolute;
+        margin: 0;
+        padding: $tiny-padding;
+        font-size: $small-font-size;
       }
     }
   }

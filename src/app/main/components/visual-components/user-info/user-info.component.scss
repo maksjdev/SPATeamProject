@@ -9,7 +9,6 @@
 }
 
 .user-info {
-
   &__image {
     display: flex;
     position: relative;
@@ -56,5 +55,10 @@
     text-align: end;
     font-size: $small-font-size;
     padding: 0 $normal-padding;
+    &.admin {
+      text-decoration: underline;
+      font-weight: bold;
+      cursor: pointer;
+    }
   }
 }

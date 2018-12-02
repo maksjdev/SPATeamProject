@@ -14,6 +14,6 @@ export class FullLogoPngComponent {
   constructor() {
     this.title = CONSTANTS.APP.TITLE;
     this.mainLink = CONSTANTS.APP.MAIN;
-    this.logoLink = '../../../../../assets/images/new-string.png';
+    this.logoLink = '../../../../../assets/images/new_string.png';
   }
 }

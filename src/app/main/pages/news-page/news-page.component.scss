@@ -4,55 +4,51 @@
 :host {
   display: grid;
   gap: $normal-padding;
-  grid-template: "f s" auto
-                 / 1fr 300px;
+  grid-template: "f s" auto / 1fr 300px;
+}
 
-  .full-news-block {
-    display: flex;
-    height: max-content;
-    grid-area: f;
-    flex-direction: column;
-    &__news {
+.full-news-block {
+  display: flex;
+  height: max-content;
+  grid-area: f;
+  flex-direction: column;
+  &__news {
+    margin-bottom: $normal-padding;
+  }
+  &__form {
+    margin-bottom: $normal-padding;
+    padding: $normal-padding;
+    &-header {
+      font-weight: bold;
+      text-transform: uppercase;
+      padding: $normal-padding 0;
       margin-bottom: $normal-padding;
+      border-bottom: 2px solid $main-text-color;
     }
-    &__form {
+  }
+
+  &__comments {
+    padding: $normal-padding;
+    &-total {
+      font-weight: bold;
+      text-transform: uppercase;
+      padding: $normal-padding 0;
       margin-bottom: $normal-padding;
-      padding: $normal-padding;
-      &-header {
-        font-weight: bold;
-        text-transform: uppercase;
-        padding: $normal-padding 0;
-        margin-bottom: $normal-padding;
-        border-bottom: 2px solid $main-text-color;
-      }
+      border-bottom: 2px solid $main-text-color;
     }
-    &__comments {
-      padding: $normal-padding;
-      &-total {
-        font-weight: bold;
-        text-transform: uppercase;
-        padding: $normal-padding 0;
-        margin-bottom: $normal-padding;
-        border-bottom: 2px solid $main-text-color;
-      }
-      &-item {
-        padding-bottom: $normal-padding;
-        margin-bottom: $normal-padding;
-        border-bottom: 1px solid rgba($main-text-color, .25);
-        &:last-child {
-          padding-bottom: 0;
-          margin-bottom: 0;
-          border-bottom: none;
-        }
+    &-item {
+      padding-bottom: $normal-padding;
+      margin-bottom: $normal-padding;
+      border-bottom: 1px solid rgba($main-text-color, .25);
+      &:last-child {
+        padding-bottom: 0;
+        margin-bottom: 0;
+        border-bottom: none;
       }
     }
   }
-  .sidebar-block {
-    display: flex;
-    grid-area: s;
-    flex-direction: column;
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
+}
+
+.sidebar-block {
+  grid-area: s;
 }

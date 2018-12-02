@@ -1,22 +1,21 @@
-import { Injectable } from '@angular/core';
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanLoad, Router, Route} from '@angular/router';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, CanActivate, CanLoad, Route, RouterStateSnapshot} from '@angular/router';
+import {Observable} from 'rxjs';
 import {AppRoutingService} from '@routes/app-routing.service';
 import {AuthService} from '@shared/auth/auth.service';
+import {CONSTANTS} from '@shared/config/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate, CanLoad {
-  private loginUrl: string = '/login';
 
   constructor(
-    private router: Router,
     private authService: AuthService,
     private routerService: AppRoutingService,
   ) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (this.authService.getLoginState().getValue()) {
       // Залогинен -> проходите, сэр
       return true;
@@ -25,8 +24,8 @@ export class AuthGuard implements CanActivate, CanLoad {
       let url = this.routerService.getCleanUrl(state.url);
       let params = route.queryParams;
 
-      this.router.navigate([this.loginUrl],
-        { queryParams: { back_url: url, back_params: JSON.stringify(params) }, skipLocationChange: true});
+      let paramsObj = { [CONSTANTS.QUERY.BACK_URL]: url, [CONSTANTS.QUERY.BACK_PARAMS]: JSON.stringify(params) };
+      this.routerService.goToLinkWithQuery(CONSTANTS.APP.LOGIN, false, paramsObj);
       return false;
     }
   }
@@ -37,7 +36,7 @@ export class AuthGuard implements CanActivate, CanLoad {
       return true;
     } else {
       // Не залогинен -> редирект на страницу логина
-      this.router.navigate([this.loginUrl]);
+      this.routerService.goToLink(CONSTANTS.APP.LOGIN);
       return false;
     }
   }

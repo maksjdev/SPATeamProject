@@ -4,8 +4,7 @@
 :host {
   display: grid;
   gap: $normal-padding;
-  grid-template: "n s"
-                 / 1fr auto;
+  grid-template: "n s" / 1fr auto;
 }
 .news-block {
   display: flex;
@@ -53,12 +52,5 @@
 }
 
 .sidebar-block {
-  display: flex;
   grid-area: s;
-  flex-direction: column;
-  width: 300px;
-  &:last-child {
-    margin-bottom: 0;
-  }
 }
-

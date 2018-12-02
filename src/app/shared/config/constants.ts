@@ -1,14 +1,22 @@
 export const CONSTANTS = {
   APP: {
     TITLE: 'NewString',
+    LN_RU: 'ru',
     MAIN: 'main',
-    LN_RU: 'ru'
+    ADMIN: 'admin',
+    CREATE: 'add',
+
+    REGISTRATION: 'registration',
+    LOGIN: 'login',
   },
   QUERY: {
     PAGE: 'page',
     PERIOD: 'period',
     RATING: 'rating',
-    CATEGORY: 'category'
+    CATEGORY: 'category',
+
+    BACK_URL: 'back_url',
+    BACK_PARAMS: 'back_params',
   },
   MOCK: {
     USER_IMAGE: 'https://hsto.org/getpro/habr/avatars/fc7/23a/b6b/fc723ab6b9870078eefc3aba22c605ad.png',

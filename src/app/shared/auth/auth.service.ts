@@ -10,9 +10,6 @@ import {MockDataService} from '@shared/mock-data.service';
   providedIn: 'root'
 })
 export class AuthService {
-  private backUrl: string = 'back_url';
-  private backParams: string = 'back_params';
-
   private strLogin = 'userLogin';
   private strPassword = 'userPassword';
   loginState: BehaviorSubject<boolean>;
@@ -56,12 +53,10 @@ export class AuthService {
     }
 
     // Перенаправляем на исходную страницу
-    let backUrl: string = this.routeService.getQueryParam(this.backUrl);
-    let backParams: string = this.routeService.getQueryParam(this.backParams);
-    backUrl? this.routeService.goToLink(backUrl) : this.routeService.goToLink(CONSTANTS.APP.MAIN);
-    if (backParams) setTimeout( _ => {
-      this.routeService.setQueryParam(JSON.parse(backParams));
-    }, 10);
+    let backUrl: string = this.routeService.getQueryParam(CONSTANTS.QUERY.BACK_URL);
+    let backParams: string = this.routeService.getQueryParam(CONSTANTS.QUERY.BACK_PARAMS);
+    let params = backParams? JSON.parse(backParams) : {};
+    backUrl? this.routeService.goToLinkWithQuery(backUrl, false ,params) : this.routeService.goToLink(CONSTANTS.APP.MAIN);
   }
 
   onLogout(): void {

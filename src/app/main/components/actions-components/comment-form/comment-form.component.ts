@@ -8,6 +8,7 @@ import {AppRoutingService} from '@routes/app-routing.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AppFormService} from '@shared/services/app-form.service';
 import {CustomValidators} from '@shared/services/custom-validators';
+import {CONSTANTS} from '@shared/config/constants';
 
 @Component({
   selector: 'app-comment-form',
@@ -60,6 +61,6 @@ export class CommentFormComponent implements OnInit, OnDestroy {
     }
   }
   goToLogin(event){
-    this.routerService.goToLinkSave('login');
+    this.routerService.goToLinkSave(CONSTANTS.APP.LOGIN);
   }
 }

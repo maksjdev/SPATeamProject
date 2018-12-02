@@ -1,24 +1,26 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
-import {DemoPageComponent} from '@demo/demo-page.component';
+import {AdminPageComponent} from '@admin/admin-page.component';
+import {BlockComponentsModule} from '@components/block-components/block-components.module';
 
 const router: Routes = [{
-  path: '', component: DemoPageComponent, data: {
-    title: 'Demo Page!'
+  path: '', component: AdminPageComponent, data: {
+    title: 'Admin Page!'
   }
 }];
 
 @NgModule({
   imports: [
     CommonModule,
+    BlockComponentsModule,
     RouterModule.forChild(router),
   ],
   exports: [
     RouterModule
   ],
   declarations: [
-    DemoPageComponent
+    AdminPageComponent
   ]
 })
-export class DemoPageModule { }
+export class AdminPageModule { }

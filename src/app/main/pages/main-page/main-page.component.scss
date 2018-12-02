@@ -22,13 +22,7 @@
   flex-direction: column;
 }
 .sidebar-block {
-  display: flex;
   grid-area: s;
-  flex-direction: column;
-  width: 300px;
-  &:last-child {
-    margin-bottom: 0;
-  }
   &__category {
     width: 100%;
     margin-bottom: $normal-padding;
