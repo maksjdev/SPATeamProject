@@ -8,8 +8,8 @@
     <ul class="category-item__content--menu">
       <li class="list-item" *ngFor="let item of categorys">
         <a href = "#" class="list-item__link">
-          <span class="list-item__link--text"> {{ item['name'] }}</span>
-          <p class="list-item__link--counter" title="Amount of new publishing per 24 hours">{{ item['amount'] }}</p>
+          <span class="list-item__link--text"> {{ item.name }}</span>
+          <p class="list-item__link--counter" title="Amount of new publishing per 24 hours">{{ item.amount }}</p>
         </a>
       </li>
     </ul>

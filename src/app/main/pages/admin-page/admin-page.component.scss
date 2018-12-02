@@ -8,10 +8,33 @@
 }
 .admin-panel {
   grid-area: a;
+  &__header {
+    margin-bottom: $normal-padding;
+  }
   &__actions {
-    margin-top: $big-padding;
+    &--simple {
+      margin-bottom: $huge-padding;
+      & > * {
+        margin-right: $normal-padding;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+    &--forms {
+
+    }
   }
 }
 .sidebar-block {
   grid-area: s;
+}
+
+.form-category {
+  &__line {
+    margin-bottom: $big-padding;
+  }
+  &__bottom {
+
+  }
 }

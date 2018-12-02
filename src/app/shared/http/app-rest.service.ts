@@ -5,6 +5,8 @@ import {catchError, map, retry} from 'rxjs/operators';
 import {News} from '@shared/models/News';
 import {HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {CONSTANTS} from '@shared/config/constants';
+import {Category} from '@shared/models/Category';
 
 @Injectable()
 export class AppRestService {
@@ -16,27 +18,40 @@ export class AppRestService {
     this.host = environment.host;
   }
 
-  sendNews(news: News): Observable<HttpResponse<ArrayBuffer>> {
-    return this.connectService.postData(this.host+'add-news', news).pipe(
+  private getData(ulr: string) {
+    return this.connectService.getData(this.host + ulr);
+  }
+  private sendData(data: any, ulr: string): Observable<HttpResponse<ArrayBuffer>> {
+    return this.connectService.postData(this.host + ulr, data).pipe(
       map( (response: HttpResponse<ArrayBuffer>) => {
-        // Ответ сервера
         console.log(response.body, response.headers);
         return response;
       })
     );
   }
 
-  public getMockData(route: string) {
-    return this.connectService.getData(this.host + route).pipe(
-      catchError(this.connectService.handleError('getSpecificData', []))
-    );
+
+  public sendNews(news: News): Observable<HttpResponse<ArrayBuffer>> {
+    let url = CONSTANTS.SERVER.ADD_NEWS;
+    return this.sendData(news, url);
+  }
+  public sendCategory(category: Category): Observable<HttpResponse<ArrayBuffer>> {
+    let url = CONSTANTS.SERVER.ADD_CATEGORY;
+    return this.sendData(category, url);
   }
 
+  public getUserData(id: string){
+    let url = CONSTANTS.SERVER.GET_USER;
+    return this.getData(url).pipe(
+      retry(1),
+      catchError(this.connectService.handleError(`getUserData #${id}`, []))
+    );
+  }
   public getAppConfigData() {
-    return this.connectService.getData(this.host + 'config').pipe(
-      // retry(3),
+    let url = CONSTANTS.SERVER.CONFIG;
+    return this.getData(url).pipe(
+      retry(1),
       catchError(this.connectService.handleError('getConfigData', []))
     );
   }
-
 }

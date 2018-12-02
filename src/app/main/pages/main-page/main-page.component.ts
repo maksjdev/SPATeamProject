@@ -9,6 +9,7 @@ import {Advertising} from '@components/block-components/ad-item-block/Advertisin
 import {PaginationItem} from '@shared/models/PaginationItem';
 import {throttleTime} from 'rxjs/operators';
 import {Category} from '@shared/models/Category';
+import {CategoryDataService} from '@shared/category-data.service';
 
 @Component({
   selector: 'app-main-page',
@@ -30,13 +31,14 @@ export class MainPageComponent implements OnInit, OnDestroy {
     private newsService: NewsDataService,
     private configService: ConfigService,
     private routingService: AppRoutingService,
+    private categoryService: CategoryDataService,
   ) {
     this.newsList = [];
     this.adv =  new Advertising('Burger King',
       'https://burgerking.ru/images/actions/BK-2037_CHEESY_710х459_.jpg',
       'https://burgerking.ru/actions');
 
-    this.categoryAll = this.newsService.getCategories();
+    this.categoryAll = this.categoryService.getAllCategories();
     this.categoryFilter = [];
   }
 
@@ -62,7 +64,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
       this.onRatingChange(rating);
       this.onPeriodChange(period);
       this.onPaginationChange(parseInt(page));
-      let categoryArr: Array<string> = this.newsService.getCategoryNames(this.categoryFilter);
+      let categoryArr: Array<string> = this.categoryService.getCategoryNames(this.categoryFilter);
       this.newsList = this.newsService.getNewsFromServer(parseInt(page), period, rating, categoryArr);
     });
   }

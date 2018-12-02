@@ -3,6 +3,7 @@ import {AppRoutingService} from '@routes/app-routing.service';
 import {CONSTANTS} from '@shared/config/constants';
 import {Category} from '@shared/models/Category';
 import {NewsDataService} from '@shared/news-data.service';
+import {CategoryDataService} from '@shared/category-data.service';
 
 @Component({
   selector: 'app-category-select',
@@ -20,7 +21,7 @@ export class CategorySelectComponent implements OnChanges {
 
   constructor(
     private routingService: AppRoutingService,
-    private newsService: NewsDataService
+    private categoryService: CategoryDataService
   ) {
     this.paramName = CONSTANTS.QUERY.CATEGORY;
   }
@@ -29,7 +30,7 @@ export class CategorySelectComponent implements OnChanges {
     if (changes.hasOwnProperty('selectedCategory') && changes['selectedCategory'].currentValue) {
       if (this.selectedCategory.length > 0) {
         setTimeout(_ => {
-          let param = {[this.paramName]: this.newsService.getCategoryNames(this.selectedCategory).join(',')};
+          let param = {[this.paramName]: this.categoryService.getCategoryNames(this.selectedCategory).join(',')};
           this.routingService.setQueryParam(param);
         }, 20);
       } else {

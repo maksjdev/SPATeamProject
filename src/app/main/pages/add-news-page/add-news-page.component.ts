@@ -6,8 +6,8 @@ import {News} from '@shared/models/News';
 import {User} from '@shared/models/User';
 import {UserService} from '@shared/user.service';
 import {Category} from '@shared/models/Category';
-import {catchError} from 'rxjs/operators';
 import {HttpResponse} from '@angular/common/http';
+import {CategoryDataService} from '@shared/category-data.service';
 
 @Component({
   selector: 'app-add-news-page',
@@ -25,17 +25,18 @@ export class AddNewsPageComponent implements OnInit {
 
   constructor(
     private formBuild: FormBuilder,
+    private userService: UserService,
     private formService: AppFormService,
     private newsService: NewsDataService,
-    private userService: UserService
+    private categoryService: CategoryDataService
   ) {}
 
   ngOnInit() {
     let title = '', image =  '', tags = [], text = '';
 
     // Передали статью (не обязательно) и категории
-    this.news = this.newsService.getFullNews('1');
-    this.categories = this.newsService.getCategories();
+    this.news = this.newsService.getFullNewsData('1111');
+    this.categories = this.categoryService.getAllCategories();
 
     if (this.news){
       title = this.news.title;

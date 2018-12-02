@@ -19,7 +19,7 @@ export class DemoPageComponent implements OnDestroy {
     private newsService: NewsDataService,
     private _sanitizer: DomSanitizer
   ) {
-    this._htmlText = this.newsService.getFullNews('df').text;
+    this._htmlText = this.newsService.getFullNewsData('1111').text;
   }
 
   ngOnDestroy(): void {
@@ -32,8 +32,8 @@ export class DemoPageComponent implements OnDestroy {
   }
 
   public loadData(event){
-    this.subscribe = this.restService.getMockData('users').subscribe( (data) => {
-      Object.keys(data).length > 0 ? alert(JSON.stringify(data[0])) : alert('Запути сервер *npm mock*, дурашка))');
+    this.subscribe = this.restService.getUserData('1').subscribe( (data) => {
+      Object.keys(data).length > 0 ? alert(JSON.stringify(data)) : alert('Запути сервер *npm mock*, дурашка))');
     });
   }
 }

@@ -23,8 +23,8 @@ export class NewsPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fullNews = this.newsService.getFullNewsData();
-    this.commentsList = this.newsService.getComments(5);
+    this.fullNews = this.newsService.getFullNewsData('1111');
+    this.commentsList = this.newsService.getComments('1111');
   }
 
   onAddComment(comment){

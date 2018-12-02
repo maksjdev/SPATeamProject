@@ -5,11 +5,12 @@ import {AdItemBlockComponent} from './ad-item-block/ad-item-block.component';
 import {StatisticTableComponent} from './statistic-table/statistic-table.component';
 import {NewsDataService} from '@shared/news-data.service';
 import {AppPipesModule} from '@shared/pipes/app-pipes.module';
-import {CategoryItemBlockComponent} from './category-block/category-item-block.component';
+import {CategoryBlockComponent} from './category-block/category-block.component';
 import {TopNewsBlockComponent} from './top-news-block/top-news-block.component';
 import {NewsSmallBlockComponent} from '@components/block-components/news-small-block/news-small-block.component';
 import {FullNewsBlockComponent} from '@components/block-components/full-news-block/full-news-block.component';
-import {CommentFullItemComponent } from './comment-full-item/comment-full-item.component';
+import {CommentFullItemComponent} from './comment-full-item/comment-full-item.component';
+import {CategoryDataService} from '@shared/category-data.service';
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import {CommentFullItemComponent } from './comment-full-item/comment-full-item.c
     NewsSmallBlockComponent,
     AdItemBlockComponent,
     StatisticTableComponent,
-    CategoryItemBlockComponent,
+    CategoryBlockComponent,
     TopNewsBlockComponent,
     StatisticTableComponent,
     FullNewsBlockComponent,
@@ -32,13 +33,14 @@ import {CommentFullItemComponent } from './comment-full-item/comment-full-item.c
     NewsSmallBlockComponent,
     AdItemBlockComponent,
     StatisticTableComponent,
-    CategoryItemBlockComponent,
+    CategoryBlockComponent,
     TopNewsBlockComponent,
     FullNewsBlockComponent,
     CommentFullItemComponent,
   ],
   providers: [
     NewsDataService,
+    CategoryDataService,
   ]
 })
 export class BlockComponentsModule { }
