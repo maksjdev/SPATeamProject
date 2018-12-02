@@ -7,7 +7,7 @@ import {AppRoutingService} from '@routes/app-routing.service';
 import {CONSTANTS} from '@shared/config/constants';
 import {Advertising} from '@components/block-components/ad-item-block/Advertising';
 import {PaginationItem} from '@shared/models/PaginationItem';
-import {debounceTime, throttleTime} from 'rxjs/operators';
+import {throttleTime} from 'rxjs/operators';
 import {Category} from '@shared/models/Category';
 
 @Component({

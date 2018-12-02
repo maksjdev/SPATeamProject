@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {UserComponentsModule} from '@components/user-components/user-components.module';
 import {RouterModule, Routes} from '@angular/router';
 import {RegistrationPageComponent} from '@registration/registration-page.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -20,7 +19,6 @@ const router: Routes = [{
     FormsModule,
     ReactiveFormsModule,
     ActionsComponentsModule,
-    UserComponentsModule,
 
     MatInputModule,
     RouterModule.forChild(router),

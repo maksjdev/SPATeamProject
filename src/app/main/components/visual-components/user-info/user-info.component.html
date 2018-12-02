@@ -1,10 +1,15 @@
 
 <div class="user-info__name">{{ user.first_name + ' ' + user.last_name }}</div>
-<div class="user-info__role">{{ user.role }}</div>
+<div class="user-info__role" [class.admin]="isAdmin">
+  <a *ngIf="isAdmin; else simpleUser" [routerLink] = "'/'+adminPage">{{ user.role }}</a>
+</div>
 <div class="user-info__image">
   <img class="user-info__image--img" src="{{ user.image }}">
   <i class="user-info__image--logout fas fa-times"
      [title]="'LogOut'" (click)="onLogout($event)"></i>
 </div>
 
+<ng-template #simpleUser>
+  {{ user.role }}
+</ng-template>
 

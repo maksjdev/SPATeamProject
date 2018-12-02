@@ -17,6 +17,7 @@
       "@about/*": ["src/app/main/pages/about-page/*"],
       "@add-news/*": ["src/app/main/pages/add-news-page/*"],
       "@demo/*": ["src/app/main/pages/demo-page/*"],
+      "@admin/*": ["src/app/main/pages/admin-page/*"],
 
       "@header/*": ["src/app/main/header/*"],
       "@footer/*": ["src/app/main/footer/*"]

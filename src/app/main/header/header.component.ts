@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AppRoutingService} from '@routes/app-routing.service';
 import {AppRouterData} from '@routes/AppRouterData';
 import {AuthService} from '@shared/auth/auth.service';
+import {CONSTANTS} from '@shared/config/constants';
 
 @Component({
   selector: 'app-header',
@@ -26,7 +27,7 @@ export class HeaderComponent implements OnInit {
     // Следим за страницей на которой находимся
     this.routingService.getCurrentRouteData().subscribe( (data: AppRouterData) => {
       if (data.path){
-        this.signPage = data.path.includes('login') || data.path.includes('registration');
+        this.signPage = data.path.includes(CONSTANTS.APP.LOGIN) || data.path.includes(CONSTANTS.APP.REGISTRATION);
       }
     });
   }

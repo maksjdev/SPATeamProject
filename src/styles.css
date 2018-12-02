@@ -439,6 +439,13 @@ img {
   width: 1000px;
   margin: 20px auto; }
 
+.sidebar-block {
+  display: flex;
+  flex-direction: column;
+  width: 300px; }
+  .sidebar-block:last-child {
+    margin-bottom: 0; }
+
 .shadow-block {
   -webkit-box-shadow: 0 10px 6px -6px #262729;
   box-shadow: 0 6px 6px 0 #1D1D1F; }

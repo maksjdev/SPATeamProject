@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {AppRoutingService} from '@routes/app-routing.service';
+import {CONSTANTS} from '@shared/config/constants';
 
 @Component({
   selector: 'app-sign-buttons',
@@ -16,6 +17,6 @@ export class SignButtonsComponent {
     this.routerService.goToLinkSave('registration');
   }
   OnSignIn (event) {
-    this.routerService.goToLinkSave('login');
+    this.routerService.goToLinkSave(CONSTANTS.APP.LOGIN);
   }
 }

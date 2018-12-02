@@ -100,7 +100,14 @@ img {
   width: $main-content-wight;
   margin: $huge-padding auto;
 }
-
+.sidebar-block {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
 
 // Визуальные общие стили
 .shadow-block {

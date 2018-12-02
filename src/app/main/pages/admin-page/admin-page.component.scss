@@ -1,0 +1,17 @@
+@import "~src/assets/base-css/theme";
+@import "~src/assets/base-css/vars";
+
+:host {
+  display: grid;
+  gap: $normal-padding;
+  grid-template: "a s" auto / 1fr 300px;
+}
+.admin-panel {
+  grid-area: a;
+  &__actions {
+    margin-top: $big-padding;
+  }
+}
+.sidebar-block {
+  grid-area: s;
+}
