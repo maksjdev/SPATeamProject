@@ -6,6 +6,8 @@ import {Comment} from '@shared/models/Comment';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {filter, switchMap} from 'rxjs/operators';
 import {AppScrollService} from '@shared/services/app-scroll.service';
+import {AppRoutingService} from '@routes/app-routing.service';
+import {CONSTANTS} from '@shared/config/constants';
 
 @Component({
   selector: 'app-news-page',
@@ -19,6 +21,7 @@ export class NewsPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private routerService: AppRoutingService,
     private newsService: NewsDataService,
     private scrollService: AppScrollService
   ) {
@@ -36,6 +39,10 @@ export class NewsPageComponent implements OnInit {
       })
     ).subscribe( (news: News) => {
       this.fullNews = news;
+      if (!news) {
+        // Если как-то так вышло что новости нету
+        this.routerService.goToLinkWithQuery(CONSTANTS.APP.MAIN)
+      }
     });
 
     this.scrollService.scrollState.pipe(
@@ -58,7 +65,8 @@ export class NewsPageComponent implements OnInit {
     console.log(`Delete comment: ${comment.id}`);
   }
   onEdit(event){
-    // Необходимо отправить на страницу редактирования
+    let id = this.fullNews.getId();
+    this.routerService.goToEditNews(id);
   }
   onFavorites (state){
     // Необходимо добавить / удалить в избранное

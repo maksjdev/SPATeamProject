@@ -9,6 +9,8 @@ import {Category} from '@shared/models/Category';
 import {HttpResponse} from '@angular/common/http';
 import {CategoryDataService} from '@shared/category-data.service';
 import {Subscription} from 'rxjs';
+import {switchMap} from 'rxjs/operators';
+import {ActivatedRoute, ParamMap} from '@angular/router';
 
 @Component({
   selector: 'app-add-news-page',
@@ -17,6 +19,7 @@ import {Subscription} from 'rxjs';
 })
 export class AddNewsPageComponent implements OnInit, OnDestroy {
   public news: News;
+  public pageTitle: string;
   public categories: Array<Category>;
   public addNewsForm: FormGroup;
   private _subscription: Subscription;
@@ -26,6 +29,7 @@ export class AddNewsPageComponent implements OnInit, OnDestroy {
   };
 
   constructor(
+    private route: ActivatedRoute,
     private formBuild: FormBuilder,
     private userService: UserService,
     private formService: AppFormService,
@@ -34,10 +38,19 @@ export class AddNewsPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.pageTitle = 'Добавление новости';
     let title = '', image =  '', tags = [], text = '';
 
-    // Передали статью (не обязательно) и категории
-    // this.news = this.newsService.getFullNewsData('1111');
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        let id = params.get('id');
+        return this.newsService.getFullNewsData(id);
+      })
+    ).subscribe( (news: News) => {
+      this.news = news;
+      if (news) this.pageTitle = 'Редактирование новости';
+    });
+
     this._subscription = this.categoryService.getAllCategories().subscribe((value: Array<Category>) => {
       this.categories  = value;
     });

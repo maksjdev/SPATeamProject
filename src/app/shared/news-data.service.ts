@@ -34,7 +34,7 @@ export class NewsDataService {
   }
 
   public getFullNewsData(id: string): Observable<News> {
-    return of(this.mockDataService.getMockNews());
+    return id? of(this.mockDataService.getMockNews()) : of(null);
   }
   public getMediumNewsData(id: string): Observable<News> {
     return of(this.mockDataService.getMockNews());

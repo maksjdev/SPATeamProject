@@ -9,9 +9,9 @@ import {CONSTANTS} from '@shared/config/constants';
   providedIn: 'root'
 })
 export class AppRoutingService {
+  activeRoute: ActivatedRoute;
   activeQueryParam: BehaviorSubject<ParamMap>;
   currentRouteData: BehaviorSubject<AppRouterData>;
-  activeRoute: ActivatedRoute;
 
   constructor(
     private router: Router,
@@ -41,6 +41,7 @@ export class AppRoutingService {
         }}
     });
   }
+
   public getCurrentRouteData(): BehaviorSubject<AppRouterData>{
     return this.currentRouteData;
   }
@@ -103,5 +104,8 @@ export class AppRoutingService {
 
   goToNews(id: string){
     this.router.navigate(['/'+CONSTANTS.APP.NEWS, id]);
+  }
+  goToEditNews(id: string){
+    this.router.navigate(['/'+CONSTANTS.APP.NEWS+'/'+CONSTANTS.APP.EDIT, id]);
   }
 }

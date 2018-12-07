@@ -6,17 +6,20 @@ import {AdminGuard} from '@shared/auth/admin.guard';
 import {CONSTANTS} from '@shared/config/constants';
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: CONSTANTS.APP.ABOUT},
+  {path: '', pathMatch: 'full', redirectTo: CONSTANTS.APP.MAIN},
   {path: CONSTANTS.APP.MAIN, component: MainPageComponent, data: {
       title: 'Main Page!'
     }
   },
-  {path: CONSTANTS.APP.NEWS+'/:id', loadChildren: '@news/news-page.module#NewsPageModule'},
-  {path: CONSTANTS.APP.CREATE, loadChildren: '@add-news/add-news-page.module#AddNewsPageModule',
-    canLoad: [AuthGuard], canActivate: [AuthGuard]
-  },
-  {path: CONSTANTS.APP.EDIT, loadChildren: '@add-news/add-news-page.module#AddNewsPageModule',
-    canLoad: [AuthGuard], canActivate: [AuthGuard]
+  {path: CONSTANTS.APP.NEWS, children: [
+      {path: CONSTANTS.APP.CREATE, loadChildren: '@add-news/add-news-page.module#AddNewsPageModule',
+        canLoad: [AuthGuard], canActivate: [AuthGuard]
+      },
+      {path: CONSTANTS.APP.EDIT+'/:id', loadChildren: '@add-news/add-news-page.module#AddNewsPageModule',
+        canLoad: [AuthGuard], canActivate: [AuthGuard]
+      },
+      {path: ':id', pathMatch: 'full', loadChildren: '@news/news-page.module#NewsPageModule'},
+    ]
   },
 
   {path: CONSTANTS.APP.LOGIN, loadChildren: '@login/login-page.module#LoginPageModule'},
@@ -26,7 +29,7 @@ const routes: Routes = [
     canLoad: [AdminGuard], canActivate: [AdminGuard]
   },
   {path: 'demo', loadChildren: '@demo/demo-page.module#DemoPageModule'},
-  {path: '**',pathMatch: 'full', redirectTo: CONSTANTS.APP.ABOUT},
+  {path: '**',pathMatch: 'full', redirectTo: CONSTANTS.APP.MAIN},
 ];
 
 @NgModule({
