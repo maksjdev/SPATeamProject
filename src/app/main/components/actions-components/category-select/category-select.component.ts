@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '
 import {AppRoutingService} from '@routes/app-routing.service';
 import {CONSTANTS} from '@shared/config/constants';
 import {Category} from '@shared/models/Category';
-import {NewsDataService} from '@shared/news-data.service';
 import {CategoryDataService} from '@shared/category-data.service';
 
 @Component({

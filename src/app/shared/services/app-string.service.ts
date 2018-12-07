@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {ShortenPipe} from 'ngx-pipes';
-import {Category} from '@shared/models/Category';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 
 @Injectable()

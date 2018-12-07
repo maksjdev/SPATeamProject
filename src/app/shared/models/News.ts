@@ -3,6 +3,7 @@ import {User} from '@shared/models/User';
 export class News {
 
   constructor(
+    public id: string,
     public author: User,
     public date: Date,
     public title: string,
@@ -10,9 +11,12 @@ export class News {
     public image: string,
     public tags: Array<string>,
     public rating: number = 0,
-    public comments: number = 0
+    public commentNumber: number = 0
   ){}
 
+  getId(): string {
+    return this.id;
+  }
   getAuthor(): User{
     return this.author;
   }
@@ -35,8 +39,8 @@ export class News {
   getRating(): number {
     return this.rating;
   }
-  getComments(): number {
-    return this.comments;
+  getCommentNumber(): number {
+    return this.commentNumber;
   }
 }
 

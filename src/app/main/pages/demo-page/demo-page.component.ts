@@ -1,8 +1,9 @@
-import {ChangeDetectionStrategy, Component, Input, OnDestroy} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {AppRestService} from '@shared/http/app-rest.service';
 import {NewsDataService} from '@shared/news-data.service';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import {News} from '@shared/models/News';
 
 @Component({
   selector: 'app-demo-page',
@@ -10,7 +11,7 @@ import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
   styleUrls: ['./demo-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DemoPageComponent implements OnDestroy {
+export class DemoPageComponent implements OnInit, OnDestroy {
   private subscribe: Subscription;
   public _htmlText: string;
 
@@ -18,10 +19,13 @@ export class DemoPageComponent implements OnDestroy {
     private restService: AppRestService,
     private newsService: NewsDataService,
     private _sanitizer: DomSanitizer
-  ) {
-    this._htmlText = this.newsService.getFullNewsData('1111').text;
-  }
+  ) {}
 
+  ngOnInit(): void {
+    this.newsService.getFullNewsData('100').subscribe( (news: News) => {
+      this._htmlText = news.text;
+    });
+  }
   ngOnDestroy(): void {
     if (this.subscribe) this.subscribe.unsubscribe();
   }

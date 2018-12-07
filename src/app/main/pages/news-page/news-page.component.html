@@ -13,7 +13,7 @@
   </section>
 
 
-  <section *ngIf="commentsList.length > 0" class="panel shadow-block column full-news-block__comments">
+  <section *ngIf="commentsList && commentsList.length > 0" class="panel shadow-block column full-news-block__comments">
     <h4 class="full-news-block__comments-total">
       Комментарии: {{commentsList.length}}
     </h4>

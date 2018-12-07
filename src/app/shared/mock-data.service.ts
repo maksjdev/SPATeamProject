@@ -20,10 +20,10 @@ export class MockDataService {
     private dateTimeService: AppDateTimeService
   ) {
     let linkUser: string = CONSTANTS.MOCK.USER_IMAGE;
-    this.mockUser = new User('FirstName', 'LastName', linkUser, 0, 'User');
+    this.mockUser = new User('100', 'FirstName', 'LastName', linkUser, 0, 'User');
 
     let linkActiveUser: string = CONSTANTS.MOCK.USER_IMAGE;
-    this.mockActiveUser = new User('Sirius', 'Dark', linkActiveUser, 0, 'Admin');
+    this.mockActiveUser = new User('200','Sirius', 'Dark', linkActiveUser, 0, 'Admin');
 
     let commentDate = dateTimeService.unixToDate('1541538783');
     this.mockComment = new Comment(111, this.mockUser, 'Обожаю ваш ресурс! Самые авторитетные и неподкупные новости, всегда акктуально свежо, молодо и вообще всем селом читаем! NodeJS + TypeScript (JavaScript) впервые дали возможность быть FullStack и писать только на одном ЯП. Тем самым упрощая процесс профессионального роста.',commentDate, 100);
@@ -33,7 +33,7 @@ export class MockDataService {
       linkNews: string = CONSTANTS.MOCK.NEWS_IMAGE,
       date = dateTimeService.unixToDate('1541538783'),
       tags = ['Space', 'Humans', 'Potato'];
-    this.mockNews = new News (this.mockUser, date, title, text, linkNews, tags,100, 5);
+    this.mockNews = new News ( '100', this.mockUser, date, title, text, linkNews, tags,100, 5);
 
     this.categorysList = [
       new Category('111', 'Anime', 0,true),
