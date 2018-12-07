@@ -12,11 +12,13 @@
   height: max-content;
   grid-area: f;
   flex-direction: column;
-  &__news {
+  & > * {
     margin-bottom: $normal-padding;
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
   &__form {
-    margin-bottom: $normal-padding;
     padding: $normal-padding;
     &-header {
       font-weight: bold;

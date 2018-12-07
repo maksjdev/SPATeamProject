@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NewsDataService} from '@shared/news-data.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AppFormService} from '@shared/services/app-form.service';
@@ -8,22 +8,28 @@ import {UserService} from '@shared/user.service';
 import {Category} from '@shared/models/Category';
 import {HttpResponse} from '@angular/common/http';
 import {CategoryDataService} from '@shared/category-data.service';
+import {Subscription} from 'rxjs';
+import {switchMap} from 'rxjs/operators';
+import {ActivatedRoute, ParamMap} from '@angular/router';
 
 @Component({
   selector: 'app-add-news-page',
   templateUrl: './add-news-page.component.html',
   styleUrls: ['./add-news-page.component.scss']
 })
-export class AddNewsPageComponent implements OnInit {
+export class AddNewsPageComponent implements OnInit, OnDestroy {
   public news: News;
+  public pageTitle: string;
   public categories: Array<Category>;
   public addNewsForm: FormGroup;
+  private _subscription: Subscription;
 
   public formErrors = {
     n_title: '', n_text: '', n_image: '', n_tags: ''
   };
 
   constructor(
+    private route: ActivatedRoute,
     private formBuild: FormBuilder,
     private userService: UserService,
     private formService: AppFormService,
@@ -32,11 +38,22 @@ export class AddNewsPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.pageTitle = 'Добавление новости';
     let title = '', image =  '', tags = [], text = '';
 
-    // Передали статью (не обязательно) и категории
-    this.news = this.newsService.getFullNewsData('1111');
-    this.categories = this.categoryService.getAllCategories();
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        let id = params.get('id');
+        return this.newsService.getFullNewsData(id);
+      })
+    ).subscribe( (news: News) => {
+      this.news = news;
+      if (news) this.pageTitle = 'Редактирование новости';
+    });
+
+    this._subscription = this.categoryService.getAllCategories().subscribe((value: Array<Category>) => {
+      this.categories  = value;
+    });
 
     if (this.news){
       title = this.news.title;
@@ -51,6 +68,9 @@ export class AddNewsPageComponent implements OnInit {
       n_text: [text, [Validators.required]]
     });
   }
+  ngOnDestroy(): void {
+
+  }
 
   onAddNews(event){
     if (this.addNewsForm.valid){
@@ -63,7 +83,7 @@ export class AddNewsPageComponent implements OnInit {
       let author: User = this.userService.getUserData().getValue();
       let date = new Date();
 
-      let news: News = new News(author, date, title, text, image, tags);
+      let news: News = new News('228', author, date, title, text, image, tags);
       this.newsService.sendNews(news).pipe().subscribe( (value: HttpResponse<ArrayBuffer>) => {
         // Если отправка удалась -> иди на главную
         this.addNewsForm.reset();

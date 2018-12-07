@@ -1,7 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {News} from '@shared/models/News';
-import {MockDataService} from '@shared/mock-data.service';
-import {Comment} from '@shared/models/Comment';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 
 @Component({

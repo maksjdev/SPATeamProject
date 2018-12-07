@@ -18,7 +18,7 @@ export class AppRestService {
     this.host = environment.host;
   }
 
-  private getData(ulr: string) {
+  private getData(ulr: string): Observable<Object> {
     return this.connectService.getData(this.host + ulr);
   }
   private sendData(data: any, ulr: string): Observable<HttpResponse<ArrayBuffer>> {
@@ -40,14 +40,15 @@ export class AppRestService {
     return this.sendData(category, url);
   }
 
-  public getUserData(id: string){
+
+  public getUserData(id: string): Observable<Object>{
     let url = CONSTANTS.SERVER.GET_USER;
     return this.getData(url).pipe(
       retry(1),
       catchError(this.connectService.handleError(`getUserData #${id}`, []))
     );
   }
-  public getAppConfigData() {
+  public getAppConfigData(): Observable<Object>{
     let url = CONSTANTS.SERVER.CONFIG;
     return this.getData(url).pipe(
       retry(1),

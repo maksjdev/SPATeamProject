@@ -3,8 +3,11 @@ export const CONSTANTS = {
     TITLE: 'NewString',
     LN_RU: 'ru',
     MAIN: 'main',
+    NEWS: 'news',
+    CREATE: 'create',
+    EDIT: 'edit',
     ADMIN: 'admin',
-    CREATE: 'add',
+    ABOUT: 'about',
 
     REGISTRATION: 'registration',
     LOGIN: 'login',

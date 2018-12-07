@@ -56,7 +56,7 @@ export class AuthService {
     let backUrl: string = this.routeService.getQueryParam(CONSTANTS.QUERY.BACK_URL);
     let backParams: string = this.routeService.getQueryParam(CONSTANTS.QUERY.BACK_PARAMS);
     let params = backParams? JSON.parse(backParams) : {};
-    backUrl? this.routeService.goToLinkWithQuery(backUrl, false ,params) : this.routeService.goToLink(CONSTANTS.APP.MAIN);
+    backUrl? this.routeService.goToLinkWithQuery(backUrl, false, params) : this.routeService.goToLink(CONSTANTS.APP.MAIN);
   }
 
   onLogout(): void {

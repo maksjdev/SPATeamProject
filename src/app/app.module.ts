@@ -20,6 +20,7 @@ import {MainPageModule} from '@main/main-page.module';
 import localeRu from '@angular/common/locales/ru';
 import {AuthService} from '@shared/auth/auth.service';
 import {UserService} from '@shared/user.service';
+import {AppScrollService} from '@shared/services/app-scroll.service';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -55,6 +56,7 @@ export function initializeApp(configData: ConfigLoadService) {
     AppRoutingModule,
     AppDateTimeService,
     AppStringService,
+    AppScrollService,
 
     // Внедренные херни
     DatePipe, ShortenPipe,

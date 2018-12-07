@@ -1,7 +1,7 @@
 
 <span class="navigations-block__item" *ngFor="let link of navLinks">
   <a (click)="menuItemClick($event)"
-     [routerLink] = "link.path"
+     [routerLink] = "'/'+link.path"
      [routerLinkActive] = "link.class">
     <span class="link" >{{link.label}}</span>
   </a>
