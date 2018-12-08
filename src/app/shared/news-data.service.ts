@@ -25,7 +25,7 @@ export class NewsDataService {
     categories: Array<string>, search?: string
   ): Observable<Array<News>> {
     let category: string = categories.length > 0 ? categories.join(',') : 'any';
-    console.info(`Нужно - (стр. ${page}, период: ${period}, рейтинг: ${rating}),категории: ${category}, поиск: ${search || 'нету'} !`);
+    console.info(`Нужно - (стр. ${page}, период: ${period}, рейтинг: ${rating}, категории: ${category}, поиск: ${search || 'нету'})!`);
 
     let currentNews: Observable<Array<News>> = of(this.mockDataService.getMockNewsList(5));
     return currentNews;

@@ -28,8 +28,8 @@ export class CategoryBlockComponent implements OnInit {
     });
   }
   public goToMainWithCategory(category: Category): void {
-      let queryParam = {[CONSTANTS.QUERY.CATEGORY]: category.name.toLowerCase()};
-      this.routingService.goToLinkWithQuery(CONSTANTS.APP.MAIN, false, queryParam);
-      this.scrollService.scrollToTop();
+    let queryParam = {[CONSTANTS.QUERY.CATEGORY]: category.name.toLowerCase()};
+    this.routingService.goToLinkWithQuery(CONSTANTS.APP.MAIN, false, queryParam, true);
+    this.scrollService.scrollToTop();
   }
 }

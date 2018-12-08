@@ -55,6 +55,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
         let page: string = params.get(CONSTANTS.QUERY.PAGE);
         let period: string = params.get(CONSTANTS.QUERY.PERIOD);
         let rating: string = params.get(CONSTANTS.QUERY.RATING);
+        let search: string = params.get(CONSTANTS.QUERY.SEARCH);
         let categoryStr: string = params.get(CONSTANTS.QUERY.CATEGORY);
 
         if (categoryStr && categoryStr.length > 0) {
@@ -71,7 +72,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
         this.onPaginationChange(parseInt(page));
 
         let categoryArr: Array<string> = this.categoryService.getCategoryNames(this.categoryFilter);
-        return this.newsService.getNewsFromServer(parseInt(page), period, rating, categoryArr);
+        return this.newsService.getNewsFromServer(parseInt(page), period, rating, categoryArr, search);
       })
     ).subscribe( (news: Array<News>) => {
       this.newsList = news;

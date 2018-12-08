@@ -15,6 +15,7 @@ export const CONSTANTS = {
 
   QUERY: {
     PAGE: 'page',
+    SEARCH: 'search',
     PERIOD: 'period',
     RATING: 'rating',
     CATEGORY: 'category',

@@ -8,7 +8,7 @@ import {debounceTime, map} from 'rxjs/operators';
   styleUrls: ['./search-field.component.scss']
 })
 export class SearchFieldComponent implements AfterViewInit, OnDestroy{
-  @Input() stringPlaceHolder: string = "Search...";
+  @Input() stringPlaceHolder: string = "Поиск..";
   @Output() search = new EventEmitter();
   subscribe: Subscription;
 
@@ -26,7 +26,7 @@ export class SearchFieldComponent implements AfterViewInit, OnDestroy{
   }
 
   filterEvent(filter) {
-    if (filter.length > 0) this.search.emit(filter);
+    this.search.emit(filter);
   }
 }
 
