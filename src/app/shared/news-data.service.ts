@@ -17,7 +17,9 @@ export class NewsDataService {
   public sendNews(news: News): Observable<HttpResponse<ArrayBuffer>>{
     return this.restService.sendNews(news);
   }
-
+  public deleteNews(id: string): Observable<HttpResponse<ArrayBuffer>>{
+    return this.restService.deleteNews(id);
+  }
   public getNewsFromServer(
     page: number, period: string, rating: string,
     categories: Array<string>, search?: string

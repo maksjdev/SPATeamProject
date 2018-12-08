@@ -52,7 +52,7 @@ export class AdminPageComponent implements OnInit {
   }
 
   public onAddNews(event){
-    this.routingService.goToLink(CONSTANTS.APP.CREATE);
+    this.routingService.goToLink(CONSTANTS.APP.NEWS+'/'+CONSTANTS.APP.CREATE);
   }
   public onSpoiler(event){
     alert(`

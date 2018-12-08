@@ -35,10 +35,15 @@ export class AppRestService {
     let url = CONSTANTS.SERVER.ADD_NEWS;
     return this.sendData(news, url);
   }
+  public deleteNews(id: string): Observable<HttpResponse<ArrayBuffer>> {
+    let url = CONSTANTS.SERVER.DEL_NEWS;
+    return this.sendData(id, url);
+  }
   public sendCategory(category: Category): Observable<HttpResponse<ArrayBuffer>> {
     let url = CONSTANTS.SERVER.ADD_CATEGORY;
     return this.sendData(category, url);
   }
+
 
 
   public getUserData(id: string): Observable<Object>{

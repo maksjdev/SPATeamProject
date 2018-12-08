@@ -29,7 +29,14 @@ export const CONSTANTS = {
     ADD_USER: 'add-user',
     ADD_CATEGORY: 'add-category',
 
+    DEL_NEWS: 'del-news',
     GET_USER: 'users'
+  },
+
+  MSG: {
+    CONFIRM_DEL_COMMENT: 'Вы точно хотите удалить данный коментарий?',
+    CONFIRM_DEL_NEWS: 'Вы уверены что хотите удалить новость?',
+    CONFIRM_RST_NEWS: 'Вы уверены что хотите очистить новость?'
   },
 
   MOCK: {

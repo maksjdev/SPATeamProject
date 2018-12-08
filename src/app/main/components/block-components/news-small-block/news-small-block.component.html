@@ -1,10 +1,8 @@
 
 <li class="news-small" *ngIf="news">
   <div class="news-small__content">
-    <div class="news-small__content--title">
-      <a href= "#">
-        <span> {{news.title}} </span>
-      </a>
+    <div class="news-small__content--title" (click)="goToNews($event)">
+      <span> {{news.title}} </span>
     </div>
   </div>
 

@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Comment} from '@shared/models/Comment';
+import {CONSTANTS} from '@shared/config/constants';
 
 @Component({
   selector: 'app-comment-full-item',
@@ -13,7 +14,9 @@ export class CommentFullItemComponent  {
   constructor() { }
 
   OnDelete($event) {
-    this.commentDelete.emit(this.comment);
+    if (confirm(CONSTANTS.MSG.CONFIRM_DEL_COMMENT)){
+      this.commentDelete.emit(this.comment);
+    }
   }
 
   ratingRaise($event){

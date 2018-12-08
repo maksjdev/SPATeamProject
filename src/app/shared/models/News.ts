@@ -32,8 +32,8 @@ export class News {
   getImage(): string {
     return this.image;
   }
-  getTags(): string {
-    return this.image;
+  getTags(): Array<string> {
+    return this.tags;
   }
 
   getRating(): number {

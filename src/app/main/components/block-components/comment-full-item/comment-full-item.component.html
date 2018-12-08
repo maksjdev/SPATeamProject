@@ -1,24 +1,25 @@
-
-<div class="row comment__header">
+<span class="row comment__header">
   <img class="comment__header--author-image" [src]="comment.author.image" alt="*User Image*">
   <a href="" class="comment__header--author-name">
-    {{ comment.author.first_name +' '+ comment.author.last_name }}{{ ',' }}
+    {{ comment.author.first_name + ' ' + comment.author.last_name }}{{ ',' }}
   </a>
-  <span class="comment__header--date">
+  <div class="comment__header--date">
       {{ comment.date | dateTransform }}
-  </span>
-  <div class="comment__header--author-rating">
-    <span>
-      <button [title]="'Повысить'" (click)="ratingRaise($event)">
-        <i class="fas fa-angle-up"></i>
-      </button>
-      {{ comment.rating }}
-      <button [title]="'Понизить'" (click)="ratingDowngrade($event)">
-        <i class="fas fa-angle-down"></i>
-      </button>
-    </span>
   </div>
-</div>
+  <div class="comment__header--author-rating">
+    <button [title]="'Повысить'" (click)="ratingRaise($event)">
+      <i class="fas fa-angle-up"></i>
+    </button>
+    {{ comment.rating }}
+    <button [title]="'Понизить'" (click)="ratingDowngrade($event)">
+      <i class="fas fa-angle-down"></i>
+    </button>
+
+    <button [title]="'Удалить коментарий'" (click)="OnDelete($event)">
+      <i class="far fa-trash-alt"></i>
+    </button>
+  </div>
+</span>
 
 <div class="comment__wrapper">
   <div class="comment__wrapper--content">
@@ -27,7 +28,7 @@
 </div>
 
 <span class="comment__footer">
-    <button class="btn btn-default" (click)="OnDelete($event)">Удалить</button>
+    <!--<button class="btn btn-default" (click)="OnDelete($event)">Удалить</button>-->
 </span>
 
 
