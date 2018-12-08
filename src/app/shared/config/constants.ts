@@ -26,12 +26,25 @@ export const CONSTANTS = {
 
   SERVER: {
     CONFIG: 'config',
+    GET_NEWS: 'get-news',
     ADD_NEWS: 'add-news',
+    EDIT_NEWS: 'edit-news',
+    DEL_NEWS: 'del-news',
+
+    GET_USER: 'user',
+    GET_USER_FULL: 'user-full',
     ADD_USER: 'add-user',
+    EDIT_USER: 'edit-user',
+
+    GET_COMMENT: 'get-comment',
+    ADD_COMMENT: 'add-comment',
+    DELETE_COMMENT: 'del-comment',
+
+    GET_CATEGORY: 'get-category',
     ADD_CATEGORY: 'add-category',
 
-    DEL_NEWS: 'del-news',
-    GET_USER: 'users'
+    ON_LOGIN: 'login',
+    ON_REGISTER: 'registration',
   },
 
   MSG: {
