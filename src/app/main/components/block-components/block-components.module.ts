@@ -11,6 +11,7 @@ import {NewsSmallBlockComponent} from '@components/block-components/news-small-b
 import {FullNewsBlockComponent} from '@components/block-components/full-news-block/full-news-block.component';
 import {CommentFullItemComponent} from './comment-full-item/comment-full-item.component';
 import {CategoryDataService} from '@shared/category-data.service';
+import {AdvertisingDataService} from '@shared/advertising-data.service';
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import {CategoryDataService} from '@shared/category-data.service';
   providers: [
     NewsDataService,
     CategoryDataService,
+    AdvertisingDataService,
   ]
 })
 export class BlockComponentsModule { }

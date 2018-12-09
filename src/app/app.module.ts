@@ -19,7 +19,7 @@ import {ShortenPipe} from 'ngx-pipes';
 import {MainPageModule} from '@main/main-page.module';
 import localeRu from '@angular/common/locales/ru';
 import {AuthService} from '@shared/auth/auth.service';
-import {UserService} from '@shared/user.service';
+import {UserDataService} from '@shared/user-data.service';
 import {AppScrollService} from '@shared/services/app-scroll.service';
 
 registerLocaleData(localeRu, 'ru');
@@ -49,7 +49,7 @@ export function initializeApp(configData: ConfigLoadService) {
   providers: [
     // Кастомные сервисы
     AuthService,
-    UserService,
+    UserDataService,
 
     AppHttpService,
     AppRestService,

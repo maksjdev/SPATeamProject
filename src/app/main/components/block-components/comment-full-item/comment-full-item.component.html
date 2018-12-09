@@ -1,16 +1,16 @@
 <span class="row comment__header">
-  <img class="comment__header--author-image" [src]="comment.author.image" alt="*User Image*">
+  <img class="comment__header--author-image" [src]="comment.author.getImage()" alt="*User Image*">
   <a href="" class="comment__header--author-name">
-    {{ comment.author.first_name + ' ' + comment.author.last_name }}{{ ',' }}
+    {{ comment.author.getNickname()}}{{ ',' }}
   </a>
   <div class="comment__header--date">
-      {{ comment.date | dateTransform }}
+      {{ comment.getDate() | dateTransform }}
   </div>
   <div class="comment__header--author-rating">
     <button [title]="'Повысить'" (click)="ratingRaise($event)">
       <i class="fas fa-angle-up"></i>
     </button>
-    {{ comment.rating }}
+    {{ comment.getRating() }}
     <button [title]="'Понизить'" (click)="ratingDowngrade($event)">
       <i class="fas fa-angle-down"></i>
     </button>
@@ -23,7 +23,7 @@
 
 <div class="comment__wrapper">
   <div class="comment__wrapper--content">
-    <p>{{comment.text}}}</p>
+    <p>{{comment.getText()}}}</p>
   </div>
 </div>
 

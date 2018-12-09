@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AppFormService} from '@shared/services/app-form.service';
 import {News} from '@shared/models/News';
 import {User} from '@shared/models/User';
-import {UserService} from '@shared/user.service';
+import {UserDataService} from '@shared/user-data.service';
 import {Category} from '@shared/models/Category';
 import {HttpResponse} from '@angular/common/http';
 import {CategoryDataService} from '@shared/category-data.service';
@@ -32,7 +32,7 @@ export class AddNewsPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private formBuild: FormBuilder,
-    private userService: UserService,
+    private userService: UserDataService,
     private formService: AppFormService,
     private newsService: NewsDataService,
     private categoryService: CategoryDataService
@@ -78,11 +78,11 @@ export class AddNewsPageComponent implements OnInit {
       let image: string = this.addNewsForm.value['n_image'];
       let tags: Array<string> = this.addNewsForm.value['n_tags'];
 
-      let author: User = this.userService.getUserData().getValue();
+      let author: User = this.userService.getCurrentUserData().getValue();
       let date = new Date();
 
-      let news: News = new News('228', author, date, title, text, image, tags);
-      this.newsService.sendNews(news).pipe().subscribe( (value: HttpResponse<ArrayBuffer>) => {
+      let news: News = new News('100', author, date, title, text, image, tags);
+      this.newsService.createNews(news).pipe().subscribe( (value: HttpResponse<ArrayBuffer>) => {
         // Если отправка удалась -> иди на главную
         this.addNewsForm.reset();
         console.log(value);

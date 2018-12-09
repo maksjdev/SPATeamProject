@@ -26,7 +26,10 @@ export const CONSTANTS = {
 
   SERVER: {
     CONFIG: 'config',
+    GET_NEWS_LIST: 'get-news-list',
     GET_NEWS: 'get-news',
+    TOP_NEWS: 'top-news',
+
     ADD_NEWS: 'add-news',
     EDIT_NEWS: 'edit-news',
     DEL_NEWS: 'del-news',
@@ -36,11 +39,11 @@ export const CONSTANTS = {
     ADD_USER: 'add-user',
     EDIT_USER: 'edit-user',
 
-    GET_COMMENT: 'get-comment',
+    GET_COMMENTS: 'get-comments',
     ADD_COMMENT: 'add-comment',
     DELETE_COMMENT: 'del-comment',
 
-    GET_CATEGORY: 'get-category',
+    GET_ALL_CATEGORIES: 'get-category',
     ADD_CATEGORY: 'add-category',
 
     ON_LOGIN: 'login',

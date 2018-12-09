@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
-import {UserService} from '@shared/user.service';
+import {UserDataService} from '@shared/user-data.service';
 import {User} from '@shared/models/User';
 import {Comment} from '@shared/models/Comment';
 
@@ -29,12 +29,12 @@ export class CommentFormComponent implements OnInit, OnDestroy {
   constructor(
     private formBuild: FormBuilder,
     private formService: AppFormService,
-    private userService: UserService,
+    private userService: UserDataService,
     private routerService: AppRoutingService
   ) { }
 
   ngOnInit() {
-    this.subscription = this.userService.getUserData().subscribe(value => {
+    this.subscription = this.userService.getCurrentUserData().subscribe(value => {
       this.currentUser = value;
     });
 
@@ -52,7 +52,7 @@ export class CommentFormComponent implements OnInit, OnDestroy {
     if (this.CommentForm.valid){
       let text: string = this.CommentForm.value['c_text'];
       // id + date - проставит сервер
-      let comment = new Comment(1, this.currentUser, text, new Date());
+      let comment = new Comment('1', this.currentUser, text, new Date());
 
       this.addComment.emit(comment);
       this.CommentForm.reset();

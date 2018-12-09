@@ -13,11 +13,12 @@ export class CategoryDataService {
     private mockDataService: MockDataService
   ) { }
 
-  public sendCategory(category: Category): Observable<HttpResponse<ArrayBuffer>>{
+  public createCategory(category: Category): Observable<HttpResponse<ArrayBuffer>>{
     return this.restService.sendCategory(category);
   }
 
   public getAllCategories(): Observable<Array<Category>> {
+    // TODO Change for restService.getAllCategories()
     return of(this.mockDataService.getMockCategories());
   }
 

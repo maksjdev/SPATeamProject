@@ -8,6 +8,7 @@ import {filter, switchMap} from 'rxjs/operators';
 import {AppScrollService} from '@shared/services/app-scroll.service';
 import {AppRoutingService} from '@routes/app-routing.service';
 import {CONSTANTS} from '@shared/config/constants';
+import {AdvertisingDataService} from '@shared/advertising-data.service';
 
 @Component({
   selector: 'app-news-page',
@@ -17,18 +18,14 @@ import {CONSTANTS} from '@shared/config/constants';
 export class NewsPageComponent implements OnInit {
   public fullNews: News;
   public commentsList: Array<Comment>;
-  public adv: Advertising;
 
   constructor(
+    private newsService: NewsDataService,
     private route: ActivatedRoute,
     private routerService: AppRoutingService,
-    private newsService: NewsDataService,
-    private scrollService: AppScrollService
+    private scrollService: AppScrollService,
   ) {
     scrollService.scrollToTop(false);
-    this.adv =  new Advertising('Burger King',
-      'https://burgerking.ru/images/actions/BK-2115_HALLOWEEN-WHOPPER_710x459px.jpg',
-      'https://burgerking.ru/actions');
   }
 
   ngOnInit() {

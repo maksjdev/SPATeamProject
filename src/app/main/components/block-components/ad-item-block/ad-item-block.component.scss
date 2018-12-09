@@ -27,7 +27,6 @@
     margin-right: $small-padding;
     & .fas {
       cursor: pointer;
-      color: $main-text-color;
     }
   }
   &__hint {
@@ -35,5 +34,12 @@
     bottom: 12px;
     right: $small-padding;
     font-size: $small-font-size;
+    font-weight: bolder;
   }
+}
+.dark {
+  color: $main-color;
+}
+white {
+  color: $main-text-color;
 }

@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Advertising} from '@components/block-components/ad-item-block/Advertising';
+import {AdvertisingDataService} from '@shared/advertising-data.service';
 
 @Component({
   selector: 'app-ad-item-block',
@@ -10,7 +11,11 @@ import {Advertising} from '@components/block-components/ad-item-block/Advertisin
   isClosed: boolean = false;
   @Input() advertising: Advertising;
 
-  constructor() {}
+  constructor(
+    private advertisingService: AdvertisingDataService,
+  ) {
+    this.advertising = this.advertisingService.getRandomAdv();
+  }
 
   public OnClose(event): void {
     this.isClosed = true;
