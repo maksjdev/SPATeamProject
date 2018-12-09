@@ -4,7 +4,7 @@ import {FullLogoComponent} from '@components/visual-components/full-logo/full-lo
 import {SocialLinksComponent} from './social-links/social-links.component';
 import {RouterModule} from '@angular/router';
 import {FullLogoPngComponent} from '@components/visual-components/full-logo-png/full-logo-png.component';
-import {UserService} from '@shared/user.service';
+import {UserDataService} from '@shared/user-data.service';
 import {AppPipesModule} from '@shared/pipes/app-pipes.module';
 import {UserInfoComponent} from '@components/visual-components/user-info/user-info.component';
 
@@ -27,7 +27,7 @@ import {UserInfoComponent} from '@components/visual-components/user-info/user-in
     UserInfoComponent
   ],
   providers: [
-    UserService
+    UserDataService
   ]
 })
 export class VisualComponentsModule { }

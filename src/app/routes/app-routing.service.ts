@@ -62,6 +62,9 @@ export class AppRoutingService {
       queryParamsHandling: 'merge',
     });
   }
+  public removeQueryParam(queryParamName: string): void {
+    this.setQueryParam({[queryParamName]: null});
+  }
 
   public getRouterData(state, parent) {
     var data = [];
@@ -83,9 +86,9 @@ export class AppRoutingService {
     this.goToLinkWithQuery(link, true, querys)
   }
 
-  public goToLinkWithQuery(link: string, skip: boolean = false, queryParams?: object): void {
+  public goToLinkWithQuery(link: string, skip: boolean = false, queryParams?: object, merge: boolean = false): void {
     this.router.navigate([`/${link}`],
-      { queryParams: queryParams, skipLocationChange: skip });
+      { queryParams: queryParams, queryParamsHandling: merge? 'merge' : null, skipLocationChange: skip });
   }
 
   public goToLink(link: string): void{

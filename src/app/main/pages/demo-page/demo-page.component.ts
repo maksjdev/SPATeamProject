@@ -4,6 +4,7 @@ import {AppRestService} from '@shared/http/app-rest.service';
 import {NewsDataService} from '@shared/news-data.service';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {News} from '@shared/models/News';
+import {UserDataService} from '@shared/user-data.service';
 
 @Component({
   selector: 'app-demo-page',
@@ -16,7 +17,7 @@ export class DemoPageComponent implements OnInit, OnDestroy {
   public _htmlText: string;
 
   constructor(
-    private restService: AppRestService,
+    private userService: UserDataService,
     private newsService: NewsDataService,
     private _sanitizer: DomSanitizer
   ) {}
@@ -36,7 +37,7 @@ export class DemoPageComponent implements OnInit, OnDestroy {
   }
 
   public loadData(event){
-    this.subscribe = this.restService.getUserData('1').subscribe( (data) => {
+    this.subscribe = this.userService.getUserData('1').subscribe( (data) => {
       Object.keys(data).length > 0 ? alert(JSON.stringify(data)) : alert('Запути сервер *npm mock*, дурашка))');
     });
   }

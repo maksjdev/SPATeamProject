@@ -1,15 +1,15 @@
 
 <article *ngIf="news" class="column panel shadow-block full-news">
   <div class="full-news__header">
-    <h2 class="full-news__header--title">{{ news.title }}</h2>
+    <h2 class="full-news__header--title">{{ news.getTitle() }}</h2>
     <div class="row header-info">
         <div class="row header-info__author">
-          <img class="header-info__author--image" [src]="news.author.image" alt="*User Image*">
+          <img class="header-info__author--image" [src]="news.author.getImage()" alt="*User Image*">
           <a href="#" class="header-info__author--name">
-            {{ news.author.first_name +' '+ news.author.last_name }}
+            {{ news.author.getRealName() +' ('+ news.author.getNickname()+')' }}
           </a>
         </div>
-        <div class="header-info__date">{{ news.date | dateTransform }} </div>
+        <div class="header-info__date">{{ news.getDate() | dateTransform }} </div>
         <div  class="header-info__actions">
           <button class="btn-edit" (click)="onEditNews($event)">
             <i class="fas fa-edit"></i>
@@ -21,14 +21,14 @@
         </div>
     </div>
     <span class="row full-news__header--tags">
-      <div class="full-news__header--tags-item" *ngFor="let tag of news.tags">
+      <div class="full-news__header--tags-item" *ngFor="let tag of news.getTags()">
         {{ tag }}
       </div>
     </span>
   </div>
 
   <div class="full-news__image">
-    <img [src]="news.image" alt="'Main news image'">
+    <img [src]="news.getImage()" alt="'Main news image'">
   </div>
 
   <div class="full-news__body content__wrapper" [innerHTML]="htmlContent">

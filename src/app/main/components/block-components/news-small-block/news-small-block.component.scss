@@ -8,6 +8,9 @@
   &__content {
     height: 100%;
     padding: $normal-padding 0;
+    &--title {
+      cursor: pointer;
+    }
   }
   &__info {
     display: flex;

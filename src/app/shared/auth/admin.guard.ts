@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {CONSTANTS} from '@shared/config/constants';
 import {AuthService} from '@shared/auth/auth.service';
 import {AppRoutingService} from '@routes/app-routing.service';
-import {UserService} from '@shared/user.service';
+import {UserDataService} from '@shared/user-data.service';
 import {User} from '@shared/models/User';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class AdminGuard implements CanActivate, CanLoad {
 
   constructor(
     private authService: AuthService,
-    private userService: UserService,
+    private userService: UserDataService,
     private routerService: AppRoutingService,
   ) {}
 

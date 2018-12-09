@@ -1,27 +1,25 @@
 
 <li class="news-small" *ngIf="news">
   <div class="news-small__content">
-    <div class="news-small__content--title">
-      <a href= "#">
-        <span> {{news.title}} </span>
-      </a>
+    <div class="news-small__content--title" (click)="goToNews($event)">
+      <span> {{news.getTitle()}} </span>
     </div>
   </div>
 
   <div class="news-small__info">
     <div class="news-small__info--author">
-      {{ (news.author.first_name +" "+ news.author.last_name) | trimString: 15 }}
+      {{ news.author.getRealName() | trimString: 15 }}
     </div>
     <div class="news-small__info--comment">
-    {{ news.comments }}
+    {{ news.getCommentNumber() }}
     <i class="main far fa-comment-dots"></i>
   </div>
     <div class="news-small__info--rating">
-      {{ news.rating }}
+      {{ news.getRating() }}
       <i class="main fas fa-star"></i>
     </div>
     <div class="news-small__info--date">
-      {{ news.date | date: 'dd.MM.yyyy' }}
+      {{ news.getDate() | date: 'dd.MM.yyyy' }}
       <i class="main far fa-calendar-alt"></i>
     </div>
   </div>

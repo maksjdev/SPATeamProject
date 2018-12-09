@@ -14,8 +14,11 @@ export class NewsDataService {
     private mockDataService: MockDataService
   ) {}
 
-  public sendNews(news: News): Observable<HttpResponse<ArrayBuffer>>{
+  public createNews(news: News): Observable<HttpResponse<ArrayBuffer>>{
     return this.restService.sendNews(news);
+  }
+  public deleteNews(id: string): Observable<HttpResponse<ArrayBuffer>>{
+    return this.restService.deleteNews(id);
   }
 
   public getNewsFromServer(
@@ -23,27 +26,33 @@ export class NewsDataService {
     categories: Array<string>, search?: string
   ): Observable<Array<News>> {
     let category: string = categories.length > 0 ? categories.join(',') : 'any';
-    console.info(`Нужно - (стр. ${page}, период: ${period}, рейтинг: ${rating}),категории: ${category}, поиск: ${search || 'нету'} !`);
+    console.info(`Нужно - (стр. ${page}, период: ${period}, рейтинг: ${rating}, категории: ${category}, поиск: ${search || 'нету'})!`);
 
+    // TODO Change for restService.getNewsList()
     let currentNews: Observable<Array<News>> = of(this.mockDataService.getMockNewsList(5));
     return currentNews;
   }
 
   public getTopNews(): Observable<Array<News>> {
+    // TODO Change for restService.getTopNews()
     return of(this.mockDataService.getMockNewsList(5));
   }
 
   public getFullNewsData(id: string): Observable<News> {
+    // TODO Change for restService.getNewsData('full')
     return id? of(this.mockDataService.getMockNews()) : of(null);
   }
   public getMediumNewsData(id: string): Observable<News> {
+    // TODO Change for restService.getNewsData('medium')
     return of(this.mockDataService.getMockNews());
   }
   public getSmallNewsData(id: string): Observable<News> {
+    // TODO Change for restService.getNewsData('small')
     return of(this.mockDataService.getMockNews());
   }
 
-  public getComments(id: string): Observable<Array<Comment>>{
+  public getComments(id: string): Observable<Array<Comment>> {
+    // TODO Change for restService.getAllComments()
     return of(this.mockDataService.getMockCommentList(5));
   }
 }

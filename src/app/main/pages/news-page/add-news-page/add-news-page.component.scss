@@ -36,10 +36,15 @@
     }
     &--bottom {
       height: 100%;
-      .add-bnt {
+      &-actions {
         margin-left: auto;
         margin-bottom: auto;
-        height: 40px;
+        & > * {
+          margin-right: $normal-padding;
+          &:last-child {
+            margin-right: 0;
+          }
+        }
       }
     }
   }

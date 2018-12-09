@@ -45,8 +45,9 @@
     margin-bottom: 0;
   }
   &--text {
-    letter-spacing: 1px;
+    cursor: pointer;
     font-weight: 400;
+    letter-spacing: 1px;
     font-family: $standart-font;
     font-size: $normal-font-size;
   }

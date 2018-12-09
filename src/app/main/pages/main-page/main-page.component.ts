@@ -5,7 +5,6 @@ import {NewsDataService} from '@shared/news-data.service';
 import {Subscription} from 'rxjs';
 import {AppRoutingService} from '@routes/app-routing.service';
 import {CONSTANTS} from '@shared/config/constants';
-import {Advertising} from '@components/block-components/ad-item-block/Advertising';
 import {PaginationItem} from '@shared/models/PaginationItem';
 import {switchMap, throttleTime} from 'rxjs/operators';
 import {Category} from '@shared/models/Category';
@@ -24,7 +23,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
   categoryFilter: Array<Category>;
   pagination: PaginationItem;
 
-  adv: Advertising;
   newsList: Array<News>;
   _subscriptionC: Subscription;
   _subscriptionN: Subscription;
@@ -36,9 +34,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
     private categoryService: CategoryDataService,
   ) {
     this.newsList = [];
-    this.adv =  new Advertising('Burger King',
-      'https://burgerking.ru/images/actions/BK-2037_CHEESY_710х459_.jpg',
-      'https://burgerking.ru/actions');
     this.categoryFilter = [];
   }
 
@@ -55,6 +50,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
         let page: string = params.get(CONSTANTS.QUERY.PAGE);
         let period: string = params.get(CONSTANTS.QUERY.PERIOD);
         let rating: string = params.get(CONSTANTS.QUERY.RATING);
+        let search: string = params.get(CONSTANTS.QUERY.SEARCH);
         let categoryStr: string = params.get(CONSTANTS.QUERY.CATEGORY);
 
         if (categoryStr && categoryStr.length > 0) {
@@ -71,7 +67,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
         this.onPaginationChange(parseInt(page));
 
         let categoryArr: Array<string> = this.categoryService.getCategoryNames(this.categoryFilter);
-        return this.newsService.getNewsFromServer(parseInt(page), period, rating, categoryArr);
+        return this.newsService.getNewsFromServer(parseInt(page), period, rating, categoryArr, search);
       })
     ).subscribe( (news: Array<News>) => {
       this.newsList = news;

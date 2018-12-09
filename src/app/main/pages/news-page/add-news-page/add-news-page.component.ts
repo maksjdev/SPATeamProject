@@ -4,20 +4,21 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AppFormService} from '@shared/services/app-form.service';
 import {News} from '@shared/models/News';
 import {User} from '@shared/models/User';
-import {UserService} from '@shared/user.service';
+import {UserDataService} from '@shared/user-data.service';
 import {Category} from '@shared/models/Category';
 import {HttpResponse} from '@angular/common/http';
 import {CategoryDataService} from '@shared/category-data.service';
 import {Subscription} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 import {ActivatedRoute, ParamMap} from '@angular/router';
+import {CONSTANTS} from '@shared/config/constants';
 
 @Component({
   selector: 'app-add-news-page',
   templateUrl: './add-news-page.component.html',
   styleUrls: ['./add-news-page.component.scss']
 })
-export class AddNewsPageComponent implements OnInit, OnDestroy {
+export class AddNewsPageComponent implements OnInit {
   public news: News;
   public pageTitle: string;
   public categories: Array<Category>;
@@ -31,7 +32,7 @@ export class AddNewsPageComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private formBuild: FormBuilder,
-    private userService: UserService,
+    private userService: UserDataService,
     private formService: AppFormService,
     private newsService: NewsDataService,
     private categoryService: CategoryDataService
@@ -56,10 +57,10 @@ export class AddNewsPageComponent implements OnInit, OnDestroy {
     });
 
     if (this.news){
-      title = this.news.title;
-      image = this.news.image;
-      tags = this.news.tags;
-      text = this.news.text;
+      title = this.news.getTitle();
+      image = this.news.getImage();
+      tags = this.news.getTags();
+      text = this.news.getText();
     }
     this.addNewsForm = this.formBuild.group({
       n_title:    [title, [Validators.required]],
@@ -68,11 +69,8 @@ export class AddNewsPageComponent implements OnInit, OnDestroy {
       n_text: [text, [Validators.required]]
     });
   }
-  ngOnDestroy(): void {
 
-  }
-
-  onAddNews(event){
+  public onAddNews(event): void{
     if (this.addNewsForm.valid){
       // Собираем информацию с полей
       let title: string = this.addNewsForm.value['n_title'];
@@ -80,17 +78,28 @@ export class AddNewsPageComponent implements OnInit, OnDestroy {
       let image: string = this.addNewsForm.value['n_image'];
       let tags: Array<string> = this.addNewsForm.value['n_tags'];
 
-      let author: User = this.userService.getUserData().getValue();
+      let author: User = this.userService.getCurrentUserData().getValue();
       let date = new Date();
 
-      let news: News = new News('228', author, date, title, text, image, tags);
-      this.newsService.sendNews(news).pipe().subscribe( (value: HttpResponse<ArrayBuffer>) => {
+      let news: News = new News('100', author, date, title, text, image, tags);
+      this.newsService.createNews(news).pipe().subscribe( (value: HttpResponse<ArrayBuffer>) => {
         // Если отправка удалась -> иди на главную
         this.addNewsForm.reset();
         console.log(value);
       });
     } else {
       this.formErrors = this.formService.validateForm(this.addNewsForm, this.formErrors, false);
+    }
+  }
+  public onDeleteNews(event){
+    if (this.news && confirm(CONSTANTS.MSG.CONFIRM_DEL_NEWS)) {
+      let id: string = this.news.getId();
+      this.newsService.deleteNews(id);
+    }
+  }
+  public onResetNews(event){
+    if (confirm(CONSTANTS.MSG.CONFIRM_RST_NEWS)){
+      this.addNewsForm.reset();
     }
   }
 }
