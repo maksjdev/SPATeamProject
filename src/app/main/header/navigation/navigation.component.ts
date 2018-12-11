@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {CONSTANTS} from '@shared/config/constants';
 
 @Component({
   selector: 'app-navigation',
@@ -7,10 +8,9 @@ import {Component} from '@angular/core';
 })
 export class NavigationComponent {
   navLinks = [
-    {path: '/main',   label: 'main',  class: 'active'},
-    {path: '/news',   label: 'news',  class: 'active'},
-    {path: '/add',  label: 'add', class: 'active'},
-    {path: '/about',  label: 'about', class: 'active'},
+    {path: CONSTANTS.APP.MAIN,   label: 'main',  class: 'active'},
+    {path: CONSTANTS.APP.NEWS+'/'+CONSTANTS.APP.CREATE,  label: 'create', class: 'active'},
+    {path: CONSTANTS.APP.ABOUT,  label: 'about', class: 'active'},
     {path: '/demo',  label: 'demo', class: 'active'},
   ];
 

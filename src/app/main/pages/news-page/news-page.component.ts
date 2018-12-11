@@ -3,6 +3,12 @@ import {NewsDataService} from '@shared/news-data.service';
 import {News} from '@shared/models/News';
 import {Advertising} from '@components/block-components/ad-item-block/Advertising';
 import {Comment} from '@shared/models/Comment';
+import {ActivatedRoute, ParamMap} from '@angular/router';
+import {filter, switchMap} from 'rxjs/operators';
+import {AppScrollService} from '@shared/services/app-scroll.service';
+import {AppRoutingService} from '@routes/app-routing.service';
+import {CONSTANTS} from '@shared/config/constants';
+import {AdvertisingDataService} from '@shared/advertising-data.service';
 
 @Component({
   selector: 'app-news-page',
@@ -10,21 +16,43 @@ import {Comment} from '@shared/models/Comment';
   styleUrls: ['./news-page.component.scss'],
 })
 export class NewsPageComponent implements OnInit {
-  fullNews: News;
-  commentsList: Array<Comment>;
-  adv: Advertising;
+  public fullNews: News;
+  public commentsList: Array<Comment>;
 
   constructor(
     private newsService: NewsDataService,
+    private route: ActivatedRoute,
+    private routerService: AppRoutingService,
+    private scrollService: AppScrollService,
   ) {
-    this.adv =  new Advertising('Burger King',
-      'https://burgerking.ru/images/actions/BK-2115_HALLOWEEN-WHOPPER_710x459px.jpg',
-      'https://burgerking.ru/actions');
+    scrollService.scrollToTop(false);
   }
 
   ngOnInit() {
-    this.fullNews = this.newsService.getFullNewsData('1111');
-    this.commentsList = this.newsService.getComments('1111');
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        let id = params.get('id');
+        return this.newsService.getFullNewsData(id);
+      })
+    ).subscribe( (news: News) => {
+      this.fullNews = news;
+      if (!news) {
+        // Если как-то так вышло что новости нету
+        this.routerService.goToLinkWithQuery(CONSTANTS.APP.MAIN)
+      }
+    });
+
+    this.scrollService.scrollState.pipe(
+      filter( (value: Event) => {
+        return window.pageYOffset > 500 && this.fullNews && !this.commentsList
+      }),
+      switchMap((value: Event) => {
+        let id = this.fullNews.getId();
+        return this.newsService.getComments(id);
+      })
+    ).subscribe( (comments: Array<Comment>) => {
+      this.commentsList = comments;
+    });
   }
 
   onAddComment(comment){
@@ -34,7 +62,8 @@ export class NewsPageComponent implements OnInit {
     console.log(`Delete comment: ${comment.id}`);
   }
   onEdit(event){
-    // Необходимо отправить на страницу редактирования
+    let id = this.fullNews.getId();
+    this.routerService.goToEditNews(id);
   }
   onFavorites (state){
     // Необходимо добавить / удалить в избранное

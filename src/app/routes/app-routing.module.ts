@@ -3,26 +3,33 @@ import { Routes, RouterModule } from '@angular/router';
 import {MainPageComponent} from '@main/main-page.component';
 import {AuthGuard} from '@shared/auth/auth.guard';
 import {AdminGuard} from '@shared/auth/admin.guard';
+import {CONSTANTS} from '@shared/config/constants';
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: 'main'},
-  //{path: '**', redirectTo: 'main'},
-
-  {path: 'main', component: MainPageComponent, data: {
+  {path: '', pathMatch: 'full', redirectTo: CONSTANTS.APP.MAIN},
+  {path: CONSTANTS.APP.MAIN, component: MainPageComponent, data: {
       title: 'Main Page!'
     }
   },
-  {path: 'news', loadChildren: '@news/news-page.module#NewsPageModule'},
-  {path: 'login', loadChildren: '@login/login-page.module#LoginPageModule'},
-  {path: 'add', loadChildren: '@add-news/add-news-page.module#AddNewsPageModule',
-    canLoad: [AuthGuard], canActivate: [AuthGuard]
+  {path: CONSTANTS.APP.NEWS, children: [
+      {path: CONSTANTS.APP.CREATE, loadChildren: '@add-news/add-news-page.module#AddNewsPageModule',
+        canLoad: [AuthGuard], canActivate: [AuthGuard]
+      },
+      {path: CONSTANTS.APP.EDIT+'/:id', loadChildren: '@add-news/add-news-page.module#AddNewsPageModule',
+        canLoad: [AuthGuard], canActivate: [AuthGuard]
+      },
+      {path: ':id', pathMatch: 'full', loadChildren: '@news/news-page.module#NewsPageModule'},
+    ]
   },
-  {path: 'registration', loadChildren: '@registration/registration-page.module#RegistrationPageModule'},
-  {path: 'about', loadChildren: '@about/about-page.module#AboutPageModule'},
-  {path: 'admin', loadChildren: '@admin/admin-page.module#AdminPageModule',
+
+  {path: CONSTANTS.APP.LOGIN, loadChildren: '@login/login-page.module#LoginPageModule'},
+  {path: CONSTANTS.APP.REGISTRATION, loadChildren: '@registration/registration-page.module#RegistrationPageModule'},
+  {path: CONSTANTS.APP.ABOUT, loadChildren: '@about/about-page.module#AboutPageModule'},
+  {path: CONSTANTS.APP.ADMIN, loadChildren: '@admin/admin-page.module#AdminPageModule',
     canLoad: [AdminGuard], canActivate: [AdminGuard]
   },
   {path: 'demo', loadChildren: '@demo/demo-page.module#DemoPageModule'},
+  {path: '**',pathMatch: 'full', redirectTo: CONSTANTS.APP.MAIN},
 ];
 
 @NgModule({

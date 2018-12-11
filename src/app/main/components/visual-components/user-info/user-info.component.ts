@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from '@shared/models/User';
 import {AuthService} from '@shared/auth/auth.service';
-import {UserService} from '@shared/user.service';
+import {UserDataService} from '@shared/user-data.service';
 import {CONSTANTS} from '@shared/config/constants';
 
 @Component({
@@ -15,12 +15,12 @@ export class UserInfoComponent implements OnInit {
   adminPage: string = CONSTANTS.APP.ADMIN;
 
   constructor(
-    private userService: UserService,
+    private userService: UserDataService,
     private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
-    this.userService.getUserData().subscribe(value => {
+    this.userService.getCurrentUserData().subscribe(value => {
       if (value){
         this.user = value;
         this.isAdmin = this.userService.isAdmin();

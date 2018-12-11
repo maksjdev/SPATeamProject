@@ -1,21 +1,32 @@
 import {Injectable} from '@angular/core';
 import {User} from '@shared/models/User';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {AppRestService} from '@shared/http/app-rest.service';
 
 @Injectable()
-export class UserService {
+export class UserDataService {
   private currentUser: BehaviorSubject<User>;
 
-  constructor() {
+  constructor(
+    private restService: AppRestService,
+  ){
     this.currentUser = new BehaviorSubject(null);
   }
 
-  public setUserData(user: User){
+  public setCurrentUserData(user: User){
     this.currentUser.next(user);
   }
-  public getUserData(): BehaviorSubject<User> {
+  public getCurrentUserData(): BehaviorSubject<User> {
     return this.currentUser;
   }
+
+
+ public getUserData(id: string){
+    return this.restService.getUserData(id).pipe(
+      catchError(this.restService.handleError(`Get UserData #${id}`, []))
+    );
+ }
 
   public isAdmin(): boolean {
     let user: User = this.currentUser.getValue();

@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges} fro
 import {News} from '@shared/models/News';
 import {AppStringService} from '@shared/services/app-string.service';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import {AppRoutingService} from '@routes/app-routing.service';
 
 @Component({
   selector: 'app-news-big-block',
@@ -15,7 +16,8 @@ export class NewsBigBlockComponent implements OnChanges {
 
   constructor(
     private _sanitizer: DomSanitizer,
-  private stringService: AppStringService
+    private stringService: AppStringService,
+    private routingService: AppRoutingService,
   ) {
     this._textContent = '';
   }
@@ -31,5 +33,9 @@ export class NewsBigBlockComponent implements OnChanges {
   public get textContent(): SafeHtml {
     let string = this._textContent? this._textContent : '';
     return this._sanitizer.bypassSecurityTrustHtml(string);
+  }
+  public goToNews(event){
+    let id: string = this.news.getId();
+    this.routingService.goToNews(id);
   }
 }

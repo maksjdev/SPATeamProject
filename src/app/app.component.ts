@@ -1,21 +1,25 @@
-import {Component, HostListener} from '@angular/core';
-import {Debounce} from 'lodash-decorators';
+import {Component, OnInit} from '@angular/core';
+import {AppScrollService} from '@shared/services/app-scroll.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   isScroled: boolean = false;
+  private offsetY: number = 300;
 
-  constructor(){}
+  constructor(
+    private scrollService: AppScrollService
+  ){}
 
-  @HostListener('window:scroll', ['$event'])
-  @Debounce(50)
-  trackScroll(event) {
-    this.isScroled = window.pageYOffset > 300;
+  ngOnInit(): void {
+    this.scrollService.getScrollState().subscribe((event: Event) => {
+      this.isScroled = window.pageYOffset > this.offsetY;
+    });
   }
+
   scrollToTop(event) {
-    window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+    this.scrollService.scrollToTop();
   }
 }

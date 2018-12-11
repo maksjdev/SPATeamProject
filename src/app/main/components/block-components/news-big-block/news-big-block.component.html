@@ -1,17 +1,17 @@
 
 <article *ngIf="news" class="panel shadow-block news-item">
   <div class="news-item__header">
-    <h2 class="news-item__header--title">{{ news.title | trimString: 100 }}</h2>
+    <h2 class="news-item__header--title">{{ news.getTitle() | trimString: 100 }}</h2>
     <div class="header-info">
       <div class="row header-info__author">
-        <img class="header-info__author--image" [src]="news.author.image" alt="*User Image*">
+        <img class="header-info__author--image" [src]="news.author.getImage()" alt="*User Image*">
         <a href="#" class="header-info__author--name">
-          {{ news.author.first_name +' '+ news.author.last_name }}{{ ',' }}
+          {{ news.author.getRealName() +' ('+ news.author.getNickname()+'),' }}
         </a>
       </div>
-      <div class="header-info__date">{{ news.date | dateTransform }}</div>
+      <div class="header-info__date">{{ news.getDate() | dateTransform }}</div>
       <div class="header-info__comments">
-        {{ news.comments }}
+        {{ news.getCommentNumber() }}
         <i class="main far fa-comment-dots"></i>
       </div>
       <div class="header-info__rating">
@@ -27,12 +27,14 @@
   </div>
 
   <div class="shadow-block-sm news-item__image">
-    <img [src]="news.image" alt="News image">
+    <img [src]="news.getImage()" alt="News image">
   </div>
   <div class="news-item__content" [innerHTML]="textContent">
 
   </div>
   <div class="news-item__bottom">
-    <button class="btn btn-default btn-read-more">Читать далее <i class="fas fa-long-arrow-alt-right"></i></button>
+    <button class="btn btn-default btn-read-more" (click)="goToNews($event)">
+      Читать далее <i class="fas fa-long-arrow-alt-right"></i>
+    </button>
   </div>
 </article>

@@ -6,7 +6,7 @@ import {AppConfigDefault} from '@shared/config/config-default';
 @Injectable({
   providedIn: 'root'
 })
-export class ConfigService implements IConfigModel{
+export class ConfigService implements IConfigModel {
   numbOfNews: number;
 
   constructor() {

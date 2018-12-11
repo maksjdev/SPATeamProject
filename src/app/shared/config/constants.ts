@@ -3,8 +3,11 @@ export const CONSTANTS = {
     TITLE: 'NewString',
     LN_RU: 'ru',
     MAIN: 'main',
+    NEWS: 'news',
+    CREATE: 'create',
+    EDIT: 'edit',
     ADMIN: 'admin',
-    CREATE: 'add',
+    ABOUT: 'about',
 
     REGISTRATION: 'registration',
     LOGIN: 'login',
@@ -12,6 +15,7 @@ export const CONSTANTS = {
 
   QUERY: {
     PAGE: 'page',
+    SEARCH: 'search',
     PERIOD: 'period',
     RATING: 'rating',
     CATEGORY: 'category',
@@ -22,11 +26,34 @@ export const CONSTANTS = {
 
   SERVER: {
     CONFIG: 'config',
+    GET_NEWS_LIST: 'get-news-list',
+    GET_NEWS: 'get-news',
+    TOP_NEWS: 'top-news',
+
     ADD_NEWS: 'add-news',
+    EDIT_NEWS: 'edit-news',
+    DEL_NEWS: 'del-news',
+
+    GET_USER: 'user',
+    GET_USER_FULL: 'user-full',
     ADD_USER: 'add-user',
+    EDIT_USER: 'edit-user',
+
+    GET_COMMENTS: 'get-comments',
+    ADD_COMMENT: 'add-comment',
+    DELETE_COMMENT: 'del-comment',
+
+    GET_ALL_CATEGORIES: 'get-category',
     ADD_CATEGORY: 'add-category',
 
-    GET_USER: 'users'
+    ON_LOGIN: 'login',
+    ON_REGISTER: 'registration',
+  },
+
+  MSG: {
+    CONFIRM_DEL_COMMENT: 'Вы точно хотите удалить данный коментарий?',
+    CONFIRM_DEL_NEWS: 'Вы уверены что хотите удалить новость?',
+    CONFIRM_RST_NEWS: 'Вы уверены что хотите очистить новость?'
   },
 
   MOCK: {

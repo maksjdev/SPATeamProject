@@ -1,11 +1,11 @@
 
 <div *ngIf="advertising" class="panel shadow-block adv-item" [class.close]="isClosed">
   <span  class="adv-item__close" [title]="'Закрыть'" (click)="OnClose($event)">
-    <i class="fas fa-times"></i>
+    <i [ngClass]="['fas','fa-times', advertising.isDark()? 'dark' : 'white']"></i>
   </span>
-  <span class="adv-item__hint">Реклама</span>
+  <span [ngClass]="['adv-item__hint', advertising.isDark()? 'dark' : 'white']">Реклама</span>
 
-  <a [href]="advertising.href" [title]="advertising.title" target="_blank">
-    <div class="adv-item__image" [ngStyle]="{ 'background-image': 'url(' + advertising.imageLink + ')'}"></div>
+  <a [href]="advertising.getHref()" [title]="advertising.getTitle()" target="_blank">
+    <div class="adv-item__image" [ngStyle]="{ 'background-image': 'url(' + advertising.getImage() + ')'}"></div>
   </a>
 </div>

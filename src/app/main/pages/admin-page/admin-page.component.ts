@@ -38,9 +38,9 @@ export class AdminPageComponent implements OnInit {
   public onAddCategory(){
     if (this.CategoryForm.valid){
       let name: string = this.CategoryForm.value['c_name'];
-      let category = new Category('1111', name, 0);
+      let category = new Category('100', name, 0);
 
-      this.categoryService.sendCategory(category).pipe().subscribe( (value: HttpResponse<ArrayBuffer>) => {
+      this.categoryService.createCategory(category).pipe().subscribe( (value: HttpResponse<ArrayBuffer>) => {
         // Если отправка удалась -> сообщить
         this.CategoryForm.reset();
         console.log(value);
@@ -52,7 +52,7 @@ export class AdminPageComponent implements OnInit {
   }
 
   public onAddNews(event){
-    this.routingService.goToLink(CONSTANTS.APP.CREATE);
+    this.routingService.goToLink(CONSTANTS.APP.NEWS+'/'+CONSTANTS.APP.CREATE);
   }
   public onSpoiler(event){
     alert(`

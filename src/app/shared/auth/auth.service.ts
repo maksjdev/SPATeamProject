@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import {AppRoutingService} from '@routes/app-routing.service';
-import {UserService} from '@shared/user.service';
+import {UserDataService} from '@shared/user-data.service';
 import {BehaviorSubject} from 'rxjs';
 import {AppRestService} from '@shared/http/app-rest.service';
 import {CONSTANTS} from '@shared/config/constants';
 import {MockDataService} from '@shared/mock-data.service';
+import {User} from '@shared/models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class AuthService {
   loginState: BehaviorSubject<boolean>;
 
   constructor(
-    private userService: UserService,
+    private userService: UserDataService,
     private mockDataService: MockDataService,
     private routeService: AppRoutingService,
     private restService: AppRestService
@@ -36,13 +37,13 @@ export class AuthService {
 
   onLogin(login: string, password: string, save?: boolean) {
     // Логином может быть nickname || email
-    // Формируем запрос на сервер (через restService)
-
+    // Произвели валидацию
+    this.restService.onLogin(login, password);
     // Ждем ответа сервера ...
-
-    // Ок? Получаем данные текущего user
     let activeUser = this.mockDataService.getMockActiveUser();
-    this.userService.setUserData(activeUser);
+
+    // Ок? Уже прислали данные
+    this.userService.setCurrentUserData(activeUser);
     this.loginState.next(true);
 
     // Нужно сохранять его пароль и логин?
@@ -51,17 +52,16 @@ export class AuthService {
       localStorage.setItem(this.strLogin, login);
       localStorage.setItem(this.strPassword, password);
     }
-
     // Перенаправляем на исходную страницу
     let backUrl: string = this.routeService.getQueryParam(CONSTANTS.QUERY.BACK_URL);
     let backParams: string = this.routeService.getQueryParam(CONSTANTS.QUERY.BACK_PARAMS);
     let params = backParams? JSON.parse(backParams) : {};
-    backUrl? this.routeService.goToLinkWithQuery(backUrl, false ,params) : this.routeService.goToLink(CONSTANTS.APP.MAIN);
+    backUrl? this.routeService.goToLinkWithQuery(backUrl, false, params) : this.routeService.goToLink(CONSTANTS.APP.MAIN);
   }
 
   onLogout(): void {
     this.loginState.next(false);
-    this.userService.setUserData(null);
+    this.userService.setCurrentUserData(null);
 
     localStorage.removeItem(this.strLogin);
     localStorage.removeItem(this.strPassword);
@@ -69,6 +69,8 @@ export class AuthService {
 
   onRegister(realName: string, nickname: string, email: string, password: string, image?: any) {
     // Формируем запрос на сервер (через restService)
+    let newUser = new User('0', realName, nickname, email, image, 0, null);
+    this.restService.onRegister(newUser, password);
     // Ждем ответа (ок? логин)
     this.onLogin(email, password);
   }
