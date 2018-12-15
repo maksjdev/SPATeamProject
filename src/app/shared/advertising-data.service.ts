@@ -28,7 +28,7 @@ export class AdvertisingDataService {
   }
 
   public getRandomAdv(): Advertising {
-    let lenght = this.advList.length;
-    return this.advList[Math.floor(Math.random()*lenght)];
+    let length = this.advList.length;
+    return this.advList[Math.floor(Math.random()*length)];
   }
 }

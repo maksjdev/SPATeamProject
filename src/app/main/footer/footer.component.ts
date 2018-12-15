@@ -6,12 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
-  referLinks = [
-    {name: 'О сайте', link: '#'},
-    {name: 'Служба поддержки', link: '#'},
-    {name: 'Мобильное приложение', link: '#'},
+  public copyright: string;
+  public developers = {
+    team: 'Elite TM',
+    link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+  };
+  public referLinks = [
+    {name: 'О сайте', link: 'about'},
+    {name: 'Поддержать нас', link: 'about'},
+    {name: 'Служба поддержки', link: 'about'},
   ];
-  constructor() { }
+
+  constructor() {
+    let currentYear: string = (new Date()).getFullYear().toString(10);
+    this.copyright = `2017 - ${currentYear} «${this.developers.team}»`;
+  }
 
   ngOnInit() {
   }

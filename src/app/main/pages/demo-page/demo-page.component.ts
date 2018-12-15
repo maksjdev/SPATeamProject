@@ -24,7 +24,7 @@ export class DemoPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.newsService.getFullNewsData('100').subscribe( (news: News) => {
-      this._htmlText = news.text;
+      this._htmlText = news.getText();
     });
   }
   ngOnDestroy(): void {

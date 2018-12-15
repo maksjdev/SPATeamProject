@@ -20,8 +20,8 @@
       </div>
     </div>
     <span class="row header-tags">
-      <div class="header-tags__item" *ngFor="let tag of news.tags">
-        {{ tag }}
+      <div class="header-tags__item" *ngFor="let category of news.getCategories()">
+        {{ category }}
       </div>
     </span>
   </div>
