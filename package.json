@@ -31,6 +31,7 @@
     "core-js": "^2.5.4",
     "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.3.16",
+    "ng-simple-slideshow": "^1.2.6",
     "ngx-bootstrap": "^3.1.1",
     "ngx-editor": "^4.1.0",
     "ngx-pipes": "^2.3.6",
