@@ -400,7 +400,16 @@ app-ngx-editor {
     border-bottom-right-radius: $normal-border-radius !important;
   }
 }
-
+// Стилизация кастомной карусели
+slideshow {
+  & .slideshow-container {
+    border-radius: $normal-border-radius !important;
+    & .arrow-container .arrow {
+      width: 15px !important;
+      height: 15px !important;
+    }
+  }
+}
 // Ну совсем не нужные.. (для редактирования)
 .loading-block{
   height: 50px;

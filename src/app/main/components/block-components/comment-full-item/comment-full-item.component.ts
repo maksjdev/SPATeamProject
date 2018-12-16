@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Comment} from '@shared/models/Comment';
 import {CONSTANTS} from '@shared/config/constants';
+import {AppDialogService} from '@shared/services/app-dialog.service';
 
 @Component({
   selector: 'app-comment-full-item',
@@ -11,10 +12,12 @@ export class CommentFullItemComponent  {
   @Input() comment: Comment;
   @Output() commentDelete = new EventEmitter();
 
-  constructor() { }
+  constructor(
+    private dialogService: AppDialogService
+  ) { }
 
   OnDelete($event) {
-    if (confirm(CONSTANTS.MSG.CONFIRM_DEL_COMMENT)){
+    if (this.dialogService.confirmDialog(CONSTANTS.MSG.CONFIRM_DEL_COMMENT)){
       this.commentDelete.emit(this.comment);
     }
   }

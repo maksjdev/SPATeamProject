@@ -8,9 +8,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material';
 import {AppFormService} from '@shared/services/app-form.service';
 import {NgSelectModule} from '@ng-select/ng-select';
+import {DeactivateGuard} from '@shared/guards/deactivate.guard';
 
 const router: Routes = [{
-  path: '', component: AddNewsPageComponent, data: {
+  path: '', component: AddNewsPageComponent, canDeactivate: [DeactivateGuard], data: {
     title: 'Add News Page!'
   }
 }];
@@ -34,7 +35,8 @@ const router: Routes = [{
     AddNewsPageComponent
   ],
   providers: [
-    AppFormService
+    AppFormService,
+    DeactivateGuard,
   ]
 })
 export class AddNewsPageModule { }

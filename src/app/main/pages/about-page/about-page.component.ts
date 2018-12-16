@@ -10,9 +10,11 @@ export class AboutPageComponent implements OnInit {
 
   constructor() {
     this.images = [
-      'https://burgerking.ru/images/actions/BK-2037_CHEESY_710х459_.jpg',
-      'https://burgerking.ru/images/actions/BK-0883_KUPONY14_710x459px.jpg',
-      'https://burgerking.ru/images/actions/BK-2212_6-ZA-199-90_710x459px.jpg'
+      'https://pets2.me/media/res/1/4/8/4/3/14843.p30fh0.300.jpg',
+      'https://i.ytimg.com/vi/FfvA-xHMvcY/hqdefault.jpg',
+      'http://420on.cz/system/photo/image/000/120/450/xxlarge/panda3.jpg',
+      'http://www.otakuusamagazine.com/Uploads/Public/Images/Newsletter/06-23-14/670px-0,672,0,360-MainPagePart3.png',
+      'https://ci.memecdn.com/7841086.jpg'
     ];
   }
 

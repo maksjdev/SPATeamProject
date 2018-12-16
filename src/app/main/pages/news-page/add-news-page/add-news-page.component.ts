@@ -8,10 +8,11 @@ import {UserDataService} from '@shared/user-data.service';
 import {Category} from '@shared/models/Category';
 import {HttpResponse} from '@angular/common/http';
 import {CategoryDataService} from '@shared/category-data.service';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {CONSTANTS} from '@shared/config/constants';
+import {AppDialogService} from '@shared/services/app-dialog.service';
 
 @Component({
   selector: 'app-add-news-page',
@@ -35,6 +36,7 @@ export class AddNewsPageComponent implements OnInit {
     private userService: UserDataService,
     private formService: AppFormService,
     private newsService: NewsDataService,
+    private dialogService: AppDialogService,
     private categoryService: CategoryDataService
   ) {}
 
@@ -92,14 +94,20 @@ export class AddNewsPageComponent implements OnInit {
     }
   }
   public onDeleteNews(event){
-    if (this.news && confirm(CONSTANTS.MSG.CONFIRM_DEL_NEWS)) {
+    if (this.news && this.dialogService.confirmDialog(CONSTANTS.MSG.CONFIRM_DEL_NEWS)) {
       let id: string = this.news.getId();
       this.newsService.deleteNews(id);
     }
   }
   public onResetNews(event){
-    if (confirm(CONSTANTS.MSG.CONFIRM_RST_NEWS)){
+    if (this.dialogService.confirmDialog(CONSTANTS.MSG.CONFIRM_RST_NEWS)){
       this.addNewsForm.reset();
     }
+  }
+  canDeactivate(): Observable<boolean> | boolean {
+    if (this.addNewsForm.value['n_title'] || this.addNewsForm.value['n_text']) {
+      return this.dialogService.confirmDialog('Отменить ваши изменения новости?');
+    }
+    return true;
   }
 }

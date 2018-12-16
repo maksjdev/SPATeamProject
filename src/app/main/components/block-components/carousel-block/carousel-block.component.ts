@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-carousel-block',
@@ -10,4 +10,6 @@ export class CarouselBlockComponent {
   // https://www.npmjs.com/package/ng-simple-slideshow
 
   constructor(){}
+
+  @ViewChild('slideshow') slideshow: any;
 }
