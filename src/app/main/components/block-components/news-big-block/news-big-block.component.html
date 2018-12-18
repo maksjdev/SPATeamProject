@@ -4,7 +4,7 @@
     <h2 class="news-item__header--title">{{ news.getTitle() | trimString: 100 }}</h2>
     <div class="header-info">
       <div class="row header-info__author">
-        <img class="header-info__author--image" [src]="news.author.getImage()" alt="*User Image*">
+        <img class="header-info__author--image" [src]="news.author.getImage()" alt="*ControlUser Image*">
         <a href="#" class="header-info__author--name">
           {{ news.author.getRealName() +' ('+ news.author.getNickname()+'),' }}
         </a>
@@ -27,7 +27,7 @@
   </div>
 
   <div class="shadow-block-sm news-item__image">
-    <img [src]="news.getImage()" alt="News image">
+    <img [src]="news.getImage()" alt="RouteNews image">
   </div>
   <div class="news-item__content" [innerHTML]="textContent">
 

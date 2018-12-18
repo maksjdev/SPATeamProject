@@ -1,8 +1,10 @@
 {
   "name": "news-project-spa",
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
     "start": "ng serve --port 4200",
+    "server": "nodemon ./scr/server/server.js",
     "build": "ng build --prod --build-optimizer --stats-json",
     "bundle": "webpack-bundle-analyzer dist/news-project-spa/stats.json",
     "test": "ng test --watch=false --code-coverage",
@@ -11,7 +13,14 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "private": true,
+  "_moduleAliases": {
+    "@server": "src/server/",
+    "@constants": "src/server/api/constants/",
+    "@controllers": "src/server/api/controllers/",
+    "@middleware": "src/server/api/middleware/",
+    "@models": "src/server/api/models/",
+    "@routes": "src/server/api/routes/"
+  },
   "dependencies": {
     "@angular/animations": "~7.0.0",
     "@angular/cdk": "~7.0.3",
@@ -28,8 +37,10 @@
     "@ngx-progressbar/core": "^5.2.1",
     "@ngx-progressbar/http": "^5.2.1",
     "bcrypt": "^3.0.2",
+    "chalk": "^2.4.1",
     "core-js": "^2.5.4",
     "jsonwebtoken": "^8.4.0",
+    "module-alias": "^2.1.0",
     "mongoose": "^5.3.16",
     "ng-simple-slideshow": "^1.2.6",
     "ngx-bootstrap": "^3.1.1",
@@ -56,6 +67,7 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "nodemon": "^1.18.9",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",

@@ -1,18 +1,13 @@
+  https://mlab.com/databases/news_spa
+  UserName: Vitalik
+  UserPassword: LA255kPG2EpT3tU
+  URL TO CONNECT: mongodb://Vitalik:LA255kPG2EpT3tU@ds137404.mlab.com:37404/news_spa
 
-Все же расскажешь что и как + по чём именно смотришь для моего более быстрого внедрения
 
 // TODO: Мелочь
-1.  Удалить модель product + роут
-2.  Установи express + mongo + mongoose для webStorm (для автодополнения) CTL+ALT+S -> Lng&Fram -> JS -> Libs -> Download
-3.  Создать команду для запуска в package (name: server)
-4.  check-auth.js 5стр. - надеятся что auth токен будет всегда первым/вторым - ошибочно
-5.  Переименовать nodemon.json -> environment.json *если можно
-6.  Вынести все ошибки *текс/msg* которые может вернуть сервер в файл - констант
-    и лучше коды (200, 201, 400.. что бы не запоминать их, а просто CODE.CREATE|CODE.NOT_FOUND..
-7.  user.js - сначала выносить в переменные и проверять
-    Пример: User.find({ email: req.body.email }), а если почту не пристали в body? -> Сервер приляжет
+7.  route-model-control-user.js - сначала выносить в переменные и проверять
+    Пример: ControlUser.find({ email: req.body.email }), а если почту не пристали в body? -> Сервер приляжет
     Никогда не брать по index из масива! [0] заменить на .shift() удалит + вернет первый -> сохранили в переменную
-8.  Убирать консоль логи после проверки
 9.  route news - так же как и user - должен ссылатся на свой controller
 
 // TODO: Средние
@@ -25,13 +20,13 @@
     - Объект пагинации (хранить не нужно будет - без модели, только класс)
 2.  Сделать префикс для id + разобраться как настроить правильную автоматич. выдачу id (user id - usr4324f32)
 3.  Сделать конфиг файл и роут для него (стандартный json, без модели)
-4.  Изменить модель User:
+4.  Изменить модель ControlUser:
     - Удалить поле для второго пароля (или если не в моготу то убрать required)
     - переименовать name -> realname
     - Добавить поле role
     - Добавить поле rating
     - Добавить поле bookmarks
-5.  Изменить модель News:
+5.  Изменить модель RouteNews:
     - Убрать name
     - Добавить date
     - Добавить author *reference по id
@@ -53,10 +48,7 @@
     Решение: сразу инфу
 2.  Пагинация (news будет принимать query и отправлять data + мои параметры (что бы я знал где нахожусь)
 3.  Разбиение обработчиков (цепочкой)
-4.  Данные само сабой нельзя хранить в mongo они отдельно (прямо считывая из папки отправляем)
 5.  Ответ всегда должен быть (код + msg). При редактировании вставке (должны возвращать то, что вставили)
-6.  Реконект mongoose.connect(uri, { server: { reconnectTries: Number.MAX_VALUE } });
-    route /api/api_version/model_name
 
 Полезные ссылки:
   https://www.npmjs.com/package/supertest TDD
@@ -65,8 +57,5 @@
   https://habr.com/post/253395/
   https://habr.com/company/ruvds/blog/321104/
 
-  https://mlab.com/databases/news_spa
-  UserName: Vitalik
-  UserPassword: LA255kPG2EpT3tU
-  URL TO CONNECT: mongodb://Vitalik:LA255kPG2EpT3tU@ds137404.mlab.com:37404/news_spa
+
 
