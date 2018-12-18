@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {MainPageComponent} from '@main/main-page.component';
-import {AuthGuard} from '@shared/auth/auth.guard';
-import {AdminGuard} from '@shared/auth/admin.guard';
+import {AuthGuard} from '@shared/guards/auth.guard';
+import {AdminGuard} from '@shared/guards/admin.guard';
 import {CONSTANTS} from '@shared/config/constants';
 
 const routes: Routes = [
@@ -29,12 +29,14 @@ const routes: Routes = [
     canLoad: [AdminGuard], canActivate: [AdminGuard]
   },
   {path: 'demo', loadChildren: '@demo/demo-page.module#DemoPageModule'},
-  {path: '**',pathMatch: 'full', redirectTo: CONSTANTS.APP.MAIN},
+  {path: '**', redirectTo: CONSTANTS.APP.MAIN},
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes,
+      { enableTracing: true }
+      )
   ],
   exports: [
     RouterModule

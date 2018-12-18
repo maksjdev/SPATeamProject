@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, CanLoad, Route, RouterStateSnapshot, UrlSegment} from '@angular/router';
 import {Observable} from 'rxjs';
-import {CONSTANTS} from '@shared/config/constants';
-import {AuthService} from '@shared/auth/auth.service';
+import {CONSTANTS} from '../config/constants';
+import {AuthService} from '../auth/auth.service';
 import {AppRoutingService} from '@routes/app-routing.service';
-import {UserDataService} from '@shared/user-data.service';
-import {User} from '@shared/models/User';
+import {UserDataService} from '../user-data.service';
 
 @Injectable({
   providedIn: 'root'

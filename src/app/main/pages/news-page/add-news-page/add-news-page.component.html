@@ -10,10 +10,10 @@
     </div>
 
     <div class="panel shadow-block column news-block__form--line">
-      <label class="news-block__form--line-label" for="n_tags">Теги статьи</label>
+      <label class="news-block__form--line-label" for="n_categories">Категории статьи</label>
       <div class="input-field">
         <ng-select class="select-white"
-                   formControlName="n_tags" id="n_tags"
+                   formControlName="n_categories" id="n_categories"
                    [items]="categories"
                    [multiple]="true"
                    [closeOnSelect]="true"
@@ -38,7 +38,7 @@
         <mat-error class="error error-block__title" *ngIf="formErrors.n_title">Тайтл: {{ formErrors.n_title }}</mat-error>
         <mat-error class="error error-block__image" *ngIf="formErrors.n_image">Изображение: {{ formErrors.n_image }}</mat-error>
         <mat-error class="error error-block__text" *ngIf="formErrors.n_text">Текст: {{ formErrors.n_text }}</mat-error>
-        <mat-error class="error error-block__tags" *ngIf="formErrors.n_tags">Тэги: {{ formErrors.n_tags }}</mat-error>
+        <mat-error class="error error-block__tags" *ngIf="formErrors.n_categories">Категории: {{ formErrors.n_categories }}</mat-error>
       </div>
 
       <span class="news-block__form--bottom-actions">

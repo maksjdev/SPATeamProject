@@ -21,6 +21,7 @@ import localeRu from '@angular/common/locales/ru';
 import {AuthService} from '@shared/auth/auth.service';
 import {UserDataService} from '@shared/user-data.service';
 import {AppScrollService} from '@shared/services/app-scroll.service';
+import {AppDialogService} from '@shared/services/app-dialog.service';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -55,6 +56,7 @@ export function initializeApp(configData: ConfigLoadService) {
     AppRestService,
     AppRoutingModule,
     AppDateTimeService,
+    AppDialogService,
     AppStringService,
     AppScrollService,
 

@@ -1,0 +1,10 @@
+{
+  "NOT_FOUND": "Not found",
+  "AUTH_FAIL": "Auth failed",
+  "AUTH_SUCCES": "Auth successful",
+  "MAIL_EXIST": "Mail exists",
+
+  "CREATED": " - was created",
+  "UPDATED": " - was updated",
+  "DELETED": " - was deleted"
+}

@@ -1,13 +1,12 @@
-
-
 const express = require('express');
-const router = express.Router();
 const mongoose = require("mongoose");
 
-const News = require("../models/news");
+const router = express.Router();
+
+const ModelNews = require("../models/model-news");
 
 router.get("/", (req, res, next) => {
-  News.find()
+  ModelNews.find()
     .exec()
     .then(docs => {
       console.log(docs);
@@ -22,7 +21,7 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/", (req, res, next) => {
-  const news = new News({
+  const news = new ModelNews({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
     title: req.body.title,

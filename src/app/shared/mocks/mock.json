@@ -56,7 +56,7 @@
           {"item": "Дело №4"}
         ]}}
       ],
-      "tags": ["it","ai"], "rating": "100", "time": "1540397337",
+      "categories": ["it","ai"], "rating": "100", "time": "1540397337",
       "comments": [
         {"time": "1540397337", "user-id": "92bk34q", "comment": "I like it!"}
       ]

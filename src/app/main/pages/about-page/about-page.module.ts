@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {AboutPageComponent} from '@pages/about-page/about-page.component';
 import {RouterModule, Routes} from '@angular/router';
 import {ActionsComponentsModule} from '@components/actions-components/actions-components.module';

@@ -1,7 +1,7 @@
 
 <div class="comment-form" *ngIf="currentUser; else errorBlock">
   <div class="row comment-form__header">
-    <img class="comment-form__header--author-image" [src]="currentUser.getImage()" alt="*User Image*">
+    <img class="comment-form__header--author-image" [src]="currentUser.getImage()" alt="*ControlUser Image*">
     <div class="comment-form__header--author-name">
       {{ currentUser.getRealName() +' ('+ currentUser.getNickname()+')' }}:
     </div>

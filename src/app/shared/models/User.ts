@@ -8,6 +8,7 @@ export class User {
     public image: string,
     public rating: number,
     public role: string,
+    public bookmarks: Array<string> = []
   ){}
 
   getId(): string {
@@ -30,6 +31,9 @@ export class User {
   }
   getRole(): string {
     return this.role;
+  }
+  getBookmarks(): Array<string> {
+    return this.bookmarks;
   }
 
   public toString(){

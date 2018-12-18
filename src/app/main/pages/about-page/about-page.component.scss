@@ -2,5 +2,14 @@
 @import "~src/assets/base-css/vars";
 
 :host {
-  //display: grid;
+  display: grid;
+  gap: $normal-padding;
+  grid-template: "a s" auto / 1fr 300px;
+}
+.about-block {
+  grid-area: a;
+
+}
+.sidebar-block {
+  grid-area: s;
 }

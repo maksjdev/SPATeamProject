@@ -9,18 +9,19 @@ export class News {
     public title: string,
     public text: string,
     public image: string,
-    public tags: Array<string>,
+    public categories: Array<string> = [],
     public rating: number = 0,
-    public commentNumber: number = 0
+    public commentNumber: number = 0,
+    public commentList: Array<string> = []
   ){}
 
   getId(): string {
     return this.id;
   }
-  getAuthor(): User{
+  getAuthor(): User {
     return this.author;
   }
-  getDate(): Date{
+  getDate(): Date {
     return this.date;
   }
   getTitle(): string {
@@ -32,15 +33,17 @@ export class News {
   getImage(): string {
     return this.image;
   }
-  getTags(): Array<string> {
-    return this.tags;
+  getCategories(): Array<string> {
+    return this.categories;
   }
-
   getRating(): number {
     return this.rating;
   }
   getCommentNumber(): number {
     return this.commentNumber;
+  }
+  getCommentList(): Array<string> {
+    return this.commentList;
   }
 }
 
