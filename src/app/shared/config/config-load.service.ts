@@ -17,7 +17,7 @@ export class ConfigLoadService {
         ConfigLoadService.settings = response;
         resolve();
       }).catch((response: any) => {
-        console.error("Could not load file: app config file: ",response);
+        console.error("Could not load file: app config file: ", response);
       });
     });
   }

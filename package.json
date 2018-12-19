@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "ng serve --port 4200",
-    "server": "nodemon ./scr/server/server.js",
+    "server": "nodemon --delay 2500ms ./src/server/server.js",
     "build": "ng build --prod --build-optimizer --stats-json",
     "bundle": "webpack-bundle-analyzer dist/news-project-spa/stats.json",
     "test": "ng test --watch=false --code-coverage",

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {IConfigModel} from '@shared/models/IConfigModel';
 import {ConfigLoadService} from '@shared/config/config-load.service';
-import {AppConfigDefault} from '@shared/config/config-default';
+import * as CONFIG_DEFAULT from '@shared/config/config-default.json';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +11,12 @@ export class ConfigService implements IConfigModel {
 
   constructor() {
     let serverConfig = ConfigLoadService.settings;
-    let config = serverConfig.hasOwnProperty('news')?  serverConfig : AppConfigDefault;
-    this.numbOfNews = config.news.numbers.start;
+    let defaultConfig = CONFIG_DEFAULT;
+    let config = serverConfig.hasOwnProperty('news')?  serverConfig : defaultConfig['default'];
+
+    console.log(config);
+    let news = config.news;
+    this.numbOfNews = news.numbers;
   }
 
   getNumberOfNews(): number {

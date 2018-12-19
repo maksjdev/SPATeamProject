@@ -4,7 +4,9 @@ const app = express();
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+
 const userRoutes = require('@routes/route-user');
+const configRoutes = require('@routes/route-config');
 
 const ENV = require('@constants/environment');
 const CODES = require('@constants/http-codes');
@@ -45,6 +47,7 @@ app.use((req, res, next) => {
 
 // Routes which should handle requests
 app.use("/user", userRoutes);
+app.use("/config", configRoutes);
 
 
 // Error handlers

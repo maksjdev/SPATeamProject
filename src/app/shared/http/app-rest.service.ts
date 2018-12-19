@@ -40,49 +40,50 @@ export class AppRestService {
 
   // Отправка данных
   public onLogin(login: string, password: string): Observable<HttpResponse<ArrayBuffer>> {
-    let url = CONSTANTS.SERVER.ON_LOGIN;
+    let url = CONSTANTS.SERVER.LOGIN;
     return this.sendData({login: login, password: password }, url);
   }
   public onRegister(newUser: User, password: string): Observable<HttpResponse<ArrayBuffer>> {
-    let url = CONSTANTS.SERVER.ON_LOGIN;
+    let url = CONSTANTS.SERVER.LOGIN;
     return this.sendData({user: newUser, password: password}, url);
   }
+
   public sendNews(news: News): Observable<HttpResponse<ArrayBuffer>> {
-    let url = CONSTANTS.SERVER.ADD_NEWS;
+    let url = CONSTANTS.SERVER.NEWS;
     return this.sendData(news, url);
   }
   public deleteNews(deleteID: string): Observable<HttpResponse<ArrayBuffer>> {
-    let url = CONSTANTS.SERVER.DEL_NEWS;
+    let url = CONSTANTS.SERVER.NEWS + '/' + deleteID;
     return this.sendData({id: deleteID}, url);
   }
   public sendCategory(category: Category): Observable<HttpResponse<ArrayBuffer>> {
-    let url = CONSTANTS.SERVER.ADD_CATEGORY;
+    let url = CONSTANTS.SERVER.CATEGORY;
     return this.sendData(category, url);
   }
 
   // Получение данных
   public getNewsList(/*Параметры для фильтрации*/): Observable<Object> {
-    let url = CONSTANTS.SERVER.GET_NEWS_LIST;
+    let url = CONSTANTS.SERVER.NEWS;
     return this.getData(url);
   }
-  public getNewsData(id: string, type: string = 'full'): Observable<Object> {
-    let url = CONSTANTS.SERVER.GET_NEWS;
-    return this.getData(url, {id: id, type: type});
+  public getNewsData(newsId: string, type: string = 'full'): Observable<Object> {
+    let url = CONSTANTS.SERVER.NEWS + '/' + newsId;
+    return this.getData(url, {id: newsId, type: type});
   }
   public getTopNews(): Observable<Object> {
-    let url = CONSTANTS.SERVER.TOP_NEWS;
+    let url = CONSTANTS.SERVER.NEWS_TOP;
     return this.getData(url);
   }
   public getAllComments(newsID: string): Observable<Object> {
-    let url = CONSTANTS.SERVER.GET_COMMENTS;
+    let url = CONSTANTS.SERVER.COMMENT;
     return this.getData(url, {id: newsID});
   }
   public getAllCategories(): Observable<Object> {
-    let url = CONSTANTS.SERVER.GET_ALL_CATEGORIES;
+    let url = CONSTANTS.SERVER.CATEGORY;
     return this.getData(url);
   }
-  public getUserData(id: string): Observable<Object> {
-    let url = CONSTANTS.SERVER.GET_USER;
+  public getUserData(userId: string): Observable<Object> {
+    let url = CONSTANTS.SERVER.USER + '/' + userId;
     return this.getData(url);
   }
   public getConfigData(): Observable<Object> {

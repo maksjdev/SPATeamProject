@@ -9,10 +9,7 @@ export class AppHttpService {
     private httpClient: HttpClient
   ){}
 
-  public getData(url: string): Observable<Object> {
-    return this.httpClient.get(url);
-  }
-
+  // DEFAULT CRUD MODEL (CREATE, READ, UPDATE, DELETE
   public postData<T>(url: string, data, options?): Observable<Object> {
     // В опциях как раз и будут все вспомогательные данные
     let body = JSON.stringify(data);
@@ -23,5 +20,13 @@ export class AppHttpService {
       .set('Cache-Control', 'no-cache');
     return this.httpClient.post(url, body, {headers: myHeaders});
   }
-
+  public getData(url: string, data?): Observable<Object> {
+    return this.httpClient.get(url);
+  }
+  public updateData(url: string, data, options?): Observable<Object> {
+    return this.httpClient.patch(url, data);
+  }
+  public deleteData(url: string, data): Observable<Object>  {
+    return this.httpClient.delete(url);
+  }
 }
