@@ -34,7 +34,7 @@ export class LoginPageComponent implements OnInit {
 
     this.LoginForm = this.formBuild.group({
       l_login:    [savedLogin, [Validators.required,
-        CustomValidators.validateLimits(5,20),
+        CustomValidators.validateLimits(5,40),
         CustomValidators.validateCharacters()]],
       l_password: [savedPassword, [Validators.required,
         CustomValidators.validateLimits(8,20), ]],
@@ -49,7 +49,7 @@ export class LoginPageComponent implements OnInit {
           checkBox = this.LoginForm.value['l_save'];
 
       this.authService.onLogin(login, password, checkBox);
-      this.LoginForm.reset();
+      // this.LoginForm.reset();
     } else {
       this.formErrors = this.formService.validateForm(this.LoginForm, this.formErrors, false);
     }

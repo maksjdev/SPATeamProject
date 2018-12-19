@@ -44,8 +44,13 @@ export class AppRestService {
     return this.sendData({login: login, password: password }, url);
   }
   public onRegister(newUser: User, password: string): Observable<HttpResponse<ArrayBuffer>> {
-    let url = CONSTANTS.SERVER.LOGIN;
-    return this.sendData({user: newUser, password: password}, url);
+    let url = CONSTANTS.SERVER.REGISTER;
+    return this.sendData({
+      email: newUser.getEmail(),
+      realname: newUser.getRealName(),
+      nickname: newUser.getNickname(),
+      img_url: newUser.getImage(),
+      password: password}, url);
   }
 
   public sendNews(news: News): Observable<HttpResponse<ArrayBuffer>> {

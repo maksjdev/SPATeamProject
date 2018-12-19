@@ -10,12 +10,10 @@ export class AppHttpService {
   ){}
 
   // DEFAULT CRUD MODEL (CREATE, READ, UPDATE, DELETE
-  public postData<T>(url: string, data, options?): Observable<Object> {
+  public postData<T>(url: string, body, options?): Observable<Object> {
     // В опциях как раз и будут все вспомогательные данные
-    let body = JSON.stringify(data);
     let myHeaders = new HttpHeaders()
       .set('Authorization', 'my-auth-token')
-      .set('responseType', 'text')
       .set('Content-Type', 'application/json')
       .set('Cache-Control', 'no-cache');
     return this.httpClient.post(url, body, {headers: myHeaders});

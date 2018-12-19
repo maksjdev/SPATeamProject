@@ -25,14 +25,14 @@ export const CONSTANTS = {
   },
 
   SERVER: {
-    CONFIG: '/config',
-    LOGIN: '/login',
-    REGISTER: '/registration',
+    CONFIG:   '/config',
+    LOGIN:    '/user/login',
+    REGISTER: '/user/registration',
 
-    NEWS: '/news',
+    NEWS:     '/news',
     NEWS_TOP: '/news/top',
-    USER: '/user',
-    COMMENT: '/comment',
+    USER:     '/user',
+    COMMENT:  '/comment',
     CATEGORY: '/category',
   },
 

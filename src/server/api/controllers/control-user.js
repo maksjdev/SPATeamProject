@@ -10,111 +10,113 @@ const MSGS = require('@constants/mesages');
 
 exports.user_signup = (req, res, next) => {
   let emailV = req.body.email,
-      realnameV = req.body.name,
+      realnameV = req.body.realname,
       nicknameV = req.body.nickname,
       passwordV = req.body.password,
       imgUrlV = req.body.img_url;
   // console.log(emailV, realnameV, nicknameV, passwordV,imgUrlV);
-  ModelUser.find({email: emailV}).exec()
-    .then(user => {
-      if (user.length >= 1) {
-        return res.status(CODES.EC_CONFLICT).json({
-          message: MSGS.MAIL_EXIST
-        });
-      }
-      else {
-        bcrypt.hash(passwordV, 10, (err, hash) => {
-          if (err) {
-            return res.status(CODES.ES_INTERNAL).json({
-              error: err
-            });
-          }
-          else {
-            const user = new ModelUser({
-              _id: new mongoose.Types.ObjectId(),
-              img_url:  imgUrlV,
-              name:     realnameV,
-              nickname: nicknameV,
-              email:    emailV,
-              password: hash,
-            });
-            user.save()
-              .then(result => {
-                res.status(CODES.S_CREATE).json(result);
-              })
-              .catch(err => {
-                console.log(err);
-                res.status(CODES.ES_INTERNAL).json({
-                  error: err
+  if (emailV && realnameV && nicknameV && passwordV && imgUrlV){
+    ModelUser.find({email: emailV}).exec()
+      .then(user => {
+        if (user.length >= 1) {
+          return res.status(CODES.EC_CONFLICT).send(MSGS.MAIL_EXIST);
+        } else {
+          bcrypt.hash(passwordV, 10, (err, hash) => {
+            if (err) {
+              return res.status(CODES.ES_INTERNAL).send(err);
+            } else {
+              const user = createUser(imgUrlV, realnameV, nicknameV, emailV, hash);
+              user.save()
+                .then(result => {
+                  res.status(CODES.S_CREATE).json(result);
+                })
+                .catch(err => {
+                  console.log(err);
+                  res.status(CODES.ES_INTERNAL).json({
+                    error: err
+                  });
                 });
-              });
-          }
-        });
-      }
-    });
+            }
+          });
+        }
+      });
+  } else { return res.status(CODES.EC_REQUEST)}
 };
 exports.user_login = (req, res, next) => {
-  let emailV = req.body.email,
+  let loginV = req.body.login,
       passwordV = req.body.password;
-  ModelUser.findOne({email: emailV }).exec()
-    .then(user => {
-      if (!user) {
-        return res.status(CODES.EC_AUTH).json({
-          message: MSGS.AUTH_FAIL
+  // console.log(loginV, passwordV);
+  if (loginV && passwordV){
+    ModelUser.findOne({email: loginV}).exec()
+      .then(user => {
+        if (!user) {
+          return res.status(CODES.EC_AUTH).send(MSGS.MAIL_NOT_EXIST);
+        }
+        bcrypt.compare(passwordV, user.password, (err, result) => {
+          if (err) {
+            return res.status(CODES.EC_AUTH).send(MSGS.PASS_WRONG);
+          }
+          if (result) {
+            const token = jwt.sign({
+              email: user.email,
+              userId: user._id
+            }, ENV.JWT_KEY, {expiresIn: "1h"});
+            return res.status(CODES.S_OK).json({
+              message: MSGS.AUTH_SUCCES,
+              token: token
+            });
+          }
+          res.status(CODES.EC_AUTH).send(MSGS.AUTH_FAIL);
         });
-      }
-      bcrypt.compare(passwordV, user.password, (err, result) => {
-        if (err) {
-          return res.status(CODES.EC_AUTH).json({
-            message: MSGS.AUTH_FAIL
-          });
-        }
-        if (result) {
-          const token = jwt.sign({
-            email: user.email,
-            userId: user._id
-          }, ENV.JWT_KEY, {expiresIn: "1h"});
-          return res.status(CODES.S_OK).json({
-            message: MSGS.AUTH_SUCCES,
-            token: token
-          });
-        }
-        res.status(CODES.EC_AUTH).json({
-          message: MSGS.AUTH_FAIL
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(CODES.ES_INTERNAL).json({
+          error: err
         });
       });
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(CODES.ES_INTERNAL).json({
-        error: err
-      });
-    });
+  } else { return res.status(CODES.EC_REQUEST)}
 };
 
 exports.user_delete = (req, res) => {
   let userId = req.params.userId;
-  ModelUser.deleteOne({_id: userId }).exec()
+  if (userId) {
+    ModelUser.deleteOne({_id: userId }).exec()
     .then( result => {
-      res.status(CODES.S_OK).json({
-        message: "User"+MSGS.DELETED
-      });
+      res.status(CODES.S_OK).send("User"+MSGS.DELETED);
     })
     .catch(err => {
       res.status(CODES.ES_INTERNAL).json({
         error: err
       });
     });
+  } else { return res.status(CODES.EC_REQUEST)}
 };
 exports.user_find = (req, res) => {
   let userId = req.params.userId;
-  ModelUser.findOne({_id: userId }).exec()
-    .then( result => {
-      res.status(CODES.S_OK).json(result);
-    })
-    .catch(err => {
-      res.status(CODES.ES_INTERNAL).json({
-        error: err
+  if (userId) {
+    ModelUser.findOne({_id: userId }).exec()
+      .then( result => {
+        if (result) {
+          res.status(CODES.S_OK).json(result)
+        } else { throw Error('Shit happends'); }
+      })
+      .catch(err => {
+        res.status(CODES.ES_INTERNAL).json({
+          error: err
+        });
       });
-    });
+  } else { return res.status(CODES.EC_REQUEST)}
 };
+
+// Вспомогательные херни
+function createUser(imgUrl, realname, nickname, email, password) {
+  return new ModelUser({
+    _id: new mongoose.Types.ObjectId(),
+    img_url:  imgUrl,
+    realname: realname,
+    nickname: nickname,
+    email:    email,
+    password: password,
+  })
+}

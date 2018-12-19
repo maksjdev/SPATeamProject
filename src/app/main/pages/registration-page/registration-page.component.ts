@@ -49,7 +49,9 @@ export class RegistrationPageComponent implements OnInit {
           password: string = this.registrationForm.value['r_password'];
 
       this.authService.onRegister(realName, nickname, email, password, image);
-      this.registrationForm.reset();
+      // Ждем ответа (ок? логин)
+      // this.registrationForm.reset();
+      // this.authService.onLogin(email, password);
     } else {
       this.formErrors = this.formService.validateForm(this.registrationForm, this.formErrors, false);
     }

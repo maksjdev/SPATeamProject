@@ -36,9 +36,10 @@ export class AuthService {
   }
 
   onLogin(login: string, password: string, save?: boolean) {
-    // Логином может быть nickname || email
-    // Произвели валидацию
-    this.restService.onLogin(login, password);
+    // Логином может быть email
+    this.restService.onLogin(login, password).subscribe(value => {
+      console.log(value);
+    });
     // Ждем ответа сервера ...
     let activeUser = this.mockDataService.getMockActiveUser();
 
@@ -70,8 +71,8 @@ export class AuthService {
   onRegister(realName: string, nickname: string, email: string, password: string, image?: any) {
     // Формируем запрос на сервер (через restService)
     let newUser = new User('0', realName, nickname, email, image, 0, null);
-    this.restService.onRegister(newUser, password);
-    // Ждем ответа (ок? логин)
-    this.onLogin(email, password);
+    this.restService.onRegister(newUser, password).subscribe(value => {
+      console.log(value);
+    });
   }
 }
