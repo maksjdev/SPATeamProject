@@ -1,8 +1,38 @@
 
-<section class="about-block column">
-  <p>You watch on about-page!</p>
+<section class="about-block">
+  <div class="panel shadow-block text-block">
+    <div class="text-block__header">
+      <h2 class="text-block__header--title">{{title}}</h2>
+    </div>
+    <div class="text-block__main">
+      <div class="text-block__main--text">
+        «Elite TM» - команда, которая разработала SPA приложение, генерирующее с сервера новости про IT технологии. <p>На протяжении боли было приготовлено:</p> Для начала мы обдумывали дизайн логотипа и нарисовали первый макет верстки. Далее установили все необходимые программы для выполнения данного проекта. И начали разработку верстки:<ul><li>Header все его компоненты (navigation, logo, buttons|user info);</li><li>Фильтрация новостей по времени, рейтингу и категориям;</li><li>Блок компонента новость, которая размещена на главной странице, а также для этого блока создали пагинацию и прописали ее логику. Для каждой новости была добавлена анимация zoom+, при наведении на изображение;</li><li>Sidenav, в котором было создано 4 блока:</li><ol><li>Реклама, которую можно закрыть;</li><li>Компонент карусель (simple slideshow) с тематическими фотографиями для настроения;</li><li>Категории для новостей, нажав на которые можно находить статьи именно тех тем, в которых заинтересованы;,</li><li>Топ популярных новостей;</li></ol><li>Footer (links, social href);</li></ul><p>Далее, была создана страница добавления новости *news/add* также она использоваться для редактирования. Для нее были сделаны формы для добавления заголовка, категорий, фотографии, а также для написания статьи.</p>Страница регистрации, на которой есть возможность добавить свой аватар, а также есть поля: реальное имя, никнейм, email, пароль, повторный пароль (для проверки ввода), bool переменная для принятия соглашения. Создана страница авторизации, без которой нельзя добавлять комментарии и ставить рейтинг для новости.<p>На главной странице есть кнопка «читать далее», которая перенаправляет на страницу со всей новостью, нажав на нее можно прочитать всю новость, а также добавить комментарий.</p>Далее началась разработка сервера, на котором хранятся данные про новости, пользователей.
+      </div>
+    </div>
+  </div>
+</section>
+<section class="sidebar-block">
+  <app-carousel-block [imageArr]="images"></app-carousel-block>
+  <div class="panel shadow-block list-block">
+    <div class="list-block__header">
+      <span class="list-block__header--title">Наша команда:</span>
+    </div>
+    <ul class="list-block__images">
+      <li class="list-block__images-img">
+        <img src="https://cdn.igromania.ru/mnt/videos/8/e/0/3/4/20366/3f40f9c8c7cb0fbd7355f1c8cb1fab54_original.jpg">
+      </li>
+      <li class="list-block__images-img">
+        <img src="https://1.bp.blogspot.com/-_M-wZ6ElFBA/WpJOKAyLtGI/AAAAAAAAoDw/3B1jl1H0dpIQuIwMQGmPVt8p6dpgg1WuwCLcBGAs/s1600/Papers%2BPlease.jpg">
+      </li>
+      <li class="list-block__images-img">
+        <img src="http://i.gzn.jp/img/2018/02/26/papers-please-4k-film/00.jpg">
+      </li>
+      <li class="list-block__images-img">
+        <img src="https://pp.userapi.com/c604531/v604531288/31cf6/jdJvnfFaUO8.jpg">
+      </li>
+    </ul>
+  </div>
+
 </section>
 
-<section class="sidebar-block">
-  <app-carousel-block class="panel shadow-block" [imageArr]="images"></app-carousel-block>
-</section>
+

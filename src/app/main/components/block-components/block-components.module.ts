@@ -12,7 +12,7 @@ import {FullNewsBlockComponent} from '@components/block-components/full-news-blo
 import {CommentFullItemComponent} from './comment-full-item/comment-full-item.component';
 import {CategoryDataService} from '@shared/category-data.service';
 import {AdvertisingDataService} from '@shared/advertising-data.service';
-import { CarouselBlockComponent } from './carousel-block/carousel-block.component';
+import {CarouselBlockComponent} from './carousel-block/carousel-block.component';
 import {SlideshowModule} from 'ng-simple-slideshow';
 
 @NgModule({

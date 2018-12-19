@@ -18,6 +18,7 @@ import {AdvertisingDataService} from '@shared/advertising-data.service';
 export class NewsPageComponent implements OnInit {
   public fullNews: News;
   public commentsList: Array<Comment>;
+  public imageArr: Array<string>;
 
   constructor(
     private newsService: NewsDataService,
@@ -26,6 +27,11 @@ export class NewsPageComponent implements OnInit {
     private scrollService: AppScrollService,
   ) {
     scrollService.scrollToTop(false);
+    this.imageArr = [
+      'http://newyearxmas.com/wp-content/uploads/2018/11/christmas-videos-vlcsnap-buy-merry-magic-video-with-fireplace-and-xmas-tree-splendi-picture-ideas-online-for-kids.jpg',
+      'https://saltnpepper.lv/wp-content/uploads/2015/12/29033-newyear-new-year-gold.1200w.tn_.jpg',
+      'https://s3.amazonaws.com/uploads.webconnex.com/27136/new-year-tree-wallpaper-06.jpg?1543140905469'
+                    ];
   }
 
   ngOnInit() {

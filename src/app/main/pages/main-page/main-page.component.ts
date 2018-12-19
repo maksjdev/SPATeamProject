@@ -22,6 +22,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   categoryAll: Array<Category>;
   categoryFilter: Array<Category>;
   pagination: PaginationItem;
+  imageArr: Array<string>;
 
   newsList: Array<News>;
   _subscriptionC: Subscription;
@@ -35,6 +36,11 @@ export class MainPageComponent implements OnInit, OnDestroy {
   ) {
     this.newsList = [];
     this.categoryFilter = [];
+    this.imageArr = [
+      'https://s23188.pcdn.co/wp-content/uploads/2016/12/banquet_hall_fireplace_img_6946.jpg',
+      'https://revistatcn.com/wp-content/uploads/2018/10/awesome-mini-white-christmas-tree-for-your-home-battery-christmas-tree-awesome-luxury-christmas-tree-lights-battery-of-awesome-mini-white-christmas-tree-for-your-home.jpg',
+      'https://farm7.staticflickr.com/6067/6112323095_505ed95435_b.jpg'
+                    ];
   }
 
   ngOnInit() {

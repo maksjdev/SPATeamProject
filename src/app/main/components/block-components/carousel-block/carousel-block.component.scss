@@ -1,5 +1,15 @@
 @import "~src/assets/base-css/theme";
 @import "~src/assets/base-css/vars";
 
+:host {
+  display: flex;
+  position: relative;
+  width: 100%;
+}
+.slider-item {
+  display: block;
+  width: 100%;
+  margin-bottom: $normal-padding;
+}
 
 
