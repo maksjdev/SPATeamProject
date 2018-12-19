@@ -1,14 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {NewsDataService} from '@shared/news-data.service';
 import {News} from '@shared/models/News';
-import {Advertising} from '@components/block-components/ad-item-block/Advertising';
 import {Comment} from '@shared/models/Comment';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {filter, switchMap} from 'rxjs/operators';
 import {AppScrollService} from '@shared/services/app-scroll.service';
 import {AppRoutingService} from '@routes/app-routing.service';
 import {CONSTANTS} from '@shared/config/constants';
-import {AdvertisingDataService} from '@shared/advertising-data.service';
 
 @Component({
   selector: 'app-news-page',
@@ -28,10 +26,11 @@ export class NewsPageComponent implements OnInit {
   ) {
     scrollService.scrollToTop(false);
     this.imageArr = [
-      'http://newyearxmas.com/wp-content/uploads/2018/11/christmas-videos-vlcsnap-buy-merry-magic-video-with-fireplace-and-xmas-tree-splendi-picture-ideas-online-for-kids.jpg',
-      'https://saltnpepper.lv/wp-content/uploads/2015/12/29033-newyear-new-year-gold.1200w.tn_.jpg',
-      'https://s3.amazonaws.com/uploads.webconnex.com/27136/new-year-tree-wallpaper-06.jpg?1543140905469'
-                    ];
+      'https://s23188.pcdn.co/wp-content/uploads/2016/12/banquet_hall_fireplace_img_6946.jpg',
+      'https://revistatcn.com/wp-content/uploads/2018/10/awesome-mini-white-christmas-tree-for-your-home-battery-christmas-tree-awesome-luxury-christmas-tree-lights-battery-of-awesome-mini-white-christmas-tree-for-your-home.jpg',
+      'https://farm7.staticflickr.com/6067/6112323095_505ed95435_b.jpg',
+      'http://newyearxmas.com/wp-content/uploads/2018/11/christmas-videos-vlcsnap-buy-merry-magic-video-with-fireplace-and-xmas-tree-splendi-picture-ideas-online-for-kids.jpg'
+    ];
   }
 
   ngOnInit() {

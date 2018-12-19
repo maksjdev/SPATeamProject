@@ -6,20 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about-page.component.scss']
 })
 export class AboutPageComponent implements OnInit {
-  public images: Array<string>;
   public title: string;
   public text: string;
+  public imagesArr: Array<object>;
 
   constructor() {
-    this.images = [
-      'https://pets2.me/media/res/1/4/8/4/3/14843.p30fh0.300.jpg',
-      'https://i.ytimg.com/vi/FfvA-xHMvcY/hqdefault.jpg',
-      'http://420on.cz/system/photo/image/000/120/450/xxlarge/panda3.jpg',
-      'http://www.otakuusamagazine.com/Uploads/Public/Images/Newsletter/06-23-14/670px-0,672,0,360-MainPagePart3.png',
-      'https://ci.memecdn.com/7841086.jpg'
-    ];
-    this.title = 'Elite TM';
-    this.text = '«Elite TM» - команда, которая разработала SPA приложение, генерирующее с сервера новости про IT технологии. <p>На протяжении боли было приготовлено:</p> Для начала мы обдумывали дизайн логотипа и нарисовали первый макет верстки. Далее установили все необходимые программы для выполнения данного проекта. И начали разработку верстки:<ul><li>Header все его компоненты (navigation, logo, buttons|user info);</li><li>Фильтрация новостей по времени, рейтингу и категориям;</li><li>Блок компонента новость, которая размещена на главной странице, а также для этого блока создали пагинацию и прописали ее логику. Для каждой новости была добавлена анимация zoom+, при наведении на изображение;</li><li>• Sidenav, в котором было создано 4 блока:</li><ul><li>1. Реклама, которую можно закрыть;</li><li>2. Компонент карусель (simple slideshow) с тематическими фотографиями для настроения;</li><li>3. Категории для новостей, нажав на которые можно находить статьи именно тех тем, в которых заинтересованы;,</li><li>4. Топ популярных новостей;</li></ul><li>Footer (links, social href);</li></ul><br>Далее, была создана страница добавления новости *news/add* также она использоваться для редактирования. Для нее были сделаны формы для добавления заголовка, категорий, фотографии, а также для написания статьи.<br>Страница регистрации, на которой есть возможность добавить свой аватар, а также есть поля: реальное имя, никнейм, email, пароль, повторный пароль (для проверки ввода), bool переменная для принятия соглашения. Создана страница авторизации, без которой нельзя добавлять комментарии и ставить рейтинг для новости.<br> На главной странице есть кнопка «читать далее», которая перенаправляет на страницу с всей новостью, на ней можно прочитать всю новость, а также добавить комментарий.<br> Далее началась разработка сервера, на котором хранятся данные про новости, пользователей.</br>';
+    this.title = 'Информация о нашей команде «Elite Team»';
+    this.imagesArr = [
+      {title: "Виталик", link:"https://bit.ly/2UYktXU"},
+      {title: "Максим", link:"https://cdn.igromania.ru/mnt/videos/8/e/0/3/4/20366/3f40f9c8c7cb0fbd7355f1c8cb1fab54_original.jpg"},
+      {title: "Славик", link:"https://cdn.igromania.ru/mnt/videos/8/e/0/3/4/20366/3f40f9c8c7cb0fbd7355f1c8cb1fab54_original.jpg"},
+      {title: "Даша", link:"https://pp.userapi.com/c604531/v604531288/31cf6/jdJvnfFaUO8.jpg"}
+    ]
   }
 
   ngOnInit() {
