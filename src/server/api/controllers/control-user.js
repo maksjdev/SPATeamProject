@@ -40,7 +40,7 @@ exports.user_signup = (req, res, next) => {
           });
         }
       });
-  } else { return res.status(CODES.EC_REQUEST)}
+  } else { res.status(CODES.EC_REQUEST).end() }
 };
 exports.user_login = (req, res, next) => {
   let loginV = req.body.login,
@@ -75,7 +75,7 @@ exports.user_login = (req, res, next) => {
           error: err
         });
       });
-  } else { return res.status(CODES.EC_REQUEST)}
+  } else { res.status(CODES.EC_REQUEST).end()}
 };
 
 exports.user_delete = (req, res) => {
@@ -90,7 +90,7 @@ exports.user_delete = (req, res) => {
         error: err
       });
     });
-  } else { return res.status(CODES.EC_REQUEST)}
+  } else { res.status(CODES.EC_REQUEST).end() }
 };
 exports.user_find = (req, res) => {
   let userId = req.params.userId;
@@ -106,7 +106,7 @@ exports.user_find = (req, res) => {
           error: err
         });
       });
-  } else { return res.status(CODES.EC_REQUEST)}
+  } else { res.status(CODES.EC_REQUEST).end() }
 };
 
 // Вспомогательные херни
