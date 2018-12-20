@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {News} from '@shared/models/News';
 import {User} from '@shared/models/User';
 import {Comment} from '@shared/models/Comment';
 import {AppDateTimeService} from '@shared/services/app-date-time.service';
 import {CONSTANTS} from '@shared/config/constants';
 import {Category} from '@shared/models/Category';
-import {Advertising} from '@components/block-components/ad-item-block/Advertising';
 
 @Injectable({
   providedIn: 'root'

@@ -35,6 +35,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   ) {
     this.newsList = [];
     this.categoryFilter = [];
+
   }
 
   ngOnInit() {

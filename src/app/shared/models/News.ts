@@ -8,7 +8,7 @@ export class News {
     public date: Date,
     public title: string,
     public text: string,
-    public image: string,
+    public image_url: string,
     public categories: Array<string> = [],
     public rating: number = 0,
     public commentNumber: number = 0,
@@ -31,7 +31,7 @@ export class News {
     return this.text;
   }
   getImage(): string {
-    return this.image;
+    return this.image_url;
   }
   getCategories(): Array<string> {
     return this.categories;

@@ -25,29 +25,21 @@ export const CONSTANTS = {
   },
 
   SERVER: {
-    CONFIG: 'config',
-    GET_NEWS_LIST: 'get-news-list',
-    GET_NEWS: 'get-news',
-    TOP_NEWS: 'top-news',
+    CONFIG:   '/config',
+    LOGIN:    '/user/login',
+    REGISTER: '/user/registration',
 
-    ADD_NEWS: 'add-news',
-    EDIT_NEWS: 'edit-news',
-    DEL_NEWS: 'del-news',
+    NEWS:     '/news',
+    NEWS_TOP: '/news/top',
+    USER:     '/user',
+    COMMENT:  '/comment',
+    CATEGORY: '/category',
+  },
 
-    GET_USER: 'user',
-    GET_USER_FULL: 'user-full',
-    ADD_USER: 'add-user',
-    EDIT_USER: 'edit-user',
-
-    GET_COMMENTS: 'get-comments',
-    ADD_COMMENT: 'add-comment',
-    DELETE_COMMENT: 'del-comment',
-
-    GET_ALL_CATEGORIES: 'get-category',
-    ADD_CATEGORY: 'add-category',
-
-    ON_LOGIN: 'login',
-    ON_REGISTER: 'registration',
+  LOCAL_S: {
+    USER_LOGIN: 'userLogin',
+    USER_PASSWORD: 'userPassword',
+    JWT_TOKEN: 'jwtToken',
   },
 
   MSG: {

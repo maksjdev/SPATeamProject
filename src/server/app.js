@@ -4,7 +4,11 @@ const app = express();
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+
+
 const userRoutes = require('@routes/route-user');
+const newsRoutes = require('@routes/route-news');
+const configRoutes = require('@routes/route-config');
 
 const ENV = require('@constants/environment');
 const CODES = require('@constants/http-codes');
@@ -38,13 +42,15 @@ app.use((req, res, next) => {
   );
   if (req.method === "OPTIONS") {
     res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
-    return res.status().json({});
+    return res.end();
   }
   next();
 });
 
 // Routes which should handle requests
 app.use("/user", userRoutes);
+app.use("/config", configRoutes);
+app.use("/news", newsRoutes);
 
 
 // Error handlers

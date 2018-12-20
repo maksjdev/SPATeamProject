@@ -1,6 +1,6 @@
 /*
 Error: File to import not found or unreadable: ~src/assets/base-css/theme.
-        on line 1 of image-field.component.scss
+        on line 1 of img_url-field.component.scss
 
 1: @import "~src/assets/base-css/theme";
 2: @import "~src/assets/base-css/vars";
@@ -10,7 +10,7 @@ Error: File to import not found or unreadable: ~src/assets/base-css/theme.
 6:   width: 100%;
 
 Backtrace:
-image-field.component.scss:1
+img_url-field.component.scss:1
 C:/Program Files (x86)/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/import_node.rb:67:in `rescue in import'
 C:/Program Files (x86)/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/import_node.rb:44:in `import'
 C:/Program Files (x86)/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/import_node.rb:28:in `imported_file'

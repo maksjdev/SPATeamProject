@@ -6,18 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about-page.component.scss']
 })
 export class AboutPageComponent implements OnInit {
-  public images: Array<string>;
+  public title: string;
+  public text: string;
+  public imagesArr: Array<object>;
 
   constructor() {
-    this.images = [
-      'https://pets2.me/media/res/1/4/8/4/3/14843.p30fh0.300.jpg',
-      'https://i.ytimg.com/vi/FfvA-xHMvcY/hqdefault.jpg',
-      'http://420on.cz/system/photo/image/000/120/450/xxlarge/panda3.jpg',
-      'http://www.otakuusamagazine.com/Uploads/Public/Images/Newsletter/06-23-14/670px-0,672,0,360-MainPagePart3.png',
-      'https://ci.memecdn.com/7841086.jpg'
-    ];
+    this.title = 'Информация о нашей команде «Elite Team»';
+    this.imagesArr = [
+      {title: "Виталик", link:"https://bit.ly/2UYktXU"},
+      {title: "Максим", link:"https://cdn.igromania.ru/mnt/videos/8/e/0/3/4/20366/3f40f9c8c7cb0fbd7355f1c8cb1fab54_original.jpg"},
+      {title: "Славик", link:"https://cdn.igromania.ru/mnt/videos/8/e/0/3/4/20366/3f40f9c8c7cb0fbd7355f1c8cb1fab54_original.jpg"},
+      {title: "Даша", link:"https://pp.userapi.com/c604531/v604531288/31cf6/jdJvnfFaUO8.jpg"}
+    ]
   }
 
   ngOnInit() {
   }
+
 }

@@ -25,6 +25,7 @@ export class AddNewsPageComponent implements OnInit {
   public categories: Array<Category>;
   public addNewsForm: FormGroup;
   private _subscription: Subscription;
+  public imageArr: Array<string>;
 
   public formErrors = {
     n_title: '', n_text: '', n_image: '', n_categories: ''
@@ -38,7 +39,13 @@ export class AddNewsPageComponent implements OnInit {
     private newsService: NewsDataService,
     private dialogService: AppDialogService,
     private categoryService: CategoryDataService
-  ) {}
+  ) {
+    this.imageArr = [
+      'https://pre00.deviantart.net/b5bc/th/pre/i/2016/001/4/6/witcher_3_new_year_2016_by_maxifen-d9mah8e.png',
+      'https://img2.goodfon.com/original/1366x768/f/4a/shokugeki-no-soma-soma-paren.jpg',
+      'https://img4.goodfon.com/wallpaper/nbig/5/98/art-anime-novyi-god-iolka-devushki.jpg'
+    ];
+  }
 
   ngOnInit() {
     this.pageTitle = 'Добавление новости';

@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AppFormService} from '@shared/services/app-form.service';
 import {AuthService} from '@shared/auth/auth.service';
 import {CustomValidators} from '@shared/services/custom-validators';
+import {AppRoutingService} from '@routes/app-routing.service';
 
 @Component({
   selector: 'app-registration-page',
@@ -25,6 +26,7 @@ export class RegistrationPageComponent implements OnInit {
     private formBuild: FormBuilder,
     private formService: AppFormService,
     private authService: AuthService,
+    private routeService: AppRoutingService
   ) { }
 
   ngOnInit() {
@@ -48,8 +50,16 @@ export class RegistrationPageComponent implements OnInit {
           email: string = this.registrationForm.value['r_email'],
           password: string = this.registrationForm.value['r_password'];
 
-      this.authService.onRegister(realName, nickname, email, password, image);
-      this.registrationForm.reset();
+      this.authService.onRegister(realName, nickname, email, password, image).then( (register: boolean) => {
+        if (register){
+          this.authService.onLogin(email, password).then( (login: boolean) => {
+            if (login) {
+              this.registrationForm.reset();
+              this.routeService.goBackByQuery();
+            }
+          });
+        }
+      });
     } else {
       this.formErrors = this.formService.validateForm(this.registrationForm, this.formErrors, false);
     }
