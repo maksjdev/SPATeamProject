@@ -5,7 +5,9 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
+
 const userRoutes = require('@routes/route-user');
+const newsRoutes = require('@routes/route-news');
 const configRoutes = require('@routes/route-config');
 
 const ENV = require('@constants/environment');
@@ -48,6 +50,7 @@ app.use((req, res, next) => {
 // Routes which should handle requests
 app.use("/user", userRoutes);
 app.use("/config", configRoutes);
+app.use("/news", newsRoutes);
 
 
 // Error handlers
