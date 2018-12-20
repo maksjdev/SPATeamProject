@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {User} from '@shared/models/User';
-import {BehaviorSubject} from 'rxjs';
-import {catchError} from 'rxjs/operators';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
 import {AppRestService} from '@shared/http/app-rest.service';
 
 @Injectable()
 export class UserDataService {
+  private jwtToken: string;
   private currentUser: BehaviorSubject<User>;
 
   constructor(
@@ -14,19 +15,33 @@ export class UserDataService {
     this.currentUser = new BehaviorSubject(null);
   }
 
-  public setCurrentUserData(user: User){
+  public setCurrentJWT(token: string) {
+    this.jwtToken = token;
+  }
+  public setCurrentUserData(user: User) {
     this.currentUser.next(user);
+  }
+
+  public getCurrentJWT(): string {
+    return this.jwtToken;
   }
   public getCurrentUserData(): BehaviorSubject<User> {
     return this.currentUser;
   }
 
 
- public getUserData(id: string){
+  public getUserData(id: string): Observable<User> {
     return this.restService.getUserData(id).pipe(
-      catchError(this.restService.handleError(`Get UserData #${id}`, []))
+      map(v => {
+        let id = v['_id'], realname = v['realname'], nickname = v['nickname'],
+          email = v['email'], img = v['img_url'], rating = v['rating'], role = v['role'],
+          bookmarks = v['bookmarks'];
+        let user = new User(id, realname, nickname, email, img, rating, role, bookmarks);
+        return user;
+      }),
+      catchError(this.restService.handleError<User>(`Get UserData #${id}`))
     );
- }
+  }
 
   public isAdmin(): boolean {
     let user: User = this.currentUser.getValue();

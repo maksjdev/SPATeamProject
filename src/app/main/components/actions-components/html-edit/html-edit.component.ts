@@ -27,7 +27,7 @@ export class HtmlEditComponent implements ControlValueAccessor {
       ["justifyLeft", "justifyCenter", "justifyRight", "indent", "outdent"],
       ["delete", "removeFormat", "undo"],
       ["paragraph", "blockquote", "removeBlockquote", "horizontalLine", "orderedList", "unorderedList"],
-      ["link", "image", "video"]
+      ["link", "img_url", "video"]
     ];
   }
 

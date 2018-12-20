@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from '@environments/environment';
 import {AppHttpService} from '@shared/http/app-http.service';
-import {catchError, map, retry} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {News} from '@shared/models/News';
 import {HttpResponse} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
@@ -19,13 +19,16 @@ export class AppRestService {
     this.host = environment.host;
   }
 
-  public getData(ulr: string, data?: object): Observable<Object> {
-    return this.connectService.getData(this.host + ulr);
+  public getData(ulr: string, params?: object): Observable<HttpResponse<ArrayBuffer>> {
+    return this.connectService.getData(this.host + ulr).pipe(
+      map( (response: HttpResponse<ArrayBuffer>) => {
+        return response;
+      })
+    );
   }
-  private sendData(data: object, ulr: string): Observable<HttpResponse<ArrayBuffer>> {
+  private sendData(ulr: string, data: object): Observable<HttpResponse<ArrayBuffer>> {
     return this.connectService.postData(this.host + ulr, data).pipe(
       map( (response: HttpResponse<ArrayBuffer>) => {
-        console.log(response.body, response.headers);
         return response;
       })
     );
@@ -41,29 +44,29 @@ export class AppRestService {
   // Отправка данных
   public onLogin(login: string, password: string): Observable<HttpResponse<ArrayBuffer>> {
     let url = CONSTANTS.SERVER.LOGIN;
-    return this.sendData({login: login, password: password }, url);
+    return this.sendData(url, {login: login, password: password });
   }
   public onRegister(newUser: User, password: string): Observable<HttpResponse<ArrayBuffer>> {
     let url = CONSTANTS.SERVER.REGISTER;
-    return this.sendData({
+    return this.sendData(url,{
       email: newUser.getEmail(),
       realname: newUser.getRealName(),
       nickname: newUser.getNickname(),
       img_url: newUser.getImage(),
-      password: password}, url);
+      password: password});
   }
 
   public sendNews(news: News): Observable<HttpResponse<ArrayBuffer>> {
     let url = CONSTANTS.SERVER.NEWS;
-    return this.sendData(news, url);
+    return this.sendData(url, news);
   }
   public deleteNews(deleteID: string): Observable<HttpResponse<ArrayBuffer>> {
     let url = CONSTANTS.SERVER.NEWS + '/' + deleteID;
-    return this.sendData({id: deleteID}, url);
+    return this.sendData(url, {id: deleteID});
   }
   public sendCategory(category: Category): Observable<HttpResponse<ArrayBuffer>> {
     let url = CONSTANTS.SERVER.CATEGORY;
-    return this.sendData(category, url);
+    return this.sendData(url, category);
   }
 
   // Получение данных

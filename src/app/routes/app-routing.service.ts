@@ -90,6 +90,12 @@ export class AppRoutingService {
     this.router.navigate([`/${link}`],
       { queryParams: queryParams, queryParamsHandling: merge? 'merge' : null, skipLocationChange: skip });
   }
+  public goBackByQuery(): void{
+    let backUrl: string = this.getQueryParam(CONSTANTS.QUERY.BACK_URL);
+    let backParams: string = this.getQueryParam(CONSTANTS.QUERY.BACK_PARAMS);
+    let params = backParams? JSON.parse(backParams) : {};
+    backUrl? this.goToLinkWithQuery(backUrl, false, params) : this.goToLink(CONSTANTS.APP.MAIN);
+  }
 
   public goToLink(link: string): void{
     this.router.navigate([`/${link}`]);
@@ -97,6 +103,7 @@ export class AppRoutingService {
   public goChildLink(link: string): void{
     this.router.navigate([`./${link}`], { relativeTo: this.activeRoute, skipLocationChange: false });
   }
+
   getCleanUrl(link): string{
     // Возврат "чистой ссылки" (без параметров)
     let urlTree = this.router.parseUrl(link);

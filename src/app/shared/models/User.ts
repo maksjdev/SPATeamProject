@@ -2,20 +2,20 @@ export class User {
 
   constructor(
     public id: string,
-    public real_name: string,
+    public realname: string,
     public nickname: string,
     public email: string,
-    public image: string,
+    public img_url: string,
     public rating: number,
     public role: string,
-    public bookmarks: Array<string> = []
+    public bookmarks: Array<string> = [],
   ){}
 
   getId(): string {
     return this.id;
   }
   getRealName(): string {
-    return this.real_name;
+    return this.realname;
   }
   getNickname(): string {
     return this.nickname;
@@ -24,7 +24,7 @@ export class User {
     return this.email;
   }
   getImage(): string {
-    return this.image;
+    return this.img_url;
   }
   getRating(): number {
     return this.rating;
@@ -37,6 +37,6 @@ export class User {
   }
 
   public toString(){
-    return `User (${this.role}) Name - ${this.real_name + this.nickname}`;
+    return `User (${this.role}) Name - ${this.realname + this.nickname}`;
   }
 }

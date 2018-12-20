@@ -4,12 +4,12 @@ const userSchema = mongoose.Schema({
   _id: {
     type: mongoose.Schema.Types.ObjectId
   },
-  realname : {
-    type : String,
+  realname: {
+    type: String,
     required: [true, 'You need enter realname!']
   },
-  nickname : {
-    type : String,
+  nickname: {
+    type: String,
     required: [true, 'You need enter nickname!']
     //unique: true,
   },
@@ -19,9 +19,9 @@ const userSchema = mongoose.Schema({
     required: [true, 'You need enter email!'],
     match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
   },
-  img_url : {
+  img_url: {
     type: String,
-    required : [true, 'You need enter image url!']
+    required: [true, 'You need enter img_url url!']
   },
   password: {
     type: String,
@@ -29,22 +29,25 @@ const userSchema = mongoose.Schema({
   },
 
   // Не объязательные поля
-  role : {
+  role: {
     type: String,
     default: 'User',
     enum: ['User', 'Admin'],
-    required : true
+    required: true
   },
-  rating : {
+  rating: {
     type: Number,
     default: 0,
     min: 0,
-    required : true
+    required: true
   },
   bookmarks: {
-    type: Array,
+    type: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'News'
+    }],
     default: [],
-    required : true
+    required: true
   },
   register_date: {
     type: Date,
@@ -52,5 +55,16 @@ const userSchema = mongoose.Schema({
     required: true
   },
 });
+const User = mongoose.model('User', userSchema);
 
-module.exports = mongoose.model('User', userSchema);
+function createUser(imgUrl, realname, nickname, email, password) {
+  return new User({
+    _id: new mongoose.Types.ObjectId(),
+    img_url:  imgUrl,
+    realname: realname,
+    nickname: nickname,
+    email:    email,
+    password: password,
+  })
+}
+module.exports = [User, createUser];

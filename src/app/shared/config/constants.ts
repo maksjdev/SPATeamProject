@@ -36,6 +36,12 @@ export const CONSTANTS = {
     CATEGORY: '/category',
   },
 
+  LOCAL_S: {
+    USER_LOGIN: 'userLogin',
+    USER_PASSWORD: 'userPassword',
+    JWT_TOKEN: 'jwtToken',
+  },
+
   MSG: {
     CONFIRM_DEL_COMMENT: 'Вы точно хотите удалить данный коментарий?',
     CONFIRM_DEL_NEWS: 'Вы уверены что хотите удалить новость?',

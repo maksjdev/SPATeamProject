@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const jwt = require("jsonwebtoken");
-const ModelUser = require("@models/model-user");
+const [ModelUser, createUser] = require("@models/model-user");
 const ENV = require('@constants/environment');
 const CODES = require('@constants/http-codes');
 const MSGS = require('@constants/mesages');
@@ -45,32 +45,34 @@ exports.user_signup = (req, res, next) => {
 exports.user_login = (req, res, next) => {
   let loginV = req.body.login,
       passwordV = req.body.password;
-  // console.log(loginV, passwordV);
   if (loginV && passwordV){
-    ModelUser.findOne({email: loginV}).exec()
+    ModelUser.findOne({email: loginV})
+      .select("_id password email").exec()
       .then(user => {
         if (!user) {
-          return res.status(CODES.EC_AUTH).send(MSGS.MAIL_NOT_EXIST);
+          res.status(CODES.EC_AUTH).send(MSGS.MAIL_NOT_EXIST);
         }
-        bcrypt.compare(passwordV, user.password, (err, result) => {
+        let userPassword = user.password, userEmail = user.email, userId= user._id;
+        bcrypt.compare(passwordV, userPassword, (err, result) => {
           if (err) {
-            return res.status(CODES.EC_AUTH).send(MSGS.PASS_WRONG);
+            res.status(CODES.EC_AUTH).send(MSGS.AUTH_FAIL);
           }
           if (result) {
             const token = jwt.sign({
-              email: user.email,
-              userId: user._id
+              email: userEmail,
+              userId: userId
             }, ENV.JWT_KEY, {expiresIn: "1h"});
+
             return res.status(CODES.S_OK).json({
               message: MSGS.AUTH_SUCCES,
-              token: token
+              token: token,
+              userId: userId
             });
           }
-          res.status(CODES.EC_AUTH).send(MSGS.AUTH_FAIL);
+          res.status(CODES.EC_AUTH).send(MSGS.PASS_WRONG);
         });
       })
       .catch(err => {
-        console.log(err);
         res.status(CODES.ES_INTERNAL).json({
           error: err
         });
@@ -95,7 +97,7 @@ exports.user_delete = (req, res) => {
 exports.user_find = (req, res) => {
   let userId = req.params.userId;
   if (userId) {
-    ModelUser.findOne({_id: userId }).exec()
+    ModelUser.findOne({_id: userId }, '-password -__v').exec()
       .then( result => {
         if (result) {
           res.status(CODES.S_OK).json(result)
@@ -108,15 +110,3 @@ exports.user_find = (req, res) => {
       });
   } else { res.status(CODES.EC_REQUEST).end() }
 };
-
-// Вспомогательные херни
-function createUser(imgUrl, realname, nickname, email, password) {
-  return new ModelUser({
-    _id: new mongoose.Types.ObjectId(),
-    img_url:  imgUrl,
-    realname: realname,
-    nickname: nickname,
-    email:    email,
-    password: password,
-  })
-}

@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class AppHttpService {
@@ -10,21 +11,32 @@ export class AppHttpService {
   ){}
 
   // DEFAULT CRUD MODEL (CREATE, READ, UPDATE, DELETE
-  public postData<T>(url: string, body, options?): Observable<Object> {
-    // В опциях как раз и будут все вспомогательные данные
-    let myHeaders = new HttpHeaders()
-      .set('Authorization', 'my-auth-token')
-      .set('Content-Type', 'application/json')
-      .set('Cache-Control', 'no-cache');
-    return this.httpClient.post(url, body, {headers: myHeaders});
+  public postData(url: string, data: object, params?): Observable<any> {
+    let myParams = new HttpParams(params);
+    let myHeaders = new HttpHeaders({
+      'Content-Type': 'application/json; charset=UTF-8',
+    });
+    let options = {
+      headers: myHeaders,
+      params: myParams
+    };
+    let body = JSON.stringify(data);
+    return this.httpClient.post(url, body, options);
   }
-  public getData(url: string, data?): Observable<Object> {
-    return this.httpClient.get(url);
+
+  public getData(url: string, params?): Observable<any> {
+    let myParams = new HttpParams(params);
+    let options = {
+      params: myParams
+    };
+    return this.httpClient.get(url, options);
   }
-  public updateData(url: string, data, options?): Observable<Object> {
+
+  public updateData(url: string, data, options?): Observable<any> {
     return this.httpClient.patch(url, data);
   }
-  public deleteData(url: string, data): Observable<Object>  {
+
+  public deleteData(url: string, data): Observable<any>  {
     return this.httpClient.delete(url);
   }
 }
