@@ -1,37 +1,36 @@
-
 const mongoose = require('mongoose');
 
-
 const newsSchema = mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
+  _id: {
+    type: mongoose.Schema.Types.ObjectId
+  },
+  author : {
+    type: mongoose.Schema.Types.ObjectId,
+    ref : 'User',
+    required : [true, 'You need enter author!']
+  },
   title : {
     type : String,
-    required: true
-  },
-  image_url : {
-    type : String,
-    required: true
+    minLength: 10,
+    required: [true, 'You need enter title!']
   },
   text : {
     type: String,
-    required : true
+    minLength: 100,
+    required : [true, 'You need enter text!']
   },
-  date:{
-    type : Date,
-    default : Date.now(),
-    required: true
-  },
-  author : {
-    type: String,
-    ref : 'user',
-    required : true
+  img_url : {
+    type : String,
+    required: [true, 'You need enter main image link!']
   },
 
-  // Ne  обязательные поля
+  // Не объязательные поля
   categories : {
-    type : Array,
+    type: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Category'
+    }],
     default: [],
-    ref:'categories',
     required : true
   },
   rating : {
@@ -40,6 +39,11 @@ const newsSchema = mongoose.Schema({
     min: 0,
     required : true
   },
+  create_date:{
+    type : Date,
+    default : Date.now(),
+    required: true
+  },
   comments_number : {
     type: Number,
     default: 0,
@@ -47,10 +51,25 @@ const newsSchema = mongoose.Schema({
     required : true
   },
   comments: {
-    type: String,
-    ref : 'comments',
+    type: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Comment'
+    }],
+    default: [],
     required: true
   }
 });
+const News = mongoose.model('News', newsSchema);
 
-module.exports = mongoose.model('News', newsSchema);
+function createNews(authorId, title, text, img_url, categories, rating) {
+  return new News({
+    _id: new mongoose.Types.ObjectId(),
+    author:   authorId,
+    title:    title,
+    text:     text,
+    img_url:  img_url,
+    categories: categories,
+    rating:     rating
+  })
+}
+module.exports = [News, createNews];

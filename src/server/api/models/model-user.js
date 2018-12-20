@@ -6,16 +6,18 @@ const userSchema = mongoose.Schema({
   },
   realname: {
     type: String,
+    minLength: 6,
     required: [true, 'You need enter realname!']
   },
   nickname: {
     type: String,
+    minLength: 6,
     required: [true, 'You need enter nickname!']
-    //unique: true,
   },
   email: {
     type: String,
     unique: true,
+    minLength: 8,
     required: [true, 'You need enter email!'],
     match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
   },
@@ -25,6 +27,7 @@ const userSchema = mongoose.Schema({
   },
   password: {
     type: String,
+    minLength: 6,
     required: [true, 'You need enter password!']
   },
 
