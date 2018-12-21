@@ -6,7 +6,8 @@ import {AppFormService} from '@shared/services/app-form.service';
 import {CustomValidators} from '@shared/services/custom-validators';
 import {CategoryDataService} from '@shared/category-data.service';
 import {Category} from '@shared/models/Category';
-import {HttpResponse} from '@angular/common/http';
+import {AppDialogService} from '@shared/services/app-dialog.service';
+import {UserDataService} from '@shared/user-data.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -25,6 +26,8 @@ export class AdminPageComponent implements OnInit {
     private formService: AppFormService,
     private routingService: AppRoutingService,
     private categoryService: CategoryDataService,
+    private userService: UserDataService,
+    private dialogService: AppDialogService,
   ) { }
 
   ngOnInit(): void {
@@ -40,10 +43,10 @@ export class AdminPageComponent implements OnInit {
       let name: string = this.CategoryForm.value['c_name'];
       let category = new Category('100', name, 0);
 
-      this.categoryService.createCategory(category).pipe().subscribe( (value: HttpResponse<ArrayBuffer>) => {
-        // Если отправка удалась -> сообщить
-        this.CategoryForm.reset();
-        console.log(value);
+      this.categoryService.createCategory(category).then( (created: boolean) => {
+        if (created) {
+          this.CategoryForm.reset();
+        }
       });
       this.formErrors = {c_name: ''};
     } else {
@@ -55,7 +58,7 @@ export class AdminPageComponent implements OnInit {
     this.routingService.goToLink(CONSTANTS.APP.NEWS+'/'+CONSTANTS.APP.CREATE);
   }
   public onSpoiler(event){
-    alert(`
+    this.dialogService.showDialog(`
       ТЫ УМРЕШЬ
       И ВСЕ КОГО ТЫ ЗНАЛ - ТОЖЕ
       БОГА НЕТ
@@ -70,5 +73,19 @@ export class AdminPageComponent implements OnInit {
       И ДРУЗЕЙ ТОЖЕ - НЕТ
       К ТОМУ ЖЕ - ТЫ ПРИЕМНЫЙ
     `);
+  }
+  public loadData(event){
+    let id: string = this.userService.getCurrentUserData().getValue().id;
+    this.userService.getUserData(id).toPromise().then(user => {
+      this.dialogService.showDialog(
+        Object.keys(user).length > 0 ? user.toString()
+          : 'Запути сервер *npm server|mock*, дурашка))'
+      );
+    });
+  }
+  public onJWT(event){
+    let jwt: string = this.userService.getCurrentJWT();
+    this.dialogService.showDialog(`Your JWT token: ${jwt}\n УЖЕ СКОПИРОВАН В БУФЕР!`);
+    this.formService.copyStringToClipboard(jwt);
   }
 }

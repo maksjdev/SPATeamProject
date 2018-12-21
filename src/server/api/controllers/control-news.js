@@ -47,18 +47,7 @@ exports.news_get_all = (req, res) => {
 
 exports.news_create = (req, res, next) => {
   // TODO: Вынести все в переменные и юзать ф-цию модели для создания
-  const news = new ModelNews({
-    _id: new mongoose.Types.ObjectId(),
-    title: req.body.title,
-    image_url: req.body.image_url,
-    text: req.body.text,
-    date : req.body.date,
-    author: req.body.author,
-    categories : req.body.categories,
-    rating : req.body.rating,
-    comments_number : req.body.comments_number,
-    comments : req.body.comments
-  });
+  const news = new createNews();
   news.save()
     .then(result => {
       console.log(result);

@@ -1,11 +1,12 @@
 const jwt = require('jsonwebtoken');
+
 const ENV = require('@constants/environment');
 const CODES = require('@constants/http-codes');
 const MSGS = require('@constants/mesages');
 
 module.exports = (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(" ")['JWT'];
+    const token = req.headers.authorization;
     const decoded = jwt.verify(token, ENV.JWT_KEY);
     req.userData = decoded;
     next();

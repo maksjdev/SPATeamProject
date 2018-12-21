@@ -40,8 +40,7 @@ export class CommentFormComponent implements OnInit, OnDestroy {
 
     this.CommentForm = this.formBuild.group({
       c_text:    ['', [Validators.required,
-        CustomValidators.validateLimits(5, 1000),
-        CustomValidators.validateCharacters()]],
+        CustomValidators.validateLimits(5, 1000)]],
     });
   }
   ngOnDestroy(): void {

@@ -10,4 +10,8 @@ export class AppDialogService {
     const confirmation = confirm(message || 'Ты уверен(-а)?');
     return of(confirmation);
   };
+
+  public showDialog(message: string): void {
+    alert(message);
+  }
 }

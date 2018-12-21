@@ -36,14 +36,14 @@ export class MockDataService {
     this.mockNews = new News ( '100', this.mockUser, date, title, text, linkNews, categories,100, 5);
 
     this.categorysList = [
-      new Category('111', 'Anime', 0,true),
-      new Category('112', 'Web', 10,false),
-      new Category('113', 'Design', 20,false),
-      new Category('114', 'Android', 12,false),
-      new Category('115', 'Toasters', 14,false),
-      new Category('116', 'iOS', 7,false),
-      new Category('117', 'Space', 15,false),
-      new Category('118', 'Navalny', 6,false),
+      new Category('111', 'Anime', 0),
+      new Category('112', 'Web', 10),
+      new Category('113', 'Design', 20,),
+      new Category('114', 'Android', 12,),
+      new Category('115', 'Toasters', 14,),
+      new Category('116', 'iOS', 7,),
+      new Category('117', 'Space', 15,),
+      new Category('118', 'Navalny', 6,),
     ];
   }
 

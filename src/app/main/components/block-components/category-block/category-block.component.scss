@@ -9,6 +9,7 @@
   height: 100%;
   &__header {
     display: block;
+    cursor: pointer;
     padding-top: $normal-padding;
     margin: 0 $big-padding;
     border-bottom: 2px solid $main-text-color;

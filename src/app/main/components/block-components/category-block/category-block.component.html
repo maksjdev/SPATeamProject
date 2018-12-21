@@ -1,7 +1,8 @@
 
 <div class="panel shadow-block column category-item">
   <div class="category-item__header">
-    <h4 class="category-item__header--title" >Категории</h4>
+    <h4 class="category-item__header--title"
+        (click)="loadCategory()" [title]="'Обновить список категорий'">Категории ({{totalCount}})</h4>
   </div>
   <div class="category-item__content">
 

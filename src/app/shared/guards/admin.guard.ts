@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, CanLoad, Route, RouterStateSnapshot, UrlSegment} from '@angular/router';
 import {Observable} from 'rxjs';
 import {CONSTANTS} from '../config/constants';
-import {AuthService} from '../auth/auth.service';
+import {AuthService} from '../auth.service';
 import {AppRoutingService} from '@routes/app-routing.service';
 import {UserDataService} from '../user-data.service';
 

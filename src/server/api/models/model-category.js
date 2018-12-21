@@ -9,15 +9,30 @@ const categorySchema = mongoose.Schema({
     minLength: 4,
     required: [true, 'You need enter name!']
   },
+
+  // Не объязательные поля
   news_amount: {
     type: Number,
     min: 0,
     default: 0,
     required: true
   },
+  news_list: {
+    type: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'News'
+    }],
+    default: [],
+    required: true
+  },
   disabled: {
     type: Boolean,
-    default: true,
+    default: false,
+    required: true
+  },
+  create_date: {
+    type: Date,
+    default: Date.now(),
     required: true
   }
 });

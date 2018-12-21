@@ -11,7 +11,6 @@ export class NavigationComponent {
     {path: CONSTANTS.APP.MAIN,   label: 'main',  class: 'active'},
     {path: CONSTANTS.APP.NEWS+'/'+CONSTANTS.APP.CREATE,  label: 'create', class: 'active'},
     {path: CONSTANTS.APP.ABOUT,  label: 'about', class: 'active'},
-    {path: '/demo',  label: 'demo', class: 'active'},
   ];
 
   constructor() { }

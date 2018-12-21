@@ -16,10 +16,12 @@ exports.user_signup = (req, res, next) => {
       imgUrlV = req.body.img_url;
   // console.log(emailV, realnameV, nicknameV, passwordV,imgUrlV);
   if (emailV && realnameV && nicknameV && passwordV && imgUrlV){
-    ModelUser.find({email: emailV}).exec()
+    ModelUser.find({email: { $regex: new RegExp("^" + emailV.toLowerCase(), "i")}}).exec()
       .then(user => {
         if (user.length >= 1) {
-          return res.status(CODES.EC_CONFLICT).send(MSGS.MAIL_EXIST);
+          return res.status(CODES.EC_CONFLICT).json({
+            message: MSGS.MAIL_EXIST
+          });
         } else {
           bcrypt.hash(passwordV, 10, (err, hash) => {
             if (err) {
@@ -50,12 +52,16 @@ exports.user_login = (req, res, next) => {
       .select("_id password email").exec()
       .then(user => {
         if (!user) {
-          res.status(CODES.EC_AUTH).send(MSGS.MAIL_NOT_EXIST);
+          res.status(CODES.EC_AUTH).json({
+            message: MSGS.MAIL_NOT_EXIST
+          });
         }
         let userPassword = user.password, userEmail = user.email, userId= user._id;
         bcrypt.compare(passwordV, userPassword, (err, result) => {
           if (err) {
-            res.status(CODES.EC_AUTH).send(MSGS.AUTH_FAIL);
+            res.status(CODES.EC_AUTH).json({
+              message: MSGS.AUTH_FAIL
+            });
           }
           if (result) {
             const token = jwt.sign({
@@ -69,7 +75,9 @@ exports.user_login = (req, res, next) => {
               userId: userId
             });
           }
-          res.status(CODES.EC_AUTH).send(MSGS.PASS_WRONG);
+          res.status(CODES.EC_AUTH).json({
+            message: MSGS.PASS_WRONG
+          });
         });
       })
       .catch(err => {
@@ -85,7 +93,9 @@ exports.user_delete = (req, res) => {
   if (userId) {
     ModelUser.deleteOne({_id: userId }).exec()
     .then( result => {
-      res.status(CODES.S_OK).send("User"+MSGS.DELETED);
+      res.status(CODES.S_OK).json({
+        message: `User [id:${userId}] ${MSGS.DELETED}`
+      });
     })
     .catch(err => {
       res.status(CODES.ES_INTERNAL).json({

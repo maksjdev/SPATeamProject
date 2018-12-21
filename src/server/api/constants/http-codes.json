@@ -5,6 +5,7 @@
 
   "EC_REQUEST": "400",
   "EC_AUTH": "401",
+  "EC_FORBIDDEN": "403",
   "EC_NOT_FOUND": "404",
   "EC_TIMEOUT": "408",
   "EC_CONFLICT": "409",

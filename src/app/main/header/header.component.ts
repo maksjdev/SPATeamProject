@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AppRoutingService} from '@routes/app-routing.service';
 import {AppRouterData} from '@routes/AppRouterData';
-import {AuthService} from '@shared/auth/auth.service';
+import {AuthService} from '@shared/auth.service';
 import {CONSTANTS} from '@shared/config/constants';
 import {AppScrollService} from '@shared/services/app-scroll.service';
 

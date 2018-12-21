@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
-import {AppRoutingService} from '@routes/app-routing.service';
-import {UserDataService} from '@shared/user-data.service';
-import {BehaviorSubject, Observable, of} from 'rxjs';
-import {AppRestService} from '@shared/http/app-rest.service';
-import {CONSTANTS} from '@shared/config/constants';
-import {MockDataService} from '@shared/mock-data.service';
-import {User} from '@shared/models/User';
-import {catchError, map, switchMap} from 'rxjs/operators';
+import {AppRoutingService} from '../routes/app-routing.service';
+import {UserDataService} from './user-data.service';
+import {BehaviorSubject, of} from 'rxjs';
+import {AppRestService} from './http/app-rest.service';
+import {MockDataService} from './mock-data.service';
+import {User} from './models/User';
+import {catchError, switchMap} from 'rxjs/operators';
 import {HttpResponse} from '@angular/common/http';
+import {AppDialogService} from '@shared/services/app-dialog.service';
+import {CONSTANTS} from '@shared/config/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class AuthService {
     private userService: UserDataService,
     private mockDataService: MockDataService,
     private routeService: AppRoutingService,
-    private restService: AppRestService
+    private restService: AppRestService,
+    private dialogService: AppDialogService,
   ) {
     this.loginState = new BehaviorSubject(false);
 
@@ -45,12 +47,14 @@ export class AuthService {
         let token = value['token'];
         if (id && token) {
           this.userService.setCurrentJWT(token);
+          localStorage.setItem(CONSTANTS.LOCAL_S.JWT_TOKEN, token);
           return this.userService.getUserData(id);
         }
       }),
-      catchError((err: Response) => {
+      catchError((errorMsg: string) => {
         // Авторизация НЕ удалась
-        alert(err['error']);
+        // let errorMsg: string = err['error'];
+        this.dialogService.showDialog(errorMsg);
         return of();
       })
     ).toPromise().then((activeUser: User) => {
@@ -76,15 +80,15 @@ export class AuthService {
 
     localStorage.removeItem(CONSTANTS.LOCAL_S.USER_LOGIN);
     localStorage.removeItem(CONSTANTS.LOCAL_S.USER_PASSWORD);
+    localStorage.removeItem(CONSTANTS.LOCAL_S.JWT_TOKEN);
   }
 
   onRegister(realName: string, nickname: string, email: string, password: string, image?: any): Promise<boolean> {
-    // Формируем запрос на сервер (через restService)
     let newUser = new User('0', realName, nickname, email, image, 0, null);
     return this.restService.onRegister(newUser, password).pipe(
-      catchError((err: Response) => {
+      catchError((errorMsg: string) => {
         // Регистрация НЕ удалась
-        alert(err['error']);
+        this.dialogService.showDialog(errorMsg);
         return of(false);
       })
     ).toPromise().then( (registered: boolean) => {

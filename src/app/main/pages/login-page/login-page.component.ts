@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AppFormService} from '@shared/services/app-form.service';
-import {AuthService} from '@shared/auth/auth.service';
+import {AuthService} from '@shared/auth.service';
 import {CustomValidators} from '@shared/services/custom-validators';
 import {Subscription} from 'rxjs';
 import {AppRoutingService} from '@routes/app-routing.service';
@@ -42,7 +42,7 @@ export class LoginPageComponent implements OnInit {
         CustomValidators.validateLimits(5,40),
         CustomValidators.validateCharacters()]],
       l_password: [savedPassword, [Validators.required,
-        CustomValidators.validateLimits(8,20), ]],
+        CustomValidators.validateLimits(6,20), ]],
       l_save:     [savedCheckBox, [Validators.required]],
     });
   }
