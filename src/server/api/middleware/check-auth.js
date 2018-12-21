@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+
 const ENV = require('@constants/environment');
 const CODES = require('@constants/http-codes');
 const MSGS = require('@constants/mesages');

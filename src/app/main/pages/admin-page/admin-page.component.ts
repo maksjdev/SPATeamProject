@@ -7,6 +7,7 @@ import {CustomValidators} from '@shared/services/custom-validators';
 import {CategoryDataService} from '@shared/category-data.service';
 import {Category} from '@shared/models/Category';
 import {HttpResponse} from '@angular/common/http';
+import {AppDialogService} from '@shared/services/app-dialog.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -25,6 +26,7 @@ export class AdminPageComponent implements OnInit {
     private formService: AppFormService,
     private routingService: AppRoutingService,
     private categoryService: CategoryDataService,
+    private dialogService: AppDialogService,
   ) { }
 
   ngOnInit(): void {
@@ -55,7 +57,7 @@ export class AdminPageComponent implements OnInit {
     this.routingService.goToLink(CONSTANTS.APP.NEWS+'/'+CONSTANTS.APP.CREATE);
   }
   public onSpoiler(event){
-    alert(`
+    this.dialogService.showDialog(`
       ТЫ УМРЕШЬ
       И ВСЕ КОГО ТЫ ЗНАЛ - ТОЖЕ
       БОГА НЕТ

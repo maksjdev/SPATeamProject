@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AppFormService} from '@shared/services/app-form.service';
-import {AuthService} from '@shared/auth/auth.service';
+import {AuthService} from '@shared/auth.service';
 import {CustomValidators} from '@shared/services/custom-validators';
 import {AppRoutingService} from '@routes/app-routing.service';
 
@@ -32,7 +32,7 @@ export class RegistrationPageComponent implements OnInit {
   ngOnInit() {
 
     this.registrationForm = this.formBuild.group({
-      r_image:    [''],
+      r_image:    ['', [Validators.required, CustomValidators.validateLimits(6)]],
       r_real_name: ['', [Validators.required, CustomValidators.validateLimits(4, 20)]],
       r_nickname: ['', [Validators.required, CustomValidators.validateLimits(4, 20)]],
       r_email: ['', [Validators.required , Validators.email]],
