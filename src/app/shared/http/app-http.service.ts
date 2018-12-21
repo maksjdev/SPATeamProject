@@ -13,7 +13,7 @@ export class AppHttpService {
   public postData(url: string, data: object, params?): Observable<any> {
     let myParams = new HttpParams(params);
     let myHeaders = new HttpHeaders({
-      'Content-Type': 'application/json; charset=UTF-8',
+      "Content-Type": "application/json; charset=UTF-8",
     });
     let options = {
       headers: myHeaders,
@@ -23,10 +23,9 @@ export class AppHttpService {
     return this.httpClient.post(url, body, options);
   }
 
-  public getData(url: string, params?): Observable<any> {
-    let myParams = new HttpParams(params);
+  public getData(url: string, params?: HttpParams): Observable<any> {
     let options = {
-      params: myParams
+      params: params
     };
     return this.httpClient.get(url, options);
   }

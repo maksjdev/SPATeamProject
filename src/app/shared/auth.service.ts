@@ -47,6 +47,7 @@ export class AuthService {
         let token = value['token'];
         if (id && token) {
           this.userService.setCurrentJWT(token);
+          localStorage.setItem(CONSTANTS.LOCAL_S.JWT_TOKEN, token);
           return this.userService.getUserData(id);
         }
       }),
@@ -79,10 +80,10 @@ export class AuthService {
 
     localStorage.removeItem(CONSTANTS.LOCAL_S.USER_LOGIN);
     localStorage.removeItem(CONSTANTS.LOCAL_S.USER_PASSWORD);
+    localStorage.removeItem(CONSTANTS.LOCAL_S.JWT_TOKEN);
   }
 
   onRegister(realName: string, nickname: string, email: string, password: string, image?: any): Promise<boolean> {
-    // Формируем запрос на сервер (через restService)
     let newUser = new User('0', realName, nickname, email, image, 0, null);
     return this.restService.onRegister(newUser, password).pipe(
       catchError((errorMsg: string) => {

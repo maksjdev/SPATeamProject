@@ -28,7 +28,6 @@ const routes: Routes = [
   {path: CONSTANTS.APP.ADMIN, loadChildren: '@admin/admin-page.module#AdminPageModule',
     canLoad: [AdminGuard], canActivate: [AdminGuard]
   },
-  {path: 'demo', loadChildren: '@demo/demo-page.module#DemoPageModule'},
   {path: '**', redirectTo: CONSTANTS.APP.MAIN},
 ];
 

@@ -3,12 +3,18 @@
 
   <div class="admin-panel__actions">
     <div class="row admin-panel__actions--simple">
-        <button class="btn btn-default" (click)="onAddNews($event)">
-          <i class="far fa-newspaper"></i>Добавить новость
-        </button>
-        <button class="btn btn-default" (click)="onSpoiler($event)">
-          <i class="far fa-hand-spock"></i>Осторожно боль
-        </button>
+      <button class="btn btn-default" (click)="onAddNews($event)">
+        <i class="far fa-newspaper"></i>Добавить
+      </button>
+      <button class="btn btn-default" (click)="onSpoiler($event)">
+        <i class="far fa-hand-spock"></i>Боль
+      </button>
+      <button class="btn btn-default" (click)="onJWT($event)">
+        <i class="fas fa-feather-alt"></i>JWT
+      </button>
+      <button class="btn btn-default" (click)="loadData($event)">
+        <i class="fas fa-male"></i>Загрузить
+      </button>
     </div>
 
     <div class="admin-panel__actions--forms">
@@ -19,7 +25,7 @@
             <div class="input-field">
               <i class="color input-field__icon fas fa-file-signature"></i>
               <input class="input-field__default-icon login-input" id="c_name"
-                     placeholder="Name of Category"  formControlName="c_name" type="text">
+                     placeholder="Название"  formControlName="c_name" type="text">
             </div>
           </div>
           <mat-error class="validator-input" *ngIf="formErrors.c_name">{{ formErrors.c_name }}</mat-error>

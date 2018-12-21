@@ -5,6 +5,7 @@ export class Category {
     public id: string,
     public name: string,
     public amount?: number,
+    public newsList?: Array<string>,
     public disabled?: boolean
   ){}
 
@@ -17,7 +18,13 @@ export class Category {
   public getAmount(): number {
     return this.amount || 0;
   }
+  public getNewsList(): Array<string>{
+    return this.newsList;
+  }
+  public getDisabled(): boolean {
+    return this.disabled;
+  }
   public toString(){
-    return `Category #${this.id} Name - ${this.name}`;
+    return `Category [id:${this.id}] Name: ${this.name}, Amount: ${this.amount}`;
   }
 }

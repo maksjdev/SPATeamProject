@@ -1,13 +1,16 @@
 {
-  "NOT_FOUND": "Not found",
+  "NOT_FOUND": "Not found! Oppss..",
 
-  "AUTH_FAIL": "Auth failed",
-  "AUTH_SUCCES": "Auth successful",
-
-  "NICKNAME_EXIST": "User with such nickname exist already",
-  "MAIL_EXIST": "User with such email exist already",
-  "MAIL_NOT_EXIST": "Mail don`t exist!",
+  "AUTH_FAIL": "Auth was failed!",
+  "AUTH_SUCCES": "Auth was successful!",
   "PASS_WRONG": "Wrong password!",
+  "ACCESS_FORBIDDEN": "Access was forbidden!",
+
+  "NICKNAME_EXIST": "User with such nickname exist already!",
+  "MAIL_EXIST": "User with such email exist already!",
+  "CATEGORY_EXIST": "Category with such name exist already!",
+
+  "MAIL_NOT_EXIST": "Mail don`t exist!",
 
   "CREATED": " - was created",
   "UPDATED": " - was updated",

@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CategoryDataService} from '@shared/category-data.service';
 import {Category} from '@shared/models/Category';
-import {Subscription} from 'rxjs';
 import {CONSTANTS} from '@shared/config/constants';
 import {AppRoutingService} from '@routes/app-routing.service';
 import {AppScrollService} from '@shared/services/app-scroll.service';
@@ -12,9 +11,9 @@ import {AppScrollService} from '@shared/services/app-scroll.service';
   styleUrls: ['./category-block.component.scss']
 })
 export class CategoryBlockComponent implements OnInit {
+  @Input() manNumber: number = 8;
   public categories: Array<Category>;
-  private _subscription: Subscription;
-
+  public totalCount: number;
 
   constructor(
     private routingService: AppRoutingService,
@@ -23,9 +22,15 @@ export class CategoryBlockComponent implements OnInit {
   ){}
 
   ngOnInit() {
-    this._subscription = this.categoryService.getAllCategories().subscribe((value: Array<Category>) => {
-      this.categories  = value;
-    });
+    this.loadCategory();
+  }
+
+  public loadCategory(){
+    let amount = this.manNumber;
+    this.categoryService.getAllCategories().toPromise().then((value: Array<Category>) => {
+      this.totalCount = value.length;
+      this.categories = value.splice(0, amount);
+    })
   }
   public goToMainWithCategory(category: Category): void {
     let queryParam = {[CONSTANTS.QUERY.CATEGORY]: category.name.toLowerCase()};

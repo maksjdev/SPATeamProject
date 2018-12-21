@@ -37,6 +37,6 @@ export class User {
   }
 
   public toString(){
-    return `User (${this.role}) Name - ${this.realname + this.nickname}`;
+    return `User [id=${this.id} Role:${this.role}, Name:${this.realname}, NickName:${this.nickname}, Rating:${this.rating}, Bookmarks:${this.bookmarks.join(',')}`;
   }
 }
