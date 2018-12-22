@@ -42,6 +42,9 @@ export class RatingFilterComponent implements OnChanges {
         let param = {[this.paramName]: this.currentRating};
         this.routingService.setQueryParam(param);
       }, 20);
+    } else {
+      let param = {[this.paramName]: null};
+      this.routingService.setQueryParam(param);
     }
   }
 

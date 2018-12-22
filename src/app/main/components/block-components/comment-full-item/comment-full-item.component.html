@@ -2,7 +2,7 @@
 <span class="row comment__header">
   <img class="comment__header--author-image" [src]="comment.author.getImage()" alt="*ControlUser Image*">
   <a href="" class="comment__header--author-name">
-    {{ comment.author.getNickname()}}{{ ',' }}
+    {{ comment.author.getNickname()}},
   </a>
   <div class="comment__header--date">
       {{ comment.getDate() | dateTransform }}
@@ -16,7 +16,7 @@
       <i class="fas fa-angle-down"></i>
     </button>
 
-    <button [title]="'Удалить коментарий'" (click)="OnDelete($event)">
+    <button *ngxPermissionsOnly="['Admin']" [title]="'Удалить коментарий'" (click)="OnDelete($event)">
       <i class="far fa-trash-alt"></i>
     </button>
   </div>

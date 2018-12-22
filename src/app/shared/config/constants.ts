@@ -45,7 +45,8 @@ export const CONSTANTS = {
   MSG: {
     CONFIRM_DEL_COMMENT: 'Вы точно хотите удалить данный коментарий?',
     CONFIRM_DEL_NEWS: 'Вы уверены что хотите удалить новость?',
-    CONFIRM_RST_NEWS: 'Вы уверены что хотите очистить новость?'
+    CONFIRM_RST_NEWS: 'Вы уверены что хотите очистить новость?',
+    CONFIRM_RST_CHANGE: 'Отменить ваши изменения новости?'
   },
 
   MOCK: {

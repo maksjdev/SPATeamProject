@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {environment} from '@environments/environment';
 import {AppHttpService} from '@shared/http/app-http.service';
-import {map} from 'rxjs/operators';
 import {News} from '@shared/models/News';
-import {HttpParams, HttpResponse} from '@angular/common/http';
+import {HttpResponse} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {CONSTANTS} from '@shared/config/constants';
 import {Category} from '@shared/models/Category';
@@ -53,7 +52,17 @@ export class AppRestService {
   }
   public sendNews(news: News): Observable<HttpResponse<ArrayBuffer>> {
     let url = CONSTANTS.SERVER.NEWS;
-    return this.sendData(url, news);
+    let categoriesId: string = news.getCategories().map((category: Category) => {
+      return category.getId();
+    }).join(',');
+    console.log(categoriesId);
+    return this.sendData(url, {
+      author: news.getAuthor().getId(),
+      title: news.getTitle(),
+      text: news.getText(),
+      image_url: news.getImage(),
+      categories: categoriesId
+    });
   }
   public sendCategory(category: Category): Observable<HttpResponse<ArrayBuffer>> {
     let url = CONSTANTS.SERVER.CATEGORY;
@@ -75,21 +84,24 @@ export class AppRestService {
   // Получение данных
   public getNewsList(page?: string, period?: string, rating?: string, categoriesId?: string, search?: string): Observable<Object> {
     let url = CONSTANTS.SERVER.NEWS;
-    let params = {};
+    let params = {
+      "page": page, "period": period, "min_rating": rating, "categories_id": categoriesId, "search": search
+    };
     return this.getData(url, params);
   }
   public getNewsData(newsId: string, type: string = 'full'): Observable<Object> {
     let url = CONSTANTS.SERVER.NEWS + '/' + newsId;
-    return this.getData(url, {id: newsId, type: type});
+    return this.getData(url, { "type": type.toString()});
   }
-  public getTopNews(): Observable<Object> {
+  public getTopNews(amount?: number): Observable<Object> {
     let url = CONSTANTS.SERVER.NEWS_TOP;
-    return this.getData(url);
+    let params = amount? { "amount": amount.toString() } : {};
+    return this.getData(url, params);
   }
 
-  public getAllComments(newsID: string): Observable<Object> {
-    let url = CONSTANTS.SERVER.COMMENT;
-    return this.getData(url, {id: newsID});
+  public getAllComments(newsId: string): Observable<Object> {
+    let url = CONSTANTS.SERVER.NEWS + '/' + newsId + CONSTANTS.SERVER.COMMENT;
+    return this.getData(url);
   }
   public getAllCategories(amount?: number): Observable<Object> {
     let url = CONSTANTS.SERVER.CATEGORY;

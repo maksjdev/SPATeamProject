@@ -9,7 +9,7 @@ const CODES = require('@constants/http-codes');
 const MSGS = require('@constants/mesages');
 
 
-exports.category_get_all = (req, res, next) => {
+exports.category_get = (req, res, next) => {
   let amount = req.query.amount;
   ModelCategory.find().sort({ news_amount : -1 }).exec()
     .then(result => {
@@ -40,7 +40,6 @@ exports.category_create = (req, res) => {
               res.status(CODES.S_CREATE).json(result);
             })
             .catch(err => {
-              console.log(err);
               res.status(CODES.ES_INTERNAL).json({
                 message: err
               });

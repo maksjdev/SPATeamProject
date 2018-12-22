@@ -1,4 +1,5 @@
 import {User} from '@shared/models/User';
+import {Category} from '@shared/models/Category';
 
 export class News {
 
@@ -9,7 +10,7 @@ export class News {
     public title: string,
     public text: string,
     public image_url: string,
-    public categories: Array<string> = [],
+    public categories: Array<Category> = [],
     public rating: number = 0,
     public commentNumber: number = 0,
     public commentList: Array<string> = []
@@ -33,7 +34,7 @@ export class News {
   getImage(): string {
     return this.image_url;
   }
-  getCategories(): Array<string> {
+  getCategories(): Array<Category> {
     return this.categories;
   }
   getRating(): number {

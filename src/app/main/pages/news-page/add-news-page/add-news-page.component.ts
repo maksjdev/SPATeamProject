@@ -85,16 +85,15 @@ export class AddNewsPageComponent implements OnInit {
       let title: string = this.addNewsForm.value['n_title'];
       let text: string = this.addNewsForm.value['n_text'];
       let image: string = this.addNewsForm.value['n_image'];
-      let categories: Array<string> = this.addNewsForm.value['n_categories'];
+      let categories: Array<Category> = this.addNewsForm.value['n_categories'];
 
       let author: User = this.userService.getCurrentUserData().getValue();
       let date = new Date();
 
       let news: News = new News('100', author, date, title, text, image, categories);
-      this.newsService.createNews(news).pipe().subscribe( (value: HttpResponse<ArrayBuffer>) => {
-        // Если отправка удалась -> иди на главную
-        this.addNewsForm.reset();
-        console.log(value);
+      this.newsService.createNews(news).then( (success: boolean) => {
+        //this.addNewsForm.reset();
+        console.log(success);
       });
     } else {
       this.formErrors = this.formService.validateForm(this.addNewsForm, this.formErrors, false);
@@ -113,7 +112,7 @@ export class AddNewsPageComponent implements OnInit {
   }
   canDeactivate(): Observable<boolean> | boolean {
     if (this.addNewsForm.value['n_title'] || this.addNewsForm.value['n_text']) {
-      return this.dialogService.confirmDialog('Отменить ваши изменения новости?');
+      return this.dialogService.confirmDialog(CONSTANTS.MSG.CONFIRM_RST_CHANGE);
     }
     return true;
   }
