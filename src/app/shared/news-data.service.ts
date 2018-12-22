@@ -22,18 +22,17 @@ export class NewsDataService {
   }
 
   public getNewsFromServer(
-    page: number, period: string, rating: string,
-    categories: Array<string>, search?: string
+    page: number, period?: string, rating?: string, categoriesId?: Array<string>, search?: string
   ): Observable<Array<News>> {
-    let category: string = categories.length > 0 ? categories.join(',') : 'any';
-    console.info(`Нужно - (стр. ${page}, период: ${period}, рейтинг: ${rating}, категории: ${category}, поиск: ${search || 'нету'})!`);
+    //let category: string = categories.length > 0 ? categories.join(',');
+    console.info(`Нужно - (стр. ${page}, период: ${period}, рейтинг: ${rating}, категории: ${categoriesId}, поиск: ${search || 'нету'})!`);
 
     // TODO Change for restService.getNewsList()
     let currentNews: Observable<Array<News>> = of(this.mockDataService.getMockNewsList(5));
     return currentNews;
   }
 
-  public getTopNews(): Observable<Array<News>> {
+  public getTopNews(amount?: number): Observable<Array<News>> {
     // TODO Change for restService.getTopNews()
     return of(this.mockDataService.getMockNewsList(5));
   }

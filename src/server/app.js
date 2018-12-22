@@ -5,7 +5,6 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
-
 const userRoutes = require('@routes/route-user');
 const newsRoutes = require('@routes/route-news');
 const categoryRoutes = require('@routes/route-category');

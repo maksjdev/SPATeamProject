@@ -52,13 +52,15 @@
     font-family: $standart-font;
     font-size: $normal-font-size;
   }
-  &--counter {
-    letter-spacing: 1px;
-    font-weight: bold;
-    margin: 0;
-    font-family: $standart-font;
-    font-size: $normal-font-size;
-    width: 50px;
-    text-align: center;
+  &--info{
+    &-counter {
+      letter-spacing: 1px;
+      font-weight: bold;
+      margin: 0;
+      font-family: $standart-font;
+      font-size: $normal-font-size;
+      width: 50px;
+      text-align: center;
+    }
   }
 }

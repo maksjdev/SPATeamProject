@@ -7,9 +7,10 @@ const CODES = require('@constants/http-codes');
 const MSGS = require('@constants/mesages');
 
 exports.news_get_all = (req, res) => {
-  // TODO: Тут будем забирать params
+  let page = req.query.page;
+
   // И уже после фильтровать по ним и после возвращать назад клиенту
-  ModelNews.find({}).exec()
+  ModelNews.find().exec()
     .then(docs => {
       const response = {
         total_count: docs.length,

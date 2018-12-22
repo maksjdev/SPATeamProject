@@ -30,11 +30,11 @@ export class AppHttpService {
     return this.httpClient.get(url, options);
   }
 
-  public updateData(url: string, data, options?): Observable<any> {
-    return this.httpClient.patch(url, data);
+  public deleteData(url: string): Observable<any>  {
+    return this.httpClient.delete(url);
   }
 
-  public deleteData(url: string, data): Observable<any>  {
-    return this.httpClient.delete(url);
+  public updateData(url: string, data, options?): Observable<any> {
+    return this.httpClient.patch(url, data);
   }
 }

@@ -18,7 +18,7 @@ import {ParamMap} from '@angular/router';
 })
 export class MainPageComponent implements OnInit, OnDestroy {
   periodFilter: string;
-  ratingFilter: string;
+  ratingFilter: number;
   categoryAll: Array<Category>;
   categoryFilter: Array<Category>;
   pagination: PaginationItem;
@@ -35,7 +35,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   ) {
     this.newsList = [];
     this.categoryFilter = [];
-
+    this.categoryAll = [];
   }
 
   ngOnInit() {
@@ -44,31 +44,37 @@ export class MainPageComponent implements OnInit, OnDestroy {
     });
 
     //Просим у сервиса данных - данные о каком-то количестве новостей
-    let numberOfNews = this.configService.getNumberOfNews();
     this._subscriptionN = this.routingService.getActiveQueryParam().pipe(
       throttleTime(100),
       switchMap((params: ParamMap) => {
-        let page: string = params.get(CONSTANTS.QUERY.PAGE);
-        let period: string = params.get(CONSTANTS.QUERY.PERIOD);
-        let rating: string = params.get(CONSTANTS.QUERY.RATING);
-        let search: string = params.get(CONSTANTS.QUERY.SEARCH);
-        let categoryStr: string = params.get(CONSTANTS.QUERY.CATEGORY);
+        let pageQuery: string = params.get(CONSTANTS.QUERY.PAGE);
+        let periodQuery: string = params.get(CONSTANTS.QUERY.PERIOD);
+        let ratingQuery: string = params.get(CONSTANTS.QUERY.RATING);
+        let searchQuery: string = params.get(CONSTANTS.QUERY.SEARCH);
+        let categoryQuery: string = params.get(CONSTANTS.QUERY.CATEGORY);
 
-        if (categoryStr && categoryStr.length > 0) {
-          this.categoryFilter = this.categoryAll.filter( (value) => {
-            return categoryStr.split(',').indexOf(value.name.toLowerCase()) > -1;
+        if (categoryQuery && categoryQuery.length > 0 && this.categoryAll.length > 0) {
+          this.categoryFilter = this.categoryAll.filter((value) => {
+            return categoryQuery.split(',').indexOf(value.name.toLowerCase()) > -1;
           });
         }
-        page = page? page : "1";          // Значения по умолчанию
-        period = period? period : 'week'; // Значения по умолчанию
-        rating = rating? rating : '10';   // Значения по умолчанию
+        // Значения по умолчанию
+        let defaultPage: number = this.configService.getDefaultPage();
+        let page: number = pageQuery ? isNaN(parseInt(pageQuery)) ?
+          defaultPage : parseInt(pageQuery) : defaultPage;
 
+        let defaultRating: number = this.configService.getDefaultRating();
+        let rating: number = ratingQuery ? isNaN(parseInt(ratingQuery)) ?
+          defaultRating : parseInt(ratingQuery) : defaultRating;
+
+        let period = periodQuery ? periodQuery : this.configService.getDefaultPeriod();
+
+        this.onPaginationChange(page);
         this.onRatingChange(rating);
         this.onPeriodChange(period);
-        this.onPaginationChange(parseInt(page));
 
-        let categoryArr: Array<string> = this.categoryService.getCategoryNames(this.categoryFilter);
-        return this.newsService.getNewsFromServer(parseInt(page), period, rating, categoryArr, search);
+        let categoryId: Array<string> = this.categoryService.getCategoryBy(this.categoryFilter, 'id');
+        return this.newsService.getNewsFromServer(page, periodQuery, ratingQuery, categoryId, searchQuery);
       })
     ).subscribe( (news: Array<News>) => {
       this.newsList = news;
@@ -79,7 +85,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
     this._subscriptionN.unsubscribe();
   }
 
-  onRatingChange(value: string): void {
+  onRatingChange(value: number): void {
     this.ratingFilter = value;
   }
   onPeriodChange(value: string): void {

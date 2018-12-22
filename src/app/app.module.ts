@@ -24,6 +24,7 @@ import {AppScrollService} from '@shared/services/app-scroll.service';
 import {AppDialogService} from '@shared/services/app-dialog.service';
 import {AuthInterceptor} from '@shared/http/auth-interceptor';
 import {ErrorInterceptor} from '@shared/http/error-interceptor';
+import {NgxPermissionsModule} from 'ngx-permissions';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -39,6 +40,7 @@ export function initializeApp(configData: ConfigLoadService) {
     // Used external Modules
     NgProgressModule,
     NgProgressHttpModule.forRoot(),
+    NgxPermissionsModule.forRoot(),
     // Custom Modules
     HeaderModule,
     MainPageModule,

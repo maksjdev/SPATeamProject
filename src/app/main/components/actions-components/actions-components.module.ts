@@ -14,6 +14,7 @@ import {ImageFieldComponent} from './image-field/image-field.component';
 import {CommentFormComponent} from '@components/actions-components/comment-form/comment-form.component';
 import {MatInputModule} from '@angular/material';
 import {AppFormService} from '@shared/services/app-form.service';
+import {NgxPermissionsModule} from 'ngx-permissions';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import {AppFormService} from '@shared/services/app-form.service';
     NgxEditorModule,
 
     MatInputModule,
+    NgxPermissionsModule.forChild()
   ],
   exports: [
     SearchFieldComponent,

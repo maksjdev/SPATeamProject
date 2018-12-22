@@ -13,7 +13,7 @@ export class PeriodFilterComponent implements OnChanges {
   paramName: string;
 
   mockPeriod: Array<object> = [
-    {name: 'Все время', value: 'all'},
+    {name: 'Все время', value: ''},
     {name: 'Сегодня', value: 'today'},
     {name: 'Неделя', value: 'week'},
     {name: 'Месяц', value: 'month'},
@@ -31,6 +31,9 @@ export class PeriodFilterComponent implements OnChanges {
         let param = {[this.paramName]: this.currentPeriod};
         this.routingService.setQueryParam(param);
       },20);
+    } else {
+      let param = {[this.paramName]: null};
+      this.routingService.setQueryParam(param);
     }
   }
 

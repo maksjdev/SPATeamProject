@@ -1,9 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AppRestService} from '@shared/http/app-rest.service';
-import {MockDataService} from '@shared/mock-data.service';
 import {Category} from '@shared/models/Category';
 import {Observable, of} from 'rxjs';
-import {HttpResponse} from '@angular/common/http';
 import {catchError, map} from 'rxjs/operators';
 import {AppDialogService} from '@shared/services/app-dialog.service';
 
@@ -28,12 +26,28 @@ export class CategoryDataService {
     })
   }
 
+  public deleteCategody(id: string): Promise<boolean>{
+    return this.restService.deleteCategory(id).pipe(
+      catchError((errorMsg: string) => {
+        // Создание НЕ удалось
+        this.dialogService.showDialog(errorMsg);
+        return of(errorMsg);
+      })
+    ).toPromise().then(value => {
+      return value === Object(value);
+    })
+  }
+
   public getAllCategories(amount?: number): Observable<Array<Category>> {
     return this.restService.getAllCategories(amount).pipe(
+      catchError((errorMsg: string) => {
+        // Получение НЕ удалось
+        return of(errorMsg);
+      }),
       map((response: object) => {
         let resultArr: Array<Category> = [];
         let totalCount: number = 0;
-        if (response || response.hasOwnProperty('categories')) {
+        if (response && response.hasOwnProperty('categories')) {
           totalCount = response['amount_total'];
           response['categories'].forEach( (c: object, index) => {
             let id = c['_id'], name = c['name'], newsList = c['news_list'],
@@ -47,10 +61,10 @@ export class CategoryDataService {
     );
   }
 
-  public getCategoryNames(arr: Array<Category>): Array<string> {
+  public getCategoryBy(arr: Array<Category>, fieldName: string): Array<string> {
     let string: Array<string> = [];
     arr.forEach( (val, ind) => {
-      string.push(val.name.toLowerCase());
+      string.push(val[fieldName].toLowerCase());
     });
     return string;
   }

@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {MainPageComponent} from '@main/main-page.component';
-import {AuthGuard} from '@shared/guards/auth.guard';
 import {AdminGuard} from '@shared/guards/admin.guard';
 import {CONSTANTS} from '@shared/config/constants';
 
@@ -13,10 +12,10 @@ const routes: Routes = [
   },
   {path: CONSTANTS.APP.NEWS, children: [
       {path: CONSTANTS.APP.CREATE, loadChildren: '@add-news/add-news-page.module#AddNewsPageModule',
-        canLoad: [AuthGuard], canActivate: [AuthGuard]
+        canLoad: [AdminGuard], canActivate: [AdminGuard]
       },
       {path: CONSTANTS.APP.EDIT+'/:id', loadChildren: '@add-news/add-news-page.module#AddNewsPageModule',
-        canLoad: [AuthGuard], canActivate: [AuthGuard]
+        canLoad: [AdminGuard], canActivate: [AdminGuard]
       },
       {path: ':id', pathMatch: 'full', loadChildren: '@news/news-page.module#NewsPageModule'},
     ]

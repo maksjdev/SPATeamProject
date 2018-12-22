@@ -4,6 +4,7 @@ import {Category} from '@shared/models/Category';
 import {CONSTANTS} from '@shared/config/constants';
 import {AppRoutingService} from '@routes/app-routing.service';
 import {AppScrollService} from '@shared/services/app-scroll.service';
+import {ConfigService} from '@shared/config/config.service';
 
 @Component({
   selector: 'app-category-block',
@@ -11,26 +12,37 @@ import {AppScrollService} from '@shared/services/app-scroll.service';
   styleUrls: ['./category-block.component.scss']
 })
 export class CategoryBlockComponent implements OnInit {
-  @Input() manNumber: number = 8;
+  @Input() maxNumber: number;
   public categories: Array<Category>;
-  public totalCount: number;
+  public totalCount: number = 0;
 
   constructor(
     private routingService: AppRoutingService,
     private categoryService: CategoryDataService,
     private scrollService: AppScrollService,
+    private configService: ConfigService
   ){}
 
   ngOnInit() {
+    if (!this.maxNumber || isNaN(this.maxNumber)){
+      this.maxNumber = this.configService.getCategoryBlockMax();
+    }
     this.loadCategory();
   }
 
   public loadCategory(){
-    let amount = this.manNumber;
+    let amount = this.maxNumber;
     this.categoryService.getAllCategories().toPromise().then((value: Array<Category>) => {
       this.totalCount = value.length;
       this.categories = value.splice(0, amount);
     })
+  }
+  public deleteCategory(id: string){
+    if (id) {
+      this.categoryService.deleteCategody(id).then(value => {
+        this.loadCategory();
+      })
+    }
   }
   public goToMainWithCategory(category: Category): void {
     let queryParam = {[CONSTANTS.QUERY.CATEGORY]: category.name.toLowerCase()};
