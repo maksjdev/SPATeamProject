@@ -15,8 +15,8 @@ const commentSchema = mongoose.Schema({
     required: [true, 'You need enter text!']
   },
   create_date: {
-    type : Date,
-    default : Date.now(),
+    type: Date,
+    default: Date.now(),
     required: true
   },
   rating: {

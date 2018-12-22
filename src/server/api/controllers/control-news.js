@@ -46,7 +46,7 @@ exports.news_get_all = (req, res) => {
     });
 };
 
-exports.news_create = (req, res, next) => {
+exports.news_create = (req, res) => {
   // TODO: Вынести все в переменные и юзать ф-цию модели для создания
   const news = new createNews();
   news.save()

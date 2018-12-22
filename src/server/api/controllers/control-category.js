@@ -92,7 +92,23 @@ exports.category_delete = (req, res) => {
 
 exports.category_update = (req, res) => {
   let categoryId = req.params.categoryId;
-  if (categoryId) {
-    res.end();
+  let newName = req.body.name;
+  if (categoryId && newName && newName.length > 0) {
+    ModelCategory.updateOne(
+      {_id: categoryId }, {$set: { "name" : newName }, $inc: { "news_amount" : 1}}, {}).exec()
+      .then(result => {
+        if (result.n === 1) {
+          res.status(CODES.S_ACCEPT).json({
+            message: `Category [id:${categoryId}] ${MSGS.UPDATED}`
+          });
+        } else res.status(CODES.EC_NOT_FOUND).json({
+          message: MSGS.NOT_FOUND
+        });
+      })
+      .catch(err => {
+        res.status(CODES.ES_INTERNAL).json({
+          message: err
+        });
+      });
   } else { res.status(CODES.EC_REQUEST).end() }
 };
