@@ -194,7 +194,26 @@ exports.news_addComment = (req, res) => {
 };
 
 exports.news_getComments = (req, res) => {
-
+  let newsId = req.params.newsId;
+  if (newsId) {
+    ModelNews.findOne({_id: newsId }).select('comments')
+      .populate({path: 'author', select: '_id realname nickname img_url email rating'})
+      //.populate({path: 'comments'})
+      .exec()
+      .then( result => {
+        if (result) {
+          res.status(CODES.S_OK).json(result);
+        }
+        else res.status(CODES.EC_NOT_FOUND).json({
+          message: MSGS.NOT_FOUND
+        });
+      })
+      .catch(err => {
+        res.status(CODES.ES_INTERNAL).json({
+          message: err
+        });
+      });
+  } else { res.status(CODES.EC_REQUEST).end() }
 };
 
 
