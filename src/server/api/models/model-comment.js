@@ -6,8 +6,12 @@ const commentSchema = mongoose.Schema({
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: [true, 'You need enter author!']
+    ref: 'User'
+    //required: [true, 'You need enter author!']
+  },
+  news:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'News'
   },
   text: {
     type: String,
@@ -33,12 +37,13 @@ const commentSchema = mongoose.Schema({
 });
 const Comment = mongoose.model('Comment', commentSchema);
 
-function createComment(authorId, text, rating) {
+function createComment(authorId, newsId, text, rating) {
   return new Comment({
     _id: new mongoose.Types.ObjectId(),
     authorId: authorId,
-    text:     text,
-    rating:   rating
+    newsId: newsId,
+    text: text,
+    rating: rating
   })
 }
 module.exports = [Comment, createComment];
