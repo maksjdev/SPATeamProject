@@ -82,12 +82,18 @@ export class AddNewsPageComponent implements OnInit {
       let image: string = this.addNewsForm.value['n_image'];
       let categories: Array<Category> = this.addNewsForm.value['n_categories'];
 
-      let author: User = this.userService.getCurrentUserData().getValue();
-      let news: News = new News('100', author, new Date(), title, text, image, categories);
-
       if (this.pageEdit){
-
+        let author: User = this.userService.getCurrentUserData().getValue();
+        let news: News = new News(this.news.getId(), author, new Date(), title, text, image, categories);
+        this.newsService.updateNews(news).then( (success: boolean) => {
+          if (!success) return;
+          this.addNewsForm.reset();
+          this.routingService.goToLink(CONSTANTS.APP.MAIN);
+        });
       } else {
+        let author: User = this.userService.getCurrentUserData().getValue();
+        let news: News = new News('100', author, new Date(), title, text, image, categories);
+
         this.newsService.createNews(news).then( (success: boolean) => {
           if (!success) return;
           this.addNewsForm.reset();
@@ -102,9 +108,11 @@ export class AddNewsPageComponent implements OnInit {
     if (this.news ){
       this.dialogService.confirmDialog(CONSTANTS.MSG.CONFIRM_DEL_NEWS).toPromise().then((value: boolean) => {
         if (!value) { return; }
+
         let id: string = this.news.getId();
         this.newsService.deleteNews(id).then((result: boolean) => {
-          this.dialogService.showDialog('Новость была удалена!');
+          this.addNewsForm.reset();
+          this.routingService.goToLink(CONSTANTS.APP.MAIN);
         });
       });
     }

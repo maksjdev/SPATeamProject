@@ -55,29 +55,6 @@ exports.news_get = (req, res) => {
   } else { res.status(CODES.EC_REQUEST).end() }
 };
 
-exports.news_create = (req, res) => {
-  let authorId = req.body.author,
-      title = req.body.title,
-      text = req.body.text,
-      imageUrl = req.body.image_url,
-      categories = req.body.categories;
-  // console.log(authorId, title, text, imageUrl, categories);
-  if (authorId && title && text && imageUrl && categories) {
-    let categoriesArr = categories.split(',');
-    const news = createNews(authorId, title, text, imageUrl, categoriesArr);
-    news.save()
-      .then(result => {
-        res.status(CODES.S_CREATE).json(result);
-      })
-      .catch(err => {
-        res.status(CODES.ES_INTERNAL).json({
-          message: err
-        });
-      });
-  }
-  else { res.status(CODES.EC_REQUEST).end() }
-};
-
 exports.news_find = (req, res) => {
   let newsId = req.params.newsId;
   let getType = req.query.get_type;
@@ -97,27 +74,6 @@ exports.news_find = (req, res) => {
           res.status(CODES.S_OK).json(result);
         }
         else res.status(CODES.EC_NOT_FOUND).json({
-          message: MSGS.NOT_FOUND
-        });
-      })
-      .catch(err => {
-        res.status(CODES.ES_INTERNAL).json({
-          message: err
-        });
-      });
-  } else { res.status(CODES.EC_REQUEST).end() }
-};
-
-exports.news_delete = (req, res) => {
-  let newsId = req.params.newsId;
-  if (newsId) {
-    ModelNews.deleteOne({_id: newsId }).exec()
-      .then( result => {
-        if (result.n === 1) {
-          res.status(CODES.S_OK).json({
-            message: `News [id:${newsId}] ${MSGS.DELETED}`
-          });
-        } else res.status(CODES.EC_NOT_FOUND).json({
           message: MSGS.NOT_FOUND
         });
       })
@@ -160,40 +116,88 @@ exports.news_top = (req, res) => {
     });
 };
 
-
-exports.news_update = (req, res) => {
-  const id = req.params.newsId;
-
-  const input = {};
-  // TODO: Тут я посмотрю завтра
-  for (const key of Object.values(input)) {
-    console.log(key, input[key]);
+/*  Операции   */
+exports.news_create = (req, res) => {
+  let authorId = req.body.author,
+    title = req.body.title,
+    text = req.body.text,
+    imageUrl = req.body.image_url,
+    categories = req.body.categories;
+  // console.log(authorId, title, text, imageUrl, categories);
+  if (authorId && title && text && imageUrl && categories) {
+    let categoriesArr = categories.split(',');
+    const news = createNews(authorId, title, text, imageUrl, categoriesArr);
+    news.save()
+      .then(result => {
+        res.status(CODES.S_CREATE).json(result);
+      })
+      .catch(err => {
+        res.status(CODES.ES_INTERNAL).json({
+          message: err
+        });
+      });
   }
- /* const updateOps = {};
-  for (const ops of req.body) {
-    updateOps[ops.propName] = ops.value;
-  }*/
-  ModelNews.update({ _id: id }, { $set: input })
-    .exec()
-    .then(result => {
-      // TODO: Если успешно обновили воозвращать саму обновленную новость
-      res.status(200).json({
-        message: "ControlNews updated",
-        result,
-        request: {
-          type: "GET",
-          url: "http://localhost:3000/news/" + id
-        }
-      });
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({
-        error: err
-      });
-    });
+  else { res.status(CODES.EC_REQUEST).end() }
 };
 
+exports.news_delete = (req, res) => {
+  let newsId = req.params.newsId;
+  if (newsId) {
+    ModelNews.deleteOne({_id: newsId }).exec()
+      .then( result => {
+        if (result.n === 1) {
+          res.status(CODES.S_OK).json({
+            message: `News [id:${newsId}] ${MSGS.DELETED}`
+          });
+        } else res.status(CODES.EC_NOT_FOUND).json({
+          message: MSGS.NOT_FOUND
+        });
+      })
+      .catch(err => {
+        res.status(CODES.ES_INTERNAL).json({
+          message: err
+        });
+      });
+  } else { res.status(CODES.EC_REQUEST).end() }
+};
+
+exports.news_update = (req, res) => {
+  let newsId = req.params.newsId;
+  let newTitle = req.body.title;
+  let newText = req.body.text;
+  let newImage = req.body.image_url;
+  let newCategories = req.body.categories;
+
+  console.log(newTitle, newText, newImage, newCategories);
+  if (newsId && (newTitle || newText || newImage || newCategories)) {
+    let updateObj = {};
+    if (newTitle) updateObj.title = newTitle;
+    if (newText) updateObj.text = newText;
+    if (newImage) updateObj.img_url = newImage;
+    if (newCategories) {
+      updateObj.categories = newCategories.split(',');
+    }
+
+    ModelNews.updateOne(
+      {_id: newsId }, {$set: updateObj}, {}).exec()
+      .then(result => {
+        if (result.ok === 1) {
+          res.status(CODES.S_ACCEPT).json({
+            message: `News [id:${newsId}] ${MSGS.UPDATED}`
+          });
+        } else res.status(CODES.EC_NOT_FOUND).json({
+          message: MSGS.NOT_FOUND
+        });
+      })
+      .catch(err => {
+        res.status(CODES.ES_INTERNAL).json({
+          message: err
+        });
+      });
+  } else { res.status(CODES.EC_REQUEST).end() }
+};
+
+/*  Сторонние   */
 exports.news_comment = (req, res) => {
 
 };

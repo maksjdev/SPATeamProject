@@ -14,7 +14,7 @@ import {CONSTANTS} from '@shared/config/constants';
   providedIn: 'root'
 })
 export class AuthService {
-  loginState: BehaviorSubject<boolean>;
+  private loginState: BehaviorSubject<boolean>;
 
   constructor(
     private userService: UserDataService,
@@ -78,6 +78,7 @@ export class AuthService {
   onLogout(): void {
     this.loginState.next(false);
     this.userService.deleteCurrentUserData();
+    this.routeService.goToLink(CONSTANTS.APP.MAIN);
 
     localStorage.removeItem(CONSTANTS.LOCAL_S.USER_LOGIN);
     localStorage.removeItem(CONSTANTS.LOCAL_S.USER_PASSWORD);

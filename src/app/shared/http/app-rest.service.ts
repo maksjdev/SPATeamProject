@@ -27,6 +27,9 @@ export class AppRestService {
   private restDeleteData(ulr: string): Observable<HttpResponse<ArrayBuffer>> {
     return this.connectService.deleteData(this.host + ulr);
   }
+  private restUpdateData(ulr: string, data: object): Observable<HttpResponse<ArrayBuffer>> {
+    return this.connectService.updateData(this.host + ulr, data);
+  }
 
   public handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -55,8 +58,20 @@ export class AppRestService {
     let categoriesId: string = news.getCategories().map((category: Category) => {
       return category.getId();
     }).join(',');
-    console.log(categoriesId);
     return this.restSendData(url, {
+      author: news.getAuthor().getId(),
+      title: news.getTitle(),
+      text: news.getText(),
+      image_url: news.getImage(),
+      categories: categoriesId
+    });
+  }
+  public restUpdateNews(news: News){
+    let url = CONSTANTS.SERVER.NEWS+"/"+news.getId();
+    let categoriesId: string = news.getCategories().map((category: Category) => {
+      return category.getId();
+    }).join(',');
+    return this.restUpdateData(url, {
       author: news.getAuthor().getId(),
       title: news.getTitle(),
       text: news.getText(),

@@ -18,31 +18,6 @@ export class NewsDataService {
     private dtoService: DtoService
   ) {}
 
-  public createNews(news: News): Promise<boolean>{
-    return this.restService.restSendNews(news).pipe(
-      catchError((errorMsg: string) => {
-        // Создание НЕ удалось
-        this.dialogService.showDialog(errorMsg);
-        return of(errorMsg);
-      })
-    ).toPromise().then(value => {
-      // Если ошибка то тут будет не object, а строка ошибки которую обработал интерсептор
-      return value === Object(value);
-    });
-  }
-  public deleteNews(id: string): Promise<boolean>{
-    return this.restService.restDeleteNews(id).pipe(
-      catchError((errorMsg: string) => {
-        // Создание НЕ удалось
-        this.dialogService.showDialog(errorMsg);
-        return of(errorMsg);
-      })
-    ).toPromise().then(value => {
-      // Если ошибка то тут будет не object, а строка ошибки которую обработал интерсептор
-      return value === Object(value);
-    });
-  }
-
   public getNewsFromServer(
     page: number, period?: string, rating?: string, categoriesId?: Array<string>, search?: string
   ): Observable<Array<News>> {
@@ -99,6 +74,37 @@ export class NewsDataService {
         return this.dtoService.getNewsFromObj(newsObj);
       })
     );
+  }
+
+  public createNews(news: News): Promise<boolean>{
+    return this.restService.restSendNews(news).pipe(
+      catchError((errorMsg: string) => {
+        this.dialogService.showDialog(errorMsg);
+        return of(errorMsg);
+      })
+    ).toPromise().then(value => {
+      return value === Object(value);
+    });
+  }
+  public updateNews(news: News): Promise<boolean>{
+    return this.restService.restUpdateNews(news).pipe(
+      catchError((errorMsg: string) => {
+        this.dialogService.showDialog(errorMsg);
+        return of(errorMsg);
+      })
+    ).toPromise().then(value => {
+      return value === Object(value);
+    });
+  }
+  public deleteNews(id: string): Promise<boolean>{
+    return this.restService.restDeleteNews(id).pipe(
+      catchError((errorMsg: string) => {
+        this.dialogService.showDialog(errorMsg);
+        return of(errorMsg);
+      })
+    ).toPromise().then(value => {
+      return value === Object(value);
+    });
   }
 
   public getComments(id: string): Observable<Array<Comment>> {
