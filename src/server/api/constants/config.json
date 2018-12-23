@@ -6,5 +6,8 @@
   },
   "category_block": {
     "max": "8"
+  },
+  "top_block": {
+    "max": "5"
   }
 }

@@ -4,12 +4,13 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {AppRestService} from '@shared/http/app-rest.service';
 import {NgxPermissionsService} from 'ngx-permissions';
-import {CONSTANTS} from '@shared/config/constants';
+import {DtoService} from '@shared/dto.service';
 
 @Injectable()
 export class UserDataService {
   private jwtToken: string;
   private currentUser: BehaviorSubject<User>;
+
   private allPermisions = {
     guest: 'Guest',
     user: 'User',
@@ -18,7 +19,8 @@ export class UserDataService {
 
   constructor(
     private restService: AppRestService,
-    private permissionsService: NgxPermissionsService
+    private permissionsService: NgxPermissionsService,
+    private dtoService: DtoService
   ){
     // Устанавливает начальные права
     permissionsService.addPermission(this.allPermisions.guest);
@@ -27,6 +29,12 @@ export class UserDataService {
 
   public setCurrentJWT(token: string) {
     this.jwtToken = token;
+  }
+  public getCurrentJWT(): string {
+    return this.jwtToken;
+  }
+  public getCurrentUserData(): BehaviorSubject<User> {
+    return this.currentUser;
   }
 
   public setCurrentUserData(user: User) {
@@ -46,30 +54,17 @@ export class UserDataService {
     }
   }
 
-  public getCurrentJWT(): string {
-    return this.jwtToken;
-  }
-  public getCurrentUserData(): BehaviorSubject<User> {
-    return this.currentUser;
-  }
-
   public getUserData(id: string): Observable<User> {
-    return this.restService.getUserData(id).pipe(
-      map((v: object) => {
-        let id = v['_id'], realname = v['realname'], nickname = v['nickname'],
-          email = v['email'], img = v['img_url'], rating = v['rating'], role = v['role'],
-          bookmarks = v['bookmarks'];
-        let user = new User(id, realname, nickname, email, img, rating, role, bookmarks);
-        return user;
+    return this.restService.restGetUserData(id).pipe(
+      map((obj: object) => {
+        return this.dtoService.getUserFromObj(obj);
       }),
       catchError(this.restService.handleError<User>(`Get UserData #${id}`))
     );
   }
 
   public isAdmin(): boolean {
-    /*  Самая "надежная проверка" на админа из всех что видел этот свет
-        Если бы еще была иконна вообще было бы кайфово
-        Само собой нужно идти на сервер, но не пойти бы вам нахуй? */
+    /*  Самая "надежная проверка" на админа */
     let user: User = this.currentUser.getValue();
     return user.getRole().toLocaleLowerCase() === 'admin';
   }

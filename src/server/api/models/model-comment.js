@@ -16,7 +16,7 @@ const commentSchema = mongoose.Schema({
   },
   create_date: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
     required: true
   },
   rating: {
@@ -24,7 +24,12 @@ const commentSchema = mongoose.Schema({
     default: 0,
     min: 0,
     required: true
-  },
+  }
+},
+{ timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+  }
 });
 const Comment = mongoose.model('Comment', commentSchema);
 

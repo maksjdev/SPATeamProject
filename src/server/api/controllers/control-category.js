@@ -21,6 +21,11 @@ exports.category_get = (req, res, next) => {
         categories: result.splice(0, send)
       };
       res.status(CODES.S_OK).json(response);
+    })
+    .catch(err => {
+      res.status(CODES.ES_INTERNAL).json({
+        message: err
+      });
     });
 };
 

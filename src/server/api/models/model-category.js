@@ -32,8 +32,13 @@ const categorySchema = mongoose.Schema({
   },
   create_date: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
     required: true
+  }
+},
+{ timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
   }
 });
 const Category = mongoose.model('Category', categorySchema);

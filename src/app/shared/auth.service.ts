@@ -42,7 +42,7 @@ export class AuthService {
     if (this.loginState){
       this.onLogout();
     }
-    return this.restService.onLogin(login, password).pipe(
+    return this.restService.restOnLogin(login, password).pipe(
       switchMap((value: HttpResponse<ArrayBuffer>) => {
         if (!value) { return of(null) }
         // Авторизация удалась
@@ -86,7 +86,7 @@ export class AuthService {
 
   onRegister(realName: string, nickname: string, email: string, password: string, image?: any): Promise<boolean> {
     let newUser = new User('0', realName, nickname, email, image, 0, null);
-    return this.restService.onRegister(newUser, password).pipe(
+    return this.restService.restOnRegister(newUser, password).pipe(
       catchError((errorMsg: string) => {
         // Регистрация НЕ удалась
         this.dialogService.showDialog(errorMsg);

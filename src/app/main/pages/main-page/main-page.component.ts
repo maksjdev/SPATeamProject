@@ -39,7 +39,8 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this._subscriptionC = this.categoryService.getAllCategories().subscribe((value: Array<Category>) => {
+    this._subscriptionC = this.categoryService.getCurrentCategoriesData().subscribe((value: Array<Category>) => {
+      if (!value) return;
       this.categoryAll  = value;
     });
 
@@ -53,7 +54,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
         let searchQuery: string = params.get(CONSTANTS.QUERY.SEARCH);
         let categoryQuery: string = params.get(CONSTANTS.QUERY.CATEGORY);
 
-        if (categoryQuery && categoryQuery.length > 0 && this.categoryAll.length > 0) {
+        if (categoryQuery && categoryQuery.length > 0 && this.categoryAll && this.categoryAll.length > 0) {
           this.categoryFilter = this.categoryAll.filter((value) => {
             return categoryQuery.split(',').indexOf(value.name.toLowerCase()) > -1;
           });

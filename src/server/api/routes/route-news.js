@@ -6,6 +6,7 @@ const checkAdmin = require('@middleware/check-admin');
 const NewsController = require('@controllers/control-news');
 
 router.get("/", NewsController.news_get);
+router.get("/top", NewsController.news_top);
 router.get("/:newsId", NewsController.news_find);
 router.get("/:newsId/comment", NewsController.news_comment);
 

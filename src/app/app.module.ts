@@ -25,6 +25,7 @@ import {AppDialogService} from '@shared/services/app-dialog.service';
 import {AuthInterceptor} from '@shared/http/auth-interceptor';
 import {ErrorInterceptor} from '@shared/http/error-interceptor';
 import {NgxPermissionsModule} from 'ngx-permissions';
+import {DtoService} from '@shared/dto.service';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -53,6 +54,7 @@ export function initializeApp(configData: ConfigLoadService) {
     AppRoutingModule,
     AppHttpService,
     AppRestService,
+    DtoService,
     AuthService,
 
     UserDataService,

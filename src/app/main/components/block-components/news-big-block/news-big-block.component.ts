@@ -30,7 +30,7 @@ export class NewsBigBlockComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.hasOwnProperty('news') &&  changes['news'].currentValue) {
       this._textContent = this.news.getText();
-      this._textContent = this.stringService.trimmString(this._textContent, 500, '...');
+      this._textContent = this.stringService.trimmString(this._textContent, 500);
       this._textContent = this.stringService.getAllBeforeTag(this._textContent, 'div');
     }
   }
@@ -43,11 +43,12 @@ export class NewsBigBlockComponent implements OnChanges {
     let id: string = this.news.getId();
     this.routingService.goToNews(id);
   }
-  public deleteNews(id: string){
-    if (id && this.dialogService.confirmDialog(CONSTANTS.MSG.CONFIRM_DEL_NEWS)) {
-      this.newsService.deleteNews(id).then( (result: boolean) => {
-
-      })
-    }
+  public deleteNews(id: string) {
+    this.dialogService.confirmDialog(CONSTANTS.MSG.CONFIRM_DEL_NEWS).toPromise().then((value: boolean) => {
+      if (!value) { return; }
+      this.newsService.deleteNews(id).then((result: boolean) => {
+        this.dialogService.showDialog('Новость была удалена!');
+      });
+    });
   }
 }

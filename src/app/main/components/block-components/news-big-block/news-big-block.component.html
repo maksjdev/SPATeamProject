@@ -1,11 +1,11 @@
 
 <article *ngIf="news" class="panel shadow-block news-item">
   <div class="news-item__header">
-    <h2 class="news-item__header--title">{{ news.getTitle() | trimString: 100 }}</h2>
+    <h2 class="news-item__header--title">{{ news.getTitle() | trimString: 90 }}</h2>
     <div class="header-info">
       <div class="row header-info__author">
         <img class="header-info__author--image" [src]="news.author.getImage()" alt="*ControlUser Image*">
-        <a href="#" class="header-info__author--name">
+        <a class="header-info__author--name">
           {{ news.author.getRealName() +' ('+ news.author.getNickname()+'),' }}
         </a>
       </div>

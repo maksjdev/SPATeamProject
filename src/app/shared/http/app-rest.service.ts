@@ -18,13 +18,13 @@ export class AppRestService {
     this.host = environment.host;
   }
 
-  public getData(ulr: string, params?): Observable<HttpResponse<ArrayBuffer>> {
+  public restGetData(ulr: string, params?): Observable<HttpResponse<ArrayBuffer>> {
     return this.connectService.getData(this.host + ulr, params);
   }
-  private sendData(ulr: string, data: object): Observable<HttpResponse<ArrayBuffer>> {
+  private restSendData(ulr: string, data: object): Observable<HttpResponse<ArrayBuffer>> {
     return this.connectService.postData(this.host + ulr, data);
   }
-  private deleteData(ulr: string): Observable<HttpResponse<ArrayBuffer>> {
+  private restDeleteData(ulr: string): Observable<HttpResponse<ArrayBuffer>> {
     return this.connectService.deleteData(this.host + ulr);
   }
 
@@ -37,26 +37,26 @@ export class AppRestService {
 
 
   // Отправка данных
-  public onLogin(login: string, password: string): Observable<HttpResponse<ArrayBuffer>> {
+  public restOnLogin(login: string, password: string): Observable<HttpResponse<ArrayBuffer>> {
     let url = CONSTANTS.SERVER.LOGIN;
-    return this.sendData(url, {login: login, password: password });
+    return this.restSendData(url, {login: login, password: password });
   }
-  public onRegister(newUser: User, password: string): Observable<HttpResponse<ArrayBuffer>> {
+  public restOnRegister(newUser: User, password: string): Observable<HttpResponse<ArrayBuffer>> {
     let url = CONSTANTS.SERVER.REGISTER;
-    return this.sendData(url,{
+    return this.restSendData(url,{
       email: newUser.getEmail(),
       realname: newUser.getRealName(),
       nickname: newUser.getNickname(),
       img_url: newUser.getImage(),
       password: password});
   }
-  public sendNews(news: News): Observable<HttpResponse<ArrayBuffer>> {
+  public restSendNews(news: News): Observable<HttpResponse<ArrayBuffer>> {
     let url = CONSTANTS.SERVER.NEWS;
     let categoriesId: string = news.getCategories().map((category: Category) => {
       return category.getId();
     }).join(',');
     console.log(categoriesId);
-    return this.sendData(url, {
+    return this.restSendData(url, {
       author: news.getAuthor().getId(),
       title: news.getTitle(),
       text: news.getText(),
@@ -64,56 +64,59 @@ export class AppRestService {
       categories: categoriesId
     });
   }
-  public sendCategory(category: Category): Observable<HttpResponse<ArrayBuffer>> {
+  public restSendCategory(category: Category): Observable<HttpResponse<ArrayBuffer>> {
     let url = CONSTANTS.SERVER.CATEGORY;
-    return this.sendData(url, {
+    return this.restSendData(url, {
       name: category.getName()
     });
   }
 
   // Удаление данных
-  public deleteNews(deleteID: string): Observable<HttpResponse<ArrayBuffer>> {
+  public restDeleteNews(deleteID: string): Observable<HttpResponse<ArrayBuffer>> {
     let url = CONSTANTS.SERVER.NEWS + '/' + deleteID;
-    return this.deleteData(url);
+    return this.restDeleteData(url);
   }
-  public deleteCategory(deleteID: string): Observable<HttpResponse<ArrayBuffer>> {
+  public restDeleteCategory(deleteID: string): Observable<HttpResponse<ArrayBuffer>> {
     let url = CONSTANTS.SERVER.CATEGORY + '/' + deleteID;
-    return this.deleteData(url);
+    return this.restDeleteData(url);
   }
 
   // Получение данных
-  public getNewsList(page?: string, period?: string, rating?: string, categoriesId?: string, search?: string): Observable<Object> {
+  public restGetNewsList(page?: string, period?: string, rating?: string, categoriesId?: string, search?: string): Observable<Object> {
     let url = CONSTANTS.SERVER.NEWS;
     let params = {
       "page": page, "period": period, "min_rating": rating, "categories_id": categoriesId, "search": search
     };
-    return this.getData(url, params);
+    return this.restGetData(url, params);
   }
-  public getNewsData(newsId: string, type: string = 'full'): Observable<Object> {
+  public restGetNewsData(newsId: string, type: string = 'full'): Observable<Object> {
     let url = CONSTANTS.SERVER.NEWS + '/' + newsId;
-    return this.getData(url, { "type": type.toString()});
+    return this.restGetData(url, { "type": type.toString()});
   }
-  public getTopNews(amount?: number): Observable<Object> {
+  public restGetTopNews(amount?: string, type?: string): Observable<Object> {
     let url = CONSTANTS.SERVER.NEWS_TOP;
-    let params = amount? { "amount": amount.toString() } : {};
-    return this.getData(url, params);
+    amount = amount? amount : "";
+    type = type? type : "";
+    let params = { "amount": amount, "get_type": type };
+    return this.restGetData(url, params);
   }
 
-  public getAllComments(newsId: string): Observable<Object> {
+  public restGetAllComments(newsId: string): Observable<Object> {
     let url = CONSTANTS.SERVER.NEWS + '/' + newsId + CONSTANTS.SERVER.COMMENT;
-    return this.getData(url);
+    return this.restGetData(url);
   }
-  public getAllCategories(amount?: number): Observable<Object> {
+  public restGetAllCategories(amount?: string): Observable<Object> {
     let url = CONSTANTS.SERVER.CATEGORY;
-    let params = amount? { "amount": amount.toString() } : {};
-    return this.getData(url, params);
+    amount = amount? amount : "";
+    let params = { "amount": amount };
+    return this.restGetData(url, params);
   }
-  public getUserData(userId: string): Observable<Object> {
+  public restGetUserData(userId: string): Observable<Object> {
     let url = CONSTANTS.SERVER.USER + '/' + userId;
-    return this.getData(url);
+    return this.restGetData(url);
   }
-  public getConfigData(): Observable<Object> {
+  public restGetConfigData(): Observable<Object> {
     let url = CONSTANTS.SERVER.CONFIG;
-    return this.getData(url);
+    return this.restGetData(url);
   }
 }

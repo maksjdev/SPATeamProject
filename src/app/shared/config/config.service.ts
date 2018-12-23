@@ -8,6 +8,8 @@ import * as CONFIG_DEFAULT from '@shared/config/config-default.json';
 })
 export class ConfigService implements IConfigModel {
   categoryBlock_max: number;
+  topBlock_max: number;
+
   defaultMinRating: number;
   defaultPeriod: string;
   defaultPage: number;
@@ -25,6 +27,9 @@ export class ConfigService implements IConfigModel {
 
     let category_block = config.category_block;
     this.categoryBlock_max = category_block.max;
+
+    let top_block = config.top_block;
+    this.topBlock_max = top_block.max;
   }
 
   getCategoryBlockMax(): number {
@@ -38,5 +43,8 @@ export class ConfigService implements IConfigModel {
   }
   getDefaultRating(): number {
     return this.defaultMinRating;
+  }
+  getTopBlockMax(): number {
+    return this.topBlock_max;
   }
 }

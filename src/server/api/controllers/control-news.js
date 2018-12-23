@@ -129,8 +129,41 @@ exports.news_delete = (req, res) => {
   } else { res.status(CODES.EC_REQUEST).end() }
 };
 
+exports.news_top = (req, res) => {
+  let amount = req.query.amount;
+  let getType = req.query.get_type;
+
+  let fieldByType = {
+    full: '_id author title text img_url categories rating create_date comments_number comments',
+    medium: '_id author title text img_url categories rating create_date comments_number',
+    small: '_id author title create_date rating comments_number'
+  }, selectedFields = Object.keys(fieldByType).indexOf(getType) > -1? fieldByType[getType] : fieldByType['small'];
+
+  ModelNews.find({ create_date: {"$gte": getFromDate('today'), "$lt": new Date() }})
+    .sort({ rating : -1 }).select(selectedFields)
+    .populate({path: 'author', select: '_id realname nickname img_url email rating'})
+    .populate({path: 'categories', select: '_id name news_amount'}).exec()
+    .then(result => {
+      let total = result.length;
+      let send = amount? amount > total? total : amount : total;
+      let response = {
+        amount_total: total,
+        amount_send: send,
+        news: result.splice(0, send)
+      };
+      res.status(CODES.S_OK).json(response);
+    })
+    .catch(err => {
+      res.status(CODES.ES_INTERNAL).json({
+        message: err
+      });
+    });
+};
+
+
 exports.news_update = (req, res) => {
   const id = req.params.newsId;
+
   const input = {};
   // TODO: Тут я посмотрю завтра
   for (const key of Object.values(input)) {
