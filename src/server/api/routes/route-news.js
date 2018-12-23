@@ -7,7 +7,8 @@ const NewsController = require('@controllers/control-news');
 
 router.get("/", NewsController.news_get);
 router.get("/:newsId", NewsController.news_find);
-router.get("/:newsId/comment", NewsController.news_comment);
+router.post("/:newsId/comment", NewsController.news_addComment);
+router.get("/:newsId/comment", NewsController.news_getComments);
 
 router.post("/", checkAuth, checkAdmin, NewsController.news_create);
 router.patch("/:newsId", checkAuth, checkAdmin, NewsController.news_update);

@@ -1,11 +1,13 @@
 const mongoose = require("mongoose");
 
 const [ModelNews, createNews] = require("@models/model-news");
+const [ModelComment, createComment] = require('@models/model-comment');
 
 const ENV = require('@constants/environment');
 const CODES = require('@constants/http-codes');
 const MSGS = require('@constants/mesages');
 const NEWS_PER_PAGE = 5;
+
 
 exports.news_get = (req, res) => {
   let page = req.query.page,
@@ -129,7 +131,15 @@ exports.news_delete = (req, res) => {
   } else { res.status(CODES.EC_REQUEST).end() }
 };
 
-exports.news_update = (req, res) => {
+exports.news_update = function(req, res){
+  const id = req.params.newsId;
+  ModelNews.findByIdAndUpdate(id, {$set: req.body},function (err, news) {
+    if (err) return next(err);
+    res.send('News Updated');
+  });
+};
+
+/*exports.news_update = (req, res) => {
   const id = req.params.newsId;
   const input = {};
   // TODO: Тут я посмотрю завтра
@@ -139,7 +149,7 @@ exports.news_update = (req, res) => {
  /* const updateOps = {};
   for (const ops of req.body) {
     updateOps[ops.propName] = ops.value;
-  }*/
+  }
   ModelNews.update({ _id: id }, { $set: input })
     .exec()
     .then(result => {
@@ -160,10 +170,33 @@ exports.news_update = (req, res) => {
       });
     });
 };
+*/
 
-exports.news_comment = (req, res) => {
+exports.news_addComment = (req, res) => {
+    let authorId = req.body.author,
+    newsId = req.params.newsId,
+    text = req.body.text,
+    rating = req.body.rating;
+  // console.log(authorId, title, text, imageUrl, categories);
+  if (authorId && newsId && text && rating) {
+    const comment = createComment(authorId, newsId, text, rating);
+    comment.save()
+      .then(result => {
+        res.status(CODES.S_CREATE).json(result);
+      })
+      .catch(err => {
+        res.status(CODES.ES_INTERNAL).json({
+          message: err
+        });
+      });
+  }
+  else { res.status(CODES.EC_REQUEST).end() }
+};
+
+exports.news_getComments = (req, res) => {
 
 };
+
 
 function getFromDate(period) {
   let availablePeriod = {

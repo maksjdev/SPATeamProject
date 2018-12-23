@@ -9,6 +9,7 @@ const userRoutes = require('@routes/route-user');
 const newsRoutes = require('@routes/route-news');
 const categoryRoutes = require('@routes/route-category');
 const configRoutes = require('@routes/route-config');
+//const commentsRoutes = require('@routes/route-comment');
 
 const ENV = require('@constants/environment');
 const CODES = require('@constants/http-codes');
@@ -53,6 +54,7 @@ app.use("/config", configRoutes);
 app.use("/user", userRoutes);
 app.use("/news", newsRoutes);
 app.use("/category", categoryRoutes);
+//app.use("/comments", commentsRoutes);
 
 
 // Error handlers
