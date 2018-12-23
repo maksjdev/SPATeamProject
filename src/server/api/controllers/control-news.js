@@ -14,10 +14,16 @@ exports.news_get = (req, res) => {
       min_rating = req.query.min_rating,
       categories_id = req.query.categories_id;
 
-  if (page && (period || search || min_rating || categories_id)){
-    let selectByPeriod = period? { create_date: {"$gte": getFromDate(period), "$lt": new Date()}} : {};
+  if (page){
+    let findfilter = {};
+    if (period) { findfilter.create_date = {"$gte": getFromDate(period), "$lt": new Date()}; }
+    if (min_rating && !isNaN(min_rating)) { findfilter.rating = {"$gte": parseInt(min_rating)}; }
+    if (search) { findfilter.$text = { $search: search }; }
+    if (categories_id && categories_id.split(',').length > 0) {
+      findfilter.categories = { "$in" : categories_id.split(',') };
+    }
 
-    ModelNews.find(selectByPeriod,'-__v').sort({ create_date : -1 })
+    ModelNews.find(findfilter, '-__v').sort({ create_date : -1 })
       .populate({path: 'author', select: '_id realname nickname img_url email rating role'})
       .populate({path: 'categories', select: '_id name news_amount'}).exec()
       .then(result => {
@@ -51,7 +57,13 @@ exports.news_get = (req, res) => {
           news: newsList
         };
         res.status(CODES.S_OK).json(response);
-      });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(CODES.ES_INTERNAL).json({
+          message: err
+        });
+    });
   } else { res.status(CODES.EC_REQUEST).end() }
 };
 

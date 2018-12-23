@@ -30,7 +30,7 @@ export class NewsBigBlockComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.hasOwnProperty('news') &&  changes['news'].currentValue) {
       this._textContent = this.news.getText();
-      this._textContent = this.stringService.trimmString(this._textContent, 500);
+      this._textContent = this.stringService.trimmString(this._textContent, 750);
       this._textContent = this.stringService.getAllBeforeTag(this._textContent, 'div');
     }
   }

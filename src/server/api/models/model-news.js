@@ -12,7 +12,8 @@ const newsSchema = mongoose.Schema({
   title: {
     type: String,
     minLength: 10,
-    required: [true, 'You need enter title!']
+    required: [true, 'You need enter title!'],
+    text: true
   },
   text: {
     type: String,

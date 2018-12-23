@@ -3,7 +3,7 @@
   <app-full-logo-png  class="header__logo"></app-full-logo-png>
   <app-navigation     class="header__navigations"></app-navigation>
 
-  <app-search-block (search)="onSearch($event)" class="header__search"></app-search-block>
+  <app-search-block [stringPlaceHolder]="'Поиск по заголовку статьи..'" (search)="onSearch($event)" class="header__search"></app-search-block>
   <app-user-info      *ngIf="isLogged" class="header__user-info"></app-user-info>
   <app-sign-buttons  *ngIf="!isLogged && !signPage" class="header__login"></app-sign-buttons>
 </header>

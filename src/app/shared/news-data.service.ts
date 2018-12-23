@@ -19,8 +19,8 @@ export class NewsDataService {
   ) {}
 
   public getNewsFromServer(
-    page: number, period?: string, rating?: string, categoriesId?: Array<string>, search?: string
-  ): Observable<Array<News>> {
+    page: number, period?: string, rating?: string, categoriesId?: Array<string>,
+    search?: string): Observable<{ news: Array<News>, pagination: object, filters: object }> {
     let category: string = categoriesId.length > 0 ? categoriesId.join(',') : null;
 
     return this.restService.restGetNewsList(page.toString(), period, rating, category, search).pipe(
@@ -35,7 +35,7 @@ export class NewsDataService {
             newsArray.push(news);
           })
         }
-        return newsArray;
+        return { news: newsArray, pagination: pagination, filters: filters };
       })
     );
   }

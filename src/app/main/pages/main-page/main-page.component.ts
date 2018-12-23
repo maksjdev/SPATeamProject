@@ -10,6 +10,7 @@ import {switchMap, throttleTime} from 'rxjs/operators';
 import {Category} from '@shared/models/Category';
 import {CategoryDataService} from '@shared/category-data.service';
 import {ParamMap} from '@angular/router';
+import {AppScrollService} from '@shared/services/app-scroll.service';
 
 @Component({
   selector: 'app-main-page',
@@ -21,17 +22,21 @@ export class MainPageComponent implements OnInit, OnDestroy {
   ratingFilter: number;
   categoryAll: Array<Category>;
   categoryFilter: Array<Category>;
-  pagination: PaginationItem;
 
   newsList: Array<News>;
-  _subscriptionC: Subscription;
-  _subscriptionN: Subscription;
+  private _subscriptionC: Subscription;
+  private _subscriptionN: Subscription;
+
+  pagination: PaginationItem;
+  paginationTotal: number;
+  isLoading: boolean;
 
   constructor(
     private newsService: NewsDataService,
     private configService: ConfigService,
     private routingService: AppRoutingService,
     private categoryService: CategoryDataService,
+    private scrollService: AppScrollService
   ) {
     this.newsList = [];
     this.categoryFilter = [];
@@ -48,6 +53,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
     this._subscriptionN = this.routingService.getActiveQueryParam().pipe(
       throttleTime(100),
       switchMap((params: ParamMap) => {
+        this.isLoading = true;
         let pageQuery: string = params.get(CONSTANTS.QUERY.PAGE);
         let periodQuery: string = params.get(CONSTANTS.QUERY.PERIOD);
         let ratingQuery: string = params.get(CONSTANTS.QUERY.RATING);
@@ -70,15 +76,20 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
         let period = periodQuery ? periodQuery : this.configService.getDefaultPeriod();
 
-        this.onPaginationChange(page);
         this.onRatingChange(rating);
         this.onPeriodChange(period);
 
         let categoryId: Array<string> = this.categoryService.getCategoryBy(this.categoryFilter, 'id');
         return this.newsService.getNewsFromServer(page, periodQuery, ratingQuery, categoryId, searchQuery);
       })
-    ).subscribe( (news: Array<News>) => {
-      this.newsList = news;
+    ).subscribe( data => {
+      this.isLoading = false;
+      if (!('news' in data) || !('pagination' in data)) return;
+      this.newsList = data.news;
+      let pagination = data.pagination,
+          page = pagination['current_page'];
+          this.paginationTotal = parseInt(pagination['total_page']);
+      this.onPaginationChange(parseInt(page));
     });
   }
   ngOnDestroy(): void {
@@ -95,11 +106,11 @@ export class MainPageComponent implements OnInit, OnDestroy {
   onCategoriesChange(value: string): void {
     this.periodFilter = value;
   }
-  onPaginationChange(page: number): void {
-    // Получаем пагинацию с сервера
-    let minPage: number = 1,  maxPage: number = 100, pageLargeStep: number = 10;
-    if (page >= minPage && page < maxPage) {
-      this.pagination = PaginationItem.createPageItem(page, pageLargeStep, minPage, maxPage);
+  onPaginationChange(pageCurrent: number): void {
+    let minPage: number = 1,  maxPage: number = this.paginationTotal, pageLargeStep: number = 5;
+    if (pageCurrent >= minPage && pageCurrent <= maxPage) {
+      this.pagination = PaginationItem.createPageItem(pageCurrent, pageLargeStep, minPage, maxPage);
+      this.scrollService.scrollToTop(false);
     }
   }
 

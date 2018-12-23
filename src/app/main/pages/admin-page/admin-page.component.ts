@@ -46,6 +46,7 @@ export class AdminPageComponent implements OnInit {
       this.categoryService.createCategory(category).then( (created: boolean) => {
         if (created) {
           this.CategoryForm.reset();
+          this.categoryService.reloadCurrentCategoriesData();
         }
       });
       this.formErrors = {c_name: ''};

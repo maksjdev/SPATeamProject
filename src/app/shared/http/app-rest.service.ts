@@ -99,6 +99,12 @@ export class AppRestService {
   // Получение данных
   public restGetNewsList(page?: string, period?: string, rating?: string, categoriesId?: string, search?: string): Observable<Object> {
     let url = CONSTANTS.SERVER.NEWS;
+    page = page? page : "1";
+    period = period? period : "";
+    rating = rating? rating : "";
+    search = search? search : "";
+    categoriesId = categoriesId? categoriesId : "";
+
     let params = {
       "page": page, "period": period, "min_rating": rating, "categories_id": categoriesId, "search": search
     };
