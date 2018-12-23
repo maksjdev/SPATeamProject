@@ -8,8 +8,8 @@ const NewsController = require('@controllers/control-news');
 router.get("/", NewsController.news_get);
 router.get("/top", NewsController.news_top);
 router.get("/:newsId", NewsController.news_find);
-router.post("/:newsId/comment", NewsController.news_addComment);
-router.get("/:newsId/comment", NewsController.news_getComments);
+router.get("/:newsId/comments", NewsController.news_get_comments);
+router.post("/:newsId/comments", NewsController.news_create_comment);
 
 router.post("/", checkAuth, checkAdmin, NewsController.news_create);
 router.patch("/:newsId", checkAuth, checkAdmin, NewsController.news_update);

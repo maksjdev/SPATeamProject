@@ -6,12 +6,13 @@ const commentSchema = mongoose.Schema({
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-    //required: [true, 'You need enter author!']
+    ref: 'User',
+    required: [true, 'You need enter author!']
   },
   news:{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'News'
+    ref: 'News',
+    required: [true, 'You need enter news!']
   },
   text: {
     type: String,

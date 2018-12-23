@@ -210,7 +210,10 @@ exports.news_update = (req, res) => {
 };
 
 /*  Сторонние   */
-exports.news_comment = (req, res) => {
+exports.news_get_comments = (req, res) => {
+
+};
+exports.news_create_comment = (req, res) => {
 
 };
 
