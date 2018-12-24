@@ -1,5 +1,13 @@
 {
   "news": {
-    "numbers": "10"
+    "page": "1",
+    "period": "",
+    "rating": ""
+  },
+  "category_block": {
+    "max": "8"
+  },
+  "top_block": {
+    "max": "5"
   }
 }

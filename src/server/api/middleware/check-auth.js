@@ -7,11 +7,16 @@ const MSGS = require('@constants/mesages');
 module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization;
-    const decoded = jwt.verify(token, ENV.JWT_KEY);
-    req.userData = decoded;
+    if (!token || token.length < 10) {
+      res.status(CODES.EC_AUTH).json({
+        message: MSGS.AUTH_FAIL
+      });
+    }
+
+    req.userData = jwt.verify(token, ENV.JWT_KEY);
     next();
   } catch (error) {
-    return res.status(CODES.EC_AUTH).json({
+    res.status(CODES.EC_AUTH).json({
       message: MSGS.AUTH_FAIL
     });
   }

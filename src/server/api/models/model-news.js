@@ -4,51 +4,47 @@ const newsSchema = mongoose.Schema({
   _id: {
     type: mongoose.Schema.Types.ObjectId
   },
-  author : {
+  author: {
     type: mongoose.Schema.Types.ObjectId,
-    ref : 'User',
-    required : [true, 'You need enter author!']
+    ref: 'User',
+    required: [true, 'You need enter author!']
   },
-  title : {
-    type : String,
+  title: {
+    type: String,
     minLength: 10,
-    required: [true, 'You need enter title!']
+    required: [true, 'You need enter title!'],
+    text: true
   },
-  text : {
+  text: {
     type: String,
     minLength: 100,
-    required : [true, 'You need enter text!']
+    required: [true, 'You need enter text!']
   },
-  img_url : {
-    type : String,
+  img_url: {
+    type: String,
     required: [true, 'You need enter main image link!']
   },
 
   // Не объязательные поля
-  categories : {
+  categories: {
     type: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Category'
     }],
     default: [],
-    required : true
-  },
-  rating : {
-    type: Number,
-    default: 0,
-    min: 0,
-    required : true
-  },
-  create_date:{
-    type : Date,
-    default : Date.now(),
     required: true
   },
-  comments_number : {
+  rating: {
     type: Number,
     default: 0,
     min: 0,
-    required : true
+    required: true
+  },
+  comments_number: {
+    type: Number,
+    default: 0,
+    min: 0,
+    required: true
   },
   comments: {
     type: [{
@@ -57,6 +53,11 @@ const newsSchema = mongoose.Schema({
     }],
     default: [],
     required: true
+  }
+},
+  { timestamps: {
+    createdAt: 'create_date',
+    updatedAt: 'update_date'
   }
 });
 const News = mongoose.model('News', newsSchema);

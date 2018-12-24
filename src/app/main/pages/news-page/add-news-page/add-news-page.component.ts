@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NewsDataService} from '@shared/news-data.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AppFormService} from '@shared/services/app-form.service';
@@ -6,13 +6,13 @@ import {News} from '@shared/models/News';
 import {User} from '@shared/models/User';
 import {UserDataService} from '@shared/user-data.service';
 import {Category} from '@shared/models/Category';
-import {HttpResponse} from '@angular/common/http';
 import {CategoryDataService} from '@shared/category-data.service';
 import {Observable, Subscription} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {CONSTANTS} from '@shared/config/constants';
 import {AppDialogService} from '@shared/services/app-dialog.service';
+import {AppRoutingService} from '@routes/app-routing.service';
 
 @Component({
   selector: 'app-add-news-page',
@@ -21,11 +21,11 @@ import {AppDialogService} from '@shared/services/app-dialog.service';
 })
 export class AddNewsPageComponent implements OnInit {
   public news: News;
-  public pageTitle: string;
   public categories: Array<Category>;
   public addNewsForm: FormGroup;
   private _subscription: Subscription;
   public imageArr: Array<string>;
+  public pageEdit: boolean;
 
   public formErrors = {
     n_title: '', n_text: '', n_image: '', n_categories: ''
@@ -34,11 +34,11 @@ export class AddNewsPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private formBuild: FormBuilder,
-    private userService: UserDataService,
     private formService: AppFormService,
     private newsService: NewsDataService,
     private dialogService: AppDialogService,
-    private categoryService: CategoryDataService
+    private categoryService: CategoryDataService,
+    private routingService: AppRoutingService
   ) {
     this.imageArr = [
       'https://pre00.deviantart.net/b5bc/th/pre/i/2016/001/4/6/witcher_3_new_year_2016_by_maxifen-d9mah8e.png',
@@ -48,9 +48,6 @@ export class AddNewsPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.pageTitle = 'Добавление новости';
-    let title = '', image =  '', categories = [], text = '';
-
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         let id = params.get('id');
@@ -58,24 +55,21 @@ export class AddNewsPageComponent implements OnInit {
       })
     ).subscribe( (news: News) => {
       this.news = news;
-      if (news) this.pageTitle = 'Редактирование новости';
+      if (this.news) {
+        this.pageEdit = true;
+        this.setFormFields(this.news);
+      }
     });
 
-    this._subscription = this.categoryService.getAllCategories().subscribe((value: Array<Category>) => {
+    this._subscription = this.categoryService.getCurrentCategoriesData().subscribe((value: Array<Category>) => {
       this.categories  = value;
     });
 
-    if (this.news){
-      title = this.news.getTitle();
-      image = this.news.getImage();
-      categories = this.news.getCategories();
-      text = this.news.getText();
-    }
     this.addNewsForm = this.formBuild.group({
-      n_title:    [title, [Validators.required]],
-      n_image:    [image, [Validators.required]],
-      n_categories:    [categories, [Validators.required]],
-      n_text: [text, [Validators.required]]
+      n_title:    ['', [Validators.required]],
+      n_image:    ['', [Validators.required]],
+      n_categories: ['', [Validators.required]],
+      n_text:       ['', [Validators.required]]
     });
   }
 
@@ -85,35 +79,60 @@ export class AddNewsPageComponent implements OnInit {
       let title: string = this.addNewsForm.value['n_title'];
       let text: string = this.addNewsForm.value['n_text'];
       let image: string = this.addNewsForm.value['n_image'];
-      let categories: Array<string> = this.addNewsForm.value['n_categories'];
+      let categories: Array<Category> = this.addNewsForm.value['n_categories'];
 
-      let author: User = this.userService.getCurrentUserData().getValue();
-      let date = new Date();
-
-      let news: News = new News('100', author, date, title, text, image, categories);
-      this.newsService.createNews(news).pipe().subscribe( (value: HttpResponse<ArrayBuffer>) => {
-        // Если отправка удалась -> иди на главную
-        this.addNewsForm.reset();
-        console.log(value);
-      });
+      if (this.pageEdit){
+        let news: News = new News(this.news.getId(), null, null, title, text, image, categories);
+        this.newsService.updateNews(news).then( (success: boolean) => {
+          if (!success) return;
+          this.addNewsForm.reset();
+          this.routingService.goToLink(CONSTANTS.APP.MAIN);
+        });
+      } else {
+        let news: News = new News(null, null, null, title, text, image, categories);
+        this.newsService.createNews(news).then( (success: boolean) => {
+          if (!success) return;
+          this.addNewsForm.reset();
+          this.routingService.goToLink(CONSTANTS.APP.MAIN);
+        });
+      }
     } else {
       this.formErrors = this.formService.validateForm(this.addNewsForm, this.formErrors, false);
     }
   }
   public onDeleteNews(event){
-    if (this.news && this.dialogService.confirmDialog(CONSTANTS.MSG.CONFIRM_DEL_NEWS)) {
-      let id: string = this.news.getId();
-      this.newsService.deleteNews(id);
+    if (this.news ){
+      this.dialogService.confirmDialog(CONSTANTS.MSG.CONFIRM_DEL_NEWS).toPromise().then((value: boolean) => {
+        if (!value) { return; }
+
+        let id: string = this.news.getId();
+        this.newsService.deleteNews(id).then((result: boolean) => {
+          this.addNewsForm.reset();
+          this.routingService.goToLink(CONSTANTS.APP.MAIN);
+        });
+      });
     }
   }
   public onResetNews(event){
-    if (this.dialogService.confirmDialog(CONSTANTS.MSG.CONFIRM_RST_NEWS)){
-      this.addNewsForm.reset();
-    }
+    this.dialogService.confirmDialog(CONSTANTS.MSG.CONFIRM_RST_NEWS).toPromise().then( (value: boolean) => {
+      if (value) this.addNewsForm.reset();
+    })
   }
+  private setFormFields(news: News){
+    let title = news.getTitle();
+    let image = news.getImage();
+    let categories = news.getCategories();
+    let text = news.getText();
+
+    this.addNewsForm.controls['n_title'].setValue(title);
+    this.addNewsForm.controls['n_image'].setValue(image);
+    this.addNewsForm.controls['n_categories'].setValue(categories);
+    this.addNewsForm.controls['n_text'].setValue(text);
+  }
+
   canDeactivate(): Observable<boolean> | boolean {
     if (this.addNewsForm.value['n_title'] || this.addNewsForm.value['n_text']) {
-      return this.dialogService.confirmDialog('Отменить ваши изменения новости?');
+      return this.dialogService.confirmDialog(CONSTANTS.MSG.CONFIRM_RST_CHANGE);
     }
     return true;
   }

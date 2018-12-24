@@ -21,6 +21,29 @@
   grid-area: m;
   flex-direction: column;
 }
+.empty-block {
+  @extend .news-block;
+  padding-top: 100px;
+  font-family: $extra-font;
+  text-align: center;
+  user-select: none;
+  &__message {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: $big-font-size;
+    letter-spacing: 1px;
+  }
+  &__image {
+    align-items: center;
+    justify-content: center;
+    &--text {
+      font-weight: bold;
+      font-size: 8em;
+      -webkit-transform: rotate(-10deg);
+      -moz-transform: rotate(-10deg);
+    }
+  }
+}
 .sidebar-block {
   grid-area: s;
   &__category {

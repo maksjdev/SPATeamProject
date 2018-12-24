@@ -30,10 +30,10 @@ const categorySchema = mongoose.Schema({
     default: false,
     required: true
   },
-  create_date: {
-    type: Date,
-    default: Date.now(),
-    required: true
+},
+{ timestamps: {
+    createdAt: 'create_date',
+    updatedAt: 'update_date'
   }
 });
 const Category = mongoose.model('Category', categorySchema);

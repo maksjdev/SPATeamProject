@@ -3,6 +3,9 @@ import {News} from '@shared/models/News';
 import {AppStringService} from '@shared/services/app-string.service';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {AppRoutingService} from '@routes/app-routing.service';
+import {NewsDataService} from '@shared/news-data.service';
+import {AppDialogService} from '@shared/services/app-dialog.service';
+import {CONSTANTS} from '@shared/config/constants';
 
 @Component({
   selector: 'app-news-big-block',
@@ -18,6 +21,8 @@ export class NewsBigBlockComponent implements OnChanges {
     private _sanitizer: DomSanitizer,
     private stringService: AppStringService,
     private routingService: AppRoutingService,
+    private dialogService: AppDialogService,
+    private newsService: NewsDataService,
   ) {
     this._textContent = '';
   }
@@ -25,7 +30,7 @@ export class NewsBigBlockComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.hasOwnProperty('news') &&  changes['news'].currentValue) {
       this._textContent = this.news.getText();
-      this._textContent = this.stringService.trimmString(this._textContent, 500, '...');
+      this._textContent = this.stringService.trimmString(this._textContent, 750);
       this._textContent = this.stringService.getAllBeforeTag(this._textContent, 'div');
     }
   }
@@ -37,5 +42,13 @@ export class NewsBigBlockComponent implements OnChanges {
   public goToNews(event){
     let id: string = this.news.getId();
     this.routingService.goToNews(id);
+  }
+  public deleteNews(id: string) {
+    this.dialogService.confirmDialog(CONSTANTS.MSG.CONFIRM_DEL_NEWS).toPromise().then((value: boolean) => {
+      if (!value) { return; }
+      this.newsService.deleteNews(id).then((result: boolean) => {
+        this.dialogService.showDialog('Новость была удалена!');
+      });
+    });
   }
 }

@@ -3,56 +3,112 @@ import {News} from '@shared/models/News';
 import {MockDataService} from '@shared/mock-data.service';
 import {AppRestService} from '@shared/http/app-rest.service';
 import {Observable, of} from 'rxjs';
-import {HttpResponse} from '@angular/common/http';
 import {Comment} from '@shared/models/Comment';
+import {catchError, map} from 'rxjs/operators';
+import {AppDialogService} from '@shared/services/app-dialog.service';
+import {DtoService} from '@shared/dto.service';
 
 @Injectable()
 export class NewsDataService {
 
   constructor(
     private restService: AppRestService,
-    private mockDataService: MockDataService
+    private mockDataService: MockDataService,
+    private dialogService: AppDialogService,
+    private dtoService: DtoService
   ) {}
 
-  public createNews(news: News): Observable<HttpResponse<ArrayBuffer>>{
-    return this.restService.sendNews(news);
-  }
-  public deleteNews(id: string): Observable<HttpResponse<ArrayBuffer>>{
-    return this.restService.deleteNews(id);
-  }
-
   public getNewsFromServer(
-    page: number, period: string, rating: string,
-    categories: Array<string>, search?: string
-  ): Observable<Array<News>> {
-    let category: string = categories.length > 0 ? categories.join(',') : 'any';
-    console.info(`Нужно - (стр. ${page}, период: ${period}, рейтинг: ${rating}, категории: ${category}, поиск: ${search || 'нету'})!`);
+    page: number, period?: string, rating?: string, categoriesId?: Array<string>,
+    search?: string): Observable<{ news: Array<News>, pagination: object, filters: object }> {
+    let category: string = categoriesId.length > 0 ? categoriesId.join(',') : null;
 
-    // TODO Change for restService.getNewsList()
-    let currentNews: Observable<Array<News>> = of(this.mockDataService.getMockNewsList(5));
-    return currentNews;
+    return this.restService.restGetNewsList(page.toString(), period, rating, category, search).pipe(
+      map((result: object) => {
+        let newsArray: Array<News> = [];
+        let filters = result['filters'],
+            pagination = result['pagination'],
+            news: Array<object> = result['news'];
+        if (news && news.length > 0){
+          news.forEach((newsObj: object) => {
+            let news = this.dtoService.getNewsFromObj(newsObj);
+            newsArray.push(news);
+          })
+        }
+        return { news: newsArray, pagination: pagination, filters: filters };
+      })
+    );
   }
 
-  public getTopNews(): Observable<Array<News>> {
-    // TODO Change for restService.getTopNews()
-    return of(this.mockDataService.getMockNewsList(5));
+  public getTopNews(amount?: number, type?: string): Observable<Array<News>> {
+    return this.restService.restGetTopNews(amount+'', type).pipe(
+      map((result: object) => {
+        let newsArray: Array<News> = [];
+        let total = result['amount_total'],
+            send = result['amount_send'],
+            news: Array<object> = result['news'];
+        if (news && news.length > 0){
+          news.forEach((newsObj: object) => {
+            let news = this.dtoService.getNewsFromObj(newsObj);
+            newsArray.push(news);
+          })
+        }
+        return newsArray;
+      })
+    );
   }
 
   public getFullNewsData(id: string): Observable<News> {
-    // TODO Change for restService.getNewsData('full')
-    return id? of(this.mockDataService.getMockNews()) : of(null);
+    return this.getNewsData(id, 'full');
   }
   public getMediumNewsData(id: string): Observable<News> {
-    // TODO Change for restService.getNewsData('medium')
-    return of(this.mockDataService.getMockNews());
+    return this.getNewsData(id, 'medium');
   }
   public getSmallNewsData(id: string): Observable<News> {
-    // TODO Change for restService.getNewsData('small')
-    return of(this.mockDataService.getMockNews());
+    return this.getNewsData(id, 'small');
+  }
+  private getNewsData(id: string, type: string): Observable<News> {
+    if (!id) {return of(null)}
+    return this.restService.restGetNewsData(id, type).pipe(
+      map((newsObj: object) => {
+        return this.dtoService.getNewsFromObj(newsObj);
+      })
+    );
+  }
+
+  public createNews(news: News): Promise<boolean>{
+    return this.restService.restSendNews(news).pipe(
+      catchError((errorMsg: string) => {
+        this.dialogService.showDialog(errorMsg);
+        return of(errorMsg);
+      })
+    ).toPromise().then(value => {
+      return value === Object(value);
+    });
+  }
+  public updateNews(news: News): Promise<boolean>{
+    return this.restService.restUpdateNews(news).pipe(
+      catchError((errorMsg: string) => {
+        this.dialogService.showDialog(errorMsg);
+        return of(errorMsg);
+      })
+    ).toPromise().then(value => {
+      return value === Object(value);
+    });
+  }
+  public deleteNews(id: string): Promise<boolean>{
+    return this.restService.restDeleteNews(id).pipe(
+      catchError((errorMsg: string) => {
+        this.dialogService.showDialog(errorMsg);
+        return of(errorMsg);
+      })
+    ).toPromise().then(value => {
+      return value === Object(value);
+    });
   }
 
   public getComments(id: string): Observable<Array<Comment>> {
-    // TODO Change for restService.getAllComments()
+    // TODO Change for restService.restGetAllComments()
     return of(this.mockDataService.getMockCommentList(5));
   }
 }

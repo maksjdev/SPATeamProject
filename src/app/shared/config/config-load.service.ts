@@ -23,8 +23,8 @@ export class ConfigLoadService {
   }
 
   public getConfig(): Observable<Object>{
-    return this.restService.getConfigData().pipe(
-      catchError(this.restService.handleError('getConfigData', []))
+    return this.restService.restGetConfigData().pipe(
+      catchError(this.restService.handleError('restGetConfigData', []))
     );
   }
 }

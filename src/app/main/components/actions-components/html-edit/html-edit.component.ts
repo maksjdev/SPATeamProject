@@ -1,5 +1,4 @@
 import {ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild} from '@angular/core';
-import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({

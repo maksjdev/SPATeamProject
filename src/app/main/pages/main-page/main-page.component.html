@@ -8,11 +8,28 @@
   </app-rating-filter>
 </section>
 
-<section class="news-block">
+<section *ngIf="(newsList && newsList.length > 0) || isLoading; else emptyBlock" class="news-block">
   <!--Будут создаватся динамически-->
   <app-news-big-block *ngFor="let news of newsList" [news]="news"></app-news-big-block>
-  <app-pagination *ngIf="pagination" [currentPagination]="pagination" (paginationChg)="onPaginationChange($event)"></app-pagination>
+  <app-pagination *ngIf="newsList && newsList.length > 0 && pagination"
+                  [currentPagination]="pagination"
+                  (paginationChg)="onPaginationChange($event)">
+  </app-pagination>
 </section>
+
+<ng-template #emptyBlock>
+  <div class="empty-block">
+    <div class="empty-block__message">
+      Простите, но вы слишком требовательны, а у нас - лапки..
+    </div>
+    <div class="row empty-block__image">
+      <div class="empty-block__image--text">404</div>
+      <div class="empty-block__image--img">
+        <img src="../../../../assets/images/cat-paws.png">
+      </div>
+    </div>
+  </div>
+</ng-template>
 
 <section class="sidebar-block">
   <div class="sidebar-block__category">

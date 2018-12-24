@@ -14,7 +14,8 @@ export class AppStringService {
     let string = html? html : '';
     return this._sanitizer.bypassSecurityTrustHtml(string);
   }
-  public trimmString(string, maxLenght, suffix?): string {
+  public trimmString(string: string, maxLenght: number, suffix?: string): string {
+    if (string.length <= maxLenght){ return string; }
     suffix = suffix? suffix : ' ...';
     let lengthShort: number = this.trimmedLenght(string, maxLenght);
     return this.shortPipe.transform(string, lengthShort, suffix);
@@ -23,6 +24,7 @@ export class AppStringService {
     let trimmedString = str.substr(0, maxLength);
     return Math.min(trimmedString.length, trimmedString.lastIndexOf(" "));
   }
+
   public leftText(arr: Array<object>): string {
     let result: string = '';
     arr.filter( (obj, ind, arr) => {
@@ -32,6 +34,7 @@ export class AppStringService {
     });
     return result;
   }
+
   public getAllBeforeTag(text: string, tag: string): string{
     if (text.includes('<'+tag+'>')){
       let regExp = new RegExp('(.)+?(?:<'+tag+'>)', 'i');

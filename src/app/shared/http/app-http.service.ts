@@ -10,17 +10,22 @@ export class AppHttpService {
   ){}
 
   // DEFAULT CRUD MODEL (CREATE, READ, UPDATE, DELETE
-  public postData(url: string, data: object, params?): Observable<any> {
-    let myParams = new HttpParams(params);
+  public postData(url: string, data: object): Observable<any> {
     let myHeaders = new HttpHeaders({
       "Content-Type": "application/json; charset=UTF-8",
     });
-    let options = {
-      headers: myHeaders,
-      params: myParams
-    };
+    let options = { headers: myHeaders };
     let body = JSON.stringify(data);
     return this.httpClient.post(url, body, options);
+  }
+
+  public updateData(url: string, data: object): Observable<any> {
+    let myHeaders = new HttpHeaders({
+      "Content-Type": "application/json; charset=UTF-8",
+    });
+    let options = { headers: myHeaders };
+    let body = JSON.stringify(data);
+    return this.httpClient.patch(url, body, options);
   }
 
   public getData(url: string, params?: HttpParams): Observable<any> {
@@ -30,11 +35,7 @@ export class AppHttpService {
     return this.httpClient.get(url, options);
   }
 
-  public updateData(url: string, data, options?): Observable<any> {
-    return this.httpClient.patch(url, data);
-  }
-
-  public deleteData(url: string, data): Observable<any>  {
+  public deleteData(url: string): Observable<any>  {
     return this.httpClient.delete(url);
   }
 }

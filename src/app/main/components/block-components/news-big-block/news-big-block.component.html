@@ -1,11 +1,15 @@
 
 <article *ngIf="news" class="panel shadow-block news-item">
   <div class="news-item__header">
-    <h2 class="news-item__header--title">{{ news.getTitle() | trimString: 100 }}</h2>
+    <h2 class="news-item__header--title"
+        (click)="goToNews($event)">
+      {{ news.getTitle() | trimString: 120 }}
+    </h2>
+
     <div class="header-info">
       <div class="row header-info__author">
         <img class="header-info__author--image" [src]="news.author.getImage()" alt="*ControlUser Image*">
-        <a href="#" class="header-info__author--name">
+        <a class="header-info__author--name">
           {{ news.author.getRealName() +' ('+ news.author.getNickname()+'),' }}
         </a>
       </div>
@@ -14,14 +18,18 @@
         {{ news.getCommentNumber() }}
         <i class="main far fa-comment-dots"></i>
       </div>
-      <div class="header-info__rating">
-        {{ news.rating }}
-        <i class="main fas fa-star"></i>
+      <div class="header-info__actions">
+        <span>{{ news.rating }}<i class="main fas fa-star"></i></span>
+        <button *ngxPermissionsOnly="['Admin']"
+              (click)="deleteNews(news.getId())">
+          <i class="main far fa-trash-alt"></i>
+        </button>
       </div>
     </div>
+
     <span class="row header-tags">
       <div class="header-tags__item" *ngFor="let category of news.getCategories()">
-        {{ category }}
+        {{ category.getName() }}
       </div>
     </span>
   </div>

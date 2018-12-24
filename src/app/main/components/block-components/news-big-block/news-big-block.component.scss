@@ -23,6 +23,7 @@
       letter-spacing: 1px;
       font-size: $extra-font-size;
       margin-bottom: $normal-padding;
+      cursor: pointer;
     }
   }
   &__image {
@@ -84,8 +85,11 @@
       border-radius: $normal-border-radius;
     }
   }
-  &__rating {
+  &__actions {
     margin-left: auto;
+    span i {
+      padding-left: $small-padding;
+    }
   }
 }
 .header-tags {

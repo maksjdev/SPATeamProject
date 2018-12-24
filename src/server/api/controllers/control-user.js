@@ -14,7 +14,6 @@ exports.user_signup = (req, res, next) => {
       nicknameV = req.body.nickname,
       passwordV = req.body.password,
       imgUrlV = req.body.img_url;
-  // console.log(emailV, realnameV, nicknameV, passwordV,imgUrlV);
   if (emailV && realnameV && nicknameV && passwordV && imgUrlV){
     ModelUser.find({email: { $regex: new RegExp("^" + emailV.toLowerCase(), "i")}}).exec()
       .then(user => {
@@ -35,7 +34,7 @@ exports.user_signup = (req, res, next) => {
                 .catch(err => {
                   console.log(err);
                   res.status(CODES.ES_INTERNAL).json({
-                    error: err
+                    message: err
                   });
                 });
             }
@@ -82,7 +81,7 @@ exports.user_login = (req, res, next) => {
       })
       .catch(err => {
         res.status(CODES.ES_INTERNAL).json({
-          error: err
+          message: err
         });
       });
   } else { res.status(CODES.EC_REQUEST).end()}
@@ -93,13 +92,17 @@ exports.user_delete = (req, res) => {
   if (userId) {
     ModelUser.deleteOne({_id: userId }).exec()
     .then( result => {
-      res.status(CODES.S_OK).json({
-        message: `User [id:${userId}] ${MSGS.DELETED}`
+      if (result.n === 1) {
+        res.status(CODES.S_OK).json({
+          message: `User [id:${userId}] ${MSGS.DELETED}`
+        });
+      } else res.status(CODES.EC_NOT_FOUND).json({
+        message: MSGS.NOT_FOUND
       });
     })
     .catch(err => {
       res.status(CODES.ES_INTERNAL).json({
-        error: err
+        message: err
       });
     });
   } else { res.status(CODES.EC_REQUEST).end() }
@@ -110,14 +113,41 @@ exports.user_find = (req, res) => {
   if (userId) {
     ModelUser.findOne({_id: userId }, '-password -__v').exec()
       .then( result => {
-        if (result) {
-          res.status(CODES.S_OK).json(result)
-        } else { throw Error('Shit happends'); }
+        if (result) { res.status(CODES.S_OK).json(result); }
+        else res.status(CODES.EC_NOT_FOUND).json({
+          message: MSGS.NOT_FOUND
+        });
       })
       .catch(err => {
         res.status(CODES.ES_INTERNAL).json({
-          error: err
+          message: err
         });
       });
+  } else { res.status(CODES.EC_REQUEST).end() }
+};
+
+exports.user_bookmarks = (req, res) => {
+  let userId = req.params.userId;
+  if (userId) {
+    ModelUser.findOne({_id: userId }).select('bookmarks')
+      .populate('bookmarks').exec()
+      .then( result => {
+        if (result) { res.status(CODES.S_OK).json(result); }
+        else res.status(CODES.EC_NOT_FOUND).json({
+          message: MSGS.NOT_FOUND
+        });
+      })
+      .catch(err => {
+        res.status(CODES.ES_INTERNAL).json({
+          message: err
+        });
+      });
+  } else { res.status(CODES.EC_REQUEST).end() }
+};
+
+exports.user_add_bookmark = (req, res) => {
+  let userId = req.params.userId;
+  if (userId) {
+    res.end();
   } else { res.status(CODES.EC_REQUEST).end() }
 };

@@ -5,7 +5,11 @@
   </div>
   <div class="top-news__content">
     <ul class="top-news__menu">
-      <app-news-small-block class="top-news__menu--item" *ngFor="let news of newsList" [news]="news"></app-news-small-block>
+      <app-news-small-block
+        *ngFor="let news of newsList"
+        class="top-news__menu--item"
+        [news]="news">
+      </app-news-small-block>
     </ul>
   </div>
 </div>

@@ -11,7 +11,7 @@
         </div>
         <div class="header-info__date">{{ news.getDate() | dateTransform }} </div>
         <div  class="header-info__actions">
-          <button class="btn-edit" (click)="onEditNews($event)">
+          <button class="btn-edit" *ngxPermissionsOnly="['Admin']" (click)="onEditNews($event)">
             <i class="fas fa-edit"></i>
           </button>
 
@@ -22,7 +22,7 @@
     </div>
     <span class="row full-news__header--tags">
       <div class="full-news__header--tags-item" *ngFor="let category of news.getCategories()">
-        {{ category }}
+        {{ category.getName() }}
       </div>
     </span>
   </div>

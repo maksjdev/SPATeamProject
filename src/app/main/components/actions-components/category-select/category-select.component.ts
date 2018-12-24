@@ -29,7 +29,7 @@ export class CategorySelectComponent implements OnChanges {
     if (changes.hasOwnProperty('selectedCategory') && changes['selectedCategory'].currentValue) {
       if (this.selectedCategory.length > 0) {
         setTimeout(_ => {
-          let param = {[this.paramName]: this.categoryService.getCategoryNames(this.selectedCategory).join(',')};
+          let param = {[this.paramName]: this.categoryService.getCategoryBy(this.selectedCategory, 'name').join(',')};
           this.routingService.setQueryParam(param);
         }, 20);
       } else {

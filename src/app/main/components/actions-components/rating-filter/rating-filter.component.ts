@@ -23,7 +23,7 @@ export class RatingFilterComponent implements OnChanges {
   paramName: string;
 
   mockRatings: Array<object> = [
-    {name: 'Любой', value: 'any'},
+    {name: 'Любой', value: ''},
     {name: '≥ 10', value: '10'},
     {name: '≥ 25', value: '25'},
     {name: '≥ 50', value: '50'},
@@ -42,6 +42,9 @@ export class RatingFilterComponent implements OnChanges {
         let param = {[this.paramName]: this.currentRating};
         this.routingService.setQueryParam(param);
       }, 20);
+    } else {
+      let param = {[this.paramName]: null};
+      this.routingService.setQueryParam(param);
     }
   }
 

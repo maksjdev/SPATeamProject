@@ -15,8 +15,8 @@ export class DateTransformPipe implements PipeTransform {
   transform(date: Date, args?: any): string {
     let result: string = '';
     switch (this.dateTimeService.findDiffInDays(date, new Date())) {
-      case 1: result = `сегодня в ${this.datePipe.transform(date, 'h:mm')}`; break;
-      case 2: result = `вчера в ${this.datePipe.transform(date, 'h:mm')}`; break;
+      case 1: result = `сегодня в ${this.datePipe.transform(date, 'shortTime')}`; break;
+      case 2: result = `вчера в ${this.datePipe.transform(date, 'shortTime')}`; break;
       default: {
         result = this.datePipe.transform(date, 'd MMMM y в h:mm'); break;
       }

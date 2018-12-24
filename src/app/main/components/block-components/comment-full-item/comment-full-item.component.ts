@@ -17,9 +17,9 @@ export class CommentFullItemComponent  {
   ) { }
 
   OnDelete($event) {
-    if (this.dialogService.confirmDialog(CONSTANTS.MSG.CONFIRM_DEL_COMMENT)){
-      this.commentDelete.emit(this.comment);
-    }
+    this.dialogService.confirmDialog(CONSTANTS.MSG.CONFIRM_DEL_COMMENT).toPromise().then((value: boolean) => {
+      if (value) this.commentDelete.emit(this.comment);
+    });
   }
 
   ratingRaise($event){

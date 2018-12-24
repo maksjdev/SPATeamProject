@@ -14,12 +14,15 @@ import {CategoryDataService} from '@shared/category-data.service';
 import {AdvertisingDataService} from '@shared/advertising-data.service';
 import {CarouselBlockComponent} from './carousel-block/carousel-block.component';
 import {SlideshowModule} from 'ng-simple-slideshow';
+import {NgxPermissionsModule} from 'ngx-permissions';
 
 @NgModule({
   imports: [
     CommonModule,
     AppPipesModule,
     SlideshowModule,
+
+    NgxPermissionsModule.forChild()
   ],
   exports: [
     NewsBigBlockComponent,

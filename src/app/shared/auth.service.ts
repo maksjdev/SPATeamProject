@@ -14,7 +14,7 @@ import {CONSTANTS} from '@shared/config/constants';
   providedIn: 'root'
 })
 export class AuthService {
-  loginState: BehaviorSubject<boolean>;
+  private loginState: BehaviorSubject<boolean>;
 
   constructor(
     private userService: UserDataService,
@@ -29,7 +29,7 @@ export class AuthService {
     let login = localStorage.getItem(CONSTANTS.LOCAL_S.USER_LOGIN);
     let password = localStorage.getItem(CONSTANTS.LOCAL_S.USER_PASSWORD);
     if (login && password){
-      this.onLogin(login, password, false);
+      this.onLogin(login, password, true);
     }
   }
 
@@ -39,7 +39,10 @@ export class AuthService {
 
   onLogin(login: string, password: string, save?: boolean): Promise<boolean> {
     // Логином может быть email
-    return this.restService.onLogin(login, password).pipe(
+    if (this.loginState){
+      this.onLogout();
+    }
+    return this.restService.restOnLogin(login, password).pipe(
       switchMap((value: HttpResponse<ArrayBuffer>) => {
         if (!value) { return of(null) }
         // Авторизация удалась
@@ -53,7 +56,6 @@ export class AuthService {
       }),
       catchError((errorMsg: string) => {
         // Авторизация НЕ удалась
-        // let errorMsg: string = err['error'];
         this.dialogService.showDialog(errorMsg);
         return of();
       })
@@ -65,8 +67,7 @@ export class AuthService {
       this.userService.setCurrentUserData(activeUser);
       this.loginState.next(true);
       // Нужно сохранять его пароль и логин?
-      if (save) {
-        // Сохранили в локал сторадж
+      if (save && login && password) {
         localStorage.setItem(CONSTANTS.LOCAL_S.USER_LOGIN, login);
         localStorage.setItem(CONSTANTS.LOCAL_S.USER_PASSWORD, password);
       }
@@ -76,7 +77,8 @@ export class AuthService {
 
   onLogout(): void {
     this.loginState.next(false);
-    this.userService.setCurrentUserData(null);
+    this.userService.deleteCurrentUserData();
+    this.routeService.goToLink(CONSTANTS.APP.MAIN);
 
     localStorage.removeItem(CONSTANTS.LOCAL_S.USER_LOGIN);
     localStorage.removeItem(CONSTANTS.LOCAL_S.USER_PASSWORD);
@@ -85,7 +87,7 @@ export class AuthService {
 
   onRegister(realName: string, nickname: string, email: string, password: string, image?: any): Promise<boolean> {
     let newUser = new User('0', realName, nickname, email, image, 0, null);
-    return this.restService.onRegister(newUser, password).pipe(
+    return this.restService.restOnRegister(newUser, password).pipe(
       catchError((errorMsg: string) => {
         // Регистрация НЕ удалась
         this.dialogService.showDialog(errorMsg);

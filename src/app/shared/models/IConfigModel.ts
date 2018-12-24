@@ -1,7 +1,17 @@
 
 export interface IConfigModel {
   // Общие настройки:
-  numbOfNews: number;
+  defaultPage: number;
+  defaultPeriod: string;
+  defaultMinRating: number;
+  // Настройка компонентов
+  categoryBlock_max: number;
+  topBlock_max: number;
+
   // Геттеры для общих полей:
-  getNumberOfNews(): number;
+  getDefaultPage(): number;
+  getDefaultPeriod(): string;
+  getDefaultRating(): number;
+  getCategoryBlockMax(): number;
+  getTopBlockMax(): number;
 }

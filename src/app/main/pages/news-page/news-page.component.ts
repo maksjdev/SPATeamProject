@@ -3,10 +3,11 @@ import {NewsDataService} from '@shared/news-data.service';
 import {News} from '@shared/models/News';
 import {Comment} from '@shared/models/Comment';
 import {ActivatedRoute, ParamMap} from '@angular/router';
-import {filter, switchMap} from 'rxjs/operators';
+import {catchError, filter, switchMap} from 'rxjs/operators';
 import {AppScrollService} from '@shared/services/app-scroll.service';
 import {AppRoutingService} from '@routes/app-routing.service';
 import {CONSTANTS} from '@shared/config/constants';
+import {of} from 'rxjs';
 
 @Component({
   selector: 'app-news-page',
@@ -38,6 +39,9 @@ export class NewsPageComponent implements OnInit {
       switchMap((params: ParamMap) => {
         let id = params.get('id');
         return this.newsService.getFullNewsData(id);
+      }),
+      catchError(err => {
+        return of(null);
       })
     ).subscribe( (news: News) => {
       this.fullNews = news;
@@ -49,7 +53,7 @@ export class NewsPageComponent implements OnInit {
 
     this.scrollService.scrollState.pipe(
       filter( (value: Event) => {
-        return window.pageYOffset > 500 && this.fullNews && !this.commentsList
+        return window.pageYOffset > 300 && this.fullNews && !this.commentsList
       }),
       switchMap((value: Event) => {
         let id = this.fullNews.getId();

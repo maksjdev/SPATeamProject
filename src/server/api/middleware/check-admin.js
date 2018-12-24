@@ -7,20 +7,17 @@ const CODES = require('@constants/http-codes');
 const MSGS = require('@constants/mesages');
 
 module.exports = (req, res, next) => {
-    const token = req.headers.authorization;
-    const decoded = jwt.verify(token, ENV.JWT_KEY);
+  let user = req.userData;
 
-    let id = decoded.userId;
-    ModelUser.findOne({_id: id}).select('role').exec().then((result) => {
-      console.log(result.role);
-      if (result.role !== 'Admin'){
-        throw Error(MSGS.ACCESS_FORBIDDEN);
-      }
-      req.userData = decoded;
-      next();
-    }).catch(error => {
-      res.status(CODES.EC_FORBIDDEN).json({
-        message: MSGS.ACCESS_FORBIDDEN
-      });
+  let id = user.userId;
+  ModelUser.findOne({_id: id}).select('role').exec().then((result) => {
+    if (result.role !== 'Admin') {
+      throw Error(MSGS.ACCESS_FORBIDDEN);
+    }
+    next();
+  }).catch(error => {
+    res.status(CODES.EC_FORBIDDEN).json({
+      message: MSGS.ACCESS_FORBIDDEN
     });
+  });
 };
