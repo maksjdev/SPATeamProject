@@ -81,7 +81,7 @@ export class NewsDataService {
   public createNews(news: News): Promise<boolean>{
     return this.restService.restSendNews(news).pipe(
       catchError((errorMsg: string) => {
-        this.dialogService.showDialog(errorMsg);
+        this.dialogService.showToastError(errorMsg);
         return of(errorMsg);
       })
     ).toPromise().then(value => {
@@ -91,7 +91,7 @@ export class NewsDataService {
   public updateNews(news: News): Promise<boolean>{
     return this.restService.restUpdateNews(news).pipe(
       catchError((errorMsg: string) => {
-        this.dialogService.showDialog(errorMsg);
+        this.dialogService.showToastError(errorMsg);
         return of(errorMsg);
       })
     ).toPromise().then(value => {
@@ -101,7 +101,7 @@ export class NewsDataService {
   public deleteNews(id: string): Promise<boolean>{
     return this.restService.restDeleteNews(id).pipe(
       catchError((errorMsg: string) => {
-        this.dialogService.showDialog(errorMsg);
+        this.dialogService.showToastError(errorMsg);
         return of(errorMsg);
       })
     ).toPromise().then(value => {
@@ -141,7 +141,7 @@ export class NewsDataService {
   public createComment(newsId: string, comment: Comment): Promise<boolean>{
     return this.restService.restSendComment(newsId, comment).pipe(
       catchError((errorMsg: string) => {
-        this.dialogService.showDialog(errorMsg);
+        this.dialogService.showToastError(errorMsg);
         return of(errorMsg);
       })
     ).toPromise().then(value => {
@@ -151,7 +151,7 @@ export class NewsDataService {
   public deleteComment(commentId: string, newsId: string): Promise<boolean>{
     return this.restService.restDeleteComment(commentId, newsId).pipe(
       catchError((errorMsg: string) => {
-        this.dialogService.showDialog(errorMsg);
+        this.dialogService.showToastError(errorMsg);
         return of(errorMsg);
       })
     ).toPromise().then(value => {

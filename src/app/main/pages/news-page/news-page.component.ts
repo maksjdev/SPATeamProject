@@ -70,7 +70,7 @@ export class NewsPageComponent implements OnInit {
   onAddComment(comment: Comment){
     this.newsService.createComment(this.fullNews.getId(), comment).then((success: boolean) => {
       if (!success) { return; }
-      this.dialogService.showDialog(CONSTANTS.MSG.COMMENT_ADD);
+      this.dialogService.showToastSuccess(CONSTANTS.MSG.COMMENT_ADD);
       this.commentForm.resetForm();
       this.newsService.reloadCurrentCommentsData(this.fullNews.getId());
     })
@@ -78,7 +78,7 @@ export class NewsPageComponent implements OnInit {
   onDeleteComment(comment: Comment){
     this.newsService.deleteComment(comment.getId(), this.fullNews.getId()).then((success: boolean) => {
       if (!success) { return; }
-      this.dialogService.showDialog(CONSTANTS.MSG.COMMENT_DEL);
+      this.dialogService.showToastSuccess(CONSTANTS.MSG.COMMENT_DEL);
       this.newsService.reloadCurrentCommentsData(this.fullNews.getId());
     })
   }

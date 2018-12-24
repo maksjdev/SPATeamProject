@@ -6,7 +6,7 @@ const [ModelComment, createComment] = require("@models/model-comment");
 const ENV = require('@constants/environment');
 const CODES = require('@constants/http-codes');
 const MSGS = require('@constants/mesages');
-const NEWS_PER_PAGE = 5;
+const NEWS_PER_PAGE = 2;
 
 exports.news_get = (req, res) => {
   let page = req.query.page,
@@ -40,7 +40,7 @@ exports.news_get = (req, res) => {
             sendFrom = (page-1) * NEWS_PER_PAGE,
             sendTo = page * NEWS_PER_PAGE;
 
-        let newsList = result.splice(sendFrom, sendTo),
+        let newsList = result.slice(sendFrom, sendTo),
             sendCount = newsList.length;
 
         let response = {

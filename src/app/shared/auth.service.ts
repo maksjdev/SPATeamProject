@@ -54,7 +54,7 @@ export class AuthService {
       }),
       catchError((errorMsg: string) => {
         // Авторизация НЕ удалась
-        this.dialogService.showDialog(errorMsg);
+        this.dialogService.showToastError(errorMsg);
         return of();
       })
     ).toPromise().then((activeUser: User) => {
@@ -88,7 +88,7 @@ export class AuthService {
     return this.restService.restOnRegister(newUser, password).pipe(
       catchError((errorMsg: string) => {
         // Регистрация НЕ удалась
-        this.dialogService.showDialog(errorMsg);
+        this.dialogService.showToastError(errorMsg);
         return of(false);
       })
     ).toPromise().then( (registered: boolean) => {

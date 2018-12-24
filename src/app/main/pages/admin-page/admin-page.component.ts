@@ -46,6 +46,7 @@ export class AdminPageComponent implements OnInit {
       this.categoryService.createCategory(category).then( (created: boolean) => {
         if (created) {
           this.CategoryForm.reset();
+          this.dialogService.showToastSuccess(CONSTANTS.MSG.CATEGORY_ADD);
           this.categoryService.reloadCurrentCategoriesData();
         }
       });
@@ -59,7 +60,7 @@ export class AdminPageComponent implements OnInit {
     this.routingService.goToLink(CONSTANTS.APP.NEWS+'/'+CONSTANTS.APP.CREATE);
   }
   public onSpoiler(event){
-    this.dialogService.showDialog(`
+    this.dialogService.showToastInfo(`
       ТЫ УМРЕШЬ
       И ВСЕ КОГО ТЫ ЗНАЛ - ТОЖЕ
       БОГА НЕТ
@@ -78,15 +79,14 @@ export class AdminPageComponent implements OnInit {
   public loadData(event){
     let id: string = this.userService.getCurrentUserData().getValue().id;
     this.userService.getUserData(id).toPromise().then(user => {
-      this.dialogService.showDialog(
+      this.dialogService.showToastWarning(
         Object.keys(user).length > 0 ? user.toString()
-          : 'Запути сервер *npm server|mock*, дурашка))'
-      );
+          : 'Запути сервер *npm server|mock*, дурашка))');
     });
   }
   public onJWT(event){
     let jwt: string = this.userService.getCurrentJWT();
-    this.dialogService.showDialog(`Your JWT token: ${jwt}\n УЖЕ СКОПИРОВАН В БУФЕР!`);
+    this.dialogService.showToastInfo(`${jwt}\n УЖЕ СКОПИРОВАН В БУФЕР!`, 'Твой JWT token:');
     this.formService.copyStringToClipboard(jwt);
   }
 }

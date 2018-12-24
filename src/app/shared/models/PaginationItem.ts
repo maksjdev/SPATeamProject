@@ -10,8 +10,9 @@ export class PaginationItem {
   ){}
 
   public static createPageItem(page: number, step: number = 10, minPage: number = 1, maxPage?: number) {
-    let largeBack = page <= step?  (page === minPage || page-1 === minPage)? null : minPage : page - step;
-    let largeForward = (page + step) < maxPage? page + step : null;
+    let largeBack = (page - step) < minPage?  (page === minPage || page-1 === minPage)? null : minPage : page - step;
+    let largeForward = (page + step) > maxPage?  (page === maxPage || page+1 === maxPage)? null : maxPage : page + step;
+    // let largeForward = (page + step) <= maxPage? page + step : maxPage;
 
     let privious = (page-1) >= minPage? page-1 : null;
     let next = (page+1) <= maxPage? page+1 : null;

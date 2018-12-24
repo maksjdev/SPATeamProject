@@ -50,7 +50,7 @@ export class CategoryBlockComponent implements OnInit, OnDestroy {
     if (id) {
       this.categoryService.deleteCategody(id).then((success: boolean) => {
         if (!success) { return; }
-        this.dialogService.showDialog(CONSTANTS.MSG.CATEGORY_DEL);
+        this.dialogService.showToastSuccess(CONSTANTS.MSG.CATEGORY_DEL);
         this.loadCategory();
       })
     }

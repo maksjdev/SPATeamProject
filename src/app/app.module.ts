@@ -26,6 +26,7 @@ import {AuthInterceptor} from '@shared/http/auth-interceptor';
 import {ErrorInterceptor} from '@shared/http/error-interceptor';
 import {NgxPermissionsModule} from 'ngx-permissions';
 import {DtoService} from '@shared/dto.service';
+import {ToastrModule} from 'ngx-toastr';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -42,6 +43,16 @@ export function initializeApp(configData: ConfigLoadService) {
     NgProgressModule,
     NgProgressHttpModule.forRoot(),
     NgxPermissionsModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      easeTime: 300,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      progressBar: true,
+      closeButton: true,
+      maxOpened: 1,
+    }),
+
     // Custom Modules
     HeaderModule,
     MainPageModule,
