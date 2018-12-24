@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const [ModelNews, createNews] = require("@models/model-news");
+const [ModelComment, createComment] = require("@models/model-comment");
 
 const ENV = require('@constants/environment');
 const CODES = require('@constants/http-codes');
@@ -130,11 +131,11 @@ exports.news_top = (req, res) => {
 
 /*  Операции   */
 exports.news_create = (req, res) => {
-  let authorId = req.body.author,
-    title = req.body.title,
-    text = req.body.text,
-    imageUrl = req.body.image_url,
-    categories = req.body.categories;
+  let authorId = req.userData.userId,
+      title = req.body.title,
+      text = req.body.text,
+      imageUrl = req.body.image_url,
+      categories = req.body.categories;
   // console.log(authorId, title, text, imageUrl, categories);
   if (authorId && title && text && imageUrl && categories) {
     let categoriesArr = categories.split(',');
@@ -180,7 +181,6 @@ exports.news_update = (req, res) => {
   let newImage = req.body.image_url;
   let newCategories = req.body.categories;
 
-  console.log(newTitle, newText, newImage, newCategories);
   if (newsId && (newTitle || newText || newImage || newCategories)) {
     let updateObj = {};
     if (newTitle) updateObj.title = newTitle;
@@ -193,7 +193,7 @@ exports.news_update = (req, res) => {
     ModelNews.updateOne(
       {_id: newsId }, {$set: updateObj}, {}).exec()
       .then(result => {
-        if (result.ok === 1) {
+        if (result.n === 1) {
           res.status(CODES.S_ACCEPT).json({
             message: `News [id:${newsId}] ${MSGS.UPDATED}`
           });
@@ -211,10 +211,91 @@ exports.news_update = (req, res) => {
 
 /*  Сторонние   */
 exports.news_get_comments = (req, res) => {
-
+  let newsId = req.params.newsId;
+  if (newsId) {
+    ModelNews.findOne({_id: newsId }).select('comments')
+      .populate({
+        path: 'comments',
+        select: '-__v'
+      }).exec().then(comments => {
+      if (comments) {
+        res.status(CODES.S_OK).json(comments);
+      }
+      else res.status(CODES.EC_NOT_FOUND).json({
+        message: MSGS.NOT_FOUND
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(CODES.ES_INTERNAL).json({
+        message: err
+      });
+    });
+  }
+  else { res.status(CODES.EC_REQUEST).end() }
 };
-exports.news_create_comment = (req, res) => {
 
+exports.news_create_comment = (req, res) => {
+  let newsId = req.params.newsId;
+  let authorId = req.userData.userId;
+  let text = req.body.text;
+
+  if (newsId && authorId && text) {
+    // Проверим есть ли вообще такая новость
+    ModelNews.findOne({_id: newsId }).exec().then(news => {
+      if (news){
+        // Создали комент
+        const comment = createComment(authorId, newsId, text);
+        comment.save()
+          .then( result => {
+            // Нужно у новости увеличить количество коментариев и их список
+            ModelNews.updateOne(
+              {_id: newsId}, {$push: { comments: result._id }, $inc: { comments_number: 1}}, {}).exec()
+              .then(update => {
+                if (update.n === 1) {
+                  res.status(CODES.S_CREATE).json(result);
+                } else res.status(CODES.EC_NOT_FOUND).json({
+                  message: MSGS.NOT_FOUND
+                });
+              })
+          })
+      }
+      else res.status(CODES.EC_NOT_FOUND).json({
+          message: MSGS.NOT_FOUND
+        });
+    })
+    .catch(err => {
+      res.status(CODES.ES_INTERNAL).json({
+        message: err
+      });
+    });
+  }
+  else { res.status(CODES.EC_REQUEST).end() }
+};
+
+exports.news_delete_comment = (req, res) => {
+  let newsId = req.params.newsId;
+  let commentId = req.params.commentId;
+
+  if (newsId && commentId) {
+    // Проверим есть ли вообще такой коментарий
+    ModelComment.deleteOne({_id: commentId }).exec()
+      .then( result => {
+        if (result.n === 1) {
+          res.status(CODES.S_OK).json({
+            message: `Comment [id:${newsId}] ${MSGS.DELETED}`
+          });
+        } else res.status(CODES.EC_NOT_FOUND).json({
+          message: MSGS.NOT_FOUND
+        });
+      })
+      .catch(err => {
+        res.status(CODES.ES_INTERNAL).json({
+          message: err
+        });
+      });
+  }
+  else { res.status(CODES.EC_REQUEST).end() }
 };
 
 function getFromDate(period) {

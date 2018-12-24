@@ -34,7 +34,6 @@ export class AddNewsPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private formBuild: FormBuilder,
-    private userService: UserDataService,
     private formService: AppFormService,
     private newsService: NewsDataService,
     private dialogService: AppDialogService,
@@ -83,17 +82,14 @@ export class AddNewsPageComponent implements OnInit {
       let categories: Array<Category> = this.addNewsForm.value['n_categories'];
 
       if (this.pageEdit){
-        let author: User = this.userService.getCurrentUserData().getValue();
-        let news: News = new News(this.news.getId(), author, new Date(), title, text, image, categories);
+        let news: News = new News(this.news.getId(), null, null, title, text, image, categories);
         this.newsService.updateNews(news).then( (success: boolean) => {
           if (!success) return;
           this.addNewsForm.reset();
           this.routingService.goToLink(CONSTANTS.APP.MAIN);
         });
       } else {
-        let author: User = this.userService.getCurrentUserData().getValue();
-        let news: News = new News('100', author, new Date(), title, text, image, categories);
-
+        let news: News = new News(null, null, null, title, text, image, categories);
         this.newsService.createNews(news).then( (success: boolean) => {
           if (!success) return;
           this.addNewsForm.reset();

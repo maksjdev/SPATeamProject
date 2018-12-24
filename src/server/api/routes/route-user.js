@@ -9,6 +9,8 @@ router.post("/registration", ControlUser.user_signup);
 router.post("/login", ControlUser.user_login);
 
 router.get("/:userId", ControlUser.user_find);
+router.get("/:userId/bookmark", ControlUser.user_bookmarks);
+router.post("/:userId/bookmark", ControlUser.user_add_bookmark);
 router.delete("/:userId", checkAuth, checkAdmin, ControlUser.user_delete);
 
 module.exports = router;

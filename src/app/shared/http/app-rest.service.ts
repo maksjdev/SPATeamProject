@@ -59,7 +59,6 @@ export class AppRestService {
       return category.getId();
     }).join(',');
     return this.restSendData(url, {
-      author: news.getAuthor().getId(),
       title: news.getTitle(),
       text: news.getText(),
       image_url: news.getImage(),
@@ -72,7 +71,6 @@ export class AppRestService {
       return category.getId();
     }).join(',');
     return this.restUpdateData(url, {
-      author: news.getAuthor().getId(),
       title: news.getTitle(),
       text: news.getText(),
       image_url: news.getImage(),

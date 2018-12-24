@@ -125,3 +125,29 @@ exports.user_find = (req, res) => {
       });
   } else { res.status(CODES.EC_REQUEST).end() }
 };
+
+exports.user_bookmarks = (req, res) => {
+  let userId = req.params.userId;
+  if (userId) {
+    ModelUser.findOne({_id: userId }).select('bookmarks')
+      .populate('bookmarks').exec()
+      .then( result => {
+        if (result) { res.status(CODES.S_OK).json(result); }
+        else res.status(CODES.EC_NOT_FOUND).json({
+          message: MSGS.NOT_FOUND
+        });
+      })
+      .catch(err => {
+        res.status(CODES.ES_INTERNAL).json({
+          message: err
+        });
+      });
+  } else { res.status(CODES.EC_REQUEST).end() }
+};
+
+exports.user_add_bookmark = (req, res) => {
+  let userId = req.params.userId;
+  if (userId) {
+    res.end();
+  } else { res.status(CODES.EC_REQUEST).end() }
+};

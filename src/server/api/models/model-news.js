@@ -40,11 +40,6 @@ const newsSchema = mongoose.Schema({
     min: 0,
     required: true
   },
-  create_date: {
-    type: Date,
-    default: Date.now,
-    required: true
-  },
   comments_number: {
     type: Number,
     default: 0,
@@ -61,8 +56,8 @@ const newsSchema = mongoose.Schema({
   }
 },
   { timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
+    createdAt: 'create_date',
+    updatedAt: 'update_date'
   }
 });
 const News = mongoose.model('News', newsSchema);

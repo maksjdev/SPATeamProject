@@ -51,16 +51,11 @@ const userSchema = mongoose.Schema({
     }],
     default: [],
     required: true
-  },
-  register_date: {
-    type: Date,
-    default: Date.now,
-    required: true
   }
 },
   { timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
+    createdAt: 'create_date',
+    updatedAt: 'update_date'
   }
 });
 const User = mongoose.model('User', userSchema);

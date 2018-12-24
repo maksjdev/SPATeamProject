@@ -4,12 +4,12 @@ const commentSchema = mongoose.Schema({
   _id: {
     type: mongoose.Schema.Types.ObjectId
   },
-  author: {
+  author_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: [true, 'You need enter author!']
   },
-  news:{
+  news_id:{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'News',
     required: [true, 'You need enter news!']
@@ -19,11 +19,8 @@ const commentSchema = mongoose.Schema({
     minLength: 10,
     required: [true, 'You need enter text!']
   },
-  create_date: {
-    type: Date,
-    default: Date.now,
-    required: true
-  },
+
+  // Не объязательные поля
   rating: {
     type: Number,
     default: 0,
@@ -32,8 +29,8 @@ const commentSchema = mongoose.Schema({
   }
 },
 { timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
+    createdAt: 'create_date',
+    updatedAt: 'update_date'
   }
 });
 const Comment = mongoose.model('Comment', commentSchema);
@@ -41,8 +38,8 @@ const Comment = mongoose.model('Comment', commentSchema);
 function createComment(authorId, newsId, text, rating) {
   return new Comment({
     _id: new mongoose.Types.ObjectId(),
-    authorId: authorId,
-    newsId: newsId,
+    author_id: authorId,
+    news_id: newsId,
     text: text,
     rating: rating
   })
