@@ -18,8 +18,8 @@ export class ErrorInterceptor implements HttpInterceptor {
         catchError(err => {
         if (err.status === 401) {
           // Если сервер сказал что ты не авторизирован
-          const authService = this.injector.get(AuthService);
-          authService.onLogout();
+          // const authService = this.injector.get(AuthService);
+          // authService.onLogout();
           // location.reload(true);
         }
         const error = err.error.message || err.statusText;

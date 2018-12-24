@@ -12,7 +12,7 @@
   text-align: justify;
   font-weight: normal;
 
-  grid-template-columns: auto 1fr auto auto;
+  grid-template-columns: auto auto 1fr auto;
   margin: $normal-padding auto;
 
   &__logo {

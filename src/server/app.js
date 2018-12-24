@@ -9,7 +9,6 @@ const userRoutes = require('@routes/route-user');
 const newsRoutes = require('@routes/route-news');
 const categoryRoutes = require('@routes/route-category');
 const configRoutes = require('@routes/route-config');
-//const commentsRoutes = require('@routes/route-comment');
 
 const ENV = require('@constants/environment');
 const CODES = require('@constants/http-codes');
@@ -54,31 +53,20 @@ app.use("/config", configRoutes);
 app.use("/user", userRoutes);
 app.use("/news", newsRoutes);
 app.use("/category", categoryRoutes);
-//app.use("/comments", commentsRoutes);
-
 
 
 // Error handlers
 app.use(function(req, res, next) {
-  res.status(404).send('ERROR 404: FILE NOT FOUND');
+  res.status(CODES.EC_NOT_FOUND).json({
+    message: MSGS.NOT_FOUND
+  });
 });
-
-/*
-app.use((req, res, next) => {
-  const error = new Error( MSGS.NOT_FOUND );
-  error.status = CODES.EC_NOT_FOUND;
-  next(error);
-});
-
 
 app.use((error, req, res) => {
   res.status(error.status || CODES.ES_INTERNAL);
   res.json({
-    error: {
-      message: error.message
-    }
+    message: error.message
   });
 });
-*/
 
 module.exports = app;

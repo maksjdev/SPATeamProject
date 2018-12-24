@@ -52,7 +52,6 @@ export class LoginPageComponent implements OnInit {
       let login: string = this.LoginForm.value['l_login'],
           password: string = this.LoginForm.value['l_password'],
           checkBox = this.LoginForm.value['l_save'];
-
       this.authService.onLogin(login, password, checkBox).then((login: boolean) => {
         if (login){
           this.LoginForm.reset();

@@ -44,6 +44,9 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    let defaultPage: number = this.configService.getDefaultPage();
+    let defaultRating: number = this.configService.getDefaultRating();
+
     this._subscriptionC = this.categoryService.getCurrentCategoriesData().subscribe((value: Array<Category>) => {
       if (!value) return;
       this.categoryAll  = value;
@@ -66,14 +69,10 @@ export class MainPageComponent implements OnInit, OnDestroy {
           });
         }
         // Значения по умолчанию
-        let defaultPage: number = this.configService.getDefaultPage();
         let page: number = pageQuery ? isNaN(parseInt(pageQuery)) ?
           defaultPage : parseInt(pageQuery) : defaultPage;
-
-        let defaultRating: number = this.configService.getDefaultRating();
         let rating: number = ratingQuery ? isNaN(parseInt(ratingQuery)) ?
           defaultRating : parseInt(ratingQuery) : defaultRating;
-
         let period = periodQuery ? periodQuery : this.configService.getDefaultPeriod();
 
         this.onRatingChange(rating);
@@ -84,12 +83,15 @@ export class MainPageComponent implements OnInit, OnDestroy {
       })
     ).subscribe( data => {
       this.isLoading = false;
+
       if (!('news' in data) || !('pagination' in data)) return;
       this.newsList = data.news;
+
       let pagination = data.pagination,
-          page = pagination['current_page'];
-          this.paginationTotal = parseInt(pagination['total_page']);
-      this.onPaginationChange(parseInt(page));
+          page = parseInt(pagination['current_page']),
+          total = parseInt(pagination['total_page']);
+      this.paginationTotal = total;
+      page > this.paginationTotal? this.onPaginationChange(defaultPage) : this.onPaginationChange(page);
     });
   }
   ngOnDestroy(): void {

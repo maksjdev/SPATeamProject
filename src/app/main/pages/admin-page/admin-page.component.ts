@@ -8,6 +8,7 @@ import {CategoryDataService} from '@shared/category-data.service';
 import {Category} from '@shared/models/Category';
 import {AppDialogService} from '@shared/services/app-dialog.service';
 import {UserDataService} from '@shared/user-data.service';
+import {User} from '@shared/models/User';
 
 @Component({
   selector: 'app-admin-page',
@@ -78,7 +79,7 @@ export class AdminPageComponent implements OnInit {
   }
   public loadData(event){
     let id: string = this.userService.getCurrentUserData().getValue().id;
-    this.userService.getUserData(id).toPromise().then(user => {
+    this.userService.getUserData(id).then((user: User) => {
       this.dialogService.showToastWarning(
         Object.keys(user).length > 0 ? user.toString()
           : 'Запути сервер *npm server|mock*, дурашка))');

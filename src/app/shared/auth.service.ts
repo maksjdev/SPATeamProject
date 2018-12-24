@@ -37,9 +37,7 @@ export class AuthService {
 
   onLogin(login: string, password: string, save?: boolean): Promise<boolean> {
     // Логином может быть email
-    if (this.loginState){
-      this.onLogout();
-    }
+    if (this.loginState.getValue()){ this.onLogout(); }
     return this.restService.restOnLogin(login, password).pipe(
       switchMap((value: HttpResponse<ArrayBuffer>) => {
         if (!value) { return of(null) }

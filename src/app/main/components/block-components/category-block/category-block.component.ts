@@ -6,7 +6,6 @@ import {AppRoutingService} from '@routes/app-routing.service';
 import {AppScrollService} from '@shared/services/app-scroll.service';
 import {ConfigService} from '@shared/config/config.service';
 import {Subscription} from 'rxjs';
-import {map} from 'rxjs/operators';
 import {AppDialogService} from '@shared/services/app-dialog.service';
 
 @Component({

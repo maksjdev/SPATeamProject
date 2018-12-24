@@ -23,7 +23,7 @@ export class AppRestService {
   public restGetData(ulr: string, params?): Observable<HttpResponse<ArrayBuffer>> {
     return this.connectService.getData(this.host + ulr, params);
   }
-  private restSendData(ulr: string, data: object): Observable<HttpResponse<ArrayBuffer>> {
+  private restSendData(ulr: string, data?: object): Observable<HttpResponse<ArrayBuffer>> {
     return this.connectService.postData(this.host + ulr, data);
   }
   private restDeleteData(ulr: string): Observable<HttpResponse<ArrayBuffer>> {
@@ -91,6 +91,10 @@ export class AppRestService {
       text: comment.getText()
     });
   }
+  public restAddBookmark(newsID:string): Observable<HttpResponse<ArrayBuffer>> {
+    let url = CONSTANTS.SERVER.NEWS + '/' + newsID + CONSTANTS.SERVER.BOOKMARK;
+    return this.restSendData(url);
+  }
 
   // Удаление данных
   public restDeleteNews(deleteID: string): Observable<HttpResponse<ArrayBuffer>> {
@@ -103,6 +107,10 @@ export class AppRestService {
   }
   public restDeleteComment(commentID: string, newsID: string): Observable<HttpResponse<ArrayBuffer>> {
     let url = CONSTANTS.SERVER.NEWS + '/' + newsID + CONSTANTS.SERVER.COMMENT + '/' + commentID;
+    return this.restDeleteData(url);
+  }
+  public restDeleteBookmark(newsID: string): Observable<HttpResponse<ArrayBuffer>> {
+    let url = CONSTANTS.SERVER.NEWS + '/' + newsID + CONSTANTS.SERVER.BOOKMARK;
     return this.restDeleteData(url);
   }
 

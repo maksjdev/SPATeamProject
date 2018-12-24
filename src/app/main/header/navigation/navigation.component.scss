@@ -5,8 +5,9 @@
   display: flex;
   height: 100%;
   align-items: center;
-  justify-content: flex-end;
-
+  padding-left: 50px;
+  padding-right: $normal-padding;
+  justify-content: flex-start;
 }
 
 .navigations-block__item {

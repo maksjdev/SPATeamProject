@@ -23,7 +23,7 @@ export class ConfigService implements IConfigModel {
 
     console.log(config);
     let news = config.news;
-    this.defaultPage = news.page;
+    this.defaultPage = parseInt(news.page);
     this.defaultPeriod = news.period;
     this.defaultMinRating = news.rating;
 

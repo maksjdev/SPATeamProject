@@ -32,6 +32,7 @@ export const CONSTANTS = {
     NEWS:     '/news',
     NEWS_TOP: '/news/top',
     USER:     '/user',
+    BOOKMARK: '/bookmark',
     COMMENT:  '/comment',
     CATEGORY: '/category',
   },

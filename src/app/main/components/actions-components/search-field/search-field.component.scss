@@ -11,7 +11,7 @@
   justify-content: flex-end;
   padding-left: 20px;
   &__input {
-    width: 125px;
+    width: 70%;
     color: $main-text-color;
     padding: $small-padding 35px $small-padding $small-padding;
     background-color: transparent;
@@ -20,7 +20,7 @@
 
     &:focus {
       outline: 0;
-      width: 300px;
+      width: 100%;
       border-color: $main-pink;
       transition: all $fast-animation ease;
     }

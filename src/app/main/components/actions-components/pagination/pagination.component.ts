@@ -8,7 +8,7 @@ import {CONSTANTS} from '@shared/config/constants';
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss']
 })
-export class PaginationComponent implements OnChanges{
+export class PaginationComponent implements OnChanges {
   @Input() currentPagination: PaginationItem;
   @Output() paginationChg = new EventEmitter();
   paramName: string;

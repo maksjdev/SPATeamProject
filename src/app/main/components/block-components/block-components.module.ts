@@ -15,6 +15,7 @@ import {AdvertisingDataService} from '@shared/advertising-data.service';
 import {CarouselBlockComponent} from './carousel-block/carousel-block.component';
 import {SlideshowModule} from 'ng-simple-slideshow';
 import {NgxPermissionsModule} from 'ngx-permissions';
+import {CommentDataService} from '@shared/comment-data.service';
 
 @NgModule({
   imports: [
@@ -50,6 +51,7 @@ import {NgxPermissionsModule} from 'ngx-permissions';
   providers: [
     NewsDataService,
     CategoryDataService,
+    CommentDataService,
     AdvertisingDataService,
   ]
 })

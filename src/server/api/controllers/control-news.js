@@ -6,7 +6,7 @@ const [ModelComment, createComment] = require("@models/model-comment");
 const ENV = require('@constants/environment');
 const CODES = require('@constants/http-codes');
 const MSGS = require('@constants/mesages');
-const NEWS_PER_PAGE = 2;
+const NEWS_PER_PAGE = 3;
 
 exports.news_get = (req, res) => {
   let page = req.query.page,
@@ -214,12 +214,13 @@ exports.news_get_comments = (req, res) => {
   let getType = req.query.get_type;
 
   let getByType = {
-    full: { path: 'comments', select: '-__v', populate: { path: 'author', select: '_id realname nickname img_url'}},
+    full: { path: 'comments', select: '-__v', populate: { path: 'author', select: '_id realname nickname img_url'} },
     normal: { path: 'comments', select: '-__v' },
   }, populate = Object.keys(getByType).indexOf(getType) > -1? getByType[getType] : getByType['normal'];
+  populate.options = { sort: { create_date : -1 }};
 
   if (newsId) {
-    ModelNews.findOne({_id: newsId }).sort({ create_date : 1 }).select('comments')
+    ModelNews.findOne({_id: newsId }).select('comments')
       .populate(populate).then(comments => {
       if (comments) {
         res.status(CODES.S_OK).json(comments);
