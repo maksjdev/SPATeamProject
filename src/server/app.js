@@ -15,7 +15,6 @@ const ENV = require('@constants/environment');
 const CODES = require('@constants/http-codes');
 const MSGS = require('@constants/mesages');
 
-
 mongoose.connect(
   `mongodb://${ENV.DB_USER}:${ENV.DB_PASSWORD}@ds137404.mlab.com:37404/news_spa`,
   {
@@ -48,6 +47,7 @@ app.use((req, res, next) => {
   next();
 });
 
+
 // Routes which should handle requests
 app.use("/config", configRoutes);
 
@@ -57,12 +57,19 @@ app.use("/category", categoryRoutes);
 //app.use("/comments", commentsRoutes);
 
 
+
 // Error handlers
+app.use(function(req, res, next) {
+  res.status(404).send('ERROR 404: FILE NOT FOUND');
+});
+
+/*
 app.use((req, res, next) => {
   const error = new Error( MSGS.NOT_FOUND );
   error.status = CODES.EC_NOT_FOUND;
   next(error);
 });
+
 
 app.use((error, req, res) => {
   res.status(error.status || CODES.ES_INTERNAL);
@@ -72,5 +79,6 @@ app.use((error, req, res) => {
     }
   });
 });
+*/
 
 module.exports = app;
