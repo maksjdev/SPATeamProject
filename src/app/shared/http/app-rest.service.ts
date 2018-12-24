@@ -7,6 +7,8 @@ import {Observable, of} from 'rxjs';
 import {CONSTANTS} from '@shared/config/constants';
 import {Category} from '@shared/models/Category';
 import {User} from '@shared/models/User';
+import {Comment} from '@shared/models/Comment';
+
 
 @Injectable()
 export class AppRestService {
@@ -65,7 +67,7 @@ export class AppRestService {
       categories: categoriesId
     });
   }
-  public restUpdateNews(news: News){
+  public restUpdateNews(news: News): Observable<HttpResponse<ArrayBuffer>> {
     let url = CONSTANTS.SERVER.NEWS+"/"+news.getId();
     let categoriesId: string = news.getCategories().map((category: Category) => {
       return category.getId();
@@ -83,6 +85,12 @@ export class AppRestService {
       name: category.getName()
     });
   }
+  public restSendComment(newsID:string, comment: Comment): Observable<HttpResponse<ArrayBuffer>> {
+    let url = CONSTANTS.SERVER.NEWS + '/' + newsID + CONSTANTS.SERVER.COMMENT;
+    return this.restSendData(url, {
+      text: comment.getText()
+    });
+  }
 
   // Удаление данных
   public restDeleteNews(deleteID: string): Observable<HttpResponse<ArrayBuffer>> {
@@ -91,6 +99,10 @@ export class AppRestService {
   }
   public restDeleteCategory(deleteID: string): Observable<HttpResponse<ArrayBuffer>> {
     let url = CONSTANTS.SERVER.CATEGORY + '/' + deleteID;
+    return this.restDeleteData(url);
+  }
+  public restDeleteComment(commentID: string, newsID: string): Observable<HttpResponse<ArrayBuffer>> {
+    let url = CONSTANTS.SERVER.NEWS + '/' + newsID + CONSTANTS.SERVER.COMMENT + '/' + commentID;
     return this.restDeleteData(url);
   }
 
@@ -110,7 +122,9 @@ export class AppRestService {
   }
   public restGetNewsData(newsId: string, type: string = 'full'): Observable<Object> {
     let url = CONSTANTS.SERVER.NEWS + '/' + newsId;
-    return this.restGetData(url, { "type": type.toString()});
+    type = type? type : "";
+    let params = { "get_type": type };
+    return this.restGetData(url, params);
   }
   public restGetTopNews(amount?: string, type?: string): Observable<Object> {
     let url = CONSTANTS.SERVER.NEWS_TOP;
@@ -120,9 +134,11 @@ export class AppRestService {
     return this.restGetData(url, params);
   }
 
-  public restGetAllComments(newsId: string): Observable<Object> {
+  public restGetAllComments(newsId: string, type: string = 'full'): Observable<Object> {
     let url = CONSTANTS.SERVER.NEWS + '/' + newsId + CONSTANTS.SERVER.COMMENT;
-    return this.restGetData(url);
+    type = type? type : "";
+    let params = { "get_type": type };
+    return this.restGetData(url, params);
   }
   public restGetAllCategories(amount?: string): Observable<Object> {
     let url = CONSTANTS.SERVER.CATEGORY;

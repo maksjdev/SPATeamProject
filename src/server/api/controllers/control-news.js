@@ -156,21 +156,20 @@ exports.news_create = (req, res) => {
 exports.news_delete = (req, res) => {
   let newsId = req.params.newsId;
   if (newsId) {
-    ModelNews.deleteOne({_id: newsId }).exec()
-      .then( result => {
-        if (result.n === 1) {
-          res.status(CODES.S_OK).json({
-            message: `News [id:${newsId}] ${MSGS.DELETED}`
-          });
-        } else res.status(CODES.EC_NOT_FOUND).json({
-          message: MSGS.NOT_FOUND
+    ModelNews.findByIdAndRemove(newsId, (err, result) => {
+      if (result && !err) {
+        res.status(CODES.S_OK).json({
+          message: `News [id:${newsId}] ${MSGS.DELETED}`
         });
-      })
-      .catch(err => {
-        res.status(CODES.ES_INTERNAL).json({
-          message: err
-        });
+        // Удалить каскадом все связаные коментариии
+        ModelComment.deleteMany({_id: {$in: result.comments} }).exec()
+          .then(deleted => {
+            // Успешно удалили!
+          }).catch(err => { });
+      } else res.status(CODES.EC_NOT_FOUND).json({
+        message: MSGS.NOT_FOUND
       });
+    })
   } else { res.status(CODES.EC_REQUEST).end() }
 };
 
@@ -212,12 +211,16 @@ exports.news_update = (req, res) => {
 /*  Сторонние   */
 exports.news_get_comments = (req, res) => {
   let newsId = req.params.newsId;
+  let getType = req.query.get_type;
+
+  let getByType = {
+    full: { path: 'comments', select: '-__v', populate: { path: 'author', select: '_id realname nickname img_url'}},
+    normal: { path: 'comments', select: '-__v' },
+  }, populate = Object.keys(getByType).indexOf(getType) > -1? getByType[getType] : getByType['normal'];
+
   if (newsId) {
-    ModelNews.findOne({_id: newsId }).select('comments')
-      .populate({
-        path: 'comments',
-        select: '-__v'
-      }).exec().then(comments => {
+    ModelNews.findOne({_id: newsId }).sort({ create_date : 1 }).select('comments')
+      .populate(populate).then(comments => {
       if (comments) {
         res.status(CODES.S_OK).json(comments);
       }
@@ -250,7 +253,7 @@ exports.news_create_comment = (req, res) => {
           .then( result => {
             // Нужно у новости увеличить количество коментариев и их список
             ModelNews.updateOne(
-              {_id: newsId}, {$push: { comments: result._id }, $inc: { comments_number: 1}}, {}).exec()
+              {_id: newsId}, {$addToSet: { comments: result._id }, $inc: { comments_number: 1}}, {}).exec()
               .then(update => {
                 if (update.n === 1) {
                   res.status(CODES.S_CREATE).json(result);
@@ -259,6 +262,11 @@ exports.news_create_comment = (req, res) => {
                 });
               })
           })
+          .catch(err => {
+            res.status(CODES.EC_REQUEST).json({
+              message: err
+            });
+          });
       }
       else res.status(CODES.EC_NOT_FOUND).json({
           message: MSGS.NOT_FOUND
@@ -285,6 +293,11 @@ exports.news_delete_comment = (req, res) => {
           res.status(CODES.S_OK).json({
             message: `Comment [id:${newsId}] ${MSGS.DELETED}`
           });
+          ModelNews.updateOne(
+            {_id: newsId}, { $pull: { comments: commentId }, $inc: { comments_number: -1}}, {}).exec()
+            .then(update => {
+              // Уменьшили количество комментариев
+            }).catch(err => { });
         } else res.status(CODES.EC_NOT_FOUND).json({
           message: MSGS.NOT_FOUND
         });
@@ -297,6 +310,7 @@ exports.news_delete_comment = (req, res) => {
   }
   else { res.status(CODES.EC_REQUEST).end() }
 };
+
 
 function getFromDate(period) {
   let availablePeriod = {

@@ -1,7 +1,7 @@
 
 <span class="row comment__header">
   <img class="comment__header--author-image" [src]="comment.author.getImage()" alt="*ControlUser Image*">
-  <a href="" class="comment__header--author-name">
+  <a class="comment__header--author-name">
     {{ comment.author.getNickname()}},
   </a>
   <div class="comment__header--date">
@@ -24,7 +24,7 @@
 
 <div class="comment__wrapper">
   <div class="comment__wrapper--content">
-    <p>{{comment.getText()}}}</p>
+    <p>{{ comment.getText() }}</p>
   </div>
 </div>
 

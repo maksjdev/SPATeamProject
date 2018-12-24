@@ -3,7 +3,6 @@ import {AppRoutingService} from '../routes/app-routing.service';
 import {UserDataService} from './user-data.service';
 import {BehaviorSubject, of} from 'rxjs';
 import {AppRestService} from './http/app-rest.service';
-import {MockDataService} from './mock-data.service';
 import {User} from './models/User';
 import {catchError, switchMap} from 'rxjs/operators';
 import {HttpResponse} from '@angular/common/http';
@@ -18,7 +17,6 @@ export class AuthService {
 
   constructor(
     private userService: UserDataService,
-    private mockDataService: MockDataService,
     private routeService: AppRoutingService,
     private restService: AppRestService,
     private dialogService: AppDialogService,

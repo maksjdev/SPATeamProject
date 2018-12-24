@@ -6,9 +6,7 @@ import {AppDateTimeService} from '@shared/services/app-date-time.service';
 import {CONSTANTS} from '@shared/config/constants';
 import {Category} from '@shared/models/Category';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class MockDataService {
   mockNews: News;
   mockUser: User;

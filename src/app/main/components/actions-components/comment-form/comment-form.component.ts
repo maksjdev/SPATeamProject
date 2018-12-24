@@ -50,16 +50,18 @@ export class CommentFormComponent implements OnInit, OnDestroy {
   onAddComment(event){
     if (this.CommentForm.valid){
       let text: string = this.CommentForm.value['c_text'];
-      // id + date - проставит сервер
-      let comment = new Comment('1', this.currentUser, text, new Date());
+      let comment = new Comment(null, this.currentUser, text, new Date());
 
       this.addComment.emit(comment);
-      this.CommentForm.reset();
     } else {
       this.formErrors = this.formService.validateForm(this.CommentForm, this.formErrors, false);
     }
   }
   goToLogin(event){
     this.routerService.goToLinkSave(CONSTANTS.APP.LOGIN);
+  }
+
+  public resetForm(){
+    this.CommentForm.reset();
   }
 }

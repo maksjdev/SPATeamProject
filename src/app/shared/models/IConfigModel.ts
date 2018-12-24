@@ -7,6 +7,8 @@ export interface IConfigModel {
   // Настройка компонентов
   categoryBlock_max: number;
   topBlock_max: number;
+  // Просто))
+  aboutPhotos: Array<object>;
 
   // Геттеры для общих полей:
   getDefaultPage(): number;
@@ -14,4 +16,5 @@ export interface IConfigModel {
   getDefaultRating(): number;
   getCategoryBlockMax(): number;
   getTopBlockMax(): number;
+  getAboutPhotos(): Array<object>;
 }

@@ -1,22 +1,24 @@
 import {Injectable} from '@angular/core';
 import {News} from '@shared/models/News';
-import {MockDataService} from '@shared/mock-data.service';
 import {AppRestService} from '@shared/http/app-rest.service';
-import {Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import {Comment} from '@shared/models/Comment';
 import {catchError, map} from 'rxjs/operators';
 import {AppDialogService} from '@shared/services/app-dialog.service';
 import {DtoService} from '@shared/dto.service';
+import {Category} from '@shared/models/Category';
 
 @Injectable()
 export class NewsDataService {
+  private currentComments: BehaviorSubject<Array<Comment>>;
 
   constructor(
     private restService: AppRestService,
-    private mockDataService: MockDataService,
     private dialogService: AppDialogService,
     private dtoService: DtoService
-  ) {}
+  ) {
+    this.currentComments = new BehaviorSubject([]);
+  }
 
   public getNewsFromServer(
     page: number, period?: string, rating?: string, categoriesId?: Array<string>,
@@ -67,7 +69,7 @@ export class NewsDataService {
   public getSmallNewsData(id: string): Observable<News> {
     return this.getNewsData(id, 'small');
   }
-  private getNewsData(id: string, type: string): Observable<News> {
+  private getNewsData(id: string, type?: string): Observable<News> {
     if (!id) {return of(null)}
     return this.restService.restGetNewsData(id, type).pipe(
       map((newsObj: object) => {
@@ -107,8 +109,53 @@ export class NewsDataService {
     });
   }
 
-  public getComments(id: string): Observable<Array<Comment>> {
-    // TODO Change for restService.restGetAllComments()
-    return of(this.mockDataService.getMockCommentList(5));
+
+  public reloadCurrentCommentsData(newsId: string, type?: string): void {
+    this.getCurrentCommentsData(newsId, type, true);
+  }
+  public getCurrentCommentsData(newsId: string, type?: string, forceReload: boolean = true): BehaviorSubject<Array<Comment>> {
+    let currentV = this.currentComments.getValue();
+    if (!currentV || (currentV && currentV.length < 1) || forceReload){
+      this.getComments(newsId, type).toPromise().then ( (comments: Array<Comment>) => {
+        this.currentComments.next(comments);
+      })
+    } return this.currentComments;
+  }
+
+  public getComments(newsId: string, type?: string): Observable<Array<Comment>> {
+    if (!newsId) {return of(null)}
+    return this.restService.restGetAllComments(newsId, type).pipe(
+      map((response: object) => {
+        let commentArr: Array<Comment> = [];
+        let comments: Array<object> = response['comments'];
+        if (comments && comments.length > 0) {
+          comments.forEach( (commentObj: object) => {
+            let comment: Comment = this.dtoService.getCommentFromObj(commentObj);
+            commentArr.push(comment);
+          });
+        }
+        return commentArr;
+      })
+    );
+  }
+  public createComment(newsId: string, comment: Comment): Promise<boolean>{
+    return this.restService.restSendComment(newsId, comment).pipe(
+      catchError((errorMsg: string) => {
+        this.dialogService.showDialog(errorMsg);
+        return of(errorMsg);
+      })
+    ).toPromise().then(value => {
+      return value === Object(value);
+    });
+  }
+  public deleteComment(commentId: string, newsId: string): Promise<boolean>{
+    return this.restService.restDeleteComment(commentId, newsId).pipe(
+      catchError((errorMsg: string) => {
+        this.dialogService.showDialog(errorMsg);
+        return of(errorMsg);
+      })
+    ).toPromise().then(value => {
+      return value === Object(value);
+    });
   }
 }

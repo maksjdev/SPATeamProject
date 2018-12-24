@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {NewsDataService} from '@shared/news-data.service';
 import {News} from '@shared/models/News';
 import {Comment} from '@shared/models/Comment';
@@ -8,6 +8,7 @@ import {AppScrollService} from '@shared/services/app-scroll.service';
 import {AppRoutingService} from '@routes/app-routing.service';
 import {CONSTANTS} from '@shared/config/constants';
 import {of} from 'rxjs';
+import {AppDialogService} from '@shared/services/app-dialog.service';
 
 @Component({
   selector: 'app-news-page',
@@ -24,6 +25,7 @@ export class NewsPageComponent implements OnInit {
     private route: ActivatedRoute,
     private routerService: AppRoutingService,
     private scrollService: AppScrollService,
+    private dialogService: AppDialogService
   ) {
     scrollService.scrollToTop(false);
     this.imageArr = [
@@ -34,6 +36,7 @@ export class NewsPageComponent implements OnInit {
     ];
   }
 
+  @ViewChild('commentForm') commentForm: any;
   ngOnInit() {
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
@@ -57,19 +60,29 @@ export class NewsPageComponent implements OnInit {
       }),
       switchMap((value: Event) => {
         let id = this.fullNews.getId();
-        return this.newsService.getComments(id);
+        return this.newsService.getCurrentCommentsData(id, 'full');
       })
     ).subscribe( (comments: Array<Comment>) => {
       this.commentsList = comments;
     });
   }
 
-  onAddComment(comment){
-    console.log(`Add comment: ${comment}`);
+  onAddComment(comment: Comment){
+    this.newsService.createComment(this.fullNews.getId(), comment).then((success: boolean) => {
+      if (!success) { return; }
+      this.dialogService.showDialog(CONSTANTS.MSG.COMMENT_ADD);
+      this.commentForm.resetForm();
+      this.newsService.reloadCurrentCommentsData(this.fullNews.getId());
+    })
   }
   onDeleteComment(comment: Comment){
-    console.log(`Delete comment: ${comment.id}`);
+    this.newsService.deleteComment(comment.getId(), this.fullNews.getId()).then((success: boolean) => {
+      if (!success) { return; }
+      this.dialogService.showDialog(CONSTANTS.MSG.COMMENT_DEL);
+      this.newsService.reloadCurrentCommentsData(this.fullNews.getId());
+    })
   }
+
   onEdit(event){
     let id = this.fullNews.getId();
     this.routerService.goToEditNews(id);

@@ -15,7 +15,7 @@ export class CategoryDataService {
     private dialogService: AppDialogService,
     private dtoService: DtoService
   ) {
-    this.currentCategories = new BehaviorSubject(null);
+    this.currentCategories = new BehaviorSubject([]);
   }
 
   public reloadCurrentCategoriesData(): void {

@@ -7,8 +7,9 @@
     <h4 class="full-news-block__form-header">
       Добавить коментарий
     </h4>
-    <app-comment-form class="full-news-block__form-body"
-                      (addComment)="onAddComment($event)">
+    <app-comment-form #commentForm
+      class="full-news-block__form-body"
+      (addComment)="onAddComment($event)">
     </app-comment-form>
   </section>
 
@@ -17,15 +18,23 @@
     <h4 class="full-news-block__comments-total">
       Комментарии: {{commentsList.length}}
     </h4>
-    <app-comment-full-item class="full-news-block__comments-item"
-                           *ngFor="let comment of commentsList"
-                           [comment]="comment" (commentDelete)="onDeleteComment($event)">
+    <app-comment-full-item
+      class="full-news-block__comments-item"
+      *ngFor="let comment of commentsList"
+      [comment]="comment" (commentDelete)="onDeleteComment($event)">
     </app-comment-full-item>
   </section>
 </section>
+
 
 <section class="sidebar-block">
   <app-carousel-block [imageArr]="imageArr"></app-carousel-block>
   <app-category-block></app-category-block>
   <app-top-news-block></app-top-news-block>
 </section>
+
+<!--<ng-template #emptyBlock>-->
+  <!--<div class="panel shadow-block column full-news-block__comments">-->
+    <!--Коментариев ещё нету, будь первым!-->
+  <!--</div>-->
+<!--</ng-template>-->
