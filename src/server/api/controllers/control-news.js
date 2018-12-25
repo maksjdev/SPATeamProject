@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 
 const [ModelNews, createNews] = require("@models/model-news");
 const [ModelComment, createComment] = require("@models/model-comment");
+const [ModelCategory, createCategory] = require("@models/model-category");
+const [ModelUser, createUser] = require("@models/model-user");
 
 const ENV = require('@constants/environment');
 const CODES = require('@constants/http-codes');
@@ -17,11 +19,11 @@ exports.news_get = (req, res) => {
 
   if (page){
     let findfilter = {};
-    if (period) { findfilter.create_date = {"$gte": getFromDate(period), "$lt": new Date()}; }
+    if (period) { findfilter.create_date = { $gte: getFromDate(period), $lt: new Date()}; }
     if (min_rating && !isNaN(min_rating)) { findfilter.rating = {"$gte": parseInt(min_rating)}; }
     if (search) { findfilter.$text = { $search: search }; }
     if (categories_id && categories_id.split(',').length > 0) {
-      findfilter.categories = { "$in" : categories_id.split(',') };
+      findfilter.categories = { $in: categories_id.split(',') };
     }
 
     ModelNews.find(findfilter, '-__v').sort({ create_date : -1 })
@@ -143,6 +145,9 @@ exports.news_create = (req, res) => {
     news.save()
       .then(result => {
         res.status(CODES.S_CREATE).json(result);
+        // Обновить категории
+        ModelCategory.updateMany({_id: {$in: categoriesArr}},
+          {$addToSet: { news_list: result._id }, $inc: { news_amount: 1}}).exec();
       })
       .catch(err => {
         res.status(CODES.ES_INTERNAL).json({
@@ -161,6 +166,10 @@ exports.news_delete = (req, res) => {
         res.status(CODES.S_OK).json({
           message: `News [id:${newsId}] ${MSGS.DELETED}`
         });
+        // Пройтись по тем категориям в которых статья была
+        ModelCategory.updateMany({_id: {$in: result.categories}},
+          {$pull: { news_list: result._id }, $inc: { news_amount: -1}}).exec()
+
         // Удалить каскадом все связаные коментариии
         ModelComment.deleteMany({_id: {$in: result.comments} }).exec()
           .then(deleted => {
@@ -188,22 +197,37 @@ exports.news_update = (req, res) => {
     if (newCategories) {
       updateObj.categories = newCategories.split(',');
     }
-
-    ModelNews.updateOne(
-      {_id: newsId }, {$set: updateObj}, {}).exec()
-      .then(result => {
-        if (result.n === 1) {
-          res.status(CODES.S_ACCEPT).json({
-            message: `News [id:${newsId}] ${MSGS.UPDATED}`
-          });
+    ModelNews.findOne({_id: newsId}).exec()
+      .then(news => {
+        if (news){
+          ModelNews.findByIdAndUpdate(newsId, {$set: updateObj}).exec()
+            .then((result, error) => {
+              if (result && !error) {
+                res.status(CODES.S_ACCEPT).json({
+                  message: `News [id:${newsId}] ${MSGS.UPDATED}`
+                });
+                // Пройтись по тем категориям в которых статья была
+                let oldCategories = news.categories;
+                ModelCategory.updateMany({_id: {$in: oldCategories}},
+                  {$pull: { news_list: result._id }, $inc: { news_amount: -1}}).exec()
+                  .then(value => {
+                    // Обновить категории в которых она оказалась
+                    let categories = newCategories.split(',');
+                    ModelCategory.updateMany({_id: {$in: categories}},
+                      {$addToSet: { news_list: result._id }, $inc: { news_amount: 1}}).exec();
+                  });
+              } else res.status(CODES.EC_NOT_FOUND).json({
+                message: MSGS.NOT_FOUND
+              });
+            })
+            .catch(err => {
+              res.status(CODES.ES_INTERNAL).json({
+                message: err
+              });
+            });
         } else res.status(CODES.EC_NOT_FOUND).json({
-          message: MSGS.NOT_FOUND
-        });
-      })
-      .catch(err => {
-        res.status(CODES.ES_INTERNAL).json({
-          message: err
-        });
+            message: MSGS.NOT_FOUND
+          });
       });
   } else { res.status(CODES.EC_REQUEST).end() }
 };
@@ -226,7 +250,7 @@ exports.news_get_comments = (req, res) => {
         res.status(CODES.S_OK).json(comments);
       }
       else res.status(CODES.EC_NOT_FOUND).json({
-        message: MSGS.NOT_FOUND
+        message: MSGS.NEWS_NOT_FOUND
       });
     })
     .catch(err => {
@@ -248,29 +272,38 @@ exports.news_create_comment = (req, res) => {
     // Проверим есть ли вообще такая новость
     ModelNews.findOne({_id: newsId }).exec().then(news => {
       if (news){
-        // Создали комент
-        const comment = createComment(authorId, newsId, text);
-        comment.save()
-          .then( result => {
-            // Нужно у новости увеличить количество коментариев и их список
-            ModelNews.updateOne(
-              {_id: newsId}, {$addToSet: { comments: result._id }, $inc: { comments_number: 1}}, {}).exec()
-              .then(update => {
-                if (update.n === 1) {
-                  res.status(CODES.S_CREATE).json(result);
-                } else res.status(CODES.EC_NOT_FOUND).json({
-                  message: MSGS.NOT_FOUND
-                });
+        // Проверим есть ли вообще такой user
+        ModelUser.findOne({_id: authorId}).exec().then(author => {
+          if (author){
+            // Создали комент
+            const comment = createComment(authorId, newsId, text);
+            comment.save()
+              .then( commentData => {
+                // Добавить данный коментарий пользователю в список
+                ModelUser.updateOne({_id: author._id}, {$addToSet: { comments: commentData._id }}).exec();
+                // Нужно у новости увеличить количество коментариев и их список
+                ModelNews.updateOne(
+                  {_id: newsId}, {$addToSet: { comments: commentData._id }, $inc: { comments_number: 1}}, {}).exec()
+                  .then(update => {
+                    if (update.n === 1) {
+                      res.status(CODES.S_CREATE).json(commentData);
+                    } else res.status(CODES.EC_NOT_FOUND).json({
+                      message: MSGS.NOT_FOUND
+                    });
+                  })
               })
-          })
-          .catch(err => {
-            res.status(CODES.EC_REQUEST).json({
-              message: err
-            });
+              .catch(err => {
+                res.status(CODES.EC_REQUEST).json({
+                  message: err
+                });
+              });
+          } else res.status(CODES.EC_REQUEST).json({
+            message: MSGS.USER_NOT_FOUND
           });
+        });
       }
-      else res.status(CODES.EC_NOT_FOUND).json({
-          message: MSGS.NOT_FOUND
+      else res.status(CODES.EC_REQUEST).json({
+          message: MSGS.NEWS_NOT_FOUND
         });
     })
     .catch(err => {
@@ -281,37 +314,6 @@ exports.news_create_comment = (req, res) => {
   }
   else { res.status(CODES.EC_REQUEST).end() }
 };
-
-exports.news_delete_comment = (req, res) => {
-  let newsId = req.params.newsId;
-  let commentId = req.params.commentId;
-
-  if (newsId && commentId) {
-    // Проверим есть ли вообще такой коментарий
-    ModelComment.deleteOne({_id: commentId }).exec()
-      .then( result => {
-        if (result.n === 1) {
-          res.status(CODES.S_OK).json({
-            message: `Comment [id:${newsId}] ${MSGS.DELETED}`
-          });
-          ModelNews.updateOne(
-            {_id: newsId}, { $pull: { comments: commentId }, $inc: { comments_number: -1}}, {}).exec()
-            .then(update => {
-              // Уменьшили количество комментариев
-            }).catch(err => { });
-        } else res.status(CODES.EC_NOT_FOUND).json({
-          message: MSGS.NOT_FOUND
-        });
-      })
-      .catch(err => {
-        res.status(CODES.ES_INTERNAL).json({
-          message: err
-        });
-      });
-  }
-  else { res.status(CODES.EC_REQUEST).end() }
-};
-
 
 function getFromDate(period) {
   let availablePeriod = {

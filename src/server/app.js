@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 const userRoutes = require('@routes/route-user');
 const newsRoutes = require('@routes/route-news');
 const categoryRoutes = require('@routes/route-category');
+const commentRoutes = require('@routes/route-comment');
 const configRoutes = require('@routes/route-config');
 
 const ENV = require('@constants/environment');
@@ -53,7 +54,7 @@ app.use("/config", configRoutes);
 app.use("/user", userRoutes);
 app.use("/news", newsRoutes);
 app.use("/category", categoryRoutes);
-
+app.use("/comment", commentRoutes);
 
 // Error handlers
 app.use(function(req, res, next) {

@@ -85,17 +85,20 @@ export class AppRestService {
       name: category.getName()
     });
   }
-  public restSendComment(newsID:string, comment: Comment): Observable<HttpResponse<ArrayBuffer>> {
+  public restSendComment(newsID: string, comment: Comment): Observable<HttpResponse<ArrayBuffer>> {
     let url = CONSTANTS.SERVER.NEWS + '/' + newsID + CONSTANTS.SERVER.COMMENT;
     return this.restSendData(url, {
       text: comment.getText()
     });
   }
-  public restAddBookmark(newsID:string): Observable<HttpResponse<ArrayBuffer>> {
+  public restAddBookmark(newsID: string): Observable<HttpResponse<ArrayBuffer>> {
     let url = CONSTANTS.SERVER.NEWS + '/' + newsID + CONSTANTS.SERVER.BOOKMARK;
     return this.restSendData(url);
   }
-
+  public restLikeComment(commentId: string): Observable<HttpResponse<ArrayBuffer>> {
+    let url = CONSTANTS.SERVER.COMMENT + '/' + commentId + CONSTANTS.SERVER.LIKE;
+    return this.restSendData(url);
+  }
   // Удаление данных
   public restDeleteNews(deleteID: string): Observable<HttpResponse<ArrayBuffer>> {
     let url = CONSTANTS.SERVER.NEWS + '/' + deleteID;
@@ -111,6 +114,10 @@ export class AppRestService {
   }
   public restDeleteBookmark(newsID: string): Observable<HttpResponse<ArrayBuffer>> {
     let url = CONSTANTS.SERVER.NEWS + '/' + newsID + CONSTANTS.SERVER.BOOKMARK;
+    return this.restDeleteData(url);
+  }
+  public restUnlikeComment(commentId: string): Observable<HttpResponse<ArrayBuffer>> {
+    let url = CONSTANTS.SERVER.COMMENT + '/' + commentId + CONSTANTS.SERVER.LIKE;
     return this.restDeleteData(url);
   }
 
@@ -156,6 +163,10 @@ export class AppRestService {
   }
   public restGetUserData(userId: string): Observable<Object> {
     let url = CONSTANTS.SERVER.USER + '/' + userId;
+    return this.restGetData(url);
+  }
+  public restGetCommentData(commentId: string): Observable<Object> {
+    let url = CONSTANTS.SERVER.COMMENT + '/' + commentId;
     return this.restGetData(url);
   }
   public restGetConfigData(): Observable<Object> {

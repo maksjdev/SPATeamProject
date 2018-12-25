@@ -44,6 +44,10 @@ export class RegistrationPageComponent implements OnInit {
 
   onRegister(){
     if (this.registrationForm.valid){
+      this.formErrors = {
+        r_image: '', r_real_name: '', r_nickname: '',
+        r_email: '', r_agreement: '', r_password: '', r_re_password: ''
+      };
       let image: string = this.registrationForm.value['r_image'],
           realName: string = this.registrationForm.value['r_real_name'],
           nickname: string = this.registrationForm.value['r_nickname'],

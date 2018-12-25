@@ -8,12 +8,12 @@
       {{ comment.getDate() | dateTransform }}
   </div>
   <div class="comment__header--author-rating">
-    <button [title]="'Повысить'" (click)="ratingRaise($event)">
-      <i class="fas fa-angle-up"></i>
-    </button>
-    {{ comment.getRating() }}
-    <button [title]="'Понизить'" (click)="ratingDowngrade($event)">
-      <i class="fas fa-angle-down"></i>
+    <b>{{ comment.getRating() }}</b>
+    <button *ngxPermissionsOnly="['User','Admin']"
+            [title]="onLiked? 'UnLike' : 'Like'"
+            [class.liked]="onLiked"
+            (click)="OnLike($event)">
+      <i [class.fas]="onLiked" [class.far]="!onLiked" class=" fa-heart"></i>
     </button>
 
     <button *ngxPermissionsOnly="['Admin']" [title]="'Удалить коментарий'" (click)="OnDelete($event)">

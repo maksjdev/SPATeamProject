@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
 import {User} from '@shared/models/User';
-import {BehaviorSubject, Observable, of} from 'rxjs';
+import {BehaviorSubject, of} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {AppRestService} from '@shared/http/app-rest.service';
 import {NgxPermissionsService} from 'ngx-permissions';
 import {DtoService} from '@shared/dto.service';
-import {Category} from '@shared/models/Category';
 import {AppDialogService} from '@shared/services/app-dialog.service';
 
 @Injectable()
@@ -73,7 +72,7 @@ export class UserDataService {
   }
 
   public hasBookmark(bookmarkId: string): boolean {
-    let currentUser = this.getCurrentUserData().getValue();
+    let currentUser: User = this.getCurrentUserData().getValue();
     if (!currentUser) { return false; }
     return currentUser.getBookmarks().some((value: string) => {
       return value === bookmarkId;
@@ -91,6 +90,34 @@ export class UserDataService {
   }
   public deleteFromBookmarks(newsId: string): Promise<boolean>{
     return this.restService.restDeleteBookmark(newsId).pipe(
+      catchError((errorMsg: string) => {
+        this.dialogService.showToastError(errorMsg);
+        return of(errorMsg);
+      })
+    ).toPromise().then(value => {
+      return value === Object(value);
+    })
+  }
+
+  public likedComment(commentId: string): boolean {
+    let currentUser: User = this.getCurrentUserData().getValue();
+    if (!currentUser) { return false; }
+    return currentUser.getLikedComments().some((value: string) => {
+      return value === commentId;
+    });
+  }
+  public likeComment(commentId: string): Promise<boolean>{
+    return this.restService.restLikeComment(commentId).pipe(
+      catchError((errorMsg: string) => {
+        this.dialogService.showToastError(errorMsg);
+        return of(errorMsg);
+      })
+    ).toPromise().then(value => {
+      return value === Object(value);
+    })
+  }
+  public unlikeComment(commentId: string): Promise<boolean>{
+    return this.restService.restUnlikeComment(commentId).pipe(
       catchError((errorMsg: string) => {
         this.dialogService.showToastError(errorMsg);
         return of(errorMsg);

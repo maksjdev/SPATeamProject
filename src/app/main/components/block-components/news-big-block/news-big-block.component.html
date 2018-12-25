@@ -15,11 +15,14 @@
       </div>
       <div class="header-info__date">{{ news.getDate() | dateTransform }}</div>
       <div class="header-info__comments">
-        {{ news.getCommentNumber() }}
+        <b>{{ news.getCommentNumber() }}</b>
         <i class="main far fa-comment-dots"></i>
       </div>
       <div class="header-info__actions">
-        <span>{{ news.rating }}<i class="main fas fa-star"></i></span>
+        <span>
+          <b>{{ news.rating }}</b>
+          <i class="main fas fa-star"></i>
+        </span>
         <button *ngxPermissionsOnly="['Admin']"
               (click)="deleteNews(news.getId())">
           <i class="main far fa-trash-alt"></i>

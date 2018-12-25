@@ -28,7 +28,6 @@ export class FullNewsBlockComponent implements OnChanges{
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.hasOwnProperty('news') && changes['news'].currentValue) {
       this._htmlContent = this.news.text;
-      // Необходимо получить "избранность" данной новости
     }
   }
 

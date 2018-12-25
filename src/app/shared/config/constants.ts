@@ -32,6 +32,7 @@ export const CONSTANTS = {
     NEWS:     '/news',
     NEWS_TOP: '/news/top',
     USER:     '/user',
+    LIKE:     '/like',
     BOOKMARK: '/bookmark',
     COMMENT:  '/comment',
     CATEGORY: '/category',
@@ -44,6 +45,9 @@ export const CONSTANTS = {
   },
 
   MSG: {
+    LOGIN_NEED: 'Ты ещё маленький, сначала залогинься',
+    FORBIDDEN: 'Ты ещё маленький, подрости до Admin..',
+
     NEWS_EDIT: 'Новость успешно изменена!',
     COMMENT_EDIT: 'Коментарий был изменен!',
     CATEGORY_EDIT: 'Категория успешно изменена!',

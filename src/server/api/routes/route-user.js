@@ -12,6 +12,7 @@ router.get("/:userId", ControlUser.user_find);
 router.delete("/:userId", checkAuth, checkAdmin, ControlUser.user_delete);
 
 router.get("/:userId/bookmark", ControlUser.user_bookmarks);
+router.get("/:userId/comment", ControlUser.user_comments);
 
 module.exports = router;
 

@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {AppRoutingService} from '@routes/app-routing.service';
 import {AuthService} from '../auth.service';
 import {CONSTANTS} from '../config/constants';
+import {AppDialogService} from '@shared/services/app-dialog.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class AuthGuard implements CanActivate, CanLoad {
   constructor(
     private authService: AuthService,
     private routerService: AppRoutingService,
+    private dialogService: AppDialogService
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
@@ -20,6 +22,7 @@ export class AuthGuard implements CanActivate, CanLoad {
       // Залогинен -> проходите, сэр
       return true;
     } else {
+      this.dialogService.showToastError(CONSTANTS.MSG.LOGIN_NEED);
       // Не залогинен -> редирект на страницу логина с сохранением линка
       let url = this.routerService.getCleanUrl(state.url);
       let params = route.queryParams;
@@ -35,6 +38,7 @@ export class AuthGuard implements CanActivate, CanLoad {
       // Залогинен -> загружаем, сэр
       return true;
     } else {
+      this.dialogService.showToastError(CONSTANTS.MSG.LOGIN_NEED);
       // Не залогинен -> редирект на страницу логина
       this.routerService.goToLink(CONSTANTS.APP.LOGIN);
       return false;

@@ -89,14 +89,14 @@ export class NewsPageComponent implements OnInit, OnDestroy {
       if (!success) { return; }
       this.dialogService.showToastSuccess(CONSTANTS.MSG.COMMENT_ADD);
       this.commentForm.resetForm();
-      this.commentService.reloadCurrentCommentsData(this.fullNews.getId());
+      this.reloadComments();
     })
   }
   onDeleteComment(comment: Comment){
     this.commentService.deleteComment(comment.getId(), this.fullNews.getId()).then((success: boolean) => {
       if (!success) { return; }
       this.dialogService.showToastSuccess(CONSTANTS.MSG.COMMENT_DEL);
-      this.commentService.reloadCurrentCommentsData(this.fullNews.getId());
+      this.reloadComments();
     })
   }
 
@@ -120,5 +120,27 @@ export class NewsPageComponent implements OnInit, OnDestroy {
         this.userService.reloadCurrentUserData();
       });
     }
+  }
+  OnLikeComment(obj: object): void {
+    let id = obj['id'], liked = obj['liked'];
+    if (liked){
+      this.userService.likeComment(id).then( (success: boolean) => {
+        if (!success) { return; }
+        this.userService.reloadCurrentUserData();
+        this.reloadComments();
+      });
+    } else {
+      this.userService.unlikeComment(id).then( (success: boolean) => {
+        if (!success) { return; }
+        this.userService.reloadCurrentUserData();
+        this.reloadComments();
+      });
+    }
+  }
+
+  private reloadComments(): void {
+    if (!this.fullNews) { return; }
+    let id = this.fullNews.getId();
+    this.commentService.reloadCurrentCommentsData(id);
   }
 }

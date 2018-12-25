@@ -11,6 +11,7 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 import {CONSTANTS} from '@shared/config/constants';
 import {AppDialogService} from '@shared/services/app-dialog.service';
 import {AppRoutingService} from '@routes/app-routing.service';
+import {CustomValidators} from '@shared/services/custom-validators';
 
 @Component({
   selector: 'app-add-news-page',
@@ -64,10 +65,10 @@ export class AddNewsPageComponent implements OnInit {
     });
 
     this.addNewsForm = this.formBuild.group({
-      n_title:    ['', [Validators.required]],
-      n_image:    ['', [Validators.required]],
-      n_categories: ['', [Validators.required]],
-      n_text:       ['', [Validators.required]]
+      n_title:    ['', [Validators.required, CustomValidators.validateLimits(10)]],
+      n_image:    ['', [Validators.required, CustomValidators.validateLimits(5)]],
+      n_categories: ['', ],
+      n_text:       ['', [Validators.required, CustomValidators.validateLimits(100,10000)]]
     });
   }
 

@@ -51,7 +51,23 @@ const userSchema = mongoose.Schema({
     }],
     default: [],
     required: true
-  }
+  },
+  comments: {
+    type: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Comment'
+    }],
+    default: [],
+    required: true
+  },
+  liked_comments: {
+    type: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Comment'
+    }],
+    default: [],
+    required: true
+  },
 },
   { timestamps: {
     createdAt: 'create_date',

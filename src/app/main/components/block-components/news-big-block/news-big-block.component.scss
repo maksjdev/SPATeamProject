@@ -14,7 +14,6 @@
 }
 .news-item {
   width: 100%;
-  //border: 1px solid $main-text-color;
   &__header {
     margin: $normal-padding $normal-padding 0;
     &--title {
@@ -87,9 +86,6 @@
   }
   &__actions {
     margin-left: auto;
-    span i {
-      padding-left: $small-padding;
-    }
   }
 }
 .header-tags {
