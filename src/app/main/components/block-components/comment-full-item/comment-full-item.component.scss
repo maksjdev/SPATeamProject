@@ -22,14 +22,14 @@
     &-name {
       margin: auto 0;
     }
-    &-rating {
-      margin-left: auto;
-      margin-bottom: auto;
-      margin-top: auto;
-      & .liked {
-        font-weight: bold;
-        color: $main-pink;
-      }
+  }
+  &--actions {
+    margin-left: auto;
+    margin-bottom: auto;
+    margin-top: auto;
+    & .liked {
+      font-weight: bold;
+      color: $main-pink;
     }
   }
   & > * {
@@ -38,13 +38,4 @@
       margin-right: 0;
     }
   }
-}
-
-.comment__wrapper {
-  &--content {
-
-  }
-}
-.comment__footer{
-
 }
