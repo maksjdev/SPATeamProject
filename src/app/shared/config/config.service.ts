@@ -14,6 +14,8 @@ export class ConfigService implements IConfigModel {
   defaultPeriod: string;
   defaultPage: number;
 
+  aboutPhotos: Array<object>;
+
   constructor() {
     let serverConfig = ConfigLoadService.settings;
     let defaultConfig = CONFIG_DEFAULT;
@@ -21,7 +23,7 @@ export class ConfigService implements IConfigModel {
 
     console.log(config);
     let news = config.news;
-    this.defaultPage = news.page;
+    this.defaultPage = parseInt(news.page);
     this.defaultPeriod = news.period;
     this.defaultMinRating = news.rating;
 
@@ -30,6 +32,9 @@ export class ConfigService implements IConfigModel {
 
     let top_block = config.top_block;
     this.topBlock_max = top_block.max;
+
+    let about = config.about;
+    this.aboutPhotos = about.photos;
   }
 
   getCategoryBlockMax(): number {
@@ -46,5 +51,8 @@ export class ConfigService implements IConfigModel {
   }
   getTopBlockMax(): number {
     return this.topBlock_max;
+  }
+  getAboutPhotos(): Array<object>{
+    return this.aboutPhotos;
   }
 }

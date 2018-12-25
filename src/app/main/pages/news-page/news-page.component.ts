@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {NewsDataService} from '@shared/news-data.service';
 import {News} from '@shared/models/News';
 import {Comment} from '@shared/models/Comment';
@@ -7,23 +7,33 @@ import {catchError, filter, switchMap} from 'rxjs/operators';
 import {AppScrollService} from '@shared/services/app-scroll.service';
 import {AppRoutingService} from '@routes/app-routing.service';
 import {CONSTANTS} from '@shared/config/constants';
-import {of} from 'rxjs';
+import {of, Subscription} from 'rxjs';
+import {AppDialogService} from '@shared/services/app-dialog.service';
+import {CommentDataService} from '@shared/comment-data.service';
+import {UserDataService} from '@shared/user-data.service';
 
 @Component({
   selector: 'app-news-page',
   templateUrl: './news-page.component.html',
   styleUrls: ['./news-page.component.scss'],
 })
-export class NewsPageComponent implements OnInit {
+export class NewsPageComponent implements OnInit, OnDestroy {
   public fullNews: News;
   public commentsList: Array<Comment>;
   public imageArr: Array<string>;
+  public favorites: boolean;
+
+  private _subc1: Subscription;
+  private _subc2: Subscription;
 
   constructor(
-    private newsService: NewsDataService,
     private route: ActivatedRoute,
+    private newsService: NewsDataService,
+    private userService: UserDataService,
+    private commentService: CommentDataService,
     private routerService: AppRoutingService,
     private scrollService: AppScrollService,
+    private dialogService: AppDialogService
   ) {
     scrollService.scrollToTop(false);
     this.imageArr = [
@@ -34,8 +44,9 @@ export class NewsPageComponent implements OnInit {
     ];
   }
 
+  @ViewChild('commentForm') commentForm: any;
   ngOnInit() {
-    this.route.paramMap.pipe(
+    this._subc1 = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         let id = params.get('id');
         return this.newsService.getFullNewsData(id);
@@ -44,38 +55,70 @@ export class NewsPageComponent implements OnInit {
         return of(null);
       })
     ).subscribe( (news: News) => {
-      this.fullNews = news;
       if (!news) {
         // Если как-то так вышло что новости нету
         this.routerService.goToLinkWithQuery(CONSTANTS.APP.MAIN)
       }
+      this.fullNews = news;
+      let newsId = this.fullNews.getId();
+      this.favorites = this.userService.hasBookmark(newsId);
     });
 
-    this.scrollService.scrollState.pipe(
+    this._subc2 = this.scrollService.scrollState.pipe(
       filter( (value: Event) => {
         return window.pageYOffset > 300 && this.fullNews && !this.commentsList
       }),
       switchMap((value: Event) => {
         let id = this.fullNews.getId();
-        return this.newsService.getComments(id);
+        return this.commentService.getCurrentCommentsData(id, 'full');
       })
     ).subscribe( (comments: Array<Comment>) => {
-      this.commentsList = comments;
+      if (comments && comments.length > 0){
+        // Особенность и продвинутый хак )) ЧВС++
+        this.commentsList = comments.splice(0, comments.length);
+      }
     });
   }
+  ngOnDestroy(): void {
+    this._subc1.unsubscribe();
+    this._subc2.unsubscribe();
+  }
 
-  onAddComment(comment){
-    console.log(`Add comment: ${comment}`);
+  onAddComment(comment: Comment){
+    this.commentService.createComment(this.fullNews.getId(), comment).then((success: boolean) => {
+      if (!success) { return; }
+      this.dialogService.showToastSuccess(CONSTANTS.MSG.COMMENT_ADD);
+      this.commentForm.resetForm();
+      this.commentService.reloadCurrentCommentsData(this.fullNews.getId());
+    })
   }
   onDeleteComment(comment: Comment){
-    console.log(`Delete comment: ${comment.id}`);
+    this.commentService.deleteComment(comment.getId(), this.fullNews.getId()).then((success: boolean) => {
+      if (!success) { return; }
+      this.dialogService.showToastSuccess(CONSTANTS.MSG.COMMENT_DEL);
+      this.commentService.reloadCurrentCommentsData(this.fullNews.getId());
+    })
   }
+
   onEdit(event){
     let id = this.fullNews.getId();
     this.routerService.goToEditNews(id);
   }
-  onFavorites (state){
-    // Необходимо добавить / удалить в избранное
-    console.log(`On favorites: ${state}`);
+  onFavorites (state: boolean){
+    let newsId = this.fullNews.getId();
+    if (!newsId) { return; }
+    if (state){
+      this.userService.addToBookmarks(newsId).then((success: boolean) => {
+        if (!success) { return; }
+        this.favorites = true;
+        this.userService.reloadCurrentUserData();
+      });
+    } else {
+      this.userService.deleteFromBookmarks(newsId).then((success: boolean) => {
+        if (!success) { return; }
+        this.favorites = false;
+        this.userService.reloadCurrentUserData();
+      });
+    }
   }
 }

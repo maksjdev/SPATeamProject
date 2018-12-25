@@ -1,9 +1,7 @@
 import {Injectable} from '@angular/core';
 import {News} from '@shared/models/News';
-import {MockDataService} from '@shared/mock-data.service';
 import {AppRestService} from '@shared/http/app-rest.service';
 import {Observable, of} from 'rxjs';
-import {Comment} from '@shared/models/Comment';
 import {catchError, map} from 'rxjs/operators';
 import {AppDialogService} from '@shared/services/app-dialog.service';
 import {DtoService} from '@shared/dto.service';
@@ -13,14 +11,14 @@ export class NewsDataService {
 
   constructor(
     private restService: AppRestService,
-    private mockDataService: MockDataService,
     private dialogService: AppDialogService,
     private dtoService: DtoService
-  ) {}
+  ) { }
 
   public getNewsFromServer(
-    page: number, period?: string, rating?: string, categoriesId?: Array<string>,
-    search?: string): Observable<{ news: Array<News>, pagination: object, filters: object }> {
+    page: number, period?: string, rating?: string,
+    categoriesId?: Array<string>, search?: string
+  ): Observable<{ news: Array<News>, pagination: object, filters: object }> {
     let category: string = categoriesId.length > 0 ? categoriesId.join(',') : null;
 
     return this.restService.restGetNewsList(page.toString(), period, rating, category, search).pipe(
@@ -67,7 +65,7 @@ export class NewsDataService {
   public getSmallNewsData(id: string): Observable<News> {
     return this.getNewsData(id, 'small');
   }
-  private getNewsData(id: string, type: string): Observable<News> {
+  private getNewsData(id: string, type?: string): Observable<News> {
     if (!id) {return of(null)}
     return this.restService.restGetNewsData(id, type).pipe(
       map((newsObj: object) => {
@@ -79,7 +77,7 @@ export class NewsDataService {
   public createNews(news: News): Promise<boolean>{
     return this.restService.restSendNews(news).pipe(
       catchError((errorMsg: string) => {
-        this.dialogService.showDialog(errorMsg);
+        this.dialogService.showToastError(errorMsg);
         return of(errorMsg);
       })
     ).toPromise().then(value => {
@@ -89,7 +87,7 @@ export class NewsDataService {
   public updateNews(news: News): Promise<boolean>{
     return this.restService.restUpdateNews(news).pipe(
       catchError((errorMsg: string) => {
-        this.dialogService.showDialog(errorMsg);
+        this.dialogService.showToastError(errorMsg);
         return of(errorMsg);
       })
     ).toPromise().then(value => {
@@ -99,16 +97,11 @@ export class NewsDataService {
   public deleteNews(id: string): Promise<boolean>{
     return this.restService.restDeleteNews(id).pipe(
       catchError((errorMsg: string) => {
-        this.dialogService.showDialog(errorMsg);
+        this.dialogService.showToastError(errorMsg);
         return of(errorMsg);
       })
     ).toPromise().then(value => {
       return value === Object(value);
     });
-  }
-
-  public getComments(id: string): Observable<Array<Comment>> {
-    // TODO Change for restService.restGetAllComments()
-    return of(this.mockDataService.getMockCommentList(5));
   }
 }

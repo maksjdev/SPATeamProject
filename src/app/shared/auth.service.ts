@@ -3,7 +3,6 @@ import {AppRoutingService} from '../routes/app-routing.service';
 import {UserDataService} from './user-data.service';
 import {BehaviorSubject, of} from 'rxjs';
 import {AppRestService} from './http/app-rest.service';
-import {MockDataService} from './mock-data.service';
 import {User} from './models/User';
 import {catchError, switchMap} from 'rxjs/operators';
 import {HttpResponse} from '@angular/common/http';
@@ -18,7 +17,6 @@ export class AuthService {
 
   constructor(
     private userService: UserDataService,
-    private mockDataService: MockDataService,
     private routeService: AppRoutingService,
     private restService: AppRestService,
     private dialogService: AppDialogService,
@@ -39,9 +37,7 @@ export class AuthService {
 
   onLogin(login: string, password: string, save?: boolean): Promise<boolean> {
     // Логином может быть email
-    if (this.loginState){
-      this.onLogout();
-    }
+    if (this.loginState.getValue()){ this.onLogout(); }
     return this.restService.restOnLogin(login, password).pipe(
       switchMap((value: HttpResponse<ArrayBuffer>) => {
         if (!value) { return of(null) }
@@ -56,7 +52,7 @@ export class AuthService {
       }),
       catchError((errorMsg: string) => {
         // Авторизация НЕ удалась
-        this.dialogService.showDialog(errorMsg);
+        this.dialogService.showToastError(errorMsg);
         return of();
       })
     ).toPromise().then((activeUser: User) => {
@@ -90,7 +86,7 @@ export class AuthService {
     return this.restService.restOnRegister(newUser, password).pipe(
       catchError((errorMsg: string) => {
         // Регистрация НЕ удалась
-        this.dialogService.showDialog(errorMsg);
+        this.dialogService.showToastError(errorMsg);
         return of(false);
       })
     ).toPromise().then( (registered: boolean) => {

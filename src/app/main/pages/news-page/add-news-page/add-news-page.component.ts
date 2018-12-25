@@ -3,8 +3,6 @@ import {NewsDataService} from '@shared/news-data.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AppFormService} from '@shared/services/app-form.service';
 import {News} from '@shared/models/News';
-import {User} from '@shared/models/User';
-import {UserDataService} from '@shared/user-data.service';
 import {Category} from '@shared/models/Category';
 import {CategoryDataService} from '@shared/category-data.service';
 import {Observable, Subscription} from 'rxjs';
@@ -86,6 +84,7 @@ export class AddNewsPageComponent implements OnInit {
         this.newsService.updateNews(news).then( (success: boolean) => {
           if (!success) return;
           this.addNewsForm.reset();
+          this.dialogService.showToastSuccess(CONSTANTS.MSG.NEWS_EDIT);
           this.routingService.goToLink(CONSTANTS.APP.MAIN);
         });
       } else {
@@ -93,6 +92,7 @@ export class AddNewsPageComponent implements OnInit {
         this.newsService.createNews(news).then( (success: boolean) => {
           if (!success) return;
           this.addNewsForm.reset();
+          this.dialogService.showToastSuccess(CONSTANTS.MSG.NEWS_ADD);
           this.routingService.goToLink(CONSTANTS.APP.MAIN);
         });
       }

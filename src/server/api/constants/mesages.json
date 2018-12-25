@@ -10,6 +10,8 @@
   "MAIL_EXIST": "User with such email exist already!",
   "CATEGORY_EXIST": "Category with such name exist already!",
 
+  "YOU_HAVE": "You already have this news in bookmarks!",
+  "YOU_DONT_HAVE": "You dont have this news in bookmarks!",
   "MAIL_NOT_EXIST": "Mail don`t exist!",
 
   "CREATED": " - was created",

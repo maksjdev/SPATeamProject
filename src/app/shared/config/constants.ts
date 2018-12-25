@@ -32,6 +32,7 @@ export const CONSTANTS = {
     NEWS:     '/news',
     NEWS_TOP: '/news/top',
     USER:     '/user',
+    BOOKMARK: '/bookmark',
     COMMENT:  '/comment',
     CATEGORY: '/category',
   },
@@ -43,6 +44,18 @@ export const CONSTANTS = {
   },
 
   MSG: {
+    NEWS_EDIT: 'Новость успешно изменена!',
+    COMMENT_EDIT: 'Коментарий был изменен!',
+    CATEGORY_EDIT: 'Категория успешно изменена!',
+
+    NEWS_ADD: 'Новость успешно добавлена!',
+    COMMENT_ADD: 'Коментарий был добавлен!',
+    CATEGORY_ADD: 'Категория успешно добавлена!',
+
+    NEWS_DEL: 'Новость была удалена!',
+    COMMENT_DEL: 'Коментарий был удален!',
+    CATEGORY_DEL: 'Категория была удалена!',
+
     CONFIRM_DEL_COMMENT: 'Вы точно хотите удалить данный коментарий?',
     CONFIRM_DEL_NEWS: 'Вы уверены что хотите удалить новость?',
     CONFIRM_RST_NEWS: 'Вы уверены что хотите очистить новость?',

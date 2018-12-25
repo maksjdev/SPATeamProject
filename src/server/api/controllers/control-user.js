@@ -3,10 +3,11 @@ const bcrypt = require("bcrypt");
 
 const jwt = require("jsonwebtoken");
 const [ModelUser, createUser] = require("@models/model-user");
+const [ModelNews, createNews] = require("@models/model-news");
+
 const ENV = require('@constants/environment');
 const CODES = require('@constants/http-codes');
 const MSGS = require('@constants/mesages');
-
 
 exports.user_signup = (req, res, next) => {
   let emailV = req.body.email,
@@ -130,7 +131,7 @@ exports.user_bookmarks = (req, res) => {
   let userId = req.params.userId;
   if (userId) {
     ModelUser.findOne({_id: userId }).select('bookmarks')
-      .populate('bookmarks').exec()
+      .populate({path: 'bookmarks', select: '-__v'}).exec()
       .then( result => {
         if (result) { res.status(CODES.S_OK).json(result); }
         else res.status(CODES.EC_NOT_FOUND).json({
@@ -146,8 +147,84 @@ exports.user_bookmarks = (req, res) => {
 };
 
 exports.user_add_bookmark = (req, res) => {
-  let userId = req.params.userId;
-  if (userId) {
-    res.end();
+  let userId = req.userData.userId;
+  let newsId = req.params.newsId;
+  if (userId && newsId) {
+    ModelUser.findOne({_id: userId, bookmarks: newsId }).exec()
+      .then( result => {
+        // Если у пользователя еще нету такой закладки
+        if (!result) {
+          ModelUser.updateOne({_id: userId}, {$addToSet: {bookmarks: newsId} }, {}).exec()
+            .then(result => {
+              if (result.n === 1) {
+                ModelNews.updateOne({_id: newsId }, { $inc: { "rating" : 1}}).exec()
+                  .then(result => {
+                    if (result.n === 1) {
+                      res.status(CODES.S_ACCEPT).json({
+                        message: `User [id:${userId}] ${MSGS.UPDATED}`
+                      });
+                    } else res.status(CODES.EC_NOT_FOUND).json({
+                      message: MSGS.NOT_FOUND
+                    });
+                  })
+              } else res.status(CODES.EC_NOT_FOUND).json({
+                message: MSGS.NOT_FOUND
+              });
+            })
+            .catch(err => {
+              res.status(CODES.ES_INTERNAL).json({
+                message: err
+              });
+            });
+        } else {
+          res.status(CODES.EC_CONFLICT).json({
+            message: MSGS.YOU_HAVE
+          });
+        }
+      });
+  } else { res.status(CODES.EC_REQUEST).end() }
+};
+
+exports.user_delete_bookmark = (req, res) => {
+  let userId = req.userData.userId;
+  let newsId = req.params.newsId;
+  if (userId && newsId) {
+    ModelUser.findOne({_id: userId, bookmarks: newsId }).exec()
+      .then( result => {
+        // Если у пользователя есть такая закладка
+        if (result) {
+          ModelUser.updateOne({_id: userId }, {$pull: {bookmarks: newsId} }, {}).exec()
+            .then(result => {
+              if (result.n === 1) {
+                ModelNews.updateOne({_id: newsId }, {$inc: { rating: -1}}, {$min: { rating: 0 }} ).exec()
+                  .then(result => {
+                    if (result.n === 1) {
+                      res.status(CODES.S_ACCEPT).json({
+                        message: `User [id:${userId}] ${MSGS.UPDATED}`
+                      });
+                    } else res.status(CODES.EC_NOT_FOUND).json({
+                      message: MSGS.NOT_FOUND
+                    });
+                  })
+                  .catch(err => {
+                    res.status(CODES.ES_INTERNAL).json({
+                      message: err
+                    });
+                  });
+              } else res.status(CODES.EC_NOT_FOUND).json({
+                message: MSGS.NOT_FOUND
+              });
+            })
+            .catch(err => {
+              res.status(CODES.ES_INTERNAL).json({
+                message: err
+              });
+            });
+        } else {
+          res.status(CODES.EC_CONFLICT).json({
+            message: MSGS.YOU_DONT_HAVE
+          });
+        }
+      });
   } else { res.status(CODES.EC_REQUEST).end() }
 };

@@ -4,12 +4,12 @@ const commentSchema = mongoose.Schema({
   _id: {
     type: mongoose.Schema.Types.ObjectId
   },
-  author_id: {
+  author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: [true, 'You need enter author!']
   },
-  news_id:{
+  news:{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'News',
     required: [true, 'You need enter news!']
@@ -38,8 +38,8 @@ const Comment = mongoose.model('Comment', commentSchema);
 function createComment(authorId, newsId, text, rating) {
   return new Comment({
     _id: new mongoose.Types.ObjectId(),
-    author_id: authorId,
-    news_id: newsId,
+    author: authorId,
+    news: newsId,
     text: text,
     rating: rating
   })

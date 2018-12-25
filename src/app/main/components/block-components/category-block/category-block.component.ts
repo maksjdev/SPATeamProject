@@ -6,7 +6,7 @@ import {AppRoutingService} from '@routes/app-routing.service';
 import {AppScrollService} from '@shared/services/app-scroll.service';
 import {ConfigService} from '@shared/config/config.service';
 import {Subscription} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {AppDialogService} from '@shared/services/app-dialog.service';
 
 @Component({
   selector: 'app-category-block',
@@ -22,6 +22,7 @@ export class CategoryBlockComponent implements OnInit, OnDestroy {
   constructor(
     private routingService: AppRoutingService,
     private categoryService: CategoryDataService,
+    private dialogService: AppDialogService,
     private scrollService: AppScrollService,
     private configService: ConfigService
   ){}
@@ -46,7 +47,9 @@ export class CategoryBlockComponent implements OnInit, OnDestroy {
 
   public deleteCategory(id: string){
     if (id) {
-      this.categoryService.deleteCategody(id).then(value => {
+      this.categoryService.deleteCategody(id).then((success: boolean) => {
+        if (!success) { return; }
+        this.dialogService.showToastSuccess(CONSTANTS.MSG.CATEGORY_DEL);
         this.loadCategory();
       })
     }

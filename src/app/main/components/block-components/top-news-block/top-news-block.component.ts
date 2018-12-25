@@ -3,7 +3,6 @@ import {NewsDataService} from '@shared/news-data.service';
 import {News} from '@shared/models/News';
 import {Subscription} from 'rxjs';
 import {ConfigService} from '@shared/config/config.service';
-import {Category} from '@shared/models/Category';
 
 @Component({
   selector: 'app-top-news-block',
@@ -31,9 +30,7 @@ export class TopNewsBlockComponent implements OnInit, OnDestroy {
     })
   }
 
-
   ngOnDestroy(): void {
     this._subcription.unsubscribe();
   }
-
 }

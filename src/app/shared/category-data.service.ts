@@ -15,7 +15,7 @@ export class CategoryDataService {
     private dialogService: AppDialogService,
     private dtoService: DtoService
   ) {
-    this.currentCategories = new BehaviorSubject(null);
+    this.currentCategories = new BehaviorSubject([]);
   }
 
   public reloadCurrentCategoriesData(): void {
@@ -34,7 +34,7 @@ export class CategoryDataService {
     return this.restService.restSendCategory(category).pipe(
       catchError((errorMsg: string) => {
         // Создание НЕ удалось
-        this.dialogService.showDialog(errorMsg);
+        this.dialogService.showToastError(errorMsg);
         return of(errorMsg);
       })
     ).toPromise().then(value => {
@@ -47,7 +47,7 @@ export class CategoryDataService {
     return this.restService.restDeleteCategory(id).pipe(
       catchError((errorMsg: string) => {
         // Создание НЕ удалось
-        this.dialogService.showDialog(errorMsg);
+        this.dialogService.showToastError(errorMsg);
         return of(errorMsg);
       })
     ).toPromise().then(value => {
@@ -59,7 +59,7 @@ export class CategoryDataService {
     return this.restService.restGetAllCategories(amount).pipe(
       catchError((errorMsg: string) => {
         // Получение НЕ удалось
-        this.dialogService.showDialog(errorMsg);
+        this.dialogService.showToastError(errorMsg);
         return of(errorMsg);
       }),
       map((response: object) => {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {User} from '@shared/models/User';
 import {Category} from '@shared/models/Category';
 import {News} from '@shared/models/News';
+import {Comment} from '@shared/models/Comment';
 
 @Injectable()
 export class DtoService {
@@ -29,12 +30,23 @@ export class DtoService {
     let categoriesObj: Array<object> = obj['categories'];
     let date = new Date(obj['create_date']),
         title = obj['title'], text = obj['text'],
-        image = obj['img_url'], rating = obj['rating'];
+        image = obj['img_url'], rating = obj['rating'],
+        commentNumber = obj['comments_number'];
     let author: User = this.getUserFromObj(authorObj);
     let categories = categoriesObj.map(categoryObj => {
       return this.getCategoryFromObj(categoryObj);
     });
-    let news: News = new News(id, author, date, title, text, image, categories, rating);
+    let news: News = new News(id, author, date, title, text, image, categories, rating, commentNumber);
     return news;
+  }
+
+  public getCommentFromObj(obj: object): Comment {
+    let id = obj['_id'], authorObj: object = obj['author'],
+        text = obj['text'], createDate = new Date(obj['create_date']),
+        rating = obj['rating'];
+    let author: User = this.getUserFromObj(authorObj);
+
+    let comment = new Comment(id, author, text, createDate, rating);
+    return comment;
   }
 }

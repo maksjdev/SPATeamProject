@@ -47,7 +47,8 @@ export class NewsBigBlockComponent implements OnChanges {
     this.dialogService.confirmDialog(CONSTANTS.MSG.CONFIRM_DEL_NEWS).toPromise().then((value: boolean) => {
       if (!value) { return; }
       this.newsService.deleteNews(id).then((result: boolean) => {
-        this.dialogService.showDialog('Новость была удалена!');
+        if (!result){ return; }
+        this.dialogService.showToastSuccess(CONSTANTS.MSG.NEWS_DEL);
       });
     });
   }

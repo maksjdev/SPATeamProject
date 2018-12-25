@@ -10,11 +10,11 @@ import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 })
 export class FullNewsBlockComponent implements OnChanges{
   @Input() news: News;
+  @Input() onFavorites: boolean;
   public _htmlContent: string;
 
   @Output() favoritesToggle = new EventEmitter();
   @Output() editClick = new EventEmitter();
-  favorites: boolean = false;
 
   constructor(
     private _sanitizer: DomSanitizer
@@ -36,7 +36,6 @@ export class FullNewsBlockComponent implements OnChanges{
     this.editClick.emit(event);
   }
   toggleFavorites(event) {
-    this.favorites = !this.favorites;
-    this.favoritesToggle.emit(this.favorites);
+    this.favoritesToggle.emit(!this.onFavorites);
   }
 }

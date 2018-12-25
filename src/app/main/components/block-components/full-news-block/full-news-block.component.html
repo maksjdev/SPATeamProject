@@ -5,7 +5,7 @@
     <div class="row header-info">
         <div class="row header-info__author">
           <img class="header-info__author--image" [src]="news.author.getImage()" alt="*ControlUser Image*">
-          <a href="#" class="header-info__author--name">
+          <a class="header-info__author--name">
             {{ news.author.getRealName() +' ('+ news.author.getNickname()+')' }}
           </a>
         </div>
@@ -15,8 +15,8 @@
             <i class="fas fa-edit"></i>
           </button>
 
-          <button class="btn-favorites" (click)="toggleFavorites($event)">
-            <i [class.fas]="favorites" [class.far]="!favorites" class=" fa-star"></i>
+          <button class="btn-favorites" *ngxPermissionsOnly="['User', 'Admin']" (click)="toggleFavorites($event)">
+            <i [class.fas]="onFavorites" [class.far]="!onFavorites" class=" fa-star"></i>
           </button>
         </div>
     </div>
