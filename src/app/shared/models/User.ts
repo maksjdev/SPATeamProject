@@ -6,9 +6,10 @@ export class User {
     public nickname: string,
     public email: string,
     public img_url: string,
-    public rating: number,
-    public role: string,
+    public rating: number = 0,
+    public role: string = 'User',
     public bookmarks: Array<string> = [],
+    public liked_comments: Array<string> = [],
   ){}
 
   getId(): string {
@@ -34,6 +35,9 @@ export class User {
   }
   getBookmarks(): Array<string> {
     return this.bookmarks;
+  }
+  getLikedComments(): Array<string>{
+    return this.liked_comments;
   }
 
   public toString(){

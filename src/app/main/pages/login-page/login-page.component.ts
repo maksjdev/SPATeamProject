@@ -49,6 +49,7 @@ export class LoginPageComponent implements OnInit {
 
   onLogin(){
     if (this.LoginForm.valid){
+      this.formErrors = {l_login: '', l_password: '', l_save: ''};
       let login: string = this.LoginForm.value['l_login'],
           password: string = this.LoginForm.value['l_password'],
           checkBox = this.LoginForm.value['l_save'];

@@ -23,7 +23,7 @@
         <div class="input-field">
           <i class="color input-field__icon fas fa-user"></i>
           <input class="input-field__default-icon login-input" id="l_login"
-                 placeholder="NickName OR Email"  formControlName="l_login" type="text">
+                 placeholder="your.email@mail.com"  formControlName="l_login" type="text">
         </div>
       </div>
       <mat-error class="validator-input" *ngIf="formErrors.l_login">{{ formErrors.l_login }}</mat-error>
@@ -35,7 +35,7 @@
         <div class="input-field">
           <i class="color input-field__icon fas fa-key"></i>
           <input class="input-field__default-icon login-input" id="l_password"
-                 placeholder="Password" formControlName="l_password"  type="password">
+                 placeholder="qwerty" formControlName="l_password"  type="password">
         </div>
       </div>
       <mat-error class="validator-input" *ngIf="formErrors.l_password">{{ formErrors.l_password }}</mat-error>

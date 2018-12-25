@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {Comment} from '@shared/models/Comment';
 import {catchError, map} from 'rxjs/operators';
@@ -48,6 +48,15 @@ export class CommentDataService {
       })
     );
   }
+  public getCommetnData(commentId: string): Promise<Comment> {
+    return this.restService.restGetCommentData(commentId).pipe(
+      map((obj: object) => {
+        return this.dtoService.getCommentFromObj(obj);
+      }),
+      catchError(this.restService.handleError<Comment>(`Get CommentData #${commentId}`))
+    ).toPromise();
+  }
+
   public createComment(newsId: string, comment: Comment): Promise<boolean>{
     return this.restService.restSendComment(newsId, comment).pipe(
       catchError((errorMsg: string) => {

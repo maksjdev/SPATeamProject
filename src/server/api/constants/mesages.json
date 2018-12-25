@@ -12,7 +12,13 @@
 
   "YOU_HAVE": "You already have this news in bookmarks!",
   "YOU_DONT_HAVE": "You dont have this news in bookmarks!",
+  "YOU_LIKED": "You already liked this comment",
+  "YOU_UNLIKED": "You already unliked this comment",
   "MAIL_NOT_EXIST": "Mail don`t exist!",
+
+  "NEWS_NOT_FOUND": "We dont have such news!",
+  "USER_NOT_FOUND": "We dont have such user!",
+  "COMMENT_NOT_FOUND": "We dont have such comment!",
 
   "CREATED": " - was created",
   "UPDATED": " - was updated",

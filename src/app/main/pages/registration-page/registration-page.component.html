@@ -24,7 +24,7 @@
             <div class="input-field">
               <i class="color input-field__icon fas fa-id-card"></i>
               <input class="input-field__default-icon registration-input" id="r_real_name"
-                     placeholder="RealName"  formControlName="r_real_name" type="text">
+                     placeholder="Real Name"  formControlName="r_real_name" type="text">
             </div>
           </div>
           <mat-error class="validator-input" *ngIf="formErrors.r_real_name">{{ formErrors.r_real_name }}</mat-error>
@@ -49,7 +49,7 @@
         <div class="input-field">
           <i class="color input-field__icon fas fa-envelope"></i>
           <input class="input-field__default-icon registration-input" id="r_email"
-                 placeholder="your.email@gmail.com" formControlName="r_email"  type="email">
+                 placeholder="your.email@mail.com" formControlName="r_email"  type="email">
         </div>
       </div>
       <mat-error class="validator-input" *ngIf="formErrors.r_email">{{ formErrors.r_email }}</mat-error>
@@ -74,7 +74,7 @@
           <div class="input-field">
             <i class="color input-field__icon fas fa-key"></i>
             <input class="input-field__default-icon registration-input" id="r_re_password"
-                   placeholder="password *again*" formControlName="r_re_password"  type="password">
+                   placeholder="password" formControlName="r_re_password"  type="password">
           </div>
         </div>
         <mat-error class="validator-input" *ngIf="formErrors.r_re_password">{{ formErrors.r_re_password }}</mat-error>

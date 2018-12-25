@@ -58,12 +58,7 @@ exports.user_login = (req, res, next) => {
         }
         let userPassword = user.password, userEmail = user.email, userId= user._id;
         bcrypt.compare(passwordV, userPassword, (err, result) => {
-          if (err) {
-            res.status(CODES.EC_AUTH).json({
-              message: MSGS.AUTH_FAIL
-            });
-          }
-          if (result) {
+          if (result && !err) {
             const token = jwt.sign({
               email: userEmail,
               userId: userId
@@ -75,8 +70,12 @@ exports.user_login = (req, res, next) => {
               userId: userId
             });
           }
-          res.status(CODES.EC_AUTH).json({
-            message: MSGS.PASS_WRONG
+          else if (!result && !err) {
+            res.status(CODES.EC_AUTH).json({
+              message: MSGS.PASS_WRONG
+            });
+          } else res.status(CODES.EC_AUTH).json({
+            message: MSGS.AUTH_FAIL
           });
         });
       })
@@ -108,7 +107,6 @@ exports.user_delete = (req, res) => {
     });
   } else { res.status(CODES.EC_REQUEST).end() }
 };
-
 exports.user_find = (req, res) => {
   let userId = req.params.userId;
   if (userId) {
@@ -134,8 +132,26 @@ exports.user_bookmarks = (req, res) => {
       .populate({path: 'bookmarks', select: '-__v'}).exec()
       .then( result => {
         if (result) { res.status(CODES.S_OK).json(result); }
-        else res.status(CODES.EC_NOT_FOUND).json({
-          message: MSGS.NOT_FOUND
+        else res.status(CODES.EC_REQUEST).json({
+          message: MSGS.USER_NOT_FOUND
+        });
+      })
+      .catch(err => {
+        res.status(CODES.ES_INTERNAL).json({
+          message: err
+        });
+      });
+  } else { res.status(CODES.EC_REQUEST).end() }
+};
+exports.user_comments = (req, res) => {
+  let userId = req.params.userId;
+  if (userId) {
+    ModelUser.findOne({_id: userId }).select('comments')
+      .populate({path: 'comments', select: '-__v'}).exec()
+      .then( result => {
+        if (result) { res.status(CODES.S_OK).json(result); }
+        else res.status(CODES.EC_REQUEST).json({
+          message: MSGS.USER_NOT_FOUND
         });
       })
       .catch(err => {
@@ -157,7 +173,7 @@ exports.user_add_bookmark = (req, res) => {
           ModelUser.updateOne({_id: userId}, {$addToSet: {bookmarks: newsId} }, {}).exec()
             .then(result => {
               if (result.n === 1) {
-                ModelNews.updateOne({_id: newsId }, { $inc: { "rating" : 1}}).exec()
+                ModelNews.updateOne({_id: newsId }, { $inc: { rating: 1}}).exec()
                   .then(result => {
                     if (result.n === 1) {
                       res.status(CODES.S_ACCEPT).json({
@@ -184,7 +200,6 @@ exports.user_add_bookmark = (req, res) => {
       });
   } else { res.status(CODES.EC_REQUEST).end() }
 };
-
 exports.user_delete_bookmark = (req, res) => {
   let userId = req.userData.userId;
   let newsId = req.params.newsId;

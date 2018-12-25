@@ -13,8 +13,9 @@ export class DtoService {
     let id = obj['_id'], realname = obj['realname'],
       nickname = obj['nickname'], email = obj['email'],
       img = obj['img_url'], rating = obj['rating'],
-      role = obj['role'], bookmarks = obj['bookmarks'];
-    let user = new User(id, realname, nickname, email, img, rating, role, bookmarks);
+      role = obj['role'], bookmarks = obj['bookmarks'],
+      likedComments = obj['liked_comments'];
+    let user = new User(id, realname, nickname, email, img, rating, role, bookmarks, likedComments);
     return user;
   }
 
