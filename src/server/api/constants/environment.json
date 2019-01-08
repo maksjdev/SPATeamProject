@@ -1,7 +1,0 @@
-{
-  "DB_USER": "Vitalik",
-  "DB_PASSWORD": "LA255kPG2EpT3tU",
-
-  "JWT_KEY": "secret",
-  "MONGO_ATLAS_PW": "CTdYB4jqX6uovW7O"
-}
